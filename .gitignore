@@ -1,0 +1,19 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Firebase — NUNCA commitear
+google-services.json
+*.jks
+*.keystore
+
+# Secrets
+.env
+secrets.properties
