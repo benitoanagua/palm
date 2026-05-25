@@ -57,10 +57,10 @@ fun ComprobanteScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    APAYBody(text = "Captura la foto del comprobante de pago")
-                    APAYCaption(text = "Asegúrate de que el comprobante esté bien iluminado y sea legible")
+                    A2Body(text = "Captura la foto del comprobante de pago")
+                    A2Caption(text = "Asegúrate de que el comprobante esté bien iluminado y sea legible")
                     Spacer(Modifier.height(16.dp))
-                    APAYButton(
+                    A2Button(
                         text     = "Abrir cámara",
                         icon     = Lucide.Camera,
                         modifier = Modifier.fillMaxWidth(),
@@ -103,13 +103,13 @@ fun ComprobanteScreen(
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        APAYButton(
+                        A2Button(
                             text    = "Repetir",
                             onClick = { viewModel.cancelar() },
-                            variant = APAYButtonVariant.Secondary,
+                            variant = A2ButtonVariant.Secondary,
                             modifier = Modifier.weight(1f)
                         )
-                        APAYButton(
+                        A2Button(
                             text    = "Enviar",
                             onClick = { viewModel.enviarComprobante(context, s.uri) },
                             modifier = Modifier.weight(1f)
@@ -124,7 +124,7 @@ fun ComprobanteScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     CircularProgressIndicator(color = PrimaryElectric)
-                    APAYBodySmall(text = "Enviando comprobante...")
+                    A2BodySmall(text = "Enviando comprobante...")
                 }
             }
 
@@ -133,13 +133,13 @@ fun ComprobanteScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    APAYTag(text = "✓ Comprobante enviado", variant = APAYTagVariant.Filled, color = PrimaryElectric)
-                    APAYCaption(text = "Será revisado por el equipo")
+                    A2Tag(text = "✓ Comprobante enviado", variant = A2TagVariant.Filled, color = PrimaryElectric)
+                    A2Caption(text = "Será revisado por el equipo")
                     Spacer(Modifier.height(8.dp))
-                    APAYButton(
+                    A2Button(
                         text    = "Enviar otro",
                         onClick = { viewModel.cancelar() },
-                        variant = APAYButtonVariant.Secondary,
+                        variant = A2ButtonVariant.Secondary,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -150,8 +150,8 @@ fun ComprobanteScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    APAYBanner(message = s.mensaje, type = APAYBannerType.Error)
-                    APAYButton(
+                    A2Banner(message = s.mensaje, type = A2BannerType.Error)
+                    A2Button(
                         text    = "Reintentar",
                         onClick = { viewModel.cancelar() },
                         modifier = Modifier.fillMaxWidth()

@@ -1,10 +1,10 @@
-package com.apay.ui.theme
+package com.a2.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// ─── APAY — Color System "Primary Dominante" ──────────────────────────────────
+// ─── A2 — Color System "Primary Dominante" ──────────────────────────────────
 // Filosofía: 90% Primary (Teal), 8% Secondary (Púrpura), 2% Tertiary (Violeta)
-// Identidad: "APAY = Teal Profundo" — Secondary y Tertiary SOLO para casos excepcionales
+// Identidad: "A2 = Teal Profundo" — Secondary y Tertiary SOLO para casos excepcionales
 
 // ─── BACKGROUNDS ───────────────────────────────────────────────────────────────
 val FondoEspacial      = Color(0xFF020914)

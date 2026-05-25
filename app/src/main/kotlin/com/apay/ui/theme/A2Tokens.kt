@@ -1,12 +1,12 @@
-package com.apay.ui.theme
+package com.a2.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// ─── APAY Design Tokens ───────────────────────────────────────────────────────
+// ─── A2 Design Tokens ───────────────────────────────────────────────────────
 
-object APAYTokens {
+object A2Tokens {
     // Spacing (8pt grid)
     val Space0  = 0.dp
     val Space1  = 2.dp
@@ -59,25 +59,25 @@ object APAYTokens {
 }
 
 // ── Spacing shorthand ─────────────────────────────────────────────────────────
-object APAYSpacing {
-    val xs  = APAYTokens.Space1
-    val sm  = APAYTokens.Space2
-    val md  = APAYTokens.Space3
-    val lg  = APAYTokens.Space5
-    val xl  = APAYTokens.Space6
-    val xxl = APAYTokens.Space10
+object A2Spacing {
+    val xs  = A2Tokens.Space1
+    val sm  = A2Tokens.Space2
+    val md  = A2Tokens.Space3
+    val lg  = A2Tokens.Space5
+    val xl  = A2Tokens.Space6
+    val xxl = A2Tokens.Space10
 }
 
-object APAYRadius {
-    val input  = APAYTokens.RadiusInput
-    val button = APAYTokens.RadiusButton
-    val card   = APAYTokens.RadiusCard
-    val tag    = APAYTokens.RadiusPill
+object A2Radius {
+    val input  = A2Tokens.RadiusInput
+    val button = A2Tokens.RadiusButton
+    val card   = A2Tokens.RadiusCard
+    val tag    = A2Tokens.RadiusPill
 }
 
-object APAYShapes {
-    val Button = RoundedCornerShape(APAYTokens.RadiusButton)
-    val Card   = RoundedCornerShape(APAYTokens.RadiusCard)
-    val Input  = RoundedCornerShape(APAYTokens.RadiusInput)
-    val Pill   = RoundedCornerShape(APAYTokens.RadiusPill)
+object A2Shapes {
+    val Button = RoundedCornerShape(A2Tokens.RadiusButton)
+    val Card   = RoundedCornerShape(A2Tokens.RadiusCard)
+    val Input  = RoundedCornerShape(A2Tokens.RadiusInput)
+    val Pill   = RoundedCornerShape(A2Tokens.RadiusPill)
 }

@@ -1,4 +1,4 @@
-package com.apay
+package com.a2
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
@@ -7,7 +7,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class APAYApp : Application(), Configuration.Provider {
+class A2App : Application(), Configuration.Provider {
 
     @Inject lateinit var workerFactory: HiltWorkerFactory
 

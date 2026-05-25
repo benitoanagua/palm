@@ -1,4 +1,4 @@
-package com.apay.ui.components
+package com.a2.ui.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -32,14 +32,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.apay.ui.theme.*
+import com.a2.ui.theme.*
 
-// ─── APAY Design System Components ───────────────────────────────────────────
+// ─── A2 Design System Components ───────────────────────────────────────────
 
 // ── Backgrounds ───────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYBackground(modifier: Modifier = Modifier) {
+fun A2Background(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -76,7 +76,7 @@ fun APAYBackground(modifier: Modifier = Modifier) {
 // ── Typography ─────────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYGradientDisplayLg(
+fun A2GradientDisplayLg(
     text: String,
     modifier: Modifier = Modifier
 ) {
@@ -84,7 +84,7 @@ fun APAYGradientDisplayLg(
         text = text,
         modifier = modifier,
         style = TextStyle(
-            brush = APAYGradients.displayGradient(),
+            brush = A2Gradients.displayGradient(),
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
@@ -92,40 +92,40 @@ fun APAYGradientDisplayLg(
 }
 
 @Composable
-fun APAYHeadline(text: String, modifier: Modifier = Modifier, color: Color = TextPrimary) {
-    Text(text = text, modifier = modifier, style = APAYTextStyle.Headline, color = color)
+fun A2Headline(text: String, modifier: Modifier = Modifier, color: Color = TextPrimary) {
+    Text(text = text, modifier = modifier, style = A2TextStyle.Headline, color = color)
 }
 
 @Composable
-fun APAYTitle(text: String, modifier: Modifier = Modifier, color: Color = TextPrimary) {
-    Text(text = text, modifier = modifier, style = APAYTextStyle.TitleLg, color = color)
+fun A2Title(text: String, modifier: Modifier = Modifier, color: Color = TextPrimary) {
+    Text(text = text, modifier = modifier, style = A2TextStyle.TitleLg, color = color)
 }
 
 @Composable
-fun APAYBody(text: String, modifier: Modifier = Modifier, color: Color = TextSecondary) {
-    Text(text = text, modifier = modifier, style = APAYTextStyle.Body, color = color)
+fun A2Body(text: String, modifier: Modifier = Modifier, color: Color = TextSecondary) {
+    Text(text = text, modifier = modifier, style = A2TextStyle.Body, color = color)
 }
 
 @Composable
-fun APAYBodySmall(text: String, modifier: Modifier = Modifier, color: Color = TextMuted) {
-    Text(text = text, modifier = modifier, style = APAYTextStyle.BodyMedium, color = color)
+fun A2BodySmall(text: String, modifier: Modifier = Modifier, color: Color = TextMuted) {
+    Text(text = text, modifier = modifier, style = A2TextStyle.BodyMedium, color = color)
 }
 
 @Composable
-fun APAYCaption(text: String, modifier: Modifier = Modifier, color: Color = TextMuted) {
-    Text(text = text, modifier = modifier, style = APAYTextStyle.Caption, color = color)
+fun A2Caption(text: String, modifier: Modifier = Modifier, color: Color = TextMuted) {
+    Text(text = text, modifier = modifier, style = A2TextStyle.Caption, color = color)
 }
 
 // ── Buttons ────────────────────────────────────────────────────────────────────
 
-enum class APAYButtonVariant { Primary, Secondary, Ghost }
+enum class A2ButtonVariant { Primary, Secondary, Ghost }
 
 @Composable
-fun APAYButton(
+fun A2Button(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    variant: APAYButtonVariant = APAYButtonVariant.Primary,
+    variant: A2ButtonVariant = A2ButtonVariant.Primary,
     icon: ImageVector? = null,
     enabled: Boolean = true,
     loading: Boolean = false,
@@ -138,19 +138,19 @@ fun APAYButton(
         label = "scale"
     )
 
-    val shape = APAYShapes.Button
+    val shape = A2Shapes.Button
 
     val baseModifier = modifier
-        .height(APAYTokens.ButtonHeight)
+        .height(A2Tokens.ButtonHeight)
         .graphicsLayer { scaleX = scale; scaleY = scale }
         .then(if (!enabled) Modifier.graphicsLayer { alpha = 0.6f } else Modifier)
 
     when (variant) {
-        APAYButtonVariant.Primary -> {
+        A2ButtonVariant.Primary -> {
             Box(
                 modifier = baseModifier
                     .clip(shape)
-                    .background(APAYGradients.primary())
+                    .background(A2Gradients.primary())
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null,
@@ -158,7 +158,7 @@ fun APAYButton(
                         role = Role.Button,
                         onClick = onClick
                     )
-                    .padding(horizontal = APAYSpacing.lg, vertical = APAYSpacing.xs),
+                    .padding(horizontal = A2Spacing.lg, vertical = A2Spacing.xs),
                 contentAlignment = Alignment.Center
             ) {
                 if (loading) {
@@ -166,15 +166,15 @@ fun APAYButton(
                 } else {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(APAYSpacing.xs)
+                        horizontalArrangement = Arrangement.spacedBy(A2Spacing.xs)
                     ) {
                         icon?.let { Icon(it, null, Modifier.size(16.dp), tint = TextPrimary) }
-                        Text(text, color = TextPrimary, style = APAYTextStyle.ButtonLabel)
+                        Text(text, color = TextPrimary, style = A2TextStyle.ButtonLabel)
                     }
                 }
             }
         }
-        APAYButtonVariant.Secondary -> {
+        A2ButtonVariant.Secondary -> {
             Box(
                 modifier = baseModifier
                     .clip(shape)
@@ -186,68 +186,68 @@ fun APAYButton(
                         role = Role.Button,
                         onClick = onClick
                     )
-                    .padding(horizontal = APAYSpacing.lg, vertical = APAYSpacing.xs),
+                    .padding(horizontal = A2Spacing.lg, vertical = A2Spacing.xs),
                 contentAlignment = Alignment.Center
             ) {
                 if (loading) {
                     CircularProgressIndicator(modifier = Modifier.size(16.dp), color = PrimaryElectric, strokeWidth = 2.dp)
                 } else {
-                    Text(text, style = TextStyle(brush = APAYGradients.textGradient(), fontSize = 12.sp, fontWeight = FontWeight.SemiBold))
+                    Text(text, style = TextStyle(brush = A2Gradients.textGradient(), fontSize = 12.sp, fontWeight = FontWeight.SemiBold))
                 }
             }
         }
-        APAYButtonVariant.Ghost -> {
+        A2ButtonVariant.Ghost -> {
             TextButton(
                 onClick = onClick,
                 enabled = enabled && !loading,
                 modifier = baseModifier
             ) {
-                Text(text, color = PrimaryElectric, style = APAYTextStyle.ButtonLabel)
+                Text(text, color = PrimaryElectric, style = A2TextStyle.ButtonLabel)
             }
         }
     }
 }
 
 @Composable
-fun APAYTextButton(
+fun A2TextButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     color: Color = PrimaryElectric
 ) {
     TextButton(onClick = onClick, modifier = modifier) {
-        Text(text, color = color, style = APAYTextStyle.BodyMedium, fontWeight = FontWeight.SemiBold)
+        Text(text, color = color, style = A2TextStyle.BodyMedium, fontWeight = FontWeight.SemiBold)
     }
 }
 
 // ── Cards ──────────────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYCard(
+fun A2Card(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = modifier
-            .clip(APAYShapes.Card)
+            .clip(A2Shapes.Card)
             .background(SuperficieCristal)
-            .border(0.8.dp, BorderSubtle, APAYShapes.Card)
-            .padding(APAYSpacing.xl),
+            .border(0.8.dp, BorderSubtle, A2Shapes.Card)
+            .padding(A2Spacing.xl),
         content = content
     )
 }
 
 @Composable
-fun APAYCardGlass(
+fun A2CardGlass(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = modifier
-            .clip(APAYShapes.Card)
-            .background(APAYGradients.cardGlass())
-            .border(0.8.dp, BorderMedium, APAYShapes.Card)
-            .padding(APAYSpacing.xl),
+            .clip(A2Shapes.Card)
+            .background(A2Gradients.cardGlass())
+            .border(0.8.dp, BorderMedium, A2Shapes.Card)
+            .padding(A2Spacing.xl),
         content = content
     )
 }
@@ -255,7 +255,7 @@ fun APAYCardGlass(
 // ── Input ──────────────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYInput(
+fun A2Input(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -271,18 +271,18 @@ fun APAYInput(
     imeAction: ImeAction = ImeAction.Done,
 ) {
     val focusManager = LocalFocusManager.current
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(APAYSpacing.xs)) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(A2Spacing.xs)) {
         if (label.isNotEmpty()) {
-            Text(label, style = APAYTextStyle.Caption, color = TextMuted)
+            Text(label, style = A2TextStyle.Caption, color = TextMuted)
         }
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(APAYTokens.InputHeight + 20.dp),
+                .height(A2Tokens.InputHeight + 20.dp),
             enabled = enabled,
-            placeholder = { Text(placeholder, style = APAYTextStyle.BodyMedium, color = TextMuted) },
+            placeholder = { Text(placeholder, style = A2TextStyle.BodyMedium, color = TextMuted) },
             leadingIcon = leadingIcon?.let { { Icon(it, null, Modifier.size(16.dp), tint = TextMuted) } },
             trailingIcon = trailingIcon?.let {
                 {
@@ -300,7 +300,7 @@ fun APAYInput(
             keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
             isError = errorMessage != null,
             singleLine = true,
-            shape = APAYShapes.Input,
+            shape = A2Shapes.Input,
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = TextPrimary,
                 unfocusedTextColor = TextPrimary,
@@ -312,42 +312,42 @@ fun APAYInput(
                 unfocusedContainerColor = SuperficieElevada,
                 errorContainerColor = ErrorBannerBg,
             ),
-            textStyle = APAYTextStyle.Body
+            textStyle = A2TextStyle.Body
         )
         if (errorMessage != null) {
-            Text(errorMessage, style = APAYTextStyle.Caption, color = Error)
+            Text(errorMessage, style = A2TextStyle.Caption, color = Error)
         }
     }
 }
 
 // ── Banner ──────────────────────────────────────────────────────────────────────
 
-enum class APAYBannerType { Success, Error, Warning, Info }
+enum class A2BannerType { Success, Error, Warning, Info }
 
 @Composable
-fun APAYBanner(
+fun A2Banner(
     message: String,
-    type: APAYBannerType = APAYBannerType.Info,
+    type: A2BannerType = A2BannerType.Info,
     modifier: Modifier = Modifier,
     dismissible: Boolean = false,
     onDismiss: (() -> Unit)? = null
 ) {
     val (bg, textColor, borderColor) = when (type) {
-        APAYBannerType.Success -> Triple(SuccessBannerBg, PrimaryLight, PrimaryElectric)
-        APAYBannerType.Error   -> Triple(ErrorBannerBg, Error, Error)
-        APAYBannerType.Warning -> Triple(WarningBannerBg, Warning, Warning)
-        APAYBannerType.Info    -> Triple(InfoBannerBg, SecondaryElectric, SecondaryElectric)
+        A2BannerType.Success -> Triple(SuccessBannerBg, PrimaryLight, PrimaryElectric)
+        A2BannerType.Error   -> Triple(ErrorBannerBg, Error, Error)
+        A2BannerType.Warning -> Triple(WarningBannerBg, Warning, Warning)
+        A2BannerType.Info    -> Triple(InfoBannerBg, SecondaryElectric, SecondaryElectric)
     }
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clip(APAYShapes.Card)
+            .clip(A2Shapes.Card)
             .background(bg)
-            .border(0.8.dp, borderColor.copy(0.4f), APAYShapes.Card)
-            .padding(horizontal = APAYSpacing.lg, vertical = APAYSpacing.md),
+            .border(0.8.dp, borderColor.copy(0.4f), A2Shapes.Card)
+            .padding(horizontal = A2Spacing.lg, vertical = A2Spacing.md),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(message, modifier = Modifier.weight(1f), style = APAYTextStyle.BodyMedium, color = textColor)
+        Text(message, modifier = Modifier.weight(1f), style = A2TextStyle.BodyMedium, color = textColor)
         if (dismissible && onDismiss != null) {
             Spacer(Modifier.width(8.dp))
             TextButton(onClick = onDismiss, modifier = Modifier.size(24.dp)) {
@@ -359,35 +359,35 @@ fun APAYBanner(
 
 // ── Tags ───────────────────────────────────────────────────────────────────────
 
-enum class APAYTagVariant { Filled, Outlined, Subtle }
+enum class A2TagVariant { Filled, Outlined, Subtle }
 
 @Composable
-fun APAYTag(
+fun A2Tag(
     text: String,
     modifier: Modifier = Modifier,
-    variant: APAYTagVariant = APAYTagVariant.Filled,
+    variant: A2TagVariant = A2TagVariant.Filled,
     color: Color = PrimaryElectric
 ) {
     val (bg, textColor, border) = when (variant) {
-        APAYTagVariant.Filled   -> Triple(color.copy(0.15f), color, color.copy(0f))
-        APAYTagVariant.Outlined -> Triple(Color.Transparent, color, color)
-        APAYTagVariant.Subtle   -> Triple(color.copy(0.08f), color.copy(0.7f), Color.Transparent)
+        A2TagVariant.Filled   -> Triple(color.copy(0.15f), color, color.copy(0f))
+        A2TagVariant.Outlined -> Triple(Color.Transparent, color, color)
+        A2TagVariant.Subtle   -> Triple(color.copy(0.08f), color.copy(0.7f), Color.Transparent)
     }
     Box(
         modifier = modifier
-            .clip(APAYShapes.Pill)
+            .clip(A2Shapes.Pill)
             .background(bg)
-            .then(if (border != Color.Transparent) Modifier.border(0.8.dp, border, APAYShapes.Pill) else Modifier)
+            .then(if (border != Color.Transparent) Modifier.border(0.8.dp, border, A2Shapes.Pill) else Modifier)
             .padding(horizontal = 8.dp, vertical = 2.dp)
     ) {
-        Text(text, style = APAYTextStyle.Caption, color = textColor, fontWeight = FontWeight.SemiBold)
+        Text(text, style = A2TextStyle.Caption, color = textColor, fontWeight = FontWeight.SemiBold)
     }
 }
 
 // ── Divider ────────────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYDivider(modifier: Modifier = Modifier) {
+fun A2Divider(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -403,16 +403,16 @@ fun APAYDivider(modifier: Modifier = Modifier) {
 // ── Avatar ─────────────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYAvatar(
+fun A2Avatar(
     initials: String,
     modifier: Modifier = Modifier,
-    size: Dp = APAYTokens.AvatarMd
+    size: Dp = A2Tokens.AvatarMd
 ) {
     Box(
         modifier = modifier
             .size(size)
             .clip(CircleShape)
-            .background(APAYGradients.primary()),
+            .background(A2Gradients.primary()),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -427,7 +427,7 @@ fun APAYAvatar(
 // ── Loading ────────────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYLoading(modifier: Modifier = Modifier) {
+fun A2Loading(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator(color = PrimaryElectric, modifier = Modifier.size(32.dp))
     }
@@ -436,7 +436,7 @@ fun APAYLoading(modifier: Modifier = Modifier) {
 // ── Top Bar ────────────────────────────────────────────────────────────────────
 
 @Composable
-fun APAYTopBar(
+fun A2TopBar(
     title: String = "APAY",
     actions: @Composable RowScope.() -> Unit = {}
 ) {
@@ -448,7 +448,7 @@ fun APAYTopBar(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        APAYGradientDisplayLg(text = title)
+        A2GradientDisplayLg(text = title)
         Row(content = actions)
     }
 }
@@ -481,7 +481,7 @@ fun APAYBottomNav(
                         modifier = Modifier.size(20.dp)
                     )
                 },
-                label = { Text(item.label, style = APAYTextStyle.Caption) },
+                label = { Text(item.label, style = A2TextStyle.Caption) },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = PrimaryElectric,
                     selectedTextColor = PrimaryElectric,

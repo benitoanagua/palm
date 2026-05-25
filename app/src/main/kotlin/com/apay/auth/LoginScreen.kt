@@ -42,7 +42,7 @@ fun LoginScreen(
     }
 
     Box(Modifier.fillMaxSize()) {
-        APAYBackground()
+        A2Background()
 
         BoxWithConstraints(Modifier.fillMaxSize()) {
             val contentMod = if (maxWidth > 600.dp) Modifier.widthIn(max = 440.dp) else Modifier.fillMaxWidth()
@@ -67,14 +67,14 @@ fun LoginScreen(
                 Spacer(Modifier.height(24.dp))
 
                 // ── Form ────────────────────────────────────────────────────
-                APAYCard(modifier = contentMod) {
-                    APAYHeadline(
+                A2Card(modifier = contentMod) {
+                    A2Headline(
                         text = "Bienvenido de nuevo",
                         modifier = Modifier.align(Alignment.Start)
                     )
                     Spacer(Modifier.height(16.dp))
 
-                    APAYInput(
+                    A2Input(
                         value = email,
                         onValueChange = { email = it.trim() },
                         label = "Email",
@@ -85,7 +85,7 @@ fun LoginScreen(
                     )
                     Spacer(Modifier.height(8.dp))
 
-                    APAYInput(
+                    A2Input(
                         value = password,
                         onValueChange = { password = it },
                         label = "Contraseña",
@@ -97,7 +97,7 @@ fun LoginScreen(
                         enabled = !state.isLoading
                     )
 
-                    APAYTextButton(
+                    A2TextButton(
                         text = "Olvidé mi contraseña",
                         onClick = {
                             if (email.isNotBlank()) viewModel.resetPassword(email)
@@ -110,24 +110,24 @@ fun LoginScreen(
                     // Error / success banners
                     if (state.error != null) {
                         Spacer(Modifier.height(4.dp))
-                        APAYBanner(
+                        A2Banner(
                             message = state.error!!,
-                            type = APAYBannerType.Error,
+                            type = A2BannerType.Error,
                             dismissible = true,
                             onDismiss = { viewModel.clearError() }
                         )
                     }
                     if (state.success != null) {
                         Spacer(Modifier.height(4.dp))
-                        APAYBanner(
+                        A2Banner(
                             message = state.success!!,
-                            type = APAYBannerType.Success
+                            type = A2BannerType.Success
                         )
                     }
 
                     Spacer(Modifier.height(12.dp))
 
-                    APAYButton(
+                    A2Button(
                         text = "Ingresar",
                         onClick = { viewModel.login(email, password) },
                         loading = state.isLoading,

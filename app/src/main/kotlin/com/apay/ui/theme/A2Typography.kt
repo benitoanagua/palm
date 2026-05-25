@@ -1,11 +1,11 @@
-package com.apay.ui.theme
+package com.a2.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-val APAYTypography = Typography(
+val A2Typography = Typography(
     displayLarge  = TextStyle(fontSize = 32.sp, fontWeight = FontWeight.Bold,      lineHeight = 38.sp),
     displayMedium = TextStyle(fontSize = 22.sp, fontWeight = FontWeight.Bold,      lineHeight = 28.sp),
     headlineLarge = TextStyle(fontSize = 17.sp, fontWeight = FontWeight.SemiBold,  lineHeight = 24.sp),
@@ -17,7 +17,7 @@ val APAYTypography = Typography(
 )
 
 // ── Aliases de tipografía para componentes ────────────────────────────────────
-object APAYTextStyle {
+object A2TextStyle {
     val DisplayLg   = TextStyle(fontSize = 22.sp, fontWeight = FontWeight.Bold,     lineHeight = 28.sp)
     val Headline    = TextStyle(fontSize = 17.sp, fontWeight = FontWeight.SemiBold, lineHeight = 24.sp)
     val TitleLg     = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.SemiBold, lineHeight = 22.sp)
