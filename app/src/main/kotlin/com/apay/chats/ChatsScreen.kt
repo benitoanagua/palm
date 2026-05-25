@@ -32,7 +32,7 @@ fun ChatsScreen(
     Box(Modifier.fillMaxSize()) {
         when {
             state.isLoading -> {
-                APAYLoading()
+                A2Loading()
             }
             state.chats.isEmpty() -> {
                 Column(
@@ -40,9 +40,9 @@ fun ChatsScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    APAYBodySmall(text = "No hay conversaciones aún")
+                    A2BodySmall(text = "No hay conversaciones aún")
                     Spacer(Modifier.height(16.dp))
-                    APAYButton(text = "Nueva conversación", onClick = onNuevoChat)
+                    A2Button(text = "Nueva conversación", onClick = onNuevoChat)
                 }
             }
             else -> {
@@ -52,7 +52,7 @@ fun ChatsScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(state.chats) { chat ->
-                        APAYCardGlass(
+                        A2CardGlass(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable { viewModel.abrirChat(chat.id) }
@@ -62,15 +62,15 @@ fun ChatsScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
-                                APAYAvatar(initials = chat.titulo.take(2), size = 40.dp)
+                                A2Avatar(initials = chat.titulo.take(2), size = 40.dp)
                                 Column(Modifier.weight(1f)) {
-                                    APAYBodySmall(text = chat.titulo, color = TextPrimary)
-                                    APAYCaption(text = chat.ultimoMensaje)
+                                    A2BodySmall(text = chat.titulo, color = TextPrimary)
+                                    A2Caption(text = chat.ultimoMensaje)
                                 }
                                 if (chat.noLeidos > 0) {
-                                    APAYTag(
+                                    A2Tag(
                                         text    = chat.noLeidos.toString(),
-                                        variant = APAYTagVariant.Filled,
+                                        variant = A2TagVariant.Filled,
                                         color   = PrimaryElectric
                                     )
                                 }

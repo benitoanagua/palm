@@ -1,11 +1,11 @@
-package com.apay.ui.theme
+package com.a2.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val APAYColorScheme = darkColorScheme(
+private val A2ColorScheme = darkColorScheme(
     primary          = PrimaryElectric,
     onPrimary        = TextOnColor,
     primaryContainer = PrimaryContainer,
@@ -20,10 +20,10 @@ private val APAYColorScheme = darkColorScheme(
 )
 
 @Composable
-fun APAYTheme(content: @Composable () -> Unit) {
+fun A2Theme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = APAYColorScheme,
-        typography  = APAYTypography,
+        colorScheme = A2ColorScheme,
+        typography  = A2Typography,
         content     = content
     )
 }

@@ -101,10 +101,10 @@ fun MainShell(
     }
 
     val navItems = listOf(
-        APAYNavItem("Chats",       Lucide.MessageSquare),
-        APAYNavItem("Tasa",        Lucide.ChartLine),
-        APAYNavItem("Comprobante", Lucide.Upload),
-        APAYNavItem("Cuenta",      Lucide.User),
+        A2NavItem("Chats",       Lucide.MessageSquare),
+        A2NavItem("Tasa",        Lucide.ChartLine),
+        A2NavItem("Comprobante", Lucide.Upload),
+        A2NavItem("Cuenta",      Lucide.User),
     )
     val navRoutes = listOf(Screen.Chats.route, Screen.Tasa.route, Screen.Comprobante.route, Screen.Cuenta.route)
     val selectedIndex = navRoutes.indexOfFirst { route ->
@@ -113,7 +113,7 @@ fun MainShell(
 
     Column(modifier = Modifier.fillMaxSize()) {
         if (shouldShowChrome) {
-            APAYTopBar(
+            A2TopBar(
                 title = "APAY",
                 actions = {
                     IconButton(onClick = onLogout) {
@@ -130,7 +130,7 @@ fun MainShell(
         }
 
         if (shouldShowChrome) {
-            APAYBottomNav(
+            A2BottomNav(
                 items         = navItems,
                 selectedIndex = selectedIndex,
                 onItemSelected = { index ->

@@ -50,17 +50,17 @@ fun CuentaScreen(
                 )
             },
             confirmButton = {
-                APAYButton(
+                A2Button(
                     text = "Sí, desvincular",
                     onClick = {
                         mostrarDialogoLogout = false
                         onLogout()
                     },
-                    variant = APAYButtonVariant.Primary
+                    variant = A2ButtonVariant.Primary
                 )
             },
             dismissButton = {
-                APAYTextButton(
+                A2TextButton(
                     text    = "Cancelar",
                     onClick = { mostrarDialogoLogout = false },
                     color   = TextMuted
@@ -70,7 +70,7 @@ fun CuentaScreen(
     }
 
     if (state.isLoading) {
-        APAYLoading()
+        A2Loading()
         return
     }
 
@@ -83,22 +83,22 @@ fun CuentaScreen(
     ) {
         // ── Profile header ──────────────────────────────────────────────────
         item {
-            APAYCard(modifier = Modifier.fillMaxWidth()) {
+            A2Card(modifier = Modifier.fillMaxWidth()) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    APAYAvatar(
+                    A2Avatar(
                         initials = state.nombre.take(2).ifEmpty { "AP" },
                         size = 56.dp
                     )
                     Column(Modifier.weight(1f)) {
-                        APAYHeadline(text = state.nombre)
-                        APAYBodySmall(text = state.email)
+                        A2Headline(text = state.nombre)
+                        A2BodySmall(text = state.email)
                         if (state.rol.isNotEmpty()) {
                             Spacer(Modifier.height(4.dp))
-                            APAYTag(text = state.rol, variant = APAYTagVariant.Subtle)
+                            A2Tag(text = state.rol, variant = A2TagVariant.Subtle)
                         }
                     }
                 }
@@ -108,8 +108,8 @@ fun CuentaScreen(
         // ── Saldo ───────────────────────────────────────────────────────────
         if (state.deudaBolivianos != 0.0) {
             item {
-                APAYCard(modifier = Modifier.fillMaxWidth()) {
-                    APAYBodySmall(text = "Saldo / Deuda")
+                A2Card(modifier = Modifier.fillMaxWidth()) {
+                    A2BodySmall(text = "Saldo / Deuda")
                     Spacer(Modifier.height(4.dp))
                     APAYGradientDisplayLg(
                         text = "${state.deudaBolivianos} BOB"
@@ -126,20 +126,20 @@ fun CuentaScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    APAYHeadline(text = "Últimos movimientos")
-                    APAYTextButton(text = "Ver historial", onClick = onIrAHistorial)
+                    A2Headline(text = "Últimos movimientos")
+                    A2TextButton(text = "Ver historial", onClick = onIrAHistorial)
                 }
             }
             items(state.ultimosMovimientos.take(5)) { mov ->
-                APAYCardGlass(modifier = Modifier.fillMaxWidth()) {
+                A2CardGlass(modifier = Modifier.fillMaxWidth()) {
                     Row(
                         Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Column {
-                            APAYBodySmall(text = mov.concepto, color = TextPrimary)
+                            A2BodySmall(text = mov.concepto, color = TextPrimary)
                         }
-                        APAYBody(
+                        A2Body(
                             text = "${if (mov.tipo == "CREDITO") "+" else "-"} ${mov.monto} BOB",
                             color = if (mov.tipo == "CREDITO") PrimaryElectric else Error
                         )
@@ -151,10 +151,10 @@ fun CuentaScreen(
         // ── Logout ──────────────────────────────────────────────────────────
         item {
             Spacer(Modifier.height(8.dp))
-            APAYButton(
+            A2Button(
                 text = "Desvincular cuenta",
                 onClick = { mostrarDialogoLogout = true },
-                variant = APAYButtonVariant.Secondary,
+                variant = A2ButtonVariant.Secondary,
                 icon = Lucide.LogOut,
                 modifier = Modifier.fillMaxWidth()
             )

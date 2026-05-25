@@ -23,11 +23,11 @@ fun HistorialScreen(onVolver: () -> Unit) {
                 Icon(Lucide.ArrowLeft, "Volver", tint = TextPrimary)
             }
             Spacer(Modifier.width(8.dp))
-            APAYHeadline(text = "Historial")
+            A2Headline(text = "Historial")
         }
         Spacer(Modifier.height(16.dp))
-        APAYCard(modifier = Modifier.fillMaxWidth()) {
-            APAYBodySmall(text = "No hay movimientos registrados aún.")
+        A2Card(modifier = Modifier.fillMaxWidth()) {
+            A2BodySmall(text = "No hay movimientos registrados aún.")
         }
     }
 }

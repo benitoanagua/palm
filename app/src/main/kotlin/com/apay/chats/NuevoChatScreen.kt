@@ -36,13 +36,13 @@ fun NuevoChatScreen(
                 Icon(Lucide.ArrowLeft, "Volver", tint = TextPrimary)
             }
             Spacer(Modifier.width(8.dp))
-            APAYHeadline(text = "Nueva conversación")
+            A2Headline(text = "Nueva conversación")
         }
 
         Spacer(Modifier.height(12.dp))
 
         // ── Search ────────────────────────────────────────────────────────
-        APAYInput(
+        A2Input(
             value         = state.query,
             onValueChange = viewModel::buscar,
             placeholder   = "Buscar usuario...",
@@ -53,16 +53,16 @@ fun NuevoChatScreen(
 
         // ── Results ───────────────────────────────────────────────────────
         when {
-            state.isLoading -> APAYLoading(modifier = Modifier.height(100.dp))
+            state.isLoading -> A2Loading(modifier = Modifier.height(100.dp))
             state.usuarios.isEmpty() && state.query.isNotEmpty() -> {
                 Box(Modifier.fillMaxWidth().padding(32.dp), Alignment.Center) {
-                    APAYBodySmall(text = "No se encontraron usuarios")
+                    A2BodySmall(text = "No se encontraron usuarios")
                 }
             }
             else -> {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(state.usuarios) { usuario ->
-                        APAYCardGlass(
+                        A2CardGlass(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
@@ -75,10 +75,10 @@ fun NuevoChatScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
-                                APAYAvatar(initials = usuario.nombre.take(2), size = 40.dp)
+                                A2Avatar(initials = usuario.nombre.take(2), size = 40.dp)
                                 Column {
-                                    APAYBodySmall(text = usuario.nombre, color = TextPrimary)
-                                    APAYCaption(text = usuario.email)
+                                    A2BodySmall(text = usuario.nombre, color = TextPrimary)
+                                    A2Caption(text = usuario.email)
                                 }
                             }
                         }

@@ -1,9 +1,9 @@
-package com.apay.ui.theme
+package com.a2.ui.theme
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 
-object APAYGradients {
+object A2Gradients {
     fun primary(): Brush = Brush.linearGradient(
         colors = listOf(PrimaryElectric, PrimaryLight),
         start = Offset(0f, 0f), end = Offset(1f, 1f)

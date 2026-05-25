@@ -50,13 +50,13 @@ class MainActivity : FragmentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            APAYTheme {
+            A2Theme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Background
                 ) {
                     Box(Modifier.fillMaxSize()) {
-                        APAYBackground()
+                        A2Background()
                         AppEntry(auth = auth)
                     }
                 }
@@ -185,7 +185,7 @@ fun LockScreen(
 
             APAYGradientDisplayLg(text = "APAY")
 
-            APAYBodySmall(
+            A2BodySmall(
                 text = if (tieneBiometria)
                     "Usa tu huella, cara o PIN para acceder"
                 else
@@ -194,12 +194,12 @@ fun LockScreen(
             )
 
             if (error != null) {
-                APAYCard(modifier = Modifier.fillMaxWidth()) {
-                    APAYBodySmall(text = error, color = Error)
+                A2Card(modifier = Modifier.fillMaxWidth()) {
+                    A2BodySmall(text = error, color = Error)
                 }
             }
 
-            APAYButton(
+            A2Button(
                 text = if (tieneBiometria) "Desbloquear con biometría" else "Ingresar PIN",
                 onClick = onDesbloquear,
                 modifier = Modifier.fillMaxWidth()
@@ -208,8 +208,8 @@ fun LockScreen(
     }
 }
 
-// ── APAYTheme reference
+// ── A2Theme reference
 @Composable
-private fun APAYTheme(content: @Composable () -> Unit) {
-    com.apay.ui.theme.APAYTheme(content = content)
+private fun A2Theme(content: @Composable () -> Unit) {
+    com.apay.ui.theme.A2Theme(content = content)
 }

@@ -32,9 +32,9 @@ fun TasaScreen(
                 CircularProgressIndicator(color = PrimaryElectric)
             }
             state.error != null -> {
-                APAYBanner(
+                A2Banner(
                     message = "Error: ${state.error}",
-                    type = APAYBannerType.Error
+                    type = A2BannerType.Error
                 )
             }
             state.tasa != null -> {
@@ -44,29 +44,29 @@ fun TasaScreen(
                     verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     // ── Tasa card ──────────────────────────────────────────
-                    APAYCard(modifier = Modifier.fillMaxWidth()) {
+                    A2Card(modifier = Modifier.fillMaxWidth()) {
                         Column(
                             modifier = Modifier.padding(8.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            APAYTag(text = "Tasa en vivo", variant = APAYTagVariant.Filled)
+                            A2Tag(text = "Tasa en vivo", variant = A2TagVariant.Filled)
                             Spacer(Modifier.height(20.dp))
 
-                            APAYBodySmall(text = "1 USD")
+                            A2BodySmall(text = "1 USD")
                             Spacer(Modifier.height(4.dp))
 
                             APAYGradientDisplayLg(text = "${state.tasa!!.valor} BOB")
                             Spacer(Modifier.height(12.dp))
 
-                            APAYDivider()
+                            A2Divider()
                             Spacer(Modifier.height(12.dp))
 
-                            APAYCaption(text = "Publicada por ${state.tasa!!.publicadaPor}")
+                            A2Caption(text = "Publicada por ${state.tasa!!.publicadaPor}")
                         }
                     }
 
                     // ── Info card ──────────────────────────────────────────
-                    APAYCard(modifier = Modifier.fillMaxWidth()) {
+                    A2Card(modifier = Modifier.fillMaxWidth()) {
                         Row(
                             modifier = Modifier.padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically,
@@ -84,15 +84,15 @@ fun TasaScreen(
                                 )
                             }
                             Column {
-                                APAYBodySmall(text = "Actualización en tiempo real")
+                                A2BodySmall(text = "Actualización en tiempo real")
                                 Spacer(Modifier.height(2.dp))
-                                APAYCaption(text = "Se actualiza automáticamente cuando hay una nueva publicación.")
+                                A2Caption(text = "Se actualiza automáticamente cuando hay una nueva publicación.")
                             }
                         }
                     }
 
                     // ── CTA ───────────────────────────────────────────────
-                    APAYButton(
+                    A2Button(
                         text = "Subir comprobante",
                         onClick = onIrAComprobante,
                         modifier = Modifier.fillMaxWidth()

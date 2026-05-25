@@ -1,4 +1,4 @@
-package com.apay.notifications
+package com.a2.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.apay.MainActivity
+import com.a2.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class APAYFcmService : FirebaseMessagingService() {
+class A2FcmService : FirebaseMessagingService() {
 
     @Inject lateinit var firestore: FirebaseFirestore
     @Inject lateinit var auth: FirebaseAuth

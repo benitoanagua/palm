@@ -57,21 +57,21 @@ fun ConversacionScreen(
             }
             Spacer(Modifier.width(4.dp))
             Column(Modifier.weight(1f)) {
-                APAYBodySmall(text = state.titulo, color = TextPrimary)
+                A2BodySmall(text = state.titulo, color = TextPrimary)
                 if (state.escribiendoTexto != null) {
-                    APAYCaption(text = "escribiendo...", color = PrimaryElectric)
+                    A2Caption(text = "escribiendo...", color = PrimaryElectric)
                 }
             }
         }
 
-        APAYDivider()
+        A2Divider()
 
         // ── Mensajes ───────────────────────────────────────────────────────
         when {
-            state.isLoading -> APAYLoading(modifier = Modifier.weight(1f))
+            state.isLoading -> A2Loading(modifier = Modifier.weight(1f))
             state.mensajes.isEmpty() -> {
                 Box(Modifier.weight(1f).fillMaxWidth(), Alignment.Center) {
-                    APAYBodySmall(text = "Comienza la conversación...")
+                    A2BodySmall(text = "Comienza la conversación...")
                 }
             }
             else -> {
@@ -94,7 +94,7 @@ fun ConversacionScreen(
             }
         }
 
-        APAYDivider()
+        A2Divider()
 
         // ── Input ──────────────────────────────────────────────────────────
         Row(
@@ -177,7 +177,7 @@ private fun BurbujaMensaje(
         horizontalAlignment = if (esMio) Alignment.End else Alignment.Start
     ) {
         if (remitente != null) {
-            APAYCaption(
+            A2Caption(
                 text     = remitente,
                 color    = PrimaryElectric,
                 modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp)
