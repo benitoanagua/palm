@@ -4,32 +4,115 @@
 *.o
 *.obj
 *.out
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.so
+*.dll
+*.exe
 build/
+dist/
 target/
+*.aar
+*.jar
+*.war
+*.apk
+*.aab
+*.class
+*.dex
 
 # Dependencies
+node_modules/
+.venv/
+venv/
+.env
+.env.local
+.env.*
 .gradle/
-__pycache__/
-.mypy_cache/
-.pytest_cache/
-coverage/
-htmlcov/
-*. coverage
+.gradle
+local.properties
+.settings/
+bin/
+gen/
+out/
 
-# Editors
+# IDE specific
 .vscode/
 .idea/
+*.iml
+*.ipr
+*.iws
 *.swp
 *.swo
+tags
+*.log
+*.tmp
 
 # System files
 .DS_Store
 Thumbs.db
-*.log
-*.tmp
+desktop.ini
+*.swp
+*.swo
 
-# Environment
-.env
-.env.local
-*.env.*
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Python specific
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
+
+# Android specific
+*.ap_
+*.arsc
+*.dex
+*.so
+*.jar
+*.class
+build/
+.gradle/
+local.properties
+.pro
+cxx/
+.externalNativeBuild/
+captures/
+.nativetestoutput/
+connected_android_test_additional_output/
+connected_check_additional_output/
+
+# Kotlin specific
+*.kotlin_metadata
+*.kotlin_builtins
+
+# Gradle specific
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Temporary folders
+tmp/
+temp/
 ```

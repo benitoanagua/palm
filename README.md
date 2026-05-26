@@ -1,7 +1,6 @@
-# APAY — Android App
+# Apay — Plataforma de Transporte de Carga Compartida
 
-Aplicación Android para gestión de pagos, comprobantes y tasa de cambio.  
-Basada en la arquitectura de TuPago, migrada a un proyecto nativo Android puro.
+Aplicación Android para conectar transportistas con espacio disponible en sus vehículos de carga con empresas y personas que necesitan enviar mercancías en la misma ruta, dentro y entre departamentos de Bolivia.
 
 ---
 
@@ -13,10 +12,9 @@ Basada en la arquitectura de TuPago, migrada a un proyecto nativo Android puro.
 | Navegación | Navigation Compose |
 | DI | Hilt |
 | Backend | Firebase (Auth, Firestore, Storage, FCM) |
-| Imágenes | CameraX + Coil |
-| Workers | WorkManager (subida de comprobantes) |
-| Red | Ktor Client (CIO) |
-| Biometría | AndroidX Biometric |
+| Mapas y GPS | Google Maps SDK |
+| Pagos | Tigo Money + QR bancario boliviano |
+| Infraestructura | AWS o Google Cloud |
 
 ---
 
@@ -25,11 +23,13 @@ Basada en la arquitectura de TuPago, migrada a un proyecto nativo Android puro.
 ```
 app/
 ├── auth/               # Login, biometría, AuthViewModel
-├── chats/              # Lista de chats, nuevo chat
-├── comprobante/        # Captura de foto + subida con WorkManager
-├── conversacion/       # Pantalla de mensajes en tiempo real
-├── cuenta/             # Perfil, saldo, historial
-├── tasa/               # Tasa de cambio en tiempo real
+├── carga/
+│   ├── home/           # Pantalla principal de carga compartida
+│   ├── rutas/          # Publicar ruta disponible
+│   ├── buscar/         # Buscar transporte disponible
+│   ├── envios/         # Lista de envíos del usuario
+│   ├── detalle/        # Detalle de envío con rastreo
+│   └── perfil/         # Perfil de transportista/cargador
 ├── data/repository/    # Implementaciones Firestore
 ├── di/                 # Módulos Hilt
 ├── domain/             # Modelos y contratos de repositorio
@@ -57,6 +57,25 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /{document=**} {
       allow read, write: if request.auth != null;
+    }
+    
+    // Colecciones específicas para carga compartida
+    match /rutas/{rutaId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.resource.data.transportistaId == request.auth.uid;
+    }
+    
+    match /envios/{envioId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && 
+        (resource.data.transportistaId == request.auth.uid || 
+         resource.data.cargadorId == request.auth.uid);
+    }
+    
+    match /transportistas/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid;
     }
   }
 }
@@ -101,11 +120,12 @@ App abre
 | Pantalla | Descripción |
 |----------|-------------|
 | **Login** | Email + contraseña. Recuperación de contraseña por email |
-| **Chats** | Lista de conversaciones con indicador de no leídos |
-| **Tasa** | Tasa de cambio USD→BOB en tiempo real desde Firestore |
-| **Comprobante** | Captura de foto con CameraX + subida asíncrona |
-| **Cuenta** | Perfil, saldo, historial de movimientos, logout |
-| **Conversación** | Chat en tiempo real con Firestore |
+| **Inicio (CargaHome)** | Dashboard principal con acceso rápido a publicar ruta o buscar transporte |
+| **Publicar Ruta** | Transportista publica su ruta con capacidad disponible, fecha y precio |
+| **Buscar Transporte** | Cargador busca rutas disponibles filtrando por origen, destino y fecha |
+| **Mis Envíos** | Lista de envíos del usuario con filtro por estado (Pendiente, En Tránsito, Entregado) |
+| **Detalle de Envío** | Información completa del envío con rastreo GPS y progreso |
+| **Perfil** | Datos del usuario, calificaciones, historial de viajes, configuración |
 
 ---
 
@@ -113,12 +133,32 @@ App abre
 
 Colors, tokens y componentes en `app/src/main/kotlin/com/apay/ui/`.
 
-- **Primario**: Teal `#009688` (90 % del uso)  
-- **Secundario**: Púrpura `#9C27B0` (solo features premium)  
+- **Primario**: Azul profundo `#0A1F3D` (identidad corporativa)  
+- **Secundario**: Eléctrico `#6B4CFF` (acciones y destacados)  
 - **Fondo**: `#020914` (espacial oscuro)  
 
-Componentes disponibles: `APAYButton`, `APAYCard`, `APAYInput`, `APAYBanner`,  
-`APAYTag`, `APAYAvatar`, `APAYDivider`, `APAYTopBar`, `APAYBottomNav`, etc.
+Componentes disponibles: `A2Button`, `A2Card`, `A2TextField`, `A2Banner`,  
+`A2Tag`, `A2Avatar`, `A2Divider`, `A2TopBar`, `A2BottomNav`, etc.
+
+---
+
+## Modelo de negocio
+
+### Para Transportistas
+- Publica tu ruta con capacidad disponible
+- Genera ingresos extra por el espacio que sobra
+- Pago garantizado antes de salir
+- Construye reputación digital con cada entrega
+
+### Para Cargadores
+- Encuentra transporte disponible en minutos
+- Precio fijo pactado en la app
+- Rastreo GPS en tiempo real
+- Foto de entrega como evidencia
+
+### Comisión
+- Apay retiene 8-10% de cada envío completado
+- Pago se libera al confirmar la entrega con foto
 
 ---
 
@@ -126,5 +166,9 @@ Componentes disponibles: `APAYButton`, `APAYCard`, `APAYInput`, `APAYBanner`,
 
 - Agregar `google-services.json` antes de compilar (no incluido por seguridad).
 - El archivo `.jks` de firma **nunca** debe ser commiteado al repositorio.
-- WorkManager garantiza la subida de comprobantes incluso si la app se cierra.
 - La biometría requiere que el dispositivo tenga un bloqueo de pantalla configurado.
+- Primera plataforma en Bolivia especializada en carga compartida entre privados.
+
+---
+
+*Bolivia 2026 — Plataforma de Transporte de Carga Compartida*
