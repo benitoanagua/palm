@@ -437,7 +437,7 @@ fun A2Loading(modifier: Modifier = Modifier) {
 
 @Composable
 fun A2TopBar(
-    title: String = "A2",
+    title: String = "APAY",
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     Row(

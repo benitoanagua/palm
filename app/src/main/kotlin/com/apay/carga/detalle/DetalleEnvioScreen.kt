@@ -104,7 +104,7 @@ fun DetalleEnvioScreen(
                         
                         // Barra de progreso
                         LinearProgressIndicator(
-                            progress = (envio.progreso / 100f).coerceIn(0f, 1f),
+                            progress = { (envio.progreso / 100f).coerceIn(0f, 1f) },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(8.dp),

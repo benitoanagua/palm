@@ -45,7 +45,7 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 // ── Logo ────────────────────────────────────────────────────
-                A2GradientDisplayLg(text = "A2")
+                A2GradientDisplayLg(text = "APAY")
                 Spacer(Modifier.height(4.dp))
                 Text(
                     text = "Gestión de pagos y cambios",

@@ -26,7 +26,7 @@ fun CargaHomeScreen(
     ) {
         // Header de bienvenida
         Text(
-            text = "A2 Carga Compartida",
+            text = "APAY Carga Compartida",
             style = A2TextStyle.Headline,
             color = PrimaryDeepBlue,
             fontWeight = FontWeight.Bold

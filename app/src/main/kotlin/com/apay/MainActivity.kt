@@ -151,7 +151,7 @@ fun LockScreen(
                 )
             }
 
-            A2GradientDisplayLg(text = "A2")
+            A2GradientDisplayLg(text = "APAY")
 
             A2BodySmall(
                 text = if (tieneBiometria)
@@ -176,8 +176,3 @@ fun LockScreen(
     }
 }
 
-// ── A2Theme reference
-@Composable
-private fun A2Theme(content: @Composable () -> Unit) {
-    A2Theme(content = content)
-}

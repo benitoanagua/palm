@@ -169,7 +169,7 @@ fun PublicarRutaScreen(
                 Icon(Lucide.Info, "Info", tint = PrimaryDeepBlue)
                 Column {
                     Text(
-                        text = "Comisión A2: 10%",
+                        text = "Comisión APAY: 10%",
                         style = A2TextStyle.BodySmall,
                         fontWeight = FontWeight.Bold,
                         color = PrimaryDeepBlue

@@ -1,4 +1,3 @@
-```
 # Compiled and build artifacts
 *.class
 *.o
@@ -115,4 +114,4 @@ build/
 # Temporary folders
 tmp/
 temp/
-```
+.kotlin/
