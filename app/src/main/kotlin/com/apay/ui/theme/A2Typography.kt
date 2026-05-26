@@ -25,6 +25,7 @@ object A2TextStyle {
     val Body        = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Normal,   lineHeight = 20.sp)
     val BodyMedium  = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Normal,   lineHeight = 16.sp)
     val Small       = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Normal,   lineHeight = 16.sp)
+    val BodySmall   = Small
     val Caption     = TextStyle(fontSize = 10.sp, fontWeight = FontWeight.Medium,   lineHeight = 14.sp)
     val ButtonLabel = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.SemiBold, lineHeight = 13.sp)
 }

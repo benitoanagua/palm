@@ -74,6 +74,10 @@ val Scrim              = Color(0xE6010814)
 val ShimmerBase        = Color(0x1F99C2FF)
 val ShimmerMid         = Color(0x4D99C2FF)
 
+// ─── COMPATIBILITY ALIASES ─────────────────────────────────────────────────────
+val PrimaryDeepBlue    = Color(0xFF0A1F3D)
+val White              = Color(0xFFFFFFFF)
+
 // ─── ALIASES ───────────────────────────────────────────────────────────────────
 val Background         = FondoEspacial
 val AccentElectric     = PrimaryElectric

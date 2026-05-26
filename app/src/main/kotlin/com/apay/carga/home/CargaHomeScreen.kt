@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.*
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 
 @Composable
 fun CargaHomeScreen(
@@ -44,8 +44,7 @@ fun CargaHomeScreen(
         
         // Tarjeta principal - Acción rápida para transportista
         A2Card(
-            modifier = Modifier.fillMaxWidth(),
-            gradient = A2GradientDisplayLg
+            modifier = Modifier.fillMaxWidth()
         ) {
             Column(
                 modifier = Modifier.padding(20.dp),
@@ -80,9 +79,7 @@ fun CargaHomeScreen(
                 
                 A2Button(
                     text = "Publicar Ruta",
-                    onClick = onPublicarRuta,
-                    backgroundColor = White,
-                    textColor = PrimaryDeepBlue
+                    onClick = onPublicarRuta
                 )
             }
         }
@@ -128,9 +125,10 @@ fun CargaHomeScreen(
                     
                     Spacer(modifier = Modifier.height(16.dp))
                     
-                    A2ButtonSecondary(
+                    A2Button(
                         text = "Buscar",
-                        onClick = onBuscarCarga
+                        onClick = onBuscarCarga,
+                        variant = A2ButtonVariant.Secondary
                     )
                 }
             }
@@ -169,9 +167,10 @@ fun CargaHomeScreen(
                     
                     Spacer(modifier = Modifier.height(16.dp))
                     
-                    A2ButtonSecondary(
+                    A2Button(
                         text = "Ver",
-                        onClick = onVerEnvios
+                        onClick = onVerEnvios,
+                        variant = A2ButtonVariant.Secondary
                     )
                 }
             }

@@ -16,8 +16,8 @@ import com.composables.icons.lucide.EyeOff
 import com.composables.icons.lucide.Lock
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Mail
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 import kotlinx.coroutines.delay
 
 @Composable

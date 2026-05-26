@@ -1,6 +1,7 @@
 package com.apay.carga.detalle
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -8,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.*
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 
 @Composable
 fun DetalleEnvioScreen(
@@ -69,8 +70,7 @@ fun DetalleEnvioScreen(
             // Estado actual con progreso
             item {
                 A2Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    gradient = A2GradientDisplayLg
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(
                         modifier = Modifier.padding(20.dp),
@@ -200,11 +200,12 @@ fun DetalleEnvioScreen(
                             }
                         }
                         
-                        A2ButtonSecondary(
-                            text = "Contactar",
-                            onClick = { /* Abrir chat o llamada */ },
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                    A2Button(
+                        text = "Contactar",
+                        onClick = { /* Abrir chat o llamada */ },
+                        modifier = Modifier.fillMaxWidth(),
+                        variant = A2ButtonVariant.Secondary
+                    )
                     }
                 }
             }

@@ -1,6 +1,8 @@
 package com.apay.carga.perfil
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -8,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.*
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 
 @Composable
 fun PerfilScreen(
@@ -65,8 +67,7 @@ fun PerfilScreen(
             // Información principal del usuario
             item {
                 A2Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    gradient = A2GradientDisplayLg
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(
                         modifier = Modifier.padding(20.dp),
@@ -194,17 +195,16 @@ fun PerfilScreen(
                 A2Button(
                     text = "Editar Perfil",
                     onClick = onEditarPerfil,
-                    modifier = Modifier.fillMaxWidth(),
-                    backgroundColor = PrimaryDeepBlue,
-                    textColor = White
+                    modifier = Modifier.fillMaxWidth()
                 )
                 
                 Spacer(modifier = Modifier.height(12.dp))
                 
-                A2ButtonSecondary(
+                A2Button(
                     text = "Cerrar Sesión",
                     onClick = onCerrarSesion,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    variant = A2ButtonVariant.Secondary
                 )
                 
                 Spacer(modifier = Modifier.height(16.dp))

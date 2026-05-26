@@ -30,8 +30,8 @@ class FirestoreUsuarioRepository @Inject constructor(
         )
     }
 
-    override suspend fun actualizarAvatar(uid: String, url: String): Result<Unit> = runCatching {
-        usuarios.document(uid).update("avatarUrl", url).await()
+    override suspend fun actualizarPerfil(uid: String, datos: Map<String, Any>): Result<Unit> = runCatching {
+        usuarios.document(uid).set(datos, SetOptions.merge()).await()
     }
 
     override suspend fun actualizarPresencia(uid: String, enLinea: Boolean) {

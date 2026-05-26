@@ -1,5 +1,7 @@
 package com.apay.carga.envios
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.*
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 
 @Composable
 fun MisEnviosScreen(
@@ -97,8 +99,7 @@ private fun EnvioCard(
     }
     
     A2Card(
-        modifier = Modifier.fillMaxWidth(),
-        onClick = onClick
+        modifier = Modifier.fillMaxWidth().clickable { onClick() }
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -191,10 +192,11 @@ private fun EnvioCard(
             
             // Acciones según estado
             if (envio.estado == "En Tránsito") {
-                A2ButtonSecondary(
+                A2Button(
                     text = "Rastrear",
                     onClick = onClick,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    variant = A2ButtonVariant.Secondary
                 )
             }
         }

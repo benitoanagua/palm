@@ -15,8 +15,8 @@ import com.apay.carga.buscar.BuscarCargaScreen
 import com.apay.carga.envios.MisEnviosScreen
 import com.apay.carga.detalle.DetalleEnvioScreen
 import com.apay.carga.perfil.PerfilScreen
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 
 @Composable
 fun AppNavHost(
@@ -104,7 +104,7 @@ fun MainShell(
     }
 
     val navItems = listOf(
-        A2NavItem("Inicio",      Lucide.Home),
+        A2NavItem("Inicio",      Lucide.House),
         A2NavItem("Mis Envíos",  Lucide.Package),
         A2NavItem("Perfil",      Lucide.User),
     )

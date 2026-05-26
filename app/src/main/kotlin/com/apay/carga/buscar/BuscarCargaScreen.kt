@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.*
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 
 @Composable
 fun BuscarCargaScreen(
@@ -69,14 +69,14 @@ fun BuscarCargaScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    A2TextField(
+                    A2Input(
                         modifier = Modifier.weight(1f),
                         value = origen,
                         onValueChange = { origen = it },
                         placeholder = "Origen",
                         leadingIcon = Lucide.MapPin
                     )
-                    A2TextField(
+                    A2Input(
                         modifier = Modifier.weight(1f),
                         value = destino,
                         onValueChange = { destino = it },
@@ -89,7 +89,7 @@ fun BuscarCargaScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    A2TextField(
+                    A2Input(
                         modifier = Modifier.weight(1f),
                         value = fecha,
                         onValueChange = { fecha = it },
@@ -102,12 +102,12 @@ fun BuscarCargaScreen(
                             .weight(1f)
                             .fillMaxHeight()
                     ) {
-                        A2TextField(
+                        A2Input(
                             value = tipoCarga,
                             onValueChange = {},
                             placeholder = "Tipo Carga",
                             leadingIcon = Lucide.Package,
-                            readOnly = true
+                            enabled = false
                         )
                     }
                 }
@@ -222,10 +222,11 @@ private fun RutaCard(
             }
             
             // Botón reservar
-            A2ButtonSecondary(
+            A2Button(
                 text = "Reservar Espacio",
                 onClick = onReservar,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                variant = A2ButtonVariant.Secondary
             )
         }
     }

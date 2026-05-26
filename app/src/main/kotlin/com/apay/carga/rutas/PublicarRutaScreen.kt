@@ -6,10 +6,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.*
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 
 @Composable
 fun PublicarRutaScreen(
@@ -58,7 +59,7 @@ fun PublicarRutaScreen(
             ) {
                 // Origen
                 Text("Origen", style = A2TextStyle.BodyMedium, fontWeight = FontWeight.Bold)
-                A2TextField(
+                A2Input(
                     value = origen,
                     onValueChange = { origen = it },
                     placeholder = "Ej: Tarija",
@@ -67,7 +68,7 @@ fun PublicarRutaScreen(
                 
                 // Destino
                 Text("Destino", style = A2TextStyle.BodyMedium, fontWeight = FontWeight.Bold)
-                A2TextField(
+                A2Input(
                     value = destino,
                     onValueChange = { destino = it },
                     placeholder = "Ej: Santa Cruz",
@@ -76,7 +77,7 @@ fun PublicarRutaScreen(
                 
                 // Fecha
                 Text("Fecha de Salida", style = A2TextStyle.BodyMedium, fontWeight = FontWeight.Bold)
-                A2TextField(
+                A2Input(
                     value = fecha,
                     onValueChange = { fecha = it },
                     placeholder = "Ej: 25/12/2026 08:00",
@@ -89,14 +90,14 @@ fun PublicarRutaScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    A2TextField(
+                    A2Input(
                         modifier = Modifier.weight(1f),
                         value = capacidad,
                         onValueChange = { capacidad = it },
                         placeholder = "Kg",
                         leadingIcon = Lucide.Scale
                     )
-                    A2TextField(
+                    A2Input(
                         modifier = Modifier.weight(1f),
                         value = capacidad,
                         onValueChange = { capacidad = it },
@@ -107,14 +108,12 @@ fun PublicarRutaScreen(
                 
                 // Precio
                 Text("Precio por Kg (Bs)", style = A2TextStyle.BodyMedium, fontWeight = FontWeight.Bold)
-                A2TextField(
+                A2Input(
                     value = precio,
                     onValueChange = { precio = it },
                     placeholder = "Ej: 0.50",
                     leadingIcon = Lucide.DollarSign,
-                    keyboardOptions = androidx.compose.ui.text.input.KeyboardOptions(
-                        keyboardType = androidx.compose.ui.text.input.KeyboardType.Number
-                    )
+                    keyboardType = KeyboardType.Number
                 )
                 
                 // Tipo de carga
@@ -160,8 +159,7 @@ fun PublicarRutaScreen(
         
         // Información de comisión
         A2Card(
-            modifier = Modifier.fillMaxWidth(),
-            backgroundColor = SecondaryElectric.copy(alpha = 0.1f)
+            modifier = Modifier.fillMaxWidth()
         ) {
             Row(
                 modifier = Modifier.padding(16.dp),

@@ -19,8 +19,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.apay.auth.BiometricHelper
 import com.apay.auth.LoginScreen
 import com.apay.navigation.AppNavHost
-import com.apay.ui.components.*
-import com.apay.ui.theme.*
+import com.a2.ui.components.*
+import com.a2.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -134,7 +134,6 @@ private fun AppEntry(auth: FirebaseAuth) {
                 val chatId = (activity as? FragmentActivity)
                     ?.intent?.getStringExtra("chatId")
                 AppNavHost(
-                    initialChatId = chatId,
                     onLogout = {
                         auth.signOut()
                         isUnlocked = false
@@ -211,5 +210,5 @@ fun LockScreen(
 // ── A2Theme reference
 @Composable
 private fun A2Theme(content: @Composable () -> Unit) {
-    com.apay.ui.theme.A2Theme(content = content)
+    A2Theme(content = content)
 }

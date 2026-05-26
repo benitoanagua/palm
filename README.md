@@ -1,174 +1,116 @@
-# Apay — Plataforma de Transporte de Carga Compartida
+# Apay (A2) — Transporte de Carga Compartida
 
-Aplicación Android para conectar transportistas con espacio disponible en sus vehículos de carga con empresas y personas que necesitan enviar mercancías en la misma ruta, dentro y entre departamentos de Bolivia.
+Aplicación Android para conectar transportistas con espacio disponible en sus vehículos de carga con empresas y personas que necesitan enviar mercancías, dentro y entre departamentos de Bolivia.
 
 ---
 
-## Stack Técnico
+## Stack
 
 | Capa | Tecnología |
 |------|-----------|
 | UI | Jetpack Compose + Material3 |
 | Navegación | Navigation Compose |
 | DI | Hilt |
-| Backend | Firebase (Auth, Firestore, Storage, FCM) |
-| Mapas y GPS | Google Maps SDK |
-| Pagos | Tigo Money + QR bancario boliviano |
-| Infraestructura | AWS o Google Cloud |
+| Backend | Firebase (Auth, Firestore, Storage, FCM, Crashlytics) |
+| Red | Ktor (CIO) |
+| Cámara | CameraX |
+| Seguridad | Biometric + Security Crypto |
+| Íconos | Lucide (com.composables:icons-lucide-android 1.1.0) |
 
----
+## Requisitos
 
-## Estructura de módulos
+- Android Studio Ladybug (o superior)
+- JDK 17
+- Android SDK 35
+- Gradle 8.9 (wrapper incluido)
+- Dispositivo/emulador con API 26+
+
+## Setup
+
+```bash
+# 1. Clonar
+git clone <repo> && cd apay-app
+
+# 2. Firebase
+# Crear proyecto en Firebase Console, agregar app Android (com.apay),
+# descargar google-services.json y colocarlo en app/
+
+# 3. Compilar e instalar
+./gradlew :app:installDebug
+```
+
+## Estructura
 
 ```
-app/
-├── auth/               # Login, biometría, AuthViewModel
+app/src/main/kotlin/com/apay/
+├── A2App.kt                 # Application (@HiltAndroidApp)
+├── MainActivity.kt           # Entry point + auth flow
+├── auth/                     # Login, biometría, AuthViewModel
+├── navigation/               # Screen (rutas), AppNavHost, MainShell
+├── domain/
+│   ├── model/                # Usuario, Transportista, Ruta, Envio
+│   └── repository/           # Interfaces de repositorio
+├── data/repository/          # Implementaciones Firestore (callbackFlow)
+├── di/                       # Módulos Hilt (AppModule, RepositoryModule)
 ├── carga/
-│   ├── home/           # Pantalla principal de carga compartida
-│   ├── rutas/          # Publicar ruta disponible
-│   ├── buscar/         # Buscar transporte disponible
-│   ├── envios/         # Lista de envíos del usuario
-│   ├── detalle/        # Detalle de envío con rastreo
-│   └── perfil/         # Perfil de transportista/cargador
-├── data/repository/    # Implementaciones Firestore
-├── di/                 # Módulos Hilt
-├── domain/             # Modelos y contratos de repositorio
-├── navigation/         # NavHost, Screen, shell BottomNav
-├── notifications/      # FCM Service
-└── ui/
-    ├── components/     # Design system APAY (botones, cards, inputs…)
-    └── theme/          # Colores, tipografía, tokens, gradientes
+│   ├── home/                 # Dashboard principal
+│   ├── rutas/                # Publicar ruta
+│   ├── buscar/               # Buscar transporte
+│   ├── envios/               # Mis envíos
+│   ├── detalle/              # Detalle de envío
+│   └── perfil/               # Perfil de usuario
+├── notifications/            # FCM service
+└── ui/ (com.a2.ui.*)
+    ├── components/           # Design system (A2Button, A2Input, etc.)
+    └── theme/                # Colores, tipografía, tokens, gradientes
 ```
 
----
+## Arquitectura
 
-## Setup inicial
+MVVM + Repository + Hilt DI:
 
-### 1. Firebase
-1. Crear proyecto en [Firebase Console](https://console.firebase.google.com)
-2. Agregar app Android con package `com.apay`
-3. Descargar `google-services.json` → colocarlo en `app/`
-4. Habilitar: **Authentication (email/password)**, **Firestore**, **Storage**, **Cloud Messaging**
-
-### 2. Reglas Firestore (desarrollo)
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-    
-    // Colecciones específicas para carga compartida
-    match /rutas/{rutaId} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && request.resource.data.transportistaId == request.auth.uid;
-    }
-    
-    match /envios/{envioId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null;
-      allow update: if request.auth != null && 
-        (resource.data.transportistaId == request.auth.uid || 
-         resource.data.cargadorId == request.auth.uid);
-    }
-    
-    match /transportistas/{uid} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.uid == uid;
-    }
-  }
-}
+```
+UI (Composables) → ViewModel → Repository (interfaz)
+                                    ↓
+                            Firestore*Repository (implementación)
 ```
 
-### 3. Firma de release
-Configurar variables de entorno:
+**Nota:** Solo `AuthViewModel` existe. Las pantallas de carga usan datos mock locales (pendiente conectar a ViewModels/repositorios).
+
+## Diseño
+
+- **Tema oscuro** solamente
+- **90% Primary (Teal #009688), 8% Secondary (Púrpura #9C27B0), 2% Tertiary (Violeta #673AB7)**
+- **Fondo:** Espacial oscuro `#020914` con glows ambientales
+- Componentes en `com.a2.ui.components.*` (paquete `com.a2`, no `com.apay`)
+- Tipografía custom vía `A2TextStyle` (9 tokens: DisplayLg a Caption)
+
+## Convenciones
+
+- **Paquetes:** El código fuente está en `com.apay.*`; el design system en `com.a2.ui.*`
+- **Navegación:** `Screen` sealed class + `AppNavHost` con `MainShell` (TopBar + BottomNav)
+- **Data real-time:** Repositorios exponen `Flow<T>` vía `callbackFlow` con `addSnapshotListener`
+- **Errores:** Operaciones suspendidas retornan `Result<T>` con `runCatching`
+- **DI:** Todos los módulos Hilt instalados en `SingletonComponent`
+
+## Comandos
+
 ```bash
-export KEYSTORE_PATH=/ruta/a/apay.jks
-export KEYSTORE_PASSWORD=tu_password
-export KEY_ALIAS=apay
-export KEY_PASSWORD=tu_key_password
-```
+# Compilar e instalar en dispositivo
+./gradlew :app:installDebug
 
-### 4. Build
-```bash
-# Debug
-./gradlew assembleDebug
+# Solo compilar Kotlin (rápido)
+./gradlew compileDebugKotlin
 
 # Release
 ./gradlew assembleRelease
+
+# Tests
+./gradlew testDebugUnitTest
 ```
 
----
-
-## Flujo de autenticación
-
-```
-App abre
-├── Sin sesión Firebase → LoginScreen (email + contraseña)
-└── Con sesión Firebase
-    ├── Dispositivo con PIN/biometría → LockScreen (prompt biométrico)
-    │   ├── Éxito → AppNavHost (app principal)
-    │   └── Error → LockScreen (reintento)
-    └── Sin bloqueo configurado → AppNavHost (acceso directo)
-```
+Ver `docs/comandos.md` para más detalles.
 
 ---
 
-## Pantallas principales
-
-| Pantalla | Descripción |
-|----------|-------------|
-| **Login** | Email + contraseña. Recuperación de contraseña por email |
-| **Inicio (CargaHome)** | Dashboard principal con acceso rápido a publicar ruta o buscar transporte |
-| **Publicar Ruta** | Transportista publica su ruta con capacidad disponible, fecha y precio |
-| **Buscar Transporte** | Cargador busca rutas disponibles filtrando por origen, destino y fecha |
-| **Mis Envíos** | Lista de envíos del usuario con filtro por estado (Pendiente, En Tránsito, Entregado) |
-| **Detalle de Envío** | Información completa del envío con rastreo GPS y progreso |
-| **Perfil** | Datos del usuario, calificaciones, historial de viajes, configuración |
-
----
-
-## Design System
-
-Colors, tokens y componentes en `app/src/main/kotlin/com/apay/ui/`.
-
-- **Primario**: Azul profundo `#0A1F3D` (identidad corporativa)  
-- **Secundario**: Eléctrico `#6B4CFF` (acciones y destacados)  
-- **Fondo**: `#020914` (espacial oscuro)  
-
-Componentes disponibles: `A2Button`, `A2Card`, `A2TextField`, `A2Banner`,  
-`A2Tag`, `A2Avatar`, `A2Divider`, `A2TopBar`, `A2BottomNav`, etc.
-
----
-
-## Modelo de negocio
-
-### Para Transportistas
-- Publica tu ruta con capacidad disponible
-- Genera ingresos extra por el espacio que sobra
-- Pago garantizado antes de salir
-- Construye reputación digital con cada entrega
-
-### Para Cargadores
-- Encuentra transporte disponible en minutos
-- Precio fijo pactado en la app
-- Rastreo GPS en tiempo real
-- Foto de entrega como evidencia
-
-### Comisión
-- Apay retiene 8-10% de cada envío completado
-- Pago se libera al confirmar la entrega con foto
-
----
-
-## Notas importantes
-
-- Agregar `google-services.json` antes de compilar (no incluido por seguridad).
-- El archivo `.jks` de firma **nunca** debe ser commiteado al repositorio.
-- La biometría requiere que el dispositivo tenga un bloqueo de pantalla configurado.
-- Primera plataforma en Bolivia especializada en carga compartida entre privados.
-
----
-
-*Bolivia 2026 — Plataforma de Transporte de Carga Compartida*
+*Bolivia 2026 — Primera plataforma de carga compartida entre privados*
