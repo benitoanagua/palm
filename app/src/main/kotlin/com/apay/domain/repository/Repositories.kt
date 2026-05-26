@@ -3,27 +3,28 @@ package com.apay.domain.repository
 import com.apay.domain.model.*
 import kotlinx.coroutines.flow.Flow
 
-interface TasaRepository {
-    fun observarTasaActual(): Flow<Tasa>
-    suspend fun publicarTasa(tasa: Tasa): Result<Unit>
-    suspend fun obtenerHistorial(): Result<List<Tasa>>
+interface RutaRepository {
+    fun observarRutasDisponibles(): Flow<List<Ruta>>
+    suspend fun publicarRuta(ruta: Ruta): Result<Unit>
+    suspend fun obtenerRutaPorId(id: String): Result<Ruta>
+}
+
+interface EnvioRepository {
+    fun observarEnvios(usuarioId: String): Flow<List<Envio>>
+    suspend fun crearEnvio(envio: Envio): Result<Unit>
+    suspend fun actualizarEstado(envioId: String, estado: String): Result<Unit>
+    suspend fun confirmarEntrega(envioId: String, evidenciaUrl: String): Result<Unit>
+}
+
+interface TransportistaRepository {
+    suspend fun obtenerPerfil(uid: String): Result<Transportista>
+    suspend fun actualizarPerfil(transportista: Transportista): Result<Unit>
+    fun observarTransportista(uid: String): Flow<Transportista>
 }
 
 interface UsuarioRepository {
     suspend fun obtenerPorId(uid: String): Result<Usuario>
-    suspend fun actualizarAvatar(uid: String, url: String): Result<Unit>
+    suspend fun actualizarPerfil(uid: String, datos: Map<String, Any>): Result<Unit>
     suspend fun actualizarPresencia(uid: String, enLinea: Boolean)
     fun observarUsuario(uid: String): Flow<Usuario>
-}
-
-interface ChatRepository {
-    fun observarChats(uid: String): Flow<List<Chat>>
-    suspend fun crearChat(participantes: List<String>, titulo: String): Result<String>
-    suspend fun marcarComoLeido(chatId: String, uid: String): Result<Unit>
-}
-
-interface MensajeRepository {
-    fun observarMensajes(chatId: String): Flow<List<Mensaje>>
-    suspend fun enviarMensaje(mensaje: Mensaje): Result<Unit>
-    suspend fun enviarMensajeConImagen(mensaje: Mensaje, imagenUrl: String): Result<Unit>
 }

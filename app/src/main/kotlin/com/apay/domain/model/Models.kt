@@ -1,46 +1,66 @@
 package com.apay.domain.model
 
-data class Tasa(
-    val id: String = "",
-    val valor: Double = 0.0,
-    val publicadaPor: String = "",
-    val timestamp: Long = 0L
-)
-
 data class Usuario(
     val uid: String = "",
     val nombre: String = "",
     val email: String = "",
-    val rol: String = "",
+    val rol: String = "", // "TRANSPORTISTA" | "CARGADOR"
     val avatarUrl: String? = null,
-    val enLinea: Boolean = false
+    val enLinea: Boolean = false,
+    val telefono: String = "",
+    val calificacion: Double = 0.0,
+    val viajesCompletados: Int = 0
 )
 
-data class MovimientoCuenta(
-    val id: String = "",
-    val concepto: String = "",
-    val monto: Double = 0.0,
-    val fecha: Long = 0L,
-    val tipo: String = "" // "CREDITO" | "DEBITO"
+data class Transportista(
+    val uid: String = "",
+    val nombre: String = "",
+    val email: String = "",
+    val telefono: String = "",
+    val placa: String = "",
+    val tipoVehiculo: String = "",
+    val capacidadMaximaKg: Int = 0,
+    val capacidadMaximaM3: Double = 0.0,
+    val calificacion: Double = 0.0,
+    val viajesCompletados: Int = 0,
+    val miembroDesde: Long = 0L,
+    val verificado: Boolean = false,
+    val rutasActivas: Int = 0
 )
 
-data class Chat(
+data class Ruta(
     val id: String = "",
-    val titulo: String = "",
-    val ultimoMensaje: String = "",
-    val fechaUltimoMensaje: Long = 0L,
-    val participantes: List<String> = emptyList(),
-    val noLeidos: Int = 0
+    val transportistaId: String = "",
+    val transportistaNombre: String = "",
+    val origen: String = "",
+    val destino: String = "",
+    val fechaSalida: Long = 0L,
+    val capacidadDisponibleKg: Int = 0,
+    val capacidadDisponibleM3: Double = 0.0,
+    val precioPorKg: Double = 0.0,
+    val tiposCargaAceptados: List<String> = emptyList(),
+    val estado: String = "DISPONIBLE", // DISPONIBLE | EN_CURSO | COMPLETADA | CANCELADA
+    val timestamp: Long = 0L
 )
 
-data class Mensaje(
+data class Envio(
     val id: String = "",
-    val chatId: String = "",
-    val remitenteId: String = "",
-    val remitenteNombre: String = "",
-    val texto: String = "",
-    val timestamp: Long = 0L,
-    val leido: Boolean = false,
-    val tieneImagen: Boolean = false,
-    val imagenUrl: String? = null
+    val rutaId: String = "",
+    val cargadorId: String = "",
+    val cargadorNombre: String = "",
+    val transportistaId: String = "",
+    val transportistaNombre: String = "",
+    val origen: String = "",
+    val destino: String = "",
+    val fechaSalida: Long = 0L,
+    val fechaEntregaEstimada: Long = 0L,
+    val pesoKg: Int = 0,
+    val dimensiones: String = "",
+    val tipoCarga: String = "",
+    val precioTotal: Double = 0.0,
+    val estado: String = "PENDIENTE", // PENDIENTE | CONFIRMADO | EN_TRANSITO | ENTREGADO | CANCELADO
+    val evidenciaEntregaUrl: String? = null,
+    val calificacionTransportista: Int? = null,
+    val calificacionCargador: Int? = null,
+    val timestamp: Long = 0L
 )

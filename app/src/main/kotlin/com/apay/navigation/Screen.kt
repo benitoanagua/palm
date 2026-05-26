@@ -10,17 +10,6 @@ sealed class Screen(val route: String) {
         fun createRoute(envioId: String) = "detalle_envio/$envioId"
     }
     data object Perfil       : Screen("perfil")
-    
-    // Pantallas legacy (para mantener compatibilidad)
-    data object Chats        : Screen("chats")
-    data object Tasa         : Screen("tasa")
-    data object Comprobante  : Screen("comprobante")
-    data object Cuenta       : Screen("cuenta")
-    data object Historial    : Screen("historial")
-    data object NuevoChat    : Screen("nuevo_chat")
-    data object Conversacion : Screen("conversacion/{chatId}") {
-        fun createRoute(chatId: String) = "conversacion/$chatId"
-    }
 
     companion object {
         val BOTTOM_NAV_SCREENS by lazy {

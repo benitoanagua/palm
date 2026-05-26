@@ -13,7 +13,13 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
 
     @Binds @Singleton
-    abstract fun bindTasaRepository(impl: FirestoreTasaRepository): TasaRepository
+    abstract fun bindRutaRepository(impl: FirestoreRutaRepository): RutaRepository
+
+    @Binds @Singleton
+    abstract fun bindEnvioRepository(impl: FirestoreEnvioRepository): EnvioRepository
+
+    @Binds @Singleton
+    abstract fun bindTransportistaRepository(impl: FirestoreTransportistaRepository): TransportistaRepository
 
     @Binds @Singleton
     abstract fun bindUsuarioRepository(impl: FirestoreUsuarioRepository): UsuarioRepository

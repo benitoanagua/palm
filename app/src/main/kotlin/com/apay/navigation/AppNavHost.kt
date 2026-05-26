@@ -9,80 +9,83 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.composables.icons.lucide.*
-import com.apay.chats.ChatsScreen
-import com.apay.comprobante.ComprobanteScreen
-import com.apay.cuenta.CuentaScreen
-import com.apay.tasa.TasaScreen
+import com.apay.carga.home.CargaHomeScreen
+import com.apay.carga.rutas.PublicarRutaScreen
+import com.apay.carga.buscar.BuscarCargaScreen
+import com.apay.carga.envios.MisEnviosScreen
+import com.apay.carga.detalle.DetalleEnvioScreen
+import com.apay.carga.perfil.PerfilScreen
 import com.apay.ui.components.*
 import com.apay.ui.theme.*
 
 @Composable
 fun AppNavHost(
-    initialChatId: String? = null,
     onLogout: () -> Unit = {}
 ) {
     val navController = rememberNavController()
 
-    val handleLogout: () -> Unit = {
-        navController.navigate(Screen.Chats.route) {
-            popUpTo(0) { inclusive = true }
-        }
-        onLogout()
-    }
-
     NavHost(
         navController    = navController,
-        startDestination = Screen.Chats.route
+        startDestination = Screen.CargaHome.route
     ) {
-        composable(Screen.Chats.route) {
-            MainShell(navController, onLogout = handleLogout) {
-                ChatsScreen(onLogout = handleLogout)
-            }
-        }
-        composable(Screen.Tasa.route) {
-            MainShell(navController, onLogout = handleLogout) {
-                TasaScreen(
-                    onIrAComprobante = { navController.navigate(Screen.Comprobante.route) { launchSingleTop = true } },
-                    onIrACuenta      = { navController.navigate(Screen.Cuenta.route) { launchSingleTop = true } },
-                    onIrAChats       = { navController.navigate(Screen.Chats.route) { launchSingleTop = true } }
+        composable(Screen.CargaHome.route) {
+            MainShell(navController, onLogout = onLogout) {
+                CargaHomeScreen(
+                    onPublicarRuta = { navController.navigate(Screen.PublicarRuta.route) },
+                    onBuscarCarga = { navController.navigate(Screen.BuscarCarga.route) },
+                    onVerEnvios = { navController.navigate(Screen.MisEnvios.route) },
+                    onIrAPerfil = { navController.navigate(Screen.Perfil.route) }
                 )
             }
         }
-        composable(Screen.Comprobante.route) {
-            MainShell(navController, onLogout = handleLogout) {
-                ComprobanteScreen(onVolver = { navController.popBackStack() })
-            }
-        }
-        composable(Screen.Cuenta.route) {
-            MainShell(navController, onLogout = handleLogout) {
-                CuentaScreen(
-                    onLogout = handleLogout,
-                    onIrAHistorial = { navController.navigate(Screen.Historial.route) }
+        composable(Screen.PublicarRuta.route) {
+            MainShell(navController, onLogout = onLogout) {
+                PublicarRutaScreen(
+                    onVolver = { navController.popBackStack() },
+                    onPublicar = { /* TODO: Implementar lógica de publicación */ }
                 )
             }
         }
-        composable(Screen.Historial.route) {
-            com.apay.cuenta.HistorialScreen(onVolver = { navController.popBackStack() })
+        composable(Screen.BuscarCarga.route) {
+            MainShell(navController, onLogout = onLogout) {
+                BuscarCargaScreen(
+                    onVolver = { navController.popBackStack() },
+                    onReservar = { /* TODO: Implementar lógica de reserva */ }
+                )
+            }
+        }
+        composable(Screen.MisEnvios.route) {
+            MainShell(navController, onLogout = onLogout) {
+                MisEnviosScreen(
+                    onVolver = { navController.popBackStack() },
+                    onVerDetalle = { envio -> 
+                        navController.navigate(Screen.DetalleEnvio.createRoute(envio.id))
+                    }
+                )
+            }
         }
         composable(
-            route     = "conversacion/{chatId}?titulo={titulo}",
-            arguments = listOf(
-                navArgument("chatId") { type = NavType.StringType },
-                navArgument("titulo") { type = NavType.StringType; defaultValue = "Chat" }
-            )
-        ) {
-            com.apay.conversacion.ConversacionScreen(onVolver = { navController.popBackStack() })
+            route = Screen.DetalleEnvio.route,
+            arguments = listOf(navArgument("envioId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val envioId = backStackEntry.arguments?.getString("envioId") ?: ""
+            MainShell(navController, onLogout = onLogout) {
+                DetalleEnvioScreen(
+                    envioId = envioId,
+                    onVolver = { navController.popBackStack() },
+                    onConfirmarEntrega = { /* TODO: Implementar confirmación de entrega */ }
+                )
+            }
         }
-        composable(Screen.NuevoChat.route) {
-            com.apay.chats.NuevoChatScreen(
-                onChatIniciado = { chatId, titulo ->
-                    val encoded = java.net.URLEncoder.encode(titulo, "UTF-8")
-                    navController.navigate("conversacion/$chatId?titulo=$encoded") {
-                        popUpTo(Screen.NuevoChat.route) { inclusive = true }
-                    }
-                },
-                onVolver = { navController.popBackStack() }
-            )
+        composable(Screen.Perfil.route) {
+            MainShell(navController, onLogout = onLogout) {
+                PerfilScreen(
+                    esTransportista = true,
+                    onVolver = { navController.popBackStack() },
+                    onEditarPerfil = { /* TODO: Implementar edición de perfil */ },
+                    onCerrarSesion = onLogout
+                )
+            }
         }
     }
 }
@@ -101,12 +104,11 @@ fun MainShell(
     }
 
     val navItems = listOf(
-        A2NavItem("Chats",       Lucide.MessageSquare),
-        A2NavItem("Tasa",        Lucide.ChartLine),
-        A2NavItem("Comprobante", Lucide.Upload),
-        A2NavItem("Cuenta",      Lucide.User),
+        A2NavItem("Inicio",      Lucide.Home),
+        A2NavItem("Mis Envíos",  Lucide.Package),
+        A2NavItem("Perfil",      Lucide.User),
     )
-    val navRoutes = listOf(Screen.Chats.route, Screen.Tasa.route, Screen.Comprobante.route, Screen.Cuenta.route)
+    val navRoutes = listOf(Screen.CargaHome.route, Screen.MisEnvios.route, Screen.Perfil.route)
     val selectedIndex = navRoutes.indexOfFirst { route ->
         currentRoute?.startsWith(route.split("/{")[0]) == true
     }.coerceAtLeast(0)
@@ -114,7 +116,7 @@ fun MainShell(
     Column(modifier = Modifier.fillMaxSize()) {
         if (shouldShowChrome) {
             A2TopBar(
-                title = "A2",
+                title = "Apay Carga",
                 actions = {
                     IconButton(onClick = onLogout) {
                         Icon(Lucide.LogOut, "Cerrar sesión", tint = SecondaryElectric)
