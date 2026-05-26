@@ -1,40 +1,20 @@
 ```
 # Compiled and build artifacts
 *.class
-*.dex
-*.so
-*.aar
-*.apk
-*.jar
+*.o
+*.obj
+*.out
+build/
+target/
 
 # Dependencies
 .gradle/
-node_modules/
-vendor/
-
-# Build outputs
-build/
-dist/
-out/
-
-# Android specific
-*.ap_
-*.aab
-*.apks
-*.split
-
-# Temporary files
-*.tmp
-*.temp
-*~
-
-# Logs
-*.log
-
-# Environment
-.env
-.env.local
-.env.*
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+coverage/
+htmlcov/
+*. coverage
 
 # Editors
 .vscode/
@@ -42,19 +22,14 @@ out/
 *.swp
 *.swo
 
-# OS generated files
+# System files
 .DS_Store
 Thumbs.db
+*.log
+*.tmp
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+# Environment
+.env
+.env.local
+*.env.*
 ```
