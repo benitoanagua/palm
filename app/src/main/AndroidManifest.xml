@@ -11,10 +11,10 @@
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
 
     <application
-        android:name=".APAYApp"
-        android:label="APAY"
+        android:name=".A2App"
+        android:label="A2"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.APAY"
+        android:theme="@style/Theme.A2"
         android:allowBackup="false">
 
         <activity
@@ -35,7 +35,7 @@
             tools:replace="android:launchMode" />
 
         <service
-            android:name=".notifications.APAYFcmService"
+            android:name=".notifications.A2FcmService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

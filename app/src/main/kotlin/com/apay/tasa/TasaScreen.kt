@@ -55,7 +55,7 @@ fun TasaScreen(
                             A2BodySmall(text = "1 USD")
                             Spacer(Modifier.height(4.dp))
 
-                            APAYGradientDisplayLg(text = "${state.tasa!!.valor} BOB")
+                            A2GradientDisplayLg(text = "${state.tasa!!.valor} BOB")
                             Spacer(Modifier.height(12.dp))
 
                             A2Divider()

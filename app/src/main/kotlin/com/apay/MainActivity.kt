@@ -164,10 +164,10 @@ fun LockScreen(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(APAYSpacing.lg),
+            verticalArrangement = Arrangement.spacedBy(A2Spacing.lg),
             modifier = Modifier
                 .widthIn(max = 360.dp)
-                .padding(APAYSpacing.xxl)
+                .padding(A2Spacing.xxl)
         ) {
             Box(
                 modifier = Modifier
@@ -183,7 +183,7 @@ fun LockScreen(
                 )
             }
 
-            APAYGradientDisplayLg(text = "APAY")
+            A2GradientDisplayLg(text = "A2")
 
             A2BodySmall(
                 text = if (tieneBiometria)
