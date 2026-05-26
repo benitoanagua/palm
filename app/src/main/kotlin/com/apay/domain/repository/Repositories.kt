@@ -49,3 +49,40 @@ interface DisputaRepository {
     suspend fun crearDisputa(disputa: Disputa): Result<Unit>
     suspend fun actualizarEstado(disputaId: String, estado: String, resolucion: String): Result<Unit>
 }
+
+// US-21 y US-22: Interfaces para Dashboard Empresarial
+interface EmpresaRepository {
+    suspend fun registrarEmpresa(empresa: Empresa): Result<Unit>
+    suspend fun obtenerEmpresaPorId(id: String): Result<Empresa>
+    suspend fun obtenerEmpresaPorNIT(nit: String): Result<Empresa?>
+    suspend fun actualizarEmpresa(empresa: Empresa): Result<Unit>
+    suspend fun actualizarGastoMensual(empresaId: String, monto: Double): Result<Unit>
+    fun observarEmpresa(propietarioId: String): Flow<Empresa?>
+    suspend fun eliminarEmpresa(empresaId: String): Result<Unit>
+}
+
+interface SubUsuarioRepository {
+    suspend fun crearSubUsuario(subUsuario: SubUsuario): Result<Unit>
+    suspend fun obtenerSubUsuarioPorId(id: String): Result<SubUsuario>
+    fun observarSubUsuarios(empresaId: String): Flow<List<SubUsuario>>
+    suspend fun actualizarSubUsuario(subUsuario: SubUsuario): Result<Unit>
+    suspend fun eliminarSubUsuario(subUsuarioId: String): Result<Unit>
+    suspend fun registrarAcceso(subUsuarioId: String): Result<Unit>
+    fun contarSubUsuarios(empresaId: String): Flow<Int>
+}
+
+interface ReporteRepository {
+    suspend fun generarReporteEnvios(
+        empresaId: String,
+        fechaInicio: Long,
+        fechaFin: Long
+    ): Result<ReporteEnvios>
+    
+    fun observarEstadisticasMensuales(empresaId: String, anio: Int): Flow<List<EstadisticaMensual>>
+    
+    suspend fun guardarEstadisticaMensual(estadistica: EstadisticaMensual): Result<Unit>
+    
+    suspend fun exportarReportePDF(empresaId: String, mes: Int, anio: Int): Result<String>
+    
+    suspend fun exportarReporteExcel(empresaId: String, mes: Int, anio: Int): Result<String>
+}

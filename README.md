@@ -30,6 +30,9 @@ app/
 │   ├── envios/         # Lista de envíos del usuario
 │   ├── detalle/        # Detalle de envío con rastreo
 │   └── perfil/         # Perfil de transportista/cargador
+├── empresa/            # Dashboard empresarial (US-21, US-22)
+│   ├── dashboard/      # Dashboard con métricas y reportes
+│   └── subusuarios/    # Gestión de sub-usuarios por empresa
 ├── data/repository/    # Implementaciones Firestore
 ├── di/                 # Módulos Hilt
 ├── domain/             # Modelos y contratos de repositorio
@@ -153,12 +156,30 @@ App abre
 | **Mis Envíos** | Lista de envíos del usuario con filtro por estado (Pendiente, En Tránsito, Entregado) |
 | **Detalle de Envío** | Información completa del envío con rastreo GPS y progreso |
 | **Perfil** | Datos del usuario, calificaciones, historial de viajes, configuración |
+| **Dashboard Empresarial** | (US-21) Métricas de envíos, costos, rutas frecuentes, ahorro estimado, emisiones CO₂ evitadas |
+| **Gestión Sub-Usuarios** | (US-22) Administrar hasta 10 sub-usuarios por empresa con roles y límites de gasto |
+
+---
+
+## Funcionalidades Empresariales (Versión 2)
+
+### Dashboard Empresarial (US-21)
+- **Resumen mensual**: Total de envíos, costo total, tasa de entregas a tiempo
+- **Métricas clave**: Ahorro vs mercado informal, emisiones CO₂ evitadas, peso transportado
+- **Rutas más usadas**: Top 5 rutas con cantidad de viajes y costo promedio
+- **Transportistas frecuentes**: Top 5 transportistas con calificación promedio
+- **Reportes exportables**: PDF y Excel con detalle completo del período
+
+### Gestión de Sub-Usuarios (US-22)
+- **Hasta 10 sub-usuarios** por cuenta empresarial
+- **Roles configurables**: ADMIN, USUARIO, LIMITADO
+- **Límites de gasto**: Límite por envío configurable por sub-usuario
+- **Control de acceso**: Registro de último acceso, activación/desactivación
+- **Rutas frecuentes**: Asignación de rutas habituales por sub-usuario
 
 ---
 
 ## Design System
-
-Colors, tokens y componentes en `app/src/main/kotlin/com/apay/ui/`.
 
 - **Primario**: Azul profundo `#0A1F3D` (identidad corporativa)  
 - **Secundario**: Eléctrico `#6B4CFF` (acciones y destacados)  

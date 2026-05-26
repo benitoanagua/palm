@@ -99,3 +99,79 @@ data class Disputa(
     val resolucion: String = "",
     val timestamp: Long = System.currentTimeMillis()
 )
+
+// US-21 y US-22: Modelos para Dashboard Empresarial
+data class Empresa(
+    val id: String = "",
+    val nombre: String = "",
+    val nit: String = "",
+    val email: String = "",
+    val telefono: String = "",
+    val direccion: String = "",
+    val ciudad: String = "",
+    val propietarioId: String = "", // UID del usuario principal
+    val limiteGastoMensual: Double = 0.0,
+    val gastoActualMes: Double = 0.0,
+    val subUsuariosMaximos: Int = 10,
+    val subUsuariosActivos: Int = 0,
+    val fechaRegistro: Long = System.currentTimeMillis(),
+    val activa: Boolean = true
+)
+
+data class SubUsuario(
+    val id: String = "",
+    val empresaId: String = "",
+    val uid: String = "", // UID del usuario en Firebase Auth
+    val nombre: String = "",
+    val email: String = "",
+    val rol: String = "USUARIO", // "ADMIN" | "USUARIO" | "LIMITADO"
+    val limiteGastoPorEnvio: Double = 0.0,
+    val rutasFrecuentes: List<String> = emptyList(),
+    val activo: Boolean = true,
+    val fechaCreacion: Long = System.currentTimeMillis(),
+    val ultimoAcceso: Long? = null
+)
+
+data class ReporteEnvios(
+    val empresaId: String = "",
+    val periodoInicio: Long = 0L,
+    val periodoFin: Long = 0L,
+    val totalEnvios: Int = 0,
+    val costoTotal: Double = 0.0,
+    val enviosPorEstado: Map<String, Int> = emptyMap(),
+    val enviosPorTipoCarga: Map<String, Int> = emptyMap(),
+    val rutasMasUsadas: List<RutaFrecuente> = emptyList(),
+    val transportistasFrecuentes: List<TransportistaFrecuente> = emptyList(),
+    val ahorroEstimado: Double = 0.0,
+    val emisionesCO2Evitadas: Double = 0.0, // en kg
+    val timestamp: Long = System.currentTimeMillis()
+)
+
+data class RutaFrecuente(
+    val origen: String = "",
+    val destino: String = "",
+    val cantidad: Int = 0,
+    val costoPromedio: Double = 0.0
+)
+
+data class TransportistaFrecuente(
+    val transportistaId: String = "",
+    val transportistaNombre: String = "",
+    val cantidadEnvios: Int = 0,
+    val calificacionPromedio: Double = 0.0
+)
+
+data class EstadisticaMensual(
+    val empresaId: String = "",
+    val mes: Int = 0, // 1-12
+    val anio: Int = 0,
+    val totalEnvios: Int = 0,
+    val costoTotal: Double = 0.0,
+    val costoPromedioPorEnvio: Double = 0.0,
+    val pesoTotalTransportado: Int = 0, // en kg
+    val rutasUnicas: Int = 0,
+    val transportistasUnicos: Int = 0,
+    val tasaEntregaATiempo: Double = 0.0, // porcentaje
+    val calificacionPromedio: Double = 0.0,
+    val timestamp: Long = System.currentTimeMillis()
+)

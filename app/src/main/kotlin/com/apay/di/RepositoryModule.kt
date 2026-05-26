@@ -26,4 +26,14 @@ abstract class RepositoryModule {
 
     @Binds @Singleton
     abstract fun bindDisputaRepository(impl: FirestoreDisputaRepository): DisputaRepository
+
+    // US-21 y US-22: Bindings para Dashboard Empresarial
+    @Binds @Singleton
+    abstract fun bindEmpresaRepository(impl: FirestoreEmpresaRepository): EmpresaRepository
+
+    @Binds @Singleton
+    abstract fun bindSubUsuarioRepository(impl: FirestoreSubUsuarioRepository): SubUsuarioRepository
+
+    @Binds @Singleton
+    abstract fun bindReporteRepository(impl: FirestoreReporteRepository): ReporteRepository
 }
