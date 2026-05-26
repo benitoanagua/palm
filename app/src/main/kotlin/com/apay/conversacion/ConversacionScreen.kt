@@ -111,7 +111,7 @@ fun ConversacionScreen(
                 value            = inputTexto,
                 onValueChange    = { inputTexto = it },
                 modifier         = Modifier.weight(1f),
-                placeholder      = { Text("Mensaje...", color = TextMuted, style = APAYTextStyle.Body) },
+                placeholder      = { Text("Mensaje...", color = TextMuted, style = A2TextStyle.Body) },
                 singleLine       = false,
                 maxLines         = 5,
                 shape            = RoundedCornerShape(16.dp),
@@ -131,7 +131,7 @@ fun ConversacionScreen(
                     unfocusedContainerColor = SuperficieElevada,
                     cursorColor           = PrimaryElectric
                 ),
-                textStyle = APAYTextStyle.Body
+                textStyle = A2TextStyle.Body
             )
 
             // Send button
@@ -198,12 +198,12 @@ private fun BurbujaMensaje(
                 .padding(horizontal = 12.dp, vertical = 8.dp)
         ) {
             Column {
-                Text(texto, color = TextPrimary, style = APAYTextStyle.Body)
+                Text(texto, color = TextPrimary, style = A2TextStyle.Body)
                 Spacer(Modifier.height(2.dp))
                 Text(
                     hora,
                     color  = TextMuted,
-                    style  = APAYTextStyle.Caption,
+                    style  = A2TextStyle.Caption,
                     modifier = Modifier.align(Alignment.End)
                 )
             }

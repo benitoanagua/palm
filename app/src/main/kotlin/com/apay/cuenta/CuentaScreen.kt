@@ -40,12 +40,12 @@ fun CuentaScreen(
                 Icon(Lucide.LogOut, null, tint = SecondaryElectric)
             },
             title = {
-                Text("Desvincular cuenta", style = APAYTextStyle.Headline, color = TextPrimary)
+                Text("Desvincular cuenta", style = A2TextStyle.Headline, color = TextPrimary)
             },
             text = {
                 Text(
                     "Se cerrará tu sesión en este dispositivo. Deberás ingresar tu email y contraseña la próxima vez.",
-                    style = APAYTextStyle.BodyMedium,
+                    style = A2TextStyle.BodyMedium,
                     color = TextSecondary
                 )
             },
@@ -111,7 +111,7 @@ fun CuentaScreen(
                 A2Card(modifier = Modifier.fillMaxWidth()) {
                     A2BodySmall(text = "Saldo / Deuda")
                     Spacer(Modifier.height(4.dp))
-                    APAYGradientDisplayLg(
+                    A2GradientDisplayLg(
                         text = "${state.deudaBolivianos} BOB"
                     )
                 }

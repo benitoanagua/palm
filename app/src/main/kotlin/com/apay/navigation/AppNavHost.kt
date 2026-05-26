@@ -114,7 +114,7 @@ fun MainShell(
     Column(modifier = Modifier.fillMaxSize()) {
         if (shouldShowChrome) {
             A2TopBar(
-                title = "APAY",
+                title = "A2",
                 actions = {
                     IconButton(onClick = onLogout) {
                         Icon(Lucide.LogOut, "Cerrar sesión", tint = SecondaryElectric)

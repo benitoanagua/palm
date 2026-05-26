@@ -56,12 +56,12 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 // ── Logo ────────────────────────────────────────────────────
-                APAYGradientDisplayLg(text = "APAY")
+                A2GradientDisplayLg(text = "A2")
                 Spacer(Modifier.height(4.dp))
                 Text(
                     text = "Gestión de pagos y cambios",
                     color = TextMuted,
-                    style = APAYTextStyle.BodyMedium,
+                    style = A2TextStyle.BodyMedium,
                     textAlign = TextAlign.Center
                 )
                 Spacer(Modifier.height(24.dp))
@@ -143,7 +143,7 @@ fun LoginScreen(
                         text = "¿No tienes cuenta? Regístrate",
                         color = PrimaryElectric.copy(alpha = 0.5f),
                         fontWeight = FontWeight.SemiBold,
-                        style = APAYTextStyle.BodyMedium
+                        style = A2TextStyle.BodyMedium
                     )
                 }
             }

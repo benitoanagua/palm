@@ -437,7 +437,7 @@ fun A2Loading(modifier: Modifier = Modifier) {
 
 @Composable
 fun A2TopBar(
-    title: String = "APAY",
+    title: String = "A2",
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
@@ -455,11 +455,11 @@ fun A2TopBar(
 
 // ── Bottom Nav ─────────────────────────────────────────────────────────────────
 
-data class APAYNavItem(val label: String, val icon: ImageVector)
+data class A2NavItem(val label: String, val icon: ImageVector)
 
 @Composable
-fun APAYBottomNav(
-    items: List<APAYNavItem>,
+fun A2BottomNav(
+    items: List<A2NavItem>,
     selectedIndex: Int,
     onItemSelected: (Int) -> Unit,
     modifier: Modifier = Modifier
