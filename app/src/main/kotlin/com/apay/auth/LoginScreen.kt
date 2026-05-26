@@ -56,10 +56,10 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 // ── Logo ────────────────────────────────────────────────────
-                A2GradientDisplayLg(text = "A2")
+                A2GradientDisplayLg(text = "Apay")
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "Gestión de pagos y cambios",
+                    text = "Transporte de carga compartida",
                     color = TextMuted,
                     style = A2TextStyle.BodyMedium,
                     textAlign = TextAlign.Center

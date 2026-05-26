@@ -55,27 +55,54 @@ app/
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Acceso general autenticado
     match /{document=**} {
       allow read, write: if request.auth != null;
     }
     
     // Colecciones específicas para carga compartida
+    
+    // Rutas: solo transportistas pueden crear sus propias rutas
     match /rutas/{rutaId} {
       allow read: if request.auth != null;
-      allow write: if request.auth != null && request.resource.data.transportistaId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.transportistaId == request.auth.uid;
+      allow update, delete: if request.auth != null && resource.data.transportistaId == request.auth.uid;
     }
     
+    // Envíos: cargadores crean, ambos pueden actualizar estado
     match /envios/{envioId} {
-      allow read: if request.auth != null;
+      allow read: if request.auth != null && 
+        (resource.data.cargadorId == request.auth.uid || 
+         resource.data.transportistaId == request.auth.uid);
       allow create: if request.auth != null;
       allow update: if request.auth != null && 
         (resource.data.transportistaId == request.auth.uid || 
          resource.data.cargadorId == request.auth.uid);
     }
     
+    // Transportistas: perfil público con escritura solo del dueño
     match /transportistas/{uid} {
       allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid;
+      allow update: if request.auth != null && request.auth.uid == uid;
+    }
+    
+    // Usuarios: perfil básico
+    match /usuarios/{uid} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == uid;
+      allow update: if request.auth != null && request.auth.uid == uid;
+    }
+    
+    // Disputas: solo involucrados y admin pueden acceder
+    match /disputas/{disputaId} {
+      allow read: if request.auth != null && 
+        (resource.data.cargadorId == request.auth.uid || 
+         resource.data.transportistaId == request.auth.uid);
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && 
+        (resource.data.cargadorId == request.auth.uid || 
+         resource.data.transportistaId == request.auth.uid);
     }
   }
 }

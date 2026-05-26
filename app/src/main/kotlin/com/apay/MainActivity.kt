@@ -131,10 +131,10 @@ private fun AppEntry(auth: FirebaseAuth) {
                 )
             }
             else -> {
-                val chatId = (activity as? FragmentActivity)
-                    ?.intent?.getStringExtra("chatId")
+                val envioId = (activity as? FragmentActivity)
+                    ?.intent?.getStringExtra("envioId")
                 AppNavHost(
-                    initialChatId = chatId,
+                    initialEnvioId = envioId,
                     onLogout = {
                         auth.signOut()
                         isUnlocked = false
@@ -183,7 +183,7 @@ fun LockScreen(
                 )
             }
 
-            A2GradientDisplayLg(text = "A2")
+            A2GradientDisplayLg(text = "Apay")
 
             A2BodySmall(
                 text = if (tieneBiometria)

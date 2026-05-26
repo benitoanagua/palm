@@ -35,12 +35,11 @@ class A2FcmService : FirebaseMessagingService() {
         crearCanales()
         val tipo = message.data["tipo"] ?: return
         val notif = when (tipo) {
-            "NUEVA_TASA"             -> buildTasaNotif(message)
-            "COMPROBANTE_VERIFICADO" -> buildComprobanteNotif(message, "✅ Comprobante verificado")
-            "COMPROBANTE_RECHAZADO"  -> buildComprobanteNotif(message, "❌ Comprobante rechazado")
-            "ALERTA"                 -> buildAlertaNotif(message)
-            "NUEVO_MENSAJE"          -> buildMensajeNotif(message)
-            else                     -> return
+            "NUEVO_ENVIO"          -> buildEnvioNotif(message)
+            "ENVIO_ACTUALIZADO"    -> buildEnvioNotif(message)
+            "ALERTA"               -> buildAlertaNotif(message)
+            "MENSAJE"              -> buildMensajeNotif(message)
+            else                   -> return
         }
         NotificationManagerCompat.from(this)
             .notify(System.currentTimeMillis().toInt(), notif)
@@ -49,10 +48,9 @@ class A2FcmService : FirebaseMessagingService() {
     private fun crearCanales() {
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         listOf(
-            NotificationChannel("tasas",        "Nueva tasa",    NotificationManager.IMPORTANCE_HIGH),
-            NotificationChannel("comprobantes", "Comprobantes",  NotificationManager.IMPORTANCE_DEFAULT),
-            NotificationChannel("alertas",      "Alertas",       NotificationManager.IMPORTANCE_HIGH),
-            NotificationChannel("mensajes",     "Mensajes",      NotificationManager.IMPORTANCE_HIGH)
+            NotificationChannel("envios",      "Envíos",       NotificationManager.IMPORTANCE_HIGH),
+            NotificationChannel("alertas",     "Alertas",      NotificationManager.IMPORTANCE_HIGH),
+            NotificationChannel("mensajes",    "Mensajes",     NotificationManager.IMPORTANCE_HIGH)
         ).forEach { manager.createNotificationChannel(it) }
     }
 
@@ -62,32 +60,22 @@ class A2FcmService : FirebaseMessagingService() {
         PendingIntent.FLAG_IMMUTABLE
     )
 
-    private fun chatIntent(chatId: String?, titulo: String?) = PendingIntent.getActivity(
+    private fun envioIntent(envioId: String?) = PendingIntent.getActivity(
         this, System.currentTimeMillis().toInt(),
         Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-            putExtra("chatId", chatId)
-            putExtra("titulo", titulo)
+            putExtra("envioId", envioId)
         },
         PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
     )
 
-    private fun buildTasaNotif(msg: RemoteMessage) =
-        NotificationCompat.Builder(this, "tasas")
+    private fun buildEnvioNotif(msg: RemoteMessage) =
+        NotificationCompat.Builder(this, "envios")
             .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle("Nueva tasa publicada")
-            .setContentText(msg.data["mensaje"] ?: "Tasa actualizada")
+            .setContentTitle(msg.data["titulo"] ?: "Actualización de envío")
+            .setContentText(msg.data["mensaje"] ?: "Tu envío ha sido actualizado")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(mainIntent())
-            .setAutoCancel(true).build()
-
-    private fun buildComprobanteNotif(msg: RemoteMessage, titulo: String) =
-        NotificationCompat.Builder(this, "comprobantes")
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle(titulo)
-            .setContentText(msg.data["mensaje"] ?: "Tu comprobante fue procesado")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(mainIntent())
+            .setContentIntent(envioIntent(msg.data["envioId"]))
             .setAutoCancel(true).build()
 
     private fun buildAlertaNotif(msg: RemoteMessage) =
@@ -105,6 +93,6 @@ class A2FcmService : FirebaseMessagingService() {
             .setContentTitle(msg.data["remitente"] ?: "Mensaje nuevo")
             .setContentText(msg.data["texto"] ?: "")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(chatIntent(msg.data["chatId"], msg.data["remitente"]))
+            .setContentIntent(mainIntent())
             .setAutoCancel(true).build()
 }

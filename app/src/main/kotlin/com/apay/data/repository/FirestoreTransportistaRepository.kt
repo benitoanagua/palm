@@ -30,7 +30,11 @@ class FirestoreTransportistaRepository @Inject constructor(
             viajesCompletados = doc.getLong("viajesCompletados")?.toInt() ?: 0,
             miembroDesde = doc.getLong("miembroDesde") ?: 0L,
             verificado = doc.getBoolean("verificado") ?: false,
-            rutasActivas = doc.getLong("rutasActivas")?.toInt() ?: 0
+            rutasActivas = doc.getLong("rutasActivas")?.toInt() ?: 0,
+            fotoVehiculoUrl = doc.getString("fotoVehiculoUrl"),
+            documentoHabilitacionUrl = doc.getString("documentoHabilitacionUrl"),
+            ingresosTotales = doc.getDouble("ingresosTotales") ?: 0.0,
+            kmTotales = doc.getDouble("kmTotales") ?: 0.0
         )
     }
 
@@ -47,7 +51,34 @@ class FirestoreTransportistaRepository @Inject constructor(
                 "calificacion" to transportista.calificacion,
                 "viajesCompletados" to transportista.viajesCompletados,
                 "verificado" to transportista.verificado,
-                "rutasActivas" to transportista.rutasActivas
+                "rutasActivas" to transportista.rutasActivas,
+                "fotoVehiculoUrl" to transportista.fotoVehiculoUrl,
+                "documentoHabilitacionUrl" to transportista.documentoHabilitacionUrl,
+                "ingresosTotales" to transportista.ingresosTotales,
+                "kmTotales" to transportista.kmTotales
+            )).await()
+    }
+
+    override suspend fun registrarTransportista(transportista: Transportista): Result<Unit> = runCatching {
+        firestore.collection("transportistas").document(transportista.uid)
+            .set(mapOf(
+                "uid" to transportista.uid,
+                "nombre" to transportista.nombre,
+                "email" to transportista.email,
+                "telefono" to transportista.telefono,
+                "placa" to transportista.placa,
+                "tipoVehiculo" to transportista.tipoVehiculo,
+                "capacidadMaximaKg" to transportista.capacidadMaximaKg,
+                "capacidadMaximaM3" to transportista.capacidadMaximaM3,
+                "calificacion" to transportista.calificacion,
+                "viajesCompletados" to transportista.viajesCompletados,
+                "miembroDesde" to System.currentTimeMillis(),
+                "verificado" to false,
+                "rutasActivas" to 0,
+                "fotoVehiculoUrl" to transportista.fotoVehiculoUrl,
+                "documentoHabilitacionUrl" to transportista.documentoHabilitacionUrl,
+                "ingresosTotales" to 0.0,
+                "kmTotales" to 0.0
             )).await()
     }
 
@@ -70,11 +101,24 @@ class FirestoreTransportistaRepository @Inject constructor(
                             viajesCompletados = it.getLong("viajesCompletados")?.toInt() ?: 0,
                             miembroDesde = it.getLong("miembroDesde") ?: 0L,
                             verificado = it.getBoolean("verificado") ?: false,
-                            rutasActivas = it.getLong("rutasActivas")?.toInt() ?: 0
+                            rutasActivas = it.getLong("rutasActivas")?.toInt() ?: 0,
+                            fotoVehiculoUrl = it.getString("fotoVehiculoUrl"),
+                            documentoHabilitacionUrl = it.getString("documentoHabilitacionUrl"),
+                            ingresosTotales = it.getDouble("ingresosTotales") ?: 0.0,
+                            kmTotales = it.getDouble("kmTotales") ?: 0.0
                         )
                     )
                 }
             }
         awaitClose { listener.remove() }
+    }
+
+    override suspend fun actualizarEstadisticas(uid: String, viajesCompletados: Int, ingresosTotales: Double, kmTotales: Double): Result<Unit> = runCatching {
+        firestore.collection("transportistas").document(uid)
+            .update(mapOf(
+                "viajesCompletados" to viajesCompletados,
+                "ingresosTotales" to ingresosTotales,
+                "kmTotales" to kmTotales
+            )).await()
     }
 }

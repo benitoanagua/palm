@@ -23,4 +23,7 @@ abstract class RepositoryModule {
 
     @Binds @Singleton
     abstract fun bindUsuarioRepository(impl: FirestoreUsuarioRepository): UsuarioRepository
+
+    @Binds @Singleton
+    abstract fun bindDisputaRepository(impl: FirestoreDisputaRepository): DisputaRepository
 }

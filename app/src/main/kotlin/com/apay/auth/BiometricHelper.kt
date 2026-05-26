@@ -52,7 +52,7 @@ object BiometricHelper {
         )
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Acceder a A2")
+            .setTitle("Acceder a Apay")
             .setSubtitle(
                 if (tieneBiometria(activity)) "Usa tu huella o cara para continuar"
                 else "Usa tu PIN o patrón para continuar"
