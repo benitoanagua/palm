@@ -1,8 +1,9 @@
 package com.apay.di
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
+// Firebase (comentado - activar cuando se configuren los servicios)
+// import com.google.firebase.auth.FirebaseAuth
+// import com.google.firebase.firestore.FirebaseFirestore
+// import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,14 +26,14 @@ object AppModule {
         }
     }
 
-    @Provides @Singleton
-    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance().also { auth ->
-        auth.firebaseAuthSettings.forceRecaptchaFlowForTesting(true)
-    }
+    // @Provides @Singleton
+    // fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance().also { auth ->
+    //     auth.firebaseAuthSettings.forceRecaptchaFlowForTesting(true)
+    // }
 
-    @Provides @Singleton
-    fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
+    // @Provides @Singleton
+    // fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    @Provides @Singleton
-    fun provideStorage(): FirebaseStorage = FirebaseStorage.getInstance()
+    // @Provides @Singleton
+    // fun provideStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 }

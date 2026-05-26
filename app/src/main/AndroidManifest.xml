@@ -27,20 +27,21 @@
             </intent-filter>
         </activity>
 
-        <activity
+        <!-- Firebase (comentado - activar cuando se configuren los servicios) -->
+        <!-- <activity
             android:name="com.google.firebase.auth.internal.RecaptchaActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            tools:replace="android:launchMode" />
+            tools:replace="android:launchMode" /> -->
 
-        <service
+        <!-- <service
             android:name=".notifications.A2FcmService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
-        </service>
+        </service> -->
 
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"

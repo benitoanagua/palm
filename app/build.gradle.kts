@@ -2,8 +2,10 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kotlinCompose)
-    alias(libs.plugins.googleServices)
-    alias(libs.plugins.crashlytics)
+    // Google Services (comentado - activar cuando se configure Firebase)
+    // alias(libs.plugins.googleServices)
+    // Crashlytics (comentado - activar cuando se configure Firebase)
+    // alias(libs.plugins.crashlytics)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 }
@@ -61,14 +63,14 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.compose.icons.lucide)
 
-    // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.firestore)
-    implementation(libs.firebase.storage)
-    implementation(libs.firebase.messaging)
-    implementation(libs.firebase.crashlytics)
-    implementation("com.google.firebase:firebase-appdistribution:16.0.0-beta09")
+    // Firebase (comentado - activar cuando se configuren los servicios)
+    // implementation(platform(libs.firebase.bom))
+    // implementation(libs.firebase.auth)
+    // implementation(libs.firebase.firestore)
+    // implementation(libs.firebase.storage)
+    // implementation(libs.firebase.messaging)
+    // implementation(libs.firebase.crashlytics)
+    // implementation("com.google.firebase:firebase-appdistribution:16.0.0-beta09")
 
     // Hilt
     implementation(libs.hilt.android)
@@ -96,9 +98,9 @@ dependencies {
     implementation(libs.ktor.client.content.neg)
     implementation(libs.ktor.serialization.kotlinx)
 
-    // Auth SMS
-    implementation("com.google.android.gms:play-services-auth:21.0.0")
-    implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
+    // Auth SMS (comentado - activar con Firebase)
+    // implementation("com.google.android.gms:play-services-auth:21.0.0")
+    // implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)

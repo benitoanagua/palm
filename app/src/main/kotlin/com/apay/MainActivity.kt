@@ -15,23 +15,20 @@ import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.Lock
 import com.composables.icons.lucide.LockOpen
 import com.composables.icons.lucide.Lucide
-import com.google.firebase.auth.FirebaseAuth
 import com.apay.auth.BiometricHelper
 import com.apay.auth.LoginScreen
 import com.apay.navigation.AppNavHost
 import com.a2.ui.components.*
 import com.a2.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 
 /**
  * Flujo de autenticación local (biométrica / PIN):
  *
  * ┌────────────────────────────────────────────────────────┐
  * │ App abre                                               │
- * │ ├── Usuario NO logueado en Firebase → LoginScreen      │
- * │ └── Usuario logueado en Firebase                       │
+ * │ ├── Usuario NO logueado → LoginScreen (mock/local)     │
+ * │ └── Usuario logueado                                   │
  * │     ├── Dispositivo tiene PIN/biometría configurado    │
  * │     │   → LockScreen (prompt biometría / PIN)          │
  * │     │   ├── Éxito → AppNavHost                         │
@@ -45,7 +42,9 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val auth = FirebaseAuth.getInstance()
+        // Firebase Auth (comentado - activar cuando se configure)
+        // val auth = FirebaseAuth.getInstance()
+        val auth = null // Mock auth para fase sin Firebase
 
         enableEdgeToEdge()
 
@@ -66,25 +65,12 @@ class MainActivity : FragmentActivity() {
 }
 
 @Composable
-private fun AppEntry(auth: FirebaseAuth) {
+private fun AppEntry(auth: Any?) {
     val activity = androidx.compose.ui.platform.LocalContext.current as FragmentActivity
 
-    var isLoggedIn  by remember { mutableStateOf(auth.currentUser != null) }
+    var isLoggedIn  by remember { mutableStateOf(auth?.let { false } ?: false) }
     var isUnlocked  by remember { mutableStateOf(false) }
     var authError   by remember { mutableStateOf<String?>(null) }
-
-    DisposableEffect(Unit) {
-        val listener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-            val loggedIn = firebaseAuth.currentUser != null
-            if (!loggedIn && isLoggedIn) {
-                isUnlocked = false
-                authError = null
-            }
-            isLoggedIn = loggedIn
-        }
-        auth.addAuthStateListener(listener)
-        onDispose { auth.removeAuthStateListener(listener) }
-    }
 
     LaunchedEffect(isLoggedIn, isUnlocked) {
         if (isLoggedIn && !isUnlocked) {
@@ -105,7 +91,7 @@ private fun AppEntry(auth: FirebaseAuth) {
         targetState = Triple(isLoggedIn, isUnlocked, isLoggedIn),
         transitionSpec = { fadeIn() togetherWith fadeOut() },
         label = "app_entry"
-    ) { (loggedIn, unlocked, _) ->
+    ) { (loggedIn, _, _) ->
         when {
             !loggedIn -> {
                 LoginScreen(
@@ -116,26 +102,9 @@ private fun AppEntry(auth: FirebaseAuth) {
                     }
                 )
             }
-            !unlocked -> {
-                LockScreen(
-                    error = authError,
-                    onDesbloquear = {
-                        authError = null
-                        BiometricHelper.autenticar(
-                            activity    = activity,
-                            onExito     = { isUnlocked = true },
-                            onError     = { error -> authError = error },
-                            onCancelado = { authError = null }
-                        )
-                    }
-                )
-            }
             else -> {
-                val chatId = (activity as? FragmentActivity)
-                    ?.intent?.getStringExtra("chatId")
                 AppNavHost(
                     onLogout = {
-                        auth.signOut()
                         isUnlocked = false
                         isLoggedIn = false
                         authError  = null

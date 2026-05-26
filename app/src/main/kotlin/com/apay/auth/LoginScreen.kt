@@ -10,7 +10,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.composables.icons.lucide.Eye
 import com.composables.icons.lucide.EyeOff
 import com.composables.icons.lucide.Lock
@@ -18,28 +17,18 @@ import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Mail
 import com.a2.ui.components.*
 import com.a2.ui.theme.*
-import kotlinx.coroutines.delay
 
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit,
-    viewModel: AuthViewModel = hiltViewModel()
+    onLoginSuccess: () -> Unit
 ) {
     var email        by remember { mutableStateOf("") }
     var password     by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
-    val state        by viewModel.authState.collectAsState()
+    var isLoading    by remember { mutableStateOf(false) }
+    var errorMsg     by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(state.isLoggedIn) {
-        if (state.isLoggedIn) onLoginSuccess()
-    }
-
-    LaunchedEffect(state.success) {
-        if (state.success != null) {
-            delay(5_000)
-            viewModel.clearError()
-        }
-    }
+    val canLogin = email.isNotEmpty() && password.length >= 6
 
     Box(Modifier.fillMaxSize()) {
         A2Background()
@@ -80,7 +69,7 @@ fun LoginScreen(
                         label = "Email",
                         leadingIcon = Lucide.Mail,
                         placeholder = "ejemplo@apay.com",
-                        enabled = !state.isLoading,
+                        enabled = !isLoading,
                         keyboardType = KeyboardType.Email
                     )
                     Spacer(Modifier.height(8.dp))
@@ -94,34 +83,29 @@ fun LoginScreen(
                         onTrailingIconClick = { showPassword = !showPassword },
                         isPassword = !showPassword,
                         placeholder = "••••••••",
-                        enabled = !state.isLoading
+                        enabled = !isLoading
                     )
 
                     A2TextButton(
                         text = "Olvidé mi contraseña",
                         onClick = {
-                            if (email.isNotBlank()) viewModel.resetPassword(email)
-                            else viewModel.clearError()
+                            errorMsg = if (email.isNotBlank())
+                                "Función disponible cuando se active Firebase"
+                            else
+                                null
                         },
                         modifier = Modifier.align(Alignment.End),
                         color = PrimaryElectric
                     )
 
-                    // Error / success banners
-                    if (state.error != null) {
+                    // Error banner
+                    if (errorMsg != null) {
                         Spacer(Modifier.height(4.dp))
                         A2Banner(
-                            message = state.error!!,
+                            message = errorMsg!!,
                             type = A2BannerType.Error,
                             dismissible = true,
-                            onDismiss = { viewModel.clearError() }
-                        )
-                    }
-                    if (state.success != null) {
-                        Spacer(Modifier.height(4.dp))
-                        A2Banner(
-                            message = state.success!!,
-                            type = A2BannerType.Success
+                            onDismiss = { errorMsg = null }
                         )
                     }
 
@@ -129,9 +113,13 @@ fun LoginScreen(
 
                     A2Button(
                         text = "Ingresar",
-                        onClick = { viewModel.login(email, password) },
-                        loading = state.isLoading,
-                        enabled = email.isNotEmpty() && password.length >= 6 && !state.isLoading,
+                        onClick = {
+                            isLoading = true
+                            // Mock login para fase sin Firebase
+                            onLoginSuccess()
+                        },
+                        loading = isLoading,
+                        enabled = canLogin && !isLoading,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
