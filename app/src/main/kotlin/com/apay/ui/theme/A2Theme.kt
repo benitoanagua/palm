@@ -1,22 +1,26 @@
 package com.a2.ui.theme
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
-private val A2ColorScheme = darkColorScheme(
-    primary          = PrimaryElectric,
-    onPrimary        = TextOnColor,
+private val A2ColorScheme = lightColorScheme(
+    primary          = Terracota,
+    onPrimary        = White,
     primaryContainer = PrimaryContainer,
-    secondary        = SecondaryElectric,
-    tertiary         = TertiaryElectric,
-    background       = FondoEspacial,
-    surface          = SuperficieCristal,
-    onBackground     = TextPrimary,
-    onSurface        = TextPrimary,
+    secondary        = Salvia,
+    onSecondary      = White,
+    tertiary         = MaderaTostada,
+    onTertiary       = White,
+    background       = FondoBase,
+    onBackground     = TextoGrafito,
+    surface          = SuperficiePrimaria,
+    onSurface        = TextoGrafito,
+    surfaceVariant   = SuperficieSecundaria,
     error            = Error,
-    outline          = Outline,
+    onError          = White,
+    outline          = BordeSutil,
+    outlineVariant   = BordeSutil,
 )
 
 @Composable
