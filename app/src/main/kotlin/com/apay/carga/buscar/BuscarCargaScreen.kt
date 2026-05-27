@@ -215,7 +215,7 @@ private fun RutaCard(
                 }
                 
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Lucide.Star, "Calificación", tint = androidx.compose.ui.graphics.Color(0xFFFFD700), modifier = Modifier.size(16.dp))
+                    Icon(Lucide.Star, "Calificación", tint = Estrella, modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text("${ruta.calificacion}", style = A2TextStyle.BodySmall, fontWeight = FontWeight.Bold)
                 }

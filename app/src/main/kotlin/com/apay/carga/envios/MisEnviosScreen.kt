@@ -92,9 +92,9 @@ private fun EnvioCard(
     onClick: () -> Unit
 ) {
     val colorEstado = when (envio.estado) {
-        "Entregado" -> androidx.compose.ui.graphics.Color(0xFF22C55E)
-        "En Tránsito" -> androidx.compose.ui.graphics.Color(0xFF3B82F6)
-        "Pendiente" -> androidx.compose.ui.graphics.Color(0xFFF59E0B)
+        "Entregado" -> StatusEntregado
+        "En Tránsito" -> StatusEnTransito
+        "Pendiente" -> StatusPendiente
         else -> SecondaryElectric
     }
     
@@ -184,7 +184,7 @@ private fun EnvioCard(
                 }
                 
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Lucide.Star, "Calificación", tint = androidx.compose.ui.graphics.Color(0xFFFFD700), modifier = Modifier.size(16.dp))
+                    Icon(Lucide.Star, "Calificación", tint = Estrella, modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text("${envio.calificacion}", style = A2TextStyle.BodySmall, fontWeight = FontWeight.Bold)
                 }

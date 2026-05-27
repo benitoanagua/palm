@@ -2,18 +2,21 @@ package com.a2.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// ─── 30° — Ivory Linen / Warm Structure ────────────────────────────────────
-// Fondos: lino, blanco hueso, lino medio
-// Acento: terracota templada, salvia, madera tostada
+// ─── 30° — Ivory Linen / Warm Structure (Wayfarer) ─────────────────────────
+// Fondos: lino cálido #FFF8F4, blanco hueso
+// Acento: terracota profunda #924626, salvia profunda #466550
 // Texto:  grafito cálido, tierra media
 
 // ─── FONDOS ─────────────────────────────────────────────────────────────────
-val FondoBase            = Color(0xFFF8F5EF)
-val SuperficiePrimaria   = Color(0xFFFAFAF8)
+val FondoBase            = Color(0xFFFFF8F4)
+val SuperficiePrimaria   = Color(0xFFFFF8F4)
 val SuperficieSecundaria = Color(0xFFF2EEE7)
+val SuperficieElevada    = Color(0xFFFFFFFF)
 
 // ─── ACENTOS ────────────────────────────────────────────────────────────────
+val TerracotaProfunda    = Color(0xFF924626)
 val Terracota            = Color(0xFFB05E3C)
+val SalviaProfunda       = Color(0xFF466550)
 val Salvia               = Color(0xFF6A8B74)
 val MaderaTostada        = Color(0xFF8C7B6A)
 
@@ -28,6 +31,11 @@ val Warning              = Color(0xFFD4A24E)
 val Success              = Color(0xFF4A7C59)
 val Info                 = Salvia
 
+val Estrella             = Color(0xFFD4A24E)
+val StatusEnTransito     = Color(0xFF5B8CB8)
+val StatusEntregado      = Success
+val StatusPendiente      = Warning
+
 val ErrorBannerBg        = Color(0xFFFDF0EF)
 val SuccessBannerBg      = Color(0xFFF0F7F2)
 val WarningBannerBg      = Color(0xFFFDF8F0)
@@ -35,6 +43,7 @@ val InfoBannerBg         = Color(0xFFF2F0EE)
 
 // ─── BORDES ─────────────────────────────────────────────────────────────────
 val BordeSutil           = Color(0x338C7B6A)
+val BordeCard            = Color(0x208C7B6A)
 val BordeTerracota       = Color(0xFFB05E3C)
 
 // ─── SOMBRAS ────────────────────────────────────────────────────────────────
@@ -48,17 +57,17 @@ val Scrim                = Color(0x803A3530)
 val DisabledAlpha        = Color(0x733A3530)
 
 // ─── ALIASES PRIMARIOS ──────────────────────────────────────────────────────
-val PrimaryElectric      = Terracota
+val PrimaryElectric      = TerracotaProfunda
 val PrimaryLight         = Color(0xFFC97452)
-val PrimaryDark          = Color(0xFF8E4A2E)
-val PrimaryContainer     = Color(0xFFF5E6E0)
+val PrimaryDark          = Color(0xFF75381E)
+val PrimaryContainer     = Terracota
 val PrimaryMuted         = Color(0xFFD4A89A)
 
 // ─── ALIASES SECUNDARIOS ────────────────────────────────────────────────────
-val SecondaryElectric    = Salvia
-val SecondaryLight       = Color(0xFF8DAA94)
-val SecondaryDark        = Color(0xFF4E6B56)
-val SecondaryContainer   = Color(0xFFE4EDE6)
+val SecondaryElectric    = SalviaProfunda
+val SecondaryLight       = Color(0xFF6A8B74)
+val SecondaryDark        = Color(0xFF334A38)
+val SecondaryContainer   = Salvia
 
 // ─── ALIASES TERCIARIOS ─────────────────────────────────────────────────────
 val TertiaryElectric     = MaderaTostada
@@ -81,8 +90,8 @@ val TextOnColor          = Color(0xFFFFFFFF)
 // ─── LEGACY ALIASES ─────────────────────────────────────────────────────────
 val PrimaryDeepBlue      = TextoGrafito
 val White                = Color(0xFFFFFFFF)
-val AccentElectric       = Terracota
-val BrandTeal            = Terracota
+val AccentElectric       = TerracotaProfunda
+val BrandTeal            = TerracotaProfunda
 
 // ─── SHIMMER ────────────────────────────────────────────────────────────────
 val ShimmerBase          = Color(0x1F8C7B6A)

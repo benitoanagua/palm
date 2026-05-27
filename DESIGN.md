@@ -18,21 +18,24 @@ No es minimalismo por sustracción (quitar hasta el límite). Es minimalismo por
 
 ### Fondos
 
-| Token                 | Valor     | Descripción                                                |
-| --------------------- | --------- | ---------------------------------------------------------- |
-| Fondo base            | `#F8F5EF` | Lino claro. Beige sofisticado, ni amarillento ni grisáceo. |
-| Superficie primaria   | `#FAFAF8` | Blanco hueso. Limpio pero no estéril.                      |
-| Superficie secundaria | `#F2EEE7` | Lino medio. Para zonas de distinción suave.                |
+| Token                   | Valor     | Descripción                                                |
+| ----------------------- | --------- | ---------------------------------------------------------- |
+| Fondo base              | `#FFF8F4` | Lino cálido. Beige sofisticado, tinte rosáceo muy sutil.    |
+| Superficie primaria     | `#FFF8F4` | Mismo que fondo. Superficies continuas y limpias.           |
+| Superficie secundaria   | `#F2EEE7` | Lino medio. Para zonas de distinción suave.                |
+| Superficie elevada      | `#FFFFFF` | Blanco puro. Para cards destacados, inputs en focus.       |
 
 ### Acentos
 
-| Token            | Valor     | Uso                                                             |
-| ---------------- | --------- | --------------------------------------------------------------- |
-| Primario         | `#B05E3C` | Terracota templada. Presencia sin agresividad.                  |
-| Secundario       | `#6A8B74` | Verde salvia. Calma natural y equilibrio.                       |
-| Terciario        | `#8C7B6A` | Madera tostada. Para bordes sutiles y separadores.              |
-| Texto principal  | `#3A3530` | Grafito cálido. Oscuro pero con temperatura marrón perceptible. |
-| Texto secundario | `#7A6E65` | Tierra media. Para etiquetas, metadatos.                        |
+| Token               | Valor     | Uso                                                             |
+| ------------------- | --------- | --------------------------------------------------------------- |
+| Primario profundo   | `#924626` | Terracota profunda (Wayfarer primary). CTAs, acento fuerte.     |
+| Primario medio      | `#B05E3C` | Terracota templada (Wayfarer primary-container). USA primario.   |
+| Secundario profundo | `#466550` | Salvia profunda (Wayfarer secondary).                           |
+| Secundario medio    | `#6A8B74` | Verde salvia. Calma natural y equilibrio.                       |
+| Terciario           | `#8C7B6A` | Madera tostada. Para bordes sutiles y separadores.              |
+| Texto principal     | `#3A3530` | Grafito cálido. Oscuro pero con temperatura marrón perceptible. |
+| Texto secundario    | `#7A6E65` | Tierra media. Para etiquetas, metadatos.                        |
 
 ---
 
@@ -44,11 +47,11 @@ El sistema usa radios moderados: ni la suavidad extrema del 0° ni la rectitud t
 
 | Elemento            | Radio       | Sensación                                     |
 | ------------------- | ----------- | --------------------------------------------- |
-| Tarjetas grandes    | 16px – 24px | Redondeado moderado. Volumen sin exageración. |
-| Botones primarios   | 8px – 12px  | Presencia sólida.                             |
-| Botones secundarios | 6px – 8px   | Más contenidos, casi rectangulares.           |
+| Tarjetas            | 20px        | Redondeado moderado. Volumen sin exageración. |
+| Botones             | 10px        | Presencia sólida.                             |
 | Inputs              | 8px         | Campo de trabajo claro.                       |
-| Tags / Badges       | 4px – 6px   | Pequeños y precisos.                          |
+| Search bar          | 20px        | Cómodo, integrado al diseño de tarjetas.      |
+| Tags / Badges       | 6px         | Pequeños y precisos (radius pill = 9999).     |
 
 ### Estructura de grid
 
@@ -96,7 +99,7 @@ La metáfora material es el **papel sobre papel**: capas que se distinguen por s
 
 ### Bordes
 
-- Borde sutil `1px solid rgba(139,123,106,0.2)` en tarjetas para definir límite sin agresividad.
+- Borde sutil `0.5px solid rgba(139,123,106,0.125)` (`BordeCard`) en tarjetas para definir límite sin agresividad.
 - En dark mode: `1px solid rgba(255,255,255,0.08)`.
 
 ---
@@ -118,7 +121,7 @@ El movimiento es deliberado y suave. No hay rebotes ni físicas exageradas; tamp
 | Reposo   | Estático. Sin animaciones de flotación.         |
 | Hover    | Sombra ligeramente aumentada + fondo muy tenue. |
 | Press    | `scale(0.98)`, sombra reduce a E-1.             |
-| Focus    | Borde terracota `2px solid #B05E3C`, sin glow.  |
+| Focus    | Borde terracota profundo `2px solid #924626`, sin glow. |
 | Disabled | Opacidad 0.45, cursor prohibido.                |
 
 ---
@@ -127,30 +130,31 @@ El movimiento es deliberado y suave. No hay rebotes ni físicas exageradas; tamp
 
 ### Tarjeta "Papel Grueso"
 
-- **Constructo:** Rectángulo 20px radius.
-- **Material:** Fondo lino claro (`#F8F5EF`), borde `1px` sutil.
-- **Sombra:** E-2 en reposo, E-3 en hover.
-- **Estructura interna:** Header con línea divisoria `1px solid rgba(139,123,106,0.15)`, cuerpo con padding generoso.
+- **Constructo:** Rectángulo 20px radius (`A2Card`, `A2CardElevated`, `A2CardGlass`).
+- **Material:** Fondo lino cálido (`#FFF8F4`), borde `0.5px solid rgba(139,123,106,0.125)` (`BordeCard`).
+- **Sombra:** E-2 en reposo (elevación 2dp), `A2CardElevated` usa 4dp.
+- **Estructura interna:** Padding horizontal 16dp, vertical 12dp.
 
 ### Botón "Sello Terracota"
 
-- **Primario:** Fondo terracota sólido (`#B05E3C`), texto blanco, radius 10px.
-- **Secundario:** Fondo transparente, borde `1.5px solid #B05E3C`, texto terracota.
-- **Terciario:** Solo texto, sin borde ni fondo.
-- **Active:** `scale(0.97)`, sombra desaparece.
+- **Primario:** Fondo terracota profundo (`#924626`), texto blanco, radius 10px, altura 40dp.
+- **Secundario:** Fondo transparente, borde `1.5px solid #924626`, texto terracota profundo.
+- **Ghost:** Solo texto, sin borde ni fondo, color terracota profundo.
+- **Active:** alpha `0.85`, sin scale (solo feedback visual).
 
 ### Input "Campo de Trabajo"
 
-- **Constructo:** Rectángulo radius 8px.
-- **Material:** Fondo blanco hueso (`#FAFAF8`), borde `1px solid rgba(139,123,106,0.3)`.
-- **Focus:** Borde se vuelve terracota `2px solid #B05E3C`, fondo ligeramente más claro.
-- **Error:** Borde `2px solid #C0392B`, ícono de error a la derecha.
+- **Constructo:** Rectángulo radius 8px, altura mínima 40dp (`InputHeight = ButtonHeight = TouchTarget`).
+- **Material:** Fondo lino cálido (`#FFF8F4`), borde `1px solid rgba(139,123,106,0.2)` (`BordeSutil`).
+- **Focus:** Borde se vuelve terracota profundo `2px solid #924626`, fondo blanco puro (`SuperficieElevada`).
+- **Error:** Borde `2px solid #C0392B`, container fondo rojo sutil.
 
 ### Navegación
 
-- Barra fija con fondo lino, borde inferior `1px` sutil.
-- Items de nav con peso Medium, el activo subrayado con línea terracota de 2px.
-- Sin efectos de fondo glassmorphic.
+- Top bar fija con fondo lino (`FondoBase`), borde inferior `0.5px` sutil.
+- Bottom nav con superficie elevada, items con indicator redondeado en `PrimaryContainer` (terracota medio).
+- Item activo en terracota profundo (`#924626`), inactivo en texto mutado.
+- Sin efectos glassmorphic.
 
 ---
 
@@ -166,19 +170,43 @@ El movimiento es deliberado y suave. No hay rebotes ni físicas exageradas; tamp
 
 ## IX. Resumen de Valores Técnicos
 
-| Atributo          | Especificación                                                            |
-| ----------------- | ------------------------------------------------------------------------- |
-| Fondo dominante   | Lino claro `#F8F5EF`                                                      |
-| Superficie UI     | Blanco hueso `#FAFAF8`                                                    |
-| Acento primario   | Terracota `#B05E3C`                                                       |
-| Acento secundario | Salvia `#6A8B74`                                                          |
-| Texto principal   | Grafito cálido `#3A3530`                                                  |
-| Border radius     | 16px–24px (tarjetas), 8px–12px (botones)                                  |
-| Sombra base       | Color tierra, blur 8px–24px                                               |
-| Tipografía        | Serif moderna o sans alta calidad (display) / Sans x-height alto (cuerpo) |
-| Estado de foco    | Borde terracota sólido 2px                                                |
-| Textura           | Ninguna o grano muy sutil ≤2%                                             |
-| Easing            | `ease-out`, 200ms–300ms                                                   |
+| Atributo           | Especificación                                                            |
+| ------------------ | ------------------------------------------------------------------------- |
+| Fondo dominante    | Lino cálido `#FFF8F4`                                                     |
+| Superficie UI      | Lino cálido `#FFF8F4` / blando puro `#FFFFFF` (elevado)                   |
+| Acento primario    | Terracota profunda `#924626`                                              |
+| Acento secundario  | Salvia profunda `#466550`                                                 |
+| Texto principal    | Grafito cálido `#3A3530`                                                  |
+| Border radius      | 20px (tarjetas), 10px (botones), 8px (inputs), 6px (tags)                |
+| Sombra base        | Color tierra (`rgba(58,53,48,0.08)`), blur 8px (E-2)                     |
+| Tipografía         | Literata (display) SemiBold/Medium / Manrope (body) Regular/Medium/SemiBold |
+| Estado de foco     | Borde terracota profundo `2px solid #924626`                              |
+| Textura            | Ninguna o grano muy sutil ≤2%                                             |
+| Easing             | `ease-out`, 200ms–300ms                                                   |
+
+### Componentes del sistema
+
+| Componente             | Tokens clave en código                          |
+| ---------------------- | ----------------------------------------------- |
+| `A2Button`             | `TerracotaProfunda`, `RadiusButton = 10dp`      |
+| `A2Input`              | `RadiusInput = 8dp`, `InputHeight = 40dp`       |
+| `A2Card`               | `RadiusCard = 20dp`, `BordeCard`, `ElevationCard` |
+| `A2CardElevated`       | Fondo `SuperficieElevada (#FFF)`, elevación 4dp  |
+| `A2CardGlass`          | Fondo `SuperficieSecundaria`, bordes suaves      |
+| `A2SearchBar`          | `RadiusSearch = 20dp`, overlay transparente      |
+| `A2PillFilter`         | `RadiusPill`, toggle selected/unselected         |
+| `A2ProgressStepper`    | Círculos numerados + barra de progreso linear    |
+| `A2JourneyTimeline`    | Línea vertical con dots + labels                 |
+| `A2HeroImage`          | Gradient overlay con texto                       |
+| `A2StatsGrid`          | Grid de valores + etiquetas                      |
+| `A2PromoCard`          | Card con CTA interna                             |
+| `A2MapPlaceholder`     | Área mock para mapa                              |
+| `A2RatingBar`          | Estrellas `Estrella (#D4A24E)`                   |
+| `A2DriverProfileCard`  | Avatar + rating + viajes                         |
+| `A2TopBar`             | `TopBarPadH/V`, borde inferior sutil             |
+| `A2BottomNav`          | `NavigationBar` con `indicatorColor` primary     |
+| `A2Tag`                | `RadiusTag = 6dp`, variant Filled/Outlined/Subtle |
+| `A2Banner`             | Backgrounds semánticos + borde                   |
 
 ---
 

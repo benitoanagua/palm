@@ -5,11 +5,14 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val A2ColorScheme = lightColorScheme(
-    primary          = Terracota,
+    primary          = TerracotaProfunda,
     onPrimary        = White,
-    primaryContainer = PrimaryContainer,
-    secondary        = Salvia,
+    primaryContainer = Terracota,
+    onPrimaryContainer = TextoGrafito,
+    secondary        = SalviaProfunda,
     onSecondary      = White,
+    secondaryContainer = Salvia,
+    onSecondaryContainer = White,
     tertiary         = MaderaTostada,
     onTertiary       = White,
     background       = FondoBase,
@@ -20,7 +23,7 @@ private val A2ColorScheme = lightColorScheme(
     error            = Error,
     onError          = White,
     outline          = BordeSutil,
-    outlineVariant   = BordeSutil,
+    outlineVariant   = BordeCard,
 )
 
 @Composable

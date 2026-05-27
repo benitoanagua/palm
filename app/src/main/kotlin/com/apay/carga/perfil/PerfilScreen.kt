@@ -110,7 +110,7 @@ fun PerfilScreen(
                             Icon(
                                 Lucide.Star,
                                 "Calificación",
-                                tint = androidx.compose.ui.graphics.Color(0xFFFFD700),
+                                tint = Estrella,
                                 modifier = Modifier.size(24.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))

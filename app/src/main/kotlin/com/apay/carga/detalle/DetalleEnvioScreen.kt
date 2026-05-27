@@ -194,7 +194,7 @@ fun DetalleEnvioScreen(
                             }
                             
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(Lucide.Star, "Calificación", tint = androidx.compose.ui.graphics.Color(0xFFFFD700), modifier = Modifier.size(20.dp))
+                                Icon(Lucide.Star, "Calificación", tint = Estrella, modifier = Modifier.size(20.dp))
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text("${envio.transportista.calificacion}", style = A2TextStyle.BodyMedium, fontWeight = FontWeight.Bold)
                             }

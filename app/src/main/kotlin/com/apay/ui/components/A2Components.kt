@@ -9,6 +9,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -28,10 +30,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a2.ui.theme.*
+import kotlinx.coroutines.delay
 
 @Composable
 fun A2Background(modifier: Modifier = Modifier) {
@@ -47,7 +51,7 @@ fun A2GradientDisplayLg(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         modifier = modifier,
-        style = A2TextStyle.DisplayLg.copy(color = Terracota)
+        style = A2TextStyle.DisplayLg.copy(color = TerracotaProfunda)
     )
 }
 
@@ -76,6 +80,8 @@ fun A2Caption(text: String, modifier: Modifier = Modifier, color: Color = TextoM
     Text(text = text, modifier = modifier, style = A2TextStyle.Caption, color = color)
 }
 
+// ─── BUTTONS ────────────────────────────────────────────────────────────────
+
 enum class A2ButtonVariant { Primary, Secondary, Ghost }
 
 @Composable
@@ -95,7 +101,6 @@ fun A2Button(
         animationSpec = tween(150),
         label = "alpha"
     )
-
     val shape = A2Shapes.Button
     val baseModifier = modifier
         .height(A2Tokens.ButtonHeight)
@@ -106,7 +111,7 @@ fun A2Button(
             Box(
                 modifier = baseModifier
                     .clip(shape)
-                    .background(Terracota.copy(alpha = bgAlpha))
+                    .background(TerracotaProfunda.copy(alpha = bgAlpha))
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null,
@@ -134,7 +139,7 @@ fun A2Button(
             Box(
                 modifier = baseModifier
                     .clip(shape)
-                    .border(1.5.dp, Terracota, shape)
+                    .border(A2Tokens.StrokeThick, TerracotaProfunda, shape)
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null,
@@ -146,9 +151,9 @@ fun A2Button(
                 contentAlignment = Alignment.Center
             ) {
                 if (loading) {
-                    CircularProgressIndicator(modifier = Modifier.size(18.dp), color = Terracota, strokeWidth = 2.dp)
+                    CircularProgressIndicator(modifier = Modifier.size(18.dp), color = TerracotaProfunda, strokeWidth = 2.dp)
                 } else {
-                    Text(text, color = Terracota, style = A2TextStyle.ButtonLabel)
+                    Text(text, color = TerracotaProfunda, style = A2TextStyle.ButtonLabel)
                 }
             }
         }
@@ -158,7 +163,7 @@ fun A2Button(
                 enabled = enabled && !loading,
                 modifier = baseModifier
             ) {
-                Text(text, color = Terracota, style = A2TextStyle.ButtonLabel)
+                Text(text, color = TerracotaProfunda, style = A2TextStyle.ButtonLabel)
             }
         }
     }
@@ -169,12 +174,14 @@ fun A2TextButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    color: Color = Terracota
+    color: Color = TerracotaProfunda
 ) {
     TextButton(onClick = onClick, modifier = modifier) {
         Text(text, color = color, style = A2TextStyle.BodyMedium, fontWeight = FontWeight.SemiBold)
     }
 }
+
+// ─── CARDS ──────────────────────────────────────────────────────────────────
 
 @Composable
 fun A2Card(
@@ -187,11 +194,11 @@ fun A2Card(
         colors = CardDefaults.cardColors(
             containerColor = SuperficiePrimaria
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        border = BorderStroke(0.5.dp, BordeSutil)
+        elevation = CardDefaults.cardElevation(defaultElevation = A2Tokens.ElevationCard),
+        border = BorderStroke(A2Tokens.StrokeThin, BordeCard)
     ) {
         Column(
-            modifier = Modifier.padding(A2Spacing.xl),
+            modifier = Modifier.padding(horizontal = A2Tokens.CardPadH, vertical = A2Tokens.CardPadV),
             content = content
         )
     }
@@ -208,15 +215,38 @@ fun A2CardGlass(
         colors = CardDefaults.cardColors(
             containerColor = SuperficieSecundaria
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-        border = BorderStroke(0.5.dp, BordeSutil)
+        elevation = CardDefaults.cardElevation(defaultElevation = A2Tokens.ElevationCard),
+        border = BorderStroke(A2Tokens.StrokeThin, BordeCard)
     ) {
         Column(
-            modifier = Modifier.padding(A2Spacing.xl),
+            modifier = Modifier.padding(horizontal = A2Tokens.CardPadH, vertical = A2Tokens.CardPadV),
             content = content
         )
     }
 }
+
+@Composable
+fun A2CardElevated(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Card(
+        modifier = modifier,
+        shape = A2Shapes.Card,
+        colors = CardDefaults.cardColors(
+            containerColor = SuperficieElevada
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = A2Tokens.ElevationRaised),
+        border = BorderStroke(A2Tokens.StrokeThin, BordeCard)
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = A2Tokens.CardPadH, vertical = A2Tokens.CardPadV),
+            content = content
+        )
+    }
+}
+
+// ─── INPUT ─────────────────────────────────────────────────────────────────
 
 @Composable
 fun A2Input(
@@ -244,22 +274,22 @@ fun A2Input(
             onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = A2Tokens.InputHeight + 20.dp),
+                .heightIn(min = A2Tokens.InputHeight),
             enabled = enabled,
             placeholder = {
                 Text(placeholder, style = A2TextStyle.BodyMedium, color = TextoMutado)
             },
             leadingIcon = leadingIcon?.let {
-                { Icon(it, null, Modifier.size(18.dp), tint = TextoTierra) }
+                { Icon(it, null, Modifier.size(A2Tokens.IconMd), tint = TextoTierra) }
             },
             trailingIcon = trailingIcon?.let {
                 {
                     if (onTrailingIconClick != null) {
-                        IconButton(onClick = onTrailingIconClick, modifier = Modifier.size(36.dp)) {
-                            Icon(it, null, Modifier.size(18.dp), tint = TextoTierra)
+                        IconButton(onClick = onTrailingIconClick, modifier = Modifier.size(A2Tokens.TouchTarget)) {
+                            Icon(it, null, Modifier.size(A2Tokens.IconMd), tint = TextoTierra)
                         }
                     } else {
-                        Icon(it, null, Modifier.size(18.dp), tint = TextoTierra)
+                        Icon(it, null, Modifier.size(A2Tokens.IconMd), tint = TextoTierra)
                     }
                 }
             },
@@ -272,11 +302,11 @@ fun A2Input(
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = TextoGrafito,
                 unfocusedTextColor = TextoGrafito,
-                focusedBorderColor = Terracota,
+                focusedBorderColor = TerracotaProfunda,
                 unfocusedBorderColor = BordeSutil,
                 errorBorderColor = Error,
-                cursorColor = Terracota,
-                focusedContainerColor = SuperficiePrimaria,
+                cursorColor = TerracotaProfunda,
+                focusedContainerColor = SuperficieElevada,
                 unfocusedContainerColor = SuperficiePrimaria,
                 errorContainerColor = ErrorBannerBg,
             ),
@@ -287,6 +317,8 @@ fun A2Input(
         }
     }
 }
+
+// ─── BANNER ─────────────────────────────────────────────────────────────────
 
 enum class A2BannerType { Success, Error, Warning, Info }
 
@@ -309,19 +341,21 @@ fun A2Banner(
             .fillMaxWidth()
             .clip(A2Shapes.Card)
             .background(bg)
-            .border(0.8.dp, BordeSutil, A2Shapes.Card)
+            .border(A2Tokens.StrokeLight, BordeCard, A2Shapes.Card)
             .padding(horizontal = A2Spacing.lg, vertical = A2Spacing.md),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(message, modifier = Modifier.weight(1f), style = A2TextStyle.BodyMedium, color = textColor)
         if (dismissible && onDismiss != null) {
-            Spacer(Modifier.width(8.dp))
-            TextButton(onClick = onDismiss, modifier = Modifier.size(24.dp)) {
-                Text("×", color = textColor, fontSize = 16.sp)
+            Spacer(Modifier.width(A2Spacing.sm))
+            TextButton(onClick = onDismiss, modifier = Modifier.size(A2Tokens.BannerDismissSize)) {
+                Text("×", color = textColor, fontSize = A2TextStyle.Caption.fontSize)
             }
         }
     }
 }
+
+// ─── TAG ────────────────────────────────────────────────────────────────────
 
 enum class A2TagVariant { Filled, Outlined, Subtle }
 
@@ -341,22 +375,26 @@ fun A2Tag(
         modifier = modifier
             .clip(A2Shapes.Pill)
             .background(bg)
-            .then(if (border != Color.Transparent) Modifier.border(0.8.dp, border, A2Shapes.Pill) else Modifier)
-            .padding(horizontal = 8.dp, vertical = 3.dp)
+            .then(if (border != Color.Transparent) Modifier.border(A2Tokens.StrokeLight, border, A2Shapes.Pill) else Modifier)
+            .padding(horizontal = A2Tokens.TagPadH, vertical = A2Tokens.TagPadV)
     ) {
         Text(text, style = A2TextStyle.Caption, color = textColor, fontWeight = FontWeight.SemiBold)
     }
 }
+
+// ─── DIVIDER ────────────────────────────────────────────────────────────────
 
 @Composable
 fun A2Divider(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(0.5.dp)
-            .background(BordeSutil)
+            .height(A2Tokens.StrokeThin)
+            .background(BordeCard)
     )
 }
+
+// ─── AVATAR ─────────────────────────────────────────────────────────────────
 
 @Composable
 fun A2Avatar(
@@ -368,7 +406,7 @@ fun A2Avatar(
         modifier = modifier
             .size(size)
             .clip(CircleShape)
-            .background(Terracota),
+            .background(TerracotaProfunda),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -380,12 +418,16 @@ fun A2Avatar(
     }
 }
 
+// ─── LOADING ────────────────────────────────────────────────────────────────
+
 @Composable
 fun A2Loading(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator(color = Terracota, modifier = Modifier.size(32.dp))
+        CircularProgressIndicator(color = TerracotaProfunda, modifier = Modifier.size(32.dp))
     }
 }
+
+// ─── TOP BAR ────────────────────────────────────────────────────────────────
 
 @Composable
 fun A2TopBar(
@@ -397,7 +439,7 @@ fun A2TopBar(
             .fillMaxWidth()
             .background(FondoBase)
             .statusBarsPadding()
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+            .padding(horizontal = A2Tokens.TopBarPadH, vertical = A2Tokens.TopBarPadV),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -412,6 +454,8 @@ fun A2TopBar(
     )
 }
 
+// ─── BOTTOM NAV ─────────────────────────────────────────────────────────────
+
 data class A2NavItem(val label: String, val icon: ImageVector)
 
 @Composable
@@ -425,7 +469,7 @@ fun A2BottomNav(
         modifier = modifier.navigationBarsPadding(),
         color = SuperficiePrimaria,
         tonalElevation = 0.dp,
-        shadowElevation = 4.dp
+        shadowElevation = A2Tokens.ElevationRaised
     ) {
         NavigationBar(
             containerColor = Color.Transparent,
@@ -440,18 +484,493 @@ fun A2BottomNav(
                         Icon(
                             imageVector = item.icon,
                             contentDescription = item.label,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(A2Tokens.IconXL)
                         )
                     },
                     label = { Text(item.label, style = A2TextStyle.Caption) },
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = Terracota,
-                        selectedTextColor = Terracota,
+                        selectedIconColor = TerracotaProfunda,
+                        selectedTextColor = TerracotaProfunda,
                         unselectedIconColor = TextoMutado,
                         unselectedTextColor = TextoMutado,
-                        indicatorColor = PrimaryContainer
+                        indicatorColor = PrimaryContainer.copy(0.15f)
                     )
                 )
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// NUEVOS COMPONENTES WAYFARER
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ─── SEARCH BAR ──────────────────────────────────────────────────────────
+
+@Composable
+fun A2SearchBar(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: String = "Buscar...",
+    onSearch: (() -> Unit)? = null,
+) {
+    val focusManager = LocalFocusManager.current
+    val searchShape = RoundedCornerShape(A2Tokens.RadiusSearch)
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(A2Tokens.ButtonHeight)
+            .clip(searchShape)
+            .background(SuperficieElevada)
+            .border(A2Tokens.StrokeLight, BordeSutil, searchShape)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = A2Spacing.xl),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = if (query.isEmpty()) placeholder else query,
+                color = if (query.isEmpty()) TextoMutado else TextoGrafito,
+                style = A2TextStyle.BodyMedium,
+                modifier = Modifier.weight(1f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+        TextField(
+            value = query,
+            onValueChange = onQueryChange,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Transparent),
+            placeholder = {},
+            singleLine = true,
+            textStyle = A2TextStyle.BodyMedium.copy(color = Color.Transparent),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                cursorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(
+                onSearch = {
+                    onSearch?.invoke()
+                    focusManager.clearFocus()
+                }
+            )
+        )
+    }
+}
+
+// ─── PILL FILTER ─────────────────────────────────────────────────────────
+
+@Composable
+fun A2PillFilter(
+    text: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val bg = if (selected) TerracotaProfunda else SuperficieElevada
+    val txt = if (selected) White else TextoTierra
+    val borderColor = if (selected) TerracotaProfunda else BordeSutil
+
+    Box(
+        modifier = modifier
+            .clip(A2Shapes.Pill)
+            .background(bg)
+            .border(A2Tokens.StrokeRegular, borderColor, A2Shapes.Pill)
+            .clickable(onClick = onClick)
+            .padding(horizontal = A2Spacing.xl, vertical = A2Spacing.sm)
+    ) {
+        Text(text, color = txt, style = A2TextStyle.Caption, fontWeight = FontWeight.SemiBold)
+    }
+}
+
+// ─── PROGRESS STEPPER ────────────────────────────────────────────────────
+
+@Composable
+fun A2ProgressStepper(
+    steps: List<String>,
+    currentStep: Int,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            steps.forEachIndexed { index, label ->
+                val isCompleted = index < currentStep
+                val isCurrent = index == currentStep
+                val circleColor = when {
+                    isCompleted -> TerracotaProfunda
+                    isCurrent -> TerracotaProfunda
+                    else -> BordeCard
+                }
+                val textColor = when {
+                    isCompleted || isCurrent -> TerracotaProfunda
+                    else -> TextoMutado
+                }
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clip(CircleShape)
+                            .background(circleColor),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (isCompleted) {
+                            Text("✓", color = White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        } else {
+                            Text("${index + 1}", color = if (isCurrent) White else TextoMutado, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
+                        }
+                    }
+                    Spacer(Modifier.height(A2Spacing.sm))
+                    Text(
+                        text = label,
+                        color = textColor,
+                        style = A2TextStyle.Caption,
+                        textAlign = TextAlign.Center,
+                        maxLines = 1
+                    )
+                }
+            }
+        }
+        Spacer(Modifier.height(A2Spacing.md))
+        LinearProgressIndicator(
+            progress = { (currentStep.toFloat() / (steps.size - 1).coerceAtLeast(1)) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(3.dp)
+                .clip(A2Shapes.Pill),
+            color = TerracotaProfunda,
+            trackColor = BordeCard,
+        )
+    }
+}
+
+// ─── JOURNEY TIMELINE ────────────────────────────────────────────────────
+
+@Composable
+fun A2JourneyTimeline(
+    stops: List<A2TimelineStop>,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier) {
+        stops.forEachIndexed { index, stop ->
+            val isFirst = index == 0
+            val isLast = index == stops.lastIndex
+            val isActive = stop.active
+
+            Row(modifier = Modifier.height(IntrinsicSize.Min)) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.width(32.dp)
+                ) {
+                    if (!isFirst) {
+                        Box(
+                            modifier = Modifier
+                                .width(2.dp)
+                                .height(8.dp)
+                                .background(if (isActive) TerracotaProfunda else BordeCard)
+                        )
+                    } else {
+                        Spacer(Modifier.height(8.dp))
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(12.dp)
+                            .clip(CircleShape)
+                            .background(if (isActive) TerracotaProfunda else BordeCard),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (isActive) {
+                            Box(
+                                modifier = Modifier
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(White)
+                            )
+                        }
+                    }
+                    if (!isLast) {
+                        val nextActive = stops.getOrNull(index + 1)?.active ?: false
+                        Box(
+                            modifier = Modifier
+                                .width(2.dp)
+                                .weight(1f)
+                                .background(if (isActive && nextActive) TerracotaProfunda else BordeCard)
+                        )
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = A2Spacing.xl, bottom = if (isLast) 0.dp else A2Spacing.xl)
+                ) {
+                    Text(
+                        text = stop.title,
+                        style = if (isActive) A2TextStyle.TitleMd else A2TextStyle.BodyMedium,
+                        color = if (isActive) TextoGrafito else TextoTierra
+                    )
+                    if (stop.subtitle.isNotEmpty()) {
+                        Text(
+                            text = stop.subtitle,
+                            style = A2TextStyle.Caption,
+                            color = TextoMutado
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+data class A2TimelineStop(
+    val title: String,
+    val subtitle: String = "",
+    val active: Boolean = false
+)
+
+// ─── HERO IMAGE ──────────────────────────────────────────────────────────
+
+@Composable
+fun A2HeroImage(
+    modifier: Modifier = Modifier,
+    height: Dp = 200.dp,
+    imageOverlayText: String? = null,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(height)
+            .clip(A2Shapes.Card)
+            .background(TerracotaProfunda.copy(0.15f))
+    ) {
+        if (imageOverlayText != null) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                TerracotaProfunda.copy(0.6f)
+                            )
+                        )
+                    ),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                Text(
+                    text = imageOverlayText,
+                    style = A2TextStyle.DisplayLg,
+                    color = White,
+                    modifier = Modifier.padding(A2Spacing.xl)
+                )
+            }
+        }
+    }
+}
+
+// ─── STATS GRID ──────────────────────────────────────────────────────────
+
+@Composable
+fun A2StatsGrid(
+    stats: List<A2StatItem>,
+    modifier: Modifier = Modifier,
+    columns: Int = 4
+) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(A2Spacing.md)) {
+        stats.chunked(columns).forEach { row ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(A2Spacing.md)
+            ) {
+                row.forEach { stat ->
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = stat.value,
+                            style = A2TextStyle.Headline,
+                            color = TerracotaProfunda
+                        )
+                        Text(
+                            text = stat.label,
+                            style = A2TextStyle.Caption,
+                            color = TextoTierra,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+                repeat(columns - row.size) {
+                    Spacer(Modifier.weight(1f))
+                }
+            }
+        }
+    }
+}
+
+data class A2StatItem(val value: String, val label: String)
+
+// ─── PROMO CARD ──────────────────────────────────────────────────────────
+
+@Composable
+fun A2PromoCard(
+    title: String,
+    description: String,
+    actionLabel: String,
+    onAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    accentColor: Color = SalviaProfunda,
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(A2Tokens.RadiusCard),
+        colors = CardDefaults.cardColors(containerColor = SuperficiePrimaria),
+        elevation = CardDefaults.cardElevation(defaultElevation = A2Tokens.ElevationCard),
+        border = BorderStroke(A2Tokens.StrokeThin, BordeCard)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(A2Spacing.xl),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = A2TextStyle.TitleLg,
+                    color = TextoGrafito
+                )
+                Spacer(Modifier.height(A2Spacing.sm))
+                Text(
+                    text = description,
+                    style = A2TextStyle.BodyMedium,
+                    color = TextoTierra
+                )
+                Spacer(Modifier.height(A2Spacing.md))
+                A2Button(
+                    text = actionLabel,
+                    onClick = onAction,
+                    variant = A2ButtonVariant.Primary
+                )
+            }
+        }
+    }
+}
+
+// ─── MAP PLACEHOLDER ─────────────────────────────────────────────────────
+
+@Composable
+fun A2MapPlaceholder(
+    modifier: Modifier = Modifier,
+    height: Dp = 180.dp,
+    label: String = "Mapa"
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(height)
+            .clip(RoundedCornerShape(A2Tokens.RadiusCard))
+            .background(SuperficieSecundaria)
+            .border(A2Tokens.StrokeThin, BordeCard, RoundedCornerShape(A2Tokens.RadiusCard)),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = "🗺",
+                fontSize = 28.sp
+            )
+            Spacer(Modifier.height(A2Spacing.sm))
+            Text(
+                text = label,
+                style = A2TextStyle.BodyMedium,
+                color = TextoMutado
+            )
+        }
+    }
+}
+
+// ─── RATING BAR ──────────────────────────────────────────────────────────
+
+@Composable
+fun A2RatingBar(
+    rating: Float,
+    maxStars: Int = 5,
+    modifier: Modifier = Modifier,
+    starSize: Dp = A2Tokens.IconMd,
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(A2Spacing.sm / 2)
+    ) {
+        for (i in 1..maxStars) {
+            val filled = i <= rating.toInt()
+            Box(
+                modifier = Modifier
+                    .size(starSize)
+                    .clip(CircleShape)
+                    .background(if (filled) Estrella else BordeCard)
+            )
+        }
+    }
+}
+
+// ─── DRIVER PROFILE CARD ────────────────────────────────────────────────
+
+@Composable
+fun A2DriverProfileCard(
+    name: String,
+    rating: Float,
+    tripsCount: Int,
+    modifier: Modifier = Modifier,
+    avatarInitials: String = "",
+    subtitle: String = "",
+) {
+    A2Card(modifier = modifier) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            A2Avatar(
+                initials = avatarInitials.ifEmpty { name.take(2) },
+                size = A2Tokens.AvatarLg
+            )
+            Spacer(Modifier.width(A2Spacing.xl))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = name,
+                    style = A2TextStyle.TitleLg,
+                    color = TextoGrafito
+                )
+                if (subtitle.isNotEmpty()) {
+                    Text(
+                        text = subtitle,
+                        style = A2TextStyle.Caption,
+                        color = TextoTierra
+                    )
+                }
+                Spacer(Modifier.height(A2Spacing.sm))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    A2RatingBar(rating = rating)
+                    Spacer(Modifier.width(A2Spacing.sm))
+                    Text(
+                        text = "$rating · $tripsCount viajes",
+                        style = A2TextStyle.Caption,
+                        color = TextoMutado
+                    )
+                }
             }
         }
     }

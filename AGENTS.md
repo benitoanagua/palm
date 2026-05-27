@@ -66,6 +66,10 @@ App Android de carga compartida para Bolivia. Marca "A2", paquete `com.apay`.
 | `A2TextField` no resuelto | El componente se llama `A2Input` | Reemplazar con `A2Input(...)` |
 | `A2ButtonSecondary` no resuelto | No existe | Usar `A2Button(variant = A2ButtonVariant.Secondary)` |
 | `backgroundColor`, `textColor` en A2Button | No son parámetros | Usar `variant` en su lugar |
+| `Terracota` como acento primario | Ahora es `PrimaryContainer` (#B05E3C) | Usar `TerracotaProfunda` (#924626) para CTAs/accent |
+| `Salvia` como secundario | Ahora es `SecondaryContainer` (#6A8B74) | Usar `SalviaProfunda` (#466550) para secondary |
+| `PrimaryElectric` azul | No existe azul en la paleta | Usar `TerracotaProfunda` como primary |
+| `A2Card` sin shadow | Shadow usa color tierra (#8C7B6A) integrado en M3 | No requiere cambio — usar `A2CardElevated` para más elevación |
 | `google-services.json` faltante | Requerido para compilar | Colocar archivo en `app/` |
 
 ## Comandos
