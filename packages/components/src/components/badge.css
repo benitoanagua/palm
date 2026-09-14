@@ -1,0 +1,21 @@
+:host { display: inline-block; }
+/* status_tag real de AA: relleno sólido + texto de contraste, nunca
+   tinte suave -- ver docs/foundations/visual-system.md y
+   palm-design-system.md Regla 9. El tinte quedó descartado en una
+   iteración visual anterior; esto es lo que reemplaza al placeholder
+   genérico de "badge suave" que traía el sistema por defecto. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.25rem;
+  padding: 0 var(--pm-space-2);
+  border-radius: var(--pm-radius-base);
+  font: 700 var(--pm-font-size-xs)/1.25rem var(--pm-font-family-sans);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.is-neutral { background: var(--pm-color-neutral-300); color: var(--pm-color-neutral-contrast); }
+.is-info { background: var(--pm-color-action); color: var(--pm-color-action-contrast); }
+.is-success { background: var(--pm-color-success); color: var(--pm-color-success-contrast); }
+.is-warning { background: var(--pm-color-warning); color: var(--pm-color-warning-contrast); }
+.is-danger { background: var(--pm-color-danger); color: var(--pm-color-danger-contrast); }

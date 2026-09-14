@@ -1,0 +1,25 @@
+import { Component, Element, Event, type EventEmitter, Prop, h } from '@stencil/core';
+
+@Component({ tag: 'pm-accordion', styleUrl: 'accordion.css', shadow: false, scoped: true })
+export class PmAccordion {
+  @Element() host!: HTMLElement;
+  @Prop() multiple = false;
+  @Event() pmChange!: EventEmitter<string[]>;
+  private openItems: string[] = [];
+
+  componentDidLoad() { this.refresh(); }
+  private refresh = () => Array.from(this.host.querySelectorAll(':scope > pm-accordion-item')).forEach((item) => item.addEventListener('pmToggle', this.onToggle as EventListener));
+  disconnectedCallback() { Array.from(this.host.querySelectorAll(':scope > pm-accordion-item')).forEach((item) => item.removeEventListener('pmToggle', this.onToggle as EventListener)); }
+  private onToggle = (event: Event) => {
+    const value = (event as CustomEvent<boolean>).detail;
+    const item = event.target as HTMLElement;
+    const key = item.getAttribute('value') || '';
+    if (value) this.openItems = this.multiple ? [...new Set([...this.openItems, key])] : [key];
+    else this.openItems = this.openItems.filter((v) => v !== key);
+    this.pmChange.emit(this.openItems);
+    this.sync();
+  };
+  private sync = () => Array.from(this.host.querySelectorAll(':scope > pm-accordion-item')).forEach((item) => item.setAttribute('open', String(this.openItems.includes(item.getAttribute('value') || ''))));
+  render() { return <div class="accordion"><slot /></div>; }
+}
+

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palm — Componentes adicionales ActiveAdmin</title>
+<style>
+  :root{
+    /* Mismos tokens que las otras tres demos. Esta profundiza en
+       componentes que ninguna mostraba: offcanvas de navegación,
+       accordion, menú de acciones (dropdown), tooltip, toast y un
+       modal de confirmación simple (distinto de los modales de
+       sync-conflict/crítico ya mostrados en la demo principal). */
+    --header-bg:#2c2c2c;
+    --header-text:#ffffff;
+    --header-text-dim:#b8b8b8;
+    --page-bg:#f1f2f4;
+    --surface:#ffffff;
+    --surface-alt:#f5f5f5;
+    --surface-hover:#f9f9f9;
+    --border-color:#727272;
+    --border-color-light:#949494;
+
+    --text-primary:#333333;
+    --text-secondary:#666666;
+    --text-strong:#1a1a1a;
+    --on-color:#ffffff;
+
+    --action:#0b5a92;
+    --action-strong:#00426f;
+    --pending:#8d410b;
+    --confirmed:#086335;
+    --conflict:#ae0e20;
+
+    --font-ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-data: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+    --radius-base:3px;
+    --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+    --duration-base:200ms;
+    --easing-standard: ease-in-out;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:var(--page-bg);
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--text-primary);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px;
+  }
+  button, input, a{ font-family:inherit; font-size:inherit; }
+  button:focus-visible, a:focus-visible{ outline:2px solid var(--action); outline-offset:1px; }
+
+  .phone{
+    width:100%;
+    max-width:412px;
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    background:var(--page-bg);
+    min-height:900px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,.2);
+  }
+
+  header{
+    padding:12px 14px 10px;
+    background:var(--header-bg);
+    border-bottom:3px solid var(--action);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .hamburger{
+    border:1px solid #555;
+    background:linear-gradient(to bottom, #4a4a4a, #333);
+    color:var(--header-text);
+    width:30px; height:30px;
+    border-radius:var(--radius-base);
+    cursor:pointer;
+    font-size:14px;
+    flex:0 0 auto;
+  }
+  header .wordmark{ font-size:16px; font-weight:700; color:var(--header-text); margin:0; }
+
+  main{ flex:1; padding:12px; overflow-y:auto; }
+  h2.section-title{ font-size:13px; color:var(--text-strong); margin:0 0 6px; }
+
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--border-color-light);
+    border-radius:var(--radius-base);
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .panel .panel-title{ background:var(--surface-alt); border-bottom:1px solid var(--border-color-light); padding:8px 10px; font-size:12px; font-weight:700; color:var(--text-strong); }
+  .panel .panel-body{ padding:10px; font-size:12px; color:var(--text-secondary); }
+
+  /* ========== OFFCANVAS: drawer de navegación ========== */
+  .offcanvas-backdrop{
+    position:absolute; inset:0;
+    background:rgba(0,0,0,0);
+    pointer-events:none;
+    transition:background var(--duration-base) var(--easing-standard);
+    z-index:10;
+  }
+  .offcanvas-backdrop.open{ background:rgba(0,0,0,.5); pointer-events:auto; }
+  .offcanvas{
+    position:absolute;
+    top:0; bottom:0; left:0;
+    width:78%;
+    max-width:280px;
+    background:var(--header-bg);
+    transform:translateX(-100%);
+    transition:transform var(--duration-base) var(--easing-standard);
+    display:flex;
+    flex-direction:column;
+    box-shadow:2px 0 8px rgba(0,0,0,.3);
+  }
+  .offcanvas-backdrop.open .offcanvas{ transform:translateX(0); }
+  .offcanvas-header{ padding:14px; border-bottom:1px solid #444; }
+  .offcanvas-header .title{ color:var(--header-text); font-weight:700; font-size:14px; }
+  .offcanvas-header .sub{ color:var(--header-text-dim); font-size:11px; margin-top:2px; }
+  .offcanvas-nav{ flex:1; overflow-y:auto; padding:6px 0; }
+  .offcanvas-nav a{
+    display:block;
+    padding:11px 16px;
+    color:#d7d7d7;
+    text-decoration:none;
+    font-size:13px;
+    border-left:3px solid transparent;
+    cursor:pointer;
+  }
+  .offcanvas-nav a.active{ color:#fff; background:rgba(255,255,255,.06); border-left-color:var(--action); font-weight:700; }
+  .offcanvas-nav a:hover{ background:rgba(255,255,255,.06); }
+
+  /* ========== ACCORDION ========== */
+  .accordion-item{ border-bottom:1px solid var(--border-color-light); }
+  .accordion-item:last-child{ border-bottom:none; }
+  .accordion-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 10px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+    color:var(--text-primary);
+    background:var(--surface);
+  }
+  .accordion-header:hover{ background:var(--surface-hover); }
+  .accordion-header .chevron{ color:var(--action); font-size:10px; transition:transform var(--duration-base) var(--easing-standard); }
+  .accordion-item.open .accordion-header .chevron{ transform:rotate(90deg); }
+  .accordion-body{ display:none; padding:0 10px 12px; font-size:12px; color:var(--text-secondary); }
+  .accordion-item.open .accordion-body{ display:block; }
+
+  /* ========== DROPDOWN de acciones (⋮) ========== */
+  .row-with-menu{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px;
+    border-bottom:1px solid var(--border-color-light);
+    position:relative;
+  }
+  .row-with-menu:last-child{ border-bottom:none; }
+  .row-with-menu .name{ font-size:13px; font-weight:700; color:var(--text-strong); }
+  .row-with-menu .sub{ font-size:11px; color:var(--text-secondary); }
+  .kebab{
+    border:1px solid var(--border-color-light);
+    background:var(--surface);
+    width:26px; height:26px;
+    border-radius:var(--radius-base);
+    cursor:pointer;
+    color:var(--text-secondary);
+    font-weight:700;
+    flex:0 0 auto;
+  }
+  .kebab:hover{ background:var(--surface-alt); }
+  .dropdown-menu{
+    display:none;
+    position:absolute;
+    top:36px; right:10px;
+    background:var(--surface);
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    box-shadow:0 2px 8px rgba(0,0,0,.25);
+    z-index:5;
+    min-width:140px;
+  }
+  .dropdown-menu.open{ display:block; }
+  .dropdown-menu a{
+    display:block;
+    padding:8px 12px;
+    font-size:12px;
+    color:var(--text-primary);
+    text-decoration:none;
+    cursor:pointer;
+    border-bottom:1px solid var(--border-color-light);
+  }
+  .dropdown-menu a:last-child{ border-bottom:none; color:var(--conflict); }
+  .dropdown-menu a:hover{ background:var(--surface-alt); }
+
+  /* ========== TOOLTIP ========== */
+  .field-with-tip{ display:flex; align-items:center; gap:5px; font-size:12px; font-weight:700; color:var(--text-primary); margin-bottom:10px; }
+  .tip-icon{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:15px; height:15px;
+    border-radius:50%;
+    background:var(--text-secondary);
+    color:var(--on-color);
+    font-size:10px;
+    font-weight:700;
+    cursor:help;
+    position:relative;
+  }
+  .tip-icon .tooltip{
+    display:none;
+    position:absolute;
+    bottom:22px; left:50%;
+    transform:translateX(-50%);
+    background:#1a1a1a;
+    color:#fff;
+    font-size:11px;
+    font-weight:400;
+    padding:6px 9px;
+    border-radius:var(--radius-base);
+    width:190px;
+    text-align:left;
+    z-index:6;
+    box-shadow:0 2px 6px rgba(0,0,0,.3);
+  }
+  .tip-icon .tooltip::after{
+    content:"";
+    position:absolute;
+    top:100%; left:50%;
+    transform:translateX(-50%);
+    border:5px solid transparent;
+    border-top-color:#1a1a1a;
+  }
+  .tip-icon.show .tooltip{ display:block; }
+
+  /* ========== TOAST ========== */
+  .toast-stack{
+    position:absolute;
+    left:12px; right:12px;
+    bottom:16px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    z-index:20;
+    pointer-events:none;
+  }
+  .toast{
+    background:#1a1a1a;
+    color:#fff;
+    font-size:12px;
+    padding:10px 12px;
+    border-radius:var(--radius-base);
+    border-left:4px solid var(--confirmed);
+    box-shadow:0 2px 8px rgba(0,0,0,.3);
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity var(--duration-base) var(--easing-standard), transform var(--duration-base) var(--easing-standard);
+  }
+  .toast.show{ opacity:1; transform:translateY(0); }
+
+  /* ========== botones reusados ========== */
+  .btn{
+    display:inline-block;
+    border:1px solid #b0b0b0;
+    background:linear-gradient(to bottom, #fdfdfd, #e2e2e2);
+    color:var(--text-primary);
+    font-size:12px;
+    font-weight:700;
+    padding:7px 14px;
+    border-radius:var(--radius-base);
+    cursor:pointer;
+    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+    text-shadow:0 1px 0 rgba(255,255,255,.6);
+  }
+  .btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
+  .btn.primary{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action)); border-color:var(--action-strong); color:var(--on-color); text-shadow:0 -1px 0 rgba(0,0,0,.25); }
+  .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
+  .btn.critical{ background:linear-gradient(to bottom, color-mix(in srgb, var(--conflict) 70%, white), var(--conflict)); border-color:color-mix(in srgb, var(--conflict) 70%, black); color:var(--on-color); text-shadow:0 -1px 0 rgba(0,0,0,.25); }
+
+  /* ========== MODAL de confirmación simple (distinto del modal de
+     sync-conflict y del crítico -- este es el "¿estás seguro?" plano,
+     sin franjas ni checkbox, para acciones destructivas comunes) ========== */
+  .modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; z-index:15; padding:20px; }
+  .modal-backdrop.open{ display:flex; }
+  .confirm-modal{
+    background:var(--surface);
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    box-shadow:0 4px 16px rgba(0,0,0,.35);
+    padding:16px;
+    max-width:280px;
+    width:100%;
+  }
+  .confirm-modal h3{ font-size:14px; margin:0 0 6px; color:var(--text-strong); }
+  .confirm-modal p{ font-size:12px; color:var(--text-secondary); margin:0 0 14px; }
+  .confirm-modal .actions{ display:flex; gap:8px; justify-content:flex-end; }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <header>
+    <button class="hamburger" onclick="toggleOffcanvas(true)">☰</button>
+    <p class="wordmark">PALM</p>
+  </header>
+
+  <main>
+    <h2 class="section-title">Configuración (Accordion)</h2>
+    <div class="panel">
+      <div class="accordion-item open">
+        <div class="accordion-header" onclick="toggleAccordion(this)">Cuenta <span class="chevron">▶</span></div>
+        <div class="accordion-body">Nombre, email y datos de facturación asociados a esta cuenta.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">Notificaciones <span class="chevron">▶</span></div>
+        <div class="accordion-body">Elegí qué eventos generan una notificación push: conflictos de sync, confirmaciones, recordatorios.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">Seguridad <span class="chevron">▶</span></div>
+        <div class="accordion-body">Verificación en dos pasos, dispositivos conectados, cierre de sesión remoto.</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Clientes (menú de acciones)</h2>
+    <div class="panel">
+      <div class="row-with-menu">
+        <div>
+          <div class="name">ACME</div>
+          <div class="sub">Cuenta corriente activa</div>
+        </div>
+        <button class="kebab" onclick="toggleDropdown(this)">⋮</button>
+        <div class="dropdown-menu">
+          <a>Ver detalle</a>
+          <a>Editar</a>
+          <a>Eliminar cliente</a>
+        </div>
+      </div>
+      <div class="row-with-menu">
+        <div>
+          <div class="name">Beta SRL</div>
+          <div class="sub">3 pedidos este mes</div>
+        </div>
+        <button class="kebab" onclick="toggleDropdown(this)">⋮</button>
+        <div class="dropdown-menu">
+          <a>Ver detalle</a>
+          <a>Editar</a>
+          <a>Eliminar cliente</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Tooltip + Toast + Modal simple</h2>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="field-with-tip">
+          Umbral de agrupación de cards
+          <span class="tip-icon" onclick="this.classList.toggle('show')">
+            ?
+            <span class="tooltip">Cantidad de tareas antes de agruparlas en un solo tile. Ver Regla A5 en la documentación.</span>
+          </span>
+        </div>
+
+        <button class="btn primary" onclick="showToast()">Guardar cambios</button>
+        &nbsp;
+        <button class="btn critical" onclick="openConfirm()">Eliminar cliente</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Offcanvas -->
+  <div class="offcanvas-backdrop" id="offcanvas-backdrop" onclick="if(event.target===this) toggleOffcanvas(false)">
+    <nav class="offcanvas">
+      <div class="offcanvas-header">
+        <div class="title">Palm</div>
+        <div class="sub">Cuenta ACME</div>
+      </div>
+      <div class="offcanvas-nav">
+        <a class="active">Panel de control</a>
+        <a>Pedidos</a>
+        <a>Clientes</a>
+        <a>Cuentas</a>
+        <a>Conflictos</a>
+        <a>Ajustes</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Modal de confirmación simple -->
+  <div class="modal-backdrop" id="confirm-backdrop">
+    <div class="confirm-modal">
+      <h3>¿Eliminar cliente?</h3>
+      <p>Esta acción no se puede deshacer. ACME y sus pedidos asociados dejarán de aparecer en el Hub.</p>
+      <div class="actions">
+        <button class="btn" onclick="closeConfirm()">Cancelar</button>
+        <button class="btn critical" onclick="closeConfirm()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+</div>
+
+<script>
+function toggleOffcanvas(open){
+  document.getElementById('offcanvas-backdrop').classList.toggle('open', open);
+}
+function toggleAccordion(header){
+  header.parentElement.classList.toggle('open');
+}
+function toggleDropdown(btn){
+  const menu = btn.nextElementSibling;
+  document.querySelectorAll('.dropdown-menu.open').forEach(m => { if(m !== menu) m.classList.remove('open'); });
+  menu.classList.toggle('open');
+}
+document.addEventListener('click', (e) => {
+  if(!e.target.classList.contains('kebab')){
+    document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+  }
+});
+function showToast(){
+  const stack = document.getElementById('toast-stack');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = 'Cambios guardados correctamente.';
+  stack.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('show'));
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 250);
+  }, 2600);
+}
+function openConfirm(){ document.getElementById('confirm-backdrop').classList.add('open'); }
+function closeConfirm(){ document.getElementById('confirm-backdrop').classList.remove('open'); }
+</script>
+
+</body>
+</html>

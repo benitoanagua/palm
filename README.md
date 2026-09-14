@@ -1,116 +1,62 @@
-# Apay (A2) — Transporte de Carga Compartida
+# PALM Design System
 
-Aplicación Android para conectar transportistas con espacio disponible en sus vehículos de carga con empresas y personas que necesitan enviar mercancías, dentro y entre departamentos de Bolivia.
+PALM is a design system built from scratch with Stencil, TypeScript and Web Components.
 
----
+## Principles
 
-## Stack
+- STRATA is used only as a repository-organization reference.
+- No STRATA component logic, tokens, visual rules, APIs or behavior are inherited.
+- Tabler Icons is the only icon family used by PALM.
+- `pm-icon` has a deliberately minimal API: `name` and `aria-label`.
+- Native HTML semantics are preferred over custom behavior.
+- Components are framework-agnostic; React, Vue and Angular are adapters only.
+- No business logic belongs in PALM.
 
-| Capa | Tecnología |
-|------|-----------|
-| UI | Jetpack Compose + Material3 |
-| Navegación | Navigation Compose |
-| DI | Hilt |
-| Backend | Firebase (Auth, Firestore, Storage, FCM, Crashlytics) |
-| Red | Ktor (CIO) |
-| Cámara | CameraX |
-| Seguridad | Biometric + Security Crypto |
-| Íconos | Lucide (com.composables:icons-lucide-android 1.1.0) |
+## Packages
 
-## Requisitos
+- `@palm/tokens` — design tokens and themes.
+- `@palm/foundation` — shared DOM, focus and accessibility utilities.
+- `@palm/primitives` — small layout/surface primitives.
+- `@palm/icons` — the Tabler icon data used by `pm-icon`.
+- `@palm/components` — canonical Web Components.
+- `@palm/testing` — visual and accessibility test infrastructure.
 
-- Android Studio Ladybug (o superior)
-- JDK 17
-- Android SDK 35
-- Gradle 8.9 (wrapper incluido)
-- Dispositivo/emulador con API 26+
+## Icon usage
 
-## Setup
+```html
+<pm-icon name="search"></pm-icon>
+```
+
+Accessible icon:
+
+```html
+<pm-icon name="search" aria-label="Search"></pm-icon>
+```
+
+No other icon provider is supported.
+
+## Quality gate
 
 ```bash
-# 1. Clonar
-git clone <repo> && cd apay-app
-
-# 2. Firebase
-# Crear proyecto en Firebase Console, agregar app Android (com.apay),
-# descargar google-services.json y colocarlo en app/
-
-# 3. Compilar e instalar
-./gradlew :app:installDebug
+pnpm install
+pnpm check
+pnpm test:visual
 ```
 
-## Estructura
+Visual baselines cover 320×800, 375×812, 768×1024 and 1440×900.
 
-```
-app/src/main/kotlin/com/apay/
-├── A2App.kt                 # Application (@HiltAndroidApp)
-├── MainActivity.kt           # Entry point + auth flow
-├── auth/                     # Login, biometría, AuthViewModel
-├── navigation/               # Screen (rutas), AppNavHost, MainShell
-├── domain/
-│   ├── model/                # Usuario, Transportista, Ruta, Envio
-│   └── repository/           # Interfaces de repositorio
-├── data/repository/          # Implementaciones Firestore (callbackFlow)
-├── di/                       # Módulos Hilt (AppModule, RepositoryModule)
-├── carga/
-│   ├── home/                 # Dashboard principal
-│   ├── rutas/                # Publicar ruta
-│   ├── buscar/               # Buscar transporte
-│   ├── envios/               # Mis envíos
-│   ├── detalle/              # Detalle de envío
-│   └── perfil/               # Perfil de usuario
-├── notifications/            # FCM service
-└── ui/ (com.a2.ui.*)
-    ├── components/           # Design system (A2Button, A2Input, etc.)
-    └── theme/                # Colores, tipografía, tokens, gradientes
-```
+## Showcase
 
-## Arquitectura
-
-MVVM + Repository + Hilt DI:
-
-```
-UI (Composables) → ViewModel → Repository (interfaz)
-                                    ↓
-                            Firestore*Repository (implementación)
-```
-
-**Nota:** Solo `AuthViewModel` existe. Las pantallas de carga usan datos mock locales (pendiente conectar a ViewModels/repositorios).
-
-## Diseño
-
-- **Tema oscuro** solamente
-- **90% Primary (Teal #009688), 8% Secondary (Púrpura #9C27B0), 2% Tertiary (Violeta #673AB7)**
-- **Fondo:** Espacial oscuro `#020914` con glows ambientales
-- Componentes en `com.a2.ui.components.*` (paquete `com.a2`, no `com.apay`)
-- Tipografía custom vía `A2TextStyle` (9 tokens: DisplayLg a Caption)
-
-## Convenciones
-
-- **Paquetes:** El código fuente está en `com.apay.*`; el design system en `com.a2.ui.*`
-- **Navegación:** `Screen` sealed class + `AppNavHost` con `MainShell` (TopBar + BottomNav)
-- **Data real-time:** Repositorios exponen `Flow<T>` vía `callbackFlow` con `addSnapshotListener`
-- **Errores:** Operaciones suspendidas retornan `Result<T>` con `runCatching`
-- **DI:** Todos los módulos Hilt instalados en `SingletonComponent`
-
-## Comandos
+Run the product-like PALM showcase with:
 
 ```bash
-# Compilar e instalar en dispositivo
-./gradlew :app:installDebug
-
-# Solo compilar Kotlin (rápido)
-./gradlew compileDebugKotlin
-
-# Release
-./gradlew assembleRelease
-
-# Tests
-./gradlew testDebugUnitTest
+pnpm showcase
 ```
 
-Ver `docs/comandos.md` para más detalles.
+Build it with:
 
----
+```bash
+pnpm build:showcase
+```
 
-*Bolivia 2026 — Primera plataforma de carga compartida entre privados*
+The showcase is intentionally domain-agnostic: it demonstrates the design system without introducing business logic.

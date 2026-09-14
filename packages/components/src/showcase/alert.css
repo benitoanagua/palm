@@ -1,0 +1,5 @@
+.pm-alert { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:14px 16px; border:1px solid var(--pm-color-border); border-radius:var(--pm-radius-md); background:var(--pm-color-surface); color:var(--pm-color-text); }
+.pm-alert__content { display:grid; gap:4px; min-width:0; }
+.pm-alert--success { border-color:color-mix(in srgb,var(--pm-color-success) 40%,var(--pm-color-border)); }
+.pm-alert--warning { border-color:color-mix(in srgb,var(--pm-color-warning) 45%,var(--pm-color-border)); }
+.pm-alert--danger { border-color:color-mix(in srgb,var(--pm-color-danger) 45%,var(--pm-color-border)); }

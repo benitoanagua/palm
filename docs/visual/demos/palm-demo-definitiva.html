@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palm — Demo definitiva</title>
+<style>
+  :root{
+    /* Clon de ActiveAdmin (Ruby on Rails) — header oscuro, cajas
+       blancas con franja de título gris, botones con degradé glossy,
+       tags de estado en color sólido. Una sola desviación deliberada:
+       se usa la paleta semántica ya verificada contra los 3 tipos de
+       daltonismo en vez del azul exacto de AA — tirar esa evidencia
+       no se justifica ni para un clon fiel. Los bordes tampoco copian
+       el gris demasiado claro de AA (~#e5e5e5, 1.2:1) -- se reusan los
+       valores ya corregidos para baja visión (4.8:1 / 3.0:1). */
+    --header-bg:#2c2c2c;
+    --header-text:#ffffff;
+    --header-text-dim:#b8b8b8;
+    --page-bg:#f1f2f4;
+    --surface:#ffffff;
+    --surface-alt:#f5f5f5;
+    --surface-hover:#f9f9f9;
+    --border-color:#727272;      /* 4.8:1 */
+    --border-color-light:#949494; /* 3.0:1 */
+
+    --text-primary:#333333;
+    --text-secondary:#666666;
+    --text-strong:#1a1a1a;
+    --on-color:#ffffff;
+
+    --action:#0b5a92;
+    --action-strong:#00426f;
+    --pending:#8d410b;
+    --confirmed:#086335;
+    --conflict:#ae0e20;
+
+    --font-ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-data: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+    --radius-base:3px;
+
+    --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+    --duration-base:180ms;
+    --easing-standard: ease-in-out;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100%; }
+  body{
+    background:var(--page-bg);
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--text-primary);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px;
+  }
+
+  button, input{ font-family:inherit; }
+  button:focus-visible, input:focus-visible, .row:focus-visible{
+    outline:2px solid var(--action);
+    outline-offset:1px;
+  }
+  input[type="checkbox"]{ accent-color: var(--conflict); }
+
+  .phone{
+    width:100%;
+    max-width:412px;
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    background:var(--page-bg);
+    min-height:820px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,.2);
+  }
+
+  /* ---------- header oscuro, clásico de AA ---------- */
+  header{
+    padding:12px 16px;
+    background:var(--header-bg);
+    border-bottom:3px solid var(--action);
+    position:relative;
+    z-index:2;
+  }
+  header .wordmark{
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:0;
+    color:var(--header-text);
+    margin:0 0 2px;
+  }
+  header h1{
+    margin:0;
+    font-size:12px;
+    font-weight:400;
+    color:var(--header-text-dim);
+  }
+  header .count{
+    font-family:var(--font-data);
+    font-size:11px;
+    color:var(--header-text-dim);
+    margin-top:2px;
+  }
+
+  .density-toggle{
+    font-family:var(--font-ui);
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-primary);
+    background:linear-gradient(to bottom, #fdfdfd, #e6e6e6);
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    padding:4px 10px;
+    cursor:pointer;
+    flex:0 0 auto;
+    white-space:nowrap;
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset;
+  }
+  .density-toggle:hover{ background:linear-gradient(to bottom, #ffffff, #ececec); }
+  .density-toggle:active{ background:#dcdcdc; }
+  .density-toggle #density-label{ color:var(--action); }
+
+  /* Insignia de seguridad -- status_tag de AA: rect. chico, color
+     sólido, texto blanco. Nunca tinte suave -- ese no es el look. */
+  .security-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    font-family:var(--font-ui);
+    font-weight:700;
+    font-size:10px;
+    line-height:16px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--on-color);
+    background:var(--action);
+    padding:0 6px;
+    border-radius:var(--radius-base);
+    margin-top:6px;
+  }
+
+  /* ---------- contenedor de vistas ---------- */
+  main{ flex:1; overflow-y:auto; padding:14px; padding-bottom:100px; }
+  .view{ display:none; }
+  .view.active{
+    display:block;
+    animation:view-enter var(--duration-base) var(--easing-standard);
+  }
+  @keyframes view-enter{
+    from{ opacity:0; }
+    to{ opacity:1; }
+  }
+
+  /* ---------- cards como "panel" de AA: caja blanca con franja
+     de título gris arriba ---------- */
+  .cards-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .card{
+    border:1px solid var(--border-color-light);
+    background:var(--surface);
+    border-radius:var(--radius-base);
+    padding:0;
+    min-height:132px;
+    display:flex;
+    flex-direction:column;
+    text-align:left;
+    touch-action:pan-y;
+    position:relative;
+    overflow:hidden;
+  }
+  .card:active{ background:var(--surface-hover); }
+  .card .preview{
+    height:44px;
+    background:var(--surface-alt);
+    border-bottom:1px solid var(--border-color-light);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-secondary);
+    font-family:var(--font-data);
+    font-size:11px;
+  }
+  .card .name{
+    font-size:12px;
+    font-weight:700;
+    color:var(--text-strong);
+    margin-top:8px;
+    padding:0 8px;
+  }
+  .card .status{
+    font-size:11px;
+    color:var(--text-secondary);
+    margin-top:2px;
+    padding:0 8px 8px;
+  }
+  .card .dismiss{
+    align-self:flex-end;
+    border:none;
+    background:none;
+    color:var(--text-secondary);
+    font-size:14px;
+    line-height:1;
+    width:20px; height:20px;
+    margin:4px 4px 0 0;
+    cursor:pointer;
+  }
+  .card .dismiss:hover{ color:var(--conflict); }
+  .card.grouped{
+    justify-content:center;
+    align-items:center;
+    color:var(--text-secondary);
+    background:var(--surface-alt);
+  }
+  .card.grouped .name{ margin-top:6px; text-align:center; padding:0; }
+
+  /* ---------- Hub como index_table de AA: filas con borde inferior,
+     cabecera de columna implícita en el título de la fila ---------- */
+  .hub-list{ display:flex; flex-direction:column; }
+  .row{
+    border-bottom:1px solid var(--border-color-light);
+    background:var(--surface);
+    padding:10px 8px;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+  }
+  .row:nth-child(even){ background:var(--surface-hover); }
+  .row:hover{ background:var(--surface-alt); }
+  .row:active{ background:#eef1f4; }
+  .row-top{ display:flex; align-items:flex-start; gap:10px; }
+  .row-body{ flex:1; min-width:0; }
+  .row-title{ font-size:13px; font-weight:700; color:var(--text-strong); }
+  .row-sub{ font-size:11px; color:var(--text-secondary); margin-top:2px; }
+
+  /* Tag de estado -- status_tag de AA: rectángulo de esquina chica,
+     color sólido, texto blanco en mayúsculas -- nunca tinte suave. */
+  .row-status{
+    display:inline-flex; align-items:center; gap:4px;
+    font-family:var(--font-ui);
+    font-weight:700;
+    font-size:10px;
+    line-height:16px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--on-color);
+    padding:0 6px;
+    border-radius:var(--radius-base);
+    margin-top:6px;
+  }
+  .row-status .dot{ width:5px; height:5px; border-radius:50%; flex:0 0 auto; background:var(--on-color); }
+  .row-status.local{ color:var(--text-primary); background:var(--border-color-light); }
+  .row-status.pending{ background:var(--pending); }
+  .row-status.confirmed{ background:var(--confirmed); }
+  .row-status.conflict{ background:var(--conflict); }
+
+  .row-detail{
+    display:none;
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px solid var(--border-color-light);
+    font-size:11px;
+    color:var(--text-secondary);
+  }
+  .row.expanded .row-detail{ display:block; }
+  .row-detail .action-btn{ margin-top:8px; }
+
+  .hold-hint{
+    font-size:10px;
+    color:var(--text-secondary);
+    margin-top:6px;
+    font-style:italic;
+  }
+
+  /* ---------- botones glossy, marca de fábrica de AA ---------- */
+  .action-btn{
+    border:1px solid #b0b0b0;
+    background:linear-gradient(to bottom, #fdfdfd, #e2e2e2);
+    color:var(--text-primary);
+    font-size:12px;
+    font-weight:700;
+    padding:6px 14px;
+    border-radius:var(--radius-base);
+    cursor:pointer;
+    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+    text-shadow:0 1px 0 rgba(255,255,255,.6);
+  }
+  .action-btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
+  .action-btn:active{ background:#cfcfcf; box-shadow:none; }
+  .action-btn.primary{
+    background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action));
+    border-color:var(--action-strong);
+    color:var(--on-color);
+    text-shadow:0 -1px 0 rgba(0,0,0,.25);
+  }
+  .action-btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
+  .action-btn.primary:active{ background:var(--action-strong); }
+  .action-btn.critical{
+    background:linear-gradient(to bottom, color-mix(in srgb, var(--conflict) 70%, white), var(--conflict));
+    border-color:color-mix(in srgb, var(--conflict) 70%, black);
+    color:var(--on-color);
+    text-shadow:0 -1px 0 rgba(0,0,0,.25);
+  }
+  .action-btn.critical:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--conflict) 80%, white), color-mix(in srgb, var(--conflict) 90%, black)); }
+  .action-btn.critical:disabled{
+    background:#e8e8e8;
+    border-color:var(--border-color-light);
+    color:#a0a0a0;
+    text-shadow:none;
+    cursor:not-allowed;
+    box-shadow:none;
+  }
+
+  /* ---------- tabbar como sub-nav de tabs de AA ---------- */
+  nav.tabbar{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    display:flex;
+    background:var(--surface-alt);
+    border-top:1px solid var(--border-color-light);
+    z-index:2;
+  }
+  nav.tabbar button{
+    flex:1;
+    border:none;
+    background:none;
+    padding:12px 8px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--text-secondary);
+    cursor:pointer;
+    border-top:3px solid transparent;
+  }
+  nav.tabbar button.active{
+    color:var(--action);
+    background:var(--surface);
+    border-top-color:var(--action);
+  }
+
+  /* FAB -- AA no tiene botón flotante circular; se adapta como botón
+     glossy rectangular de esquina chica, coherente con el resto. */
+  .fab{
+    position:absolute;
+    right:16px;
+    bottom:72px;
+    width:48px;
+    height:48px;
+    border-radius:var(--radius-base);
+    background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action));
+    border:1px solid var(--action-strong);
+    box-shadow:0 1px 3px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.4) inset;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .fab.left{ right:auto; left:16px; }
+  .fab:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
+  .fab:active{ background:var(--action-strong); }
+  .fab svg{ width:18px; height:18px; stroke:var(--on-color); }
+
+  /* ---------- omnibar como buscador clásico de AA ---------- */
+  .overlay{
+    position:absolute;
+    inset:0;
+    background:var(--page-bg);
+    display:none;
+    flex-direction:column;
+  }
+  .overlay.open{ display:flex; }
+  .overlay-header{
+    display:flex;
+    gap:8px;
+    padding:12px;
+    border-bottom:1px solid var(--border-color-light);
+    background:var(--header-bg);
+  }
+  .overlay-header input{
+    flex:1;
+    border:1px solid #999;
+    border-radius:var(--radius-base);
+    background:var(--surface);
+    padding:7px 9px;
+    font-family:var(--font-data);
+    font-size:12px;
+    color:var(--text-primary);
+    box-shadow:0 1px 2px rgba(0,0,0,.15) inset;
+  }
+  .overlay-header input:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
+  .overlay-header .close-btn{
+    border:1px solid #b0b0b0;
+    background:linear-gradient(to bottom, #fdfdfd, #e2e2e2);
+    border-radius:var(--radius-base);
+    padding:7px 12px;
+    cursor:pointer;
+    color:var(--text-primary);
+    font-weight:700;
+    font-size:12px;
+  }
+  .overlay-header .close-btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
+  .omni-results{ padding:8px 12px; overflow-y:auto; }
+  .omni-group-label{
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--text-secondary);
+    background:var(--surface-alt);
+    padding:4px 8px;
+    margin:8px 0 0;
+    border:1px solid var(--border-color-light);
+    border-bottom:none;
+  }
+  .omni-item{
+    padding:9px 8px;
+    background:var(--surface);
+    border:1px solid var(--border-color-light);
+    border-top:none;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .omni-item:nth-child(even){ background:var(--surface-hover); }
+  .omni-item:hover{ background:#eaf1f7; }
+  .omni-item .kind{
+    font-family:var(--font-data);
+    font-size:10px;
+    color:var(--text-secondary);
+    margin-left:8px;
+  }
+
+  /* ---------- peek: caja blanca simple con borde, sin blur (AA no
+     tiene materiales translúcidos) ---------- */
+  .peek{
+    position:absolute;
+    left:16px; right:16px;
+    bottom:100px;
+    background:var(--surface);
+    border:1px solid var(--border-color);
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
+    border-radius:var(--radius-base);
+    padding:12px;
+    display:none;
+    font-size:12px;
+  }
+  .peek.show{ display:block; }
+  .peek .peek-title{ font-weight:700; margin-bottom:4px; color:var(--text-strong); }
+
+  /* ---------- modal / hoja de conflicto ---------- */
+  .modal-backdrop{
+    position:absolute; inset:0;
+    background:rgba(0,0,0,.5);
+    display:none;
+    align-items:flex-end;
+  }
+  .modal-backdrop.open{ display:flex; }
+  .modal{
+    width:100%;
+    background:var(--surface);
+    box-shadow:0 -2px 8px rgba(0,0,0,.3);
+    border-radius:0;
+    border-top:3px solid var(--action);
+    padding:14px;
+    max-height:80%;
+    overflow-y:auto;
+  }
+  .modal h2{ font-size:14px; margin:0 0 4px; color:var(--text-strong); }
+  .modal .modal-sub{ font-size:11px; color:var(--text-secondary); margin-bottom:12px; }
+  .compare{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .compare .col{
+    border:1px solid var(--border-color-light);
+    background:var(--surface-alt);
+    border-radius:var(--radius-base);
+    padding:8px;
+    font-size:11px;
+  }
+  .compare .col h3{ font-size:10px; margin:0 0 6px; color:var(--text-secondary); font-family:var(--font-data); text-transform:uppercase; }
+  .compare .diff{ background:#fff3cd; padding:1px 3px; border:1px solid #ffe08a; }
+  .modal-actions{ display:flex; flex-direction:column; gap:8px; }
+  .modal-actions .action-btn{ width:100%; text-align:center; }
+
+  .modal.critical{ border-top:3px solid var(--conflict); }
+  .modal.critical h2{ color:var(--conflict); }
+  .modal-critical-check{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    font-size:11px;
+    color:var(--text-secondary);
+    margin-bottom:12px;
+  }
+
+  /* Densidad — 3 niveles, elección explícita del usuario (Decisión
+     propia #3), nunca inferida por tamaño de pantalla. El vocabulario
+     visual de AA (franja de título, borde, status_tag sólido) no
+     cambia entre niveles -- solo cambian espaciado y tamaño de letra. */
+  body.density-compact .card{ min-height:104px; }
+  body.density-compact .card .preview{ height:32px; font-size:10px; }
+  body.density-compact .card .name{ font-size:11px; margin-top:5px; }
+  body.density-compact .card .status{ font-size:10px; }
+  body.density-compact .row{ padding:6px 8px; }
+  body.density-compact .row-title{ font-size:12px; }
+  body.density-compact .row-sub{ font-size:10px; }
+  body.density-compact .row-status{ margin-top:4px; }
+  body.density-compact .hold-hint{ display:none; }
+  body.density-compact .cards-grid{ gap:8px; }
+  body.density-compact .hub-list{ gap:6px; }
+
+  body.density-airy .cards-grid{ gap:14px; }
+  body.density-airy .card{ min-height:160px; }
+  body.density-airy .card .preview{ height:56px; font-size:12px; }
+  body.density-airy .card .name{ font-size:13px; margin-top:10px; line-height:1.4; }
+  body.density-airy .card .status{ font-size:12px; line-height:1.5; }
+  body.density-airy .hub-list{ gap:12px; }
+  body.density-airy .row{ padding:16px 14px; }
+  body.density-airy .row-title{ font-size:15px; line-height:1.4; }
+  body.density-airy .row-sub{ font-size:13px; line-height:1.5; margin-top:4px; }
+  body.density-airy .row-status{ margin-top:10px; font-size:11px; padding:2px 8px; }
+  body.density-airy .action-btn{ padding:9px 18px; font-size:13px; }
+  body.density-airy .fab{ width:56px; height:56px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+  <header>
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+      <div>
+        <p class="wordmark">PALM</p>
+        <h1 id="view-title">Tareas activas</h1>
+      </div>
+      <button class="density-toggle" id="density-toggle" onclick="toggleDensity()" title="Perfil de densidad (Compacto/Normal/Aireado) — elección explícita, nunca por tamaño de pantalla (Decisión propia #3)">
+        Perfil: <span id="density-label">Normal</span>
+      </button>
+    </div>
+    <p class="count" id="view-count">5 de 8 · 3 agrupadas</p>
+    <span class="security-badge" title="Sesión con verificación en dos pasos activa">2FA activo</span>
+  </header>
+
+  <main>
+    <!-- ===== VISTA: TAREAS (cards) — Leyes 25, 29 ===== -->
+    <section class="view active" id="view-tareas">
+      <div class="cards-grid">
+        <div class="card">
+          <div class="preview">Pedido #1042</div>
+          <div>
+            <div class="name">Pedido #1042</div>
+            <div class="status">Cantidad y precio cargados</div>
+          </div>
+          <button class="dismiss" title="Cerrar tarea" onclick="dismissCard(this.closest('.card'))">×</button>
+        </div>
+        <div class="card">
+          <div class="preview">Cliente ACME</div>
+          <div>
+            <div class="name">Ficha Cliente ACME</div>
+            <div class="status">Teléfono pendiente</div>
+          </div>
+          <button class="dismiss" title="Cerrar tarea" onclick="dismissCard(this.closest('.card'))">×</button>
+        </div>
+        <div class="card">
+          <div class="preview">Búsqueda: "ACME"</div>
+          <div>
+            <div class="name">Buscar cliente</div>
+            <div class="status">3 resultados</div>
+          </div>
+          <button class="dismiss" title="Cerrar tarea" onclick="dismissCard(this.closest('.card'))">×</button>
+        </div>
+        <div class="card">
+          <div class="preview" style="font-family:var(--font-data); font-variant-numeric:tabular-nums; font-size:15px; color:var(--text-strong);">$1.284.560,00</div>
+          <div>
+            <div class="name">Cuenta corriente</div>
+            <div class="status">Saldo revisado hace 2 min</div>
+            <button class="action-btn critical" style="margin-top:6px; font-size:11px; padding:4px 8px;" onclick="event.stopPropagation(); openCritical();">Transferir todo</button>
+          </div>
+          <button class="dismiss" title="Cerrar tarea" onclick="dismissCard(this.closest('.card'))">×</button>
+        </div>
+        <div class="card">
+          <div class="preview">Pedido #1039</div>
+          <div>
+            <div class="name">Pedido #1039</div>
+            <div class="status">Esperando confirmación</div>
+          </div>
+          <button class="dismiss" title="Cerrar tarea" onclick="dismissCard(this.closest('.card'))">×</button>
+        </div>
+        <div class="card grouped">
+          <div style="font-size:20px;">＋3</div>
+          <div class="name">Más de Cliente ACME</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VISTA: HUB — Leyes 28, 31, 42, 43 ===== -->
+    <section class="view" id="view-hub">
+      <div class="hub-list">
+
+        <div class="row" tabindex="0" role="button" onclick="toggleRow(this)"
+             onpointerdown="startPeek(event)" onpointerup="endPeek(event)" onpointerleave="endPeek(event)">
+          <div class="row-top">
+            <div class="row-body">
+              <div class="row-title">Pedido #1042</div>
+              <div class="row-sub">Guardado en el dispositivo, aún sin enviar</div>
+              <div class="row-status local"><span class="dot"></span>Guardado en el dispositivo</div>
+              <div class="hold-hint">Mantené presionado para vista previa</div>
+            </div>
+          </div>
+          <div class="row-detail">
+            Cliente: ACME · Cantidad: 12 · Se enviará al recuperar conexión.
+            <div><button class="action-btn">Editar</button></div>
+          </div>
+        </div>
+
+        <div class="row" tabindex="0" role="button" onclick="toggleRow(this)">
+          <div class="row-top">
+            <div class="row-body">
+              <div class="row-title">Pedido #1039</div>
+              <div class="row-sub">Enviado al servidor</div>
+              <div class="row-status pending"><span class="dot"></span>Esperando confirmación</div>
+            </div>
+          </div>
+          <div class="row-detail">
+            Enviado hace 4 min. El servidor aún no confirmó recepción.
+          </div>
+        </div>
+
+        <div class="row" tabindex="0" role="button" onclick="toggleRow(this)">
+          <div class="row-top">
+            <div class="row-body">
+              <div class="row-title">Cliente ACME actualizado</div>
+              <div class="row-sub">Teléfono y dirección</div>
+              <div class="row-status confirmed"><span class="dot"></span>Confirmado</div>
+            </div>
+          </div>
+          <div class="row-detail">
+            Confirmado por el servidor hace 20 min.
+          </div>
+        </div>
+
+        <div class="row" tabindex="0" role="button" onclick="openConflict()">
+          <div class="row-top">
+            <div class="row-body">
+              <div class="row-title">Pedido #1035</div>
+              <div class="row-sub">Otro dispositivo modificó este pedido</div>
+              <div class="row-status conflict"><span class="dot"></span>Conflicto — revisar</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" tabindex="0" role="button" onclick="toggleRow(this)">
+          <div class="row-top">
+            <div class="row-body">
+              <div class="row-title">Sesión por expirar</div>
+              <div class="row-sub">Alerta del sistema, no de negocio</div>
+            </div>
+          </div>
+          <div class="row-detail">
+            Tu sesión se cerrará en 5 minutos por inactividad.
+            <div><button class="action-btn primary">Extender sesión</button></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Peek — Ley 26 ===== -->
+  <div class="peek" id="peek">
+    <div class="peek-title">Vista previa — Pedido #1042</div>
+    <div>ACME · 12 unidades · guardado localmente hace 2 min.</div>
+  </div>
+
+  <!-- ===== Bottom nav ===== -->
+  <nav class="tabbar">
+    <button class="active" onclick="showView('tareas', this)">Tareas</button>
+    <button onclick="showView('hub', this)">Hub</button>
+  </nav>
+
+  <!-- ===== FAB → Omnibar — Ley 32. Mantener presionado cambia de lado
+       (Decisión resuelta: configurable, no fija, para usuarios zurdos) ===== -->
+  <div class="fab" id="fab" title="Buscar/ejecutar — mantener presionado para cambiar de lado">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+
+  <!-- ===== Omnibar overlay ===== -->
+  <div class="overlay" id="omni">
+    <div class="overlay-header">
+      <input id="omni-input" type="text" placeholder="Buscar cliente, pedido, o función…" oninput="filterOmni()">
+      <button class="close-btn" onclick="closeOmni()">Cerrar</button>
+    </div>
+    <div class="omni-results" id="omni-results"></div>
+  </div>
+
+  <!-- ===== Conflict modal — Ley 43 ===== -->
+  <div class="modal-backdrop" id="conflict-backdrop">
+    <div class="modal">
+      <h2>Pedido #1035 — conflicto de sincronización</h2>
+      <p class="modal-sub">Otro dispositivo confirmó un cambio mientras este pedido estaba sin conexión.</p>
+      <div class="compare">
+        <div class="col">
+          <h3>TU VERSIÓN · hace 8 min</h3>
+          <div>Cantidad: <span class="diff">15</span></div>
+          <div>Precio unitario: $420</div>
+        </div>
+        <div class="col">
+          <h3>VERSIÓN DEL SERVIDOR · hace 3 min</h3>
+          <div>Cantidad: <span class="diff">10</span></div>
+          <div>Precio unitario: $420</div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="action-btn primary" onclick="closeConflict()">Mantener la mía</button>
+        <button class="action-btn" onclick="closeConflict()">Mantener la del servidor</button>
+        <button class="action-btn" onclick="closeConflict()">Revisar campo por campo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Modal crítico — acción irreversible, fricción deliberada ===== -->
+  <div class="modal-backdrop" id="critical-backdrop">
+    <div class="modal critical">
+      <h2>Transferir todo el saldo</h2>
+      <p class="modal-sub">Esta acción es irreversible. Se transferirá el saldo completo de la cuenta.</p>
+      <label class="modal-critical-check">
+        <input type="checkbox" id="critical-check" onchange="toggleCriticalConfirm(this)">
+        <span>Entiendo que esta acción no se puede deshacer y confirmo el monto de $1.284.560,00.</span>
+      </label>
+      <div class="modal-actions">
+        <button class="action-btn critical" id="critical-confirm" disabled onclick="closeCritical()">Confirmar transferencia</button>
+        <button class="action-btn" onclick="closeCritical()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+const titles = { tareas: 'Tareas activas', hub: 'Hub' };
+const counts = { tareas: '5 de 8 · 3 agrupadas', hub: '1 conflicto · 2 pendientes' };
+
+function showView(name, btn){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelectorAll('.tabbar button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('view-title').textContent = titles[name];
+  document.getElementById('view-count').textContent = counts[name];
+}
+
+// Perfil de densidad — Decisión propia #3 "Power to the User":
+// elección explícita del usuario, nunca inferida por tamaño de pantalla.
+// Perfil de densidad — Decisión propia #3 "Power to the User":
+// 3 niveles, elección explícita del usuario, nunca inferida por
+// tamaño de pantalla. Cíclico: Normal -> Compacto -> Aireado -> Normal.
+const DENSITY_LEVELS = [
+  { cls: null,              label: 'Normal'  },
+  { cls: 'density-compact', label: 'Compacto' },
+  { cls: 'density-airy',    label: 'Aireado'  },
+];
+let densityIndex = 0;
+function toggleDensity(){
+  densityIndex = (densityIndex + 1) % DENSITY_LEVELS.length;
+  document.body.classList.remove('density-compact', 'density-airy');
+  const level = DENSITY_LEVELS[densityIndex];
+  if(level.cls) document.body.classList.add(level.cls);
+  document.getElementById('density-label').textContent = level.label;
+}
+
+// Accesibilidad de teclado (patrón ARIA APG): cualquier div con
+// role="button" responde a Enter/Espacio igual que un <button> nativo,
+// delegado una sola vez en vez de repetir el manejador en cada fila.
+document.addEventListener('keydown', e => {
+  if((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"]')){
+    e.preventDefault();
+    e.target.click();
+  }
+});
+
+function toggleRow(row){
+  row.classList.toggle('expanded');
+}
+
+// Cards — swipe-to-dismiss (convención nativa Android, ItemTouchHelper) + botón "×" como alternativa accesible.
+// La duración/curva se leen de los tokens CSS reales (--duration-base,
+// --easing-standard), no un número duplicado a mano en el JS.
+const CSS_ROOT = getComputedStyle(document.documentElement);
+const DISMISS_MS = parseFloat(CSS_ROOT.getPropertyValue('--duration-base')) || 200;
+const DISMISS_EASING = CSS_ROOT.getPropertyValue('--easing-standard').trim() || 'ease';
+const DISMISS_TRANSITION = `transform ${DISMISS_MS}ms ${DISMISS_EASING}, opacity ${DISMISS_MS}ms ${DISMISS_EASING}`;
+
+function dismissCard(card){
+  if(!card) return;
+  card.style.transition = DISMISS_TRANSITION;
+  card.style.transform = 'translateX(400px)';
+  card.style.opacity = '0';
+  setTimeout(()=>{ card.remove(); updateCardCount(); }, DISMISS_MS);
+}
+function updateCardCount(){
+  const remaining = document.querySelectorAll('#view-tareas .card:not(.grouped)').length;
+  counts.tareas = remaining + ' de 8 · 3 agrupadas';
+  if(document.getElementById('view-title').textContent === titles.tareas){
+    document.getElementById('view-count').textContent = counts.tareas;
+  }
+}
+function enableSwipe(card){
+  let startX = 0, currentX = 0, dragging = false;
+  const threshold = 80;
+  card.addEventListener('pointerdown', e=>{
+    if(e.target.closest('.dismiss')) return;
+    dragging = true;
+    startX = e.clientX;
+    card.setPointerCapture(e.pointerId);
+    card.style.transition = 'none';
+  });
+  card.addEventListener('pointermove', e=>{
+    if(!dragging) return;
+    currentX = e.clientX - startX;
+    card.style.transform = `translateX(${currentX}px)`;
+    card.style.opacity = String(Math.max(1 - Math.abs(currentX)/220, 0.2));
+  });
+  function endDrag(){
+    if(!dragging) return;
+    dragging = false;
+    card.style.transition = DISMISS_TRANSITION;
+    if(Math.abs(currentX) > threshold){
+      card.style.transform = `translateX(${currentX > 0 ? 400 : -400}px)`;
+      card.style.opacity = '0';
+      setTimeout(()=>{ card.remove(); updateCardCount(); }, DISMISS_MS);
+    } else {
+      card.style.transform = 'translateX(0)';
+      card.style.opacity = '1';
+    }
+    currentX = 0;
+  }
+  card.addEventListener('pointerup', endDrag);
+  card.addEventListener('pointercancel', endDrag);
+}
+document.querySelectorAll('#view-tareas .card:not(.grouped)').forEach(enableSwipe);
+
+// Omnibar — Ley 32
+const omniData = {
+  registros: ['Pedido #1042', 'Pedido #1039', 'Cliente ACME', 'Cliente Beta SRL'],
+  funciones: ['Nuevo pedido…', 'Ver saldo de cuenta', 'Filtrar por estado: pendiente', 'Cambiar cliente activo']
+};
+function renderOmni(filter=''){
+  const el = document.getElementById('omni-results');
+  el.innerHTML = '';
+  ['registros','funciones'].forEach(group=>{
+    const items = omniData[group].filter(i => i.toLowerCase().includes(filter.toLowerCase()));
+    if(items.length === 0) return;
+    const label = document.createElement('div');
+    label.className = 'omni-group-label';
+    label.textContent = group === 'registros' ? 'REGISTROS' : 'FUNCIONES';
+    el.appendChild(label);
+    items.forEach(i=>{
+      const item = document.createElement('div');
+      item.className = 'omni-item';
+      item.textContent = i;
+      const kind = document.createElement('span');
+      kind.className = 'kind';
+      kind.textContent = group === 'registros' ? 'registro' : 'función';
+      item.appendChild(kind);
+      item.onclick = closeOmni;
+      el.appendChild(item);
+    });
+  });
+}
+// FAB — tap corto abre el Omnibar; mantener presionado (450ms) cambia
+// de lado. Resuelve el pendiente de "lado configurable para zurdos"
+// sin necesitar una pantalla de ajustes: el gesto de mantener presionado
+// ya es el mecanismo que el Omnibar y el Peek usan para "más opciones".
+(function(){
+  const fab = document.getElementById('fab');
+  let holdTimer = null;
+  let longPressed = false;
+  fab.addEventListener('pointerdown', () => {
+    longPressed = false;
+    holdTimer = setTimeout(() => {
+      longPressed = true;
+      fab.classList.toggle('left');
+    }, 450);
+  });
+  fab.addEventListener('pointerup', () => {
+    clearTimeout(holdTimer);
+    if(!longPressed) openOmni();
+  });
+  fab.addEventListener('pointerleave', () => clearTimeout(holdTimer));
+})();
+
+function openOmni(){
+  document.getElementById('omni').classList.add('open');
+  renderOmni();
+  setTimeout(()=>document.getElementById('omni-input').focus(), 0);
+}
+function closeOmni(){
+  document.getElementById('omni').classList.remove('open');
+  document.getElementById('omni-input').value = '';
+}
+function filterOmni(){
+  renderOmni(document.getElementById('omni-input').value);
+}
+
+// Peek — Ley 26 (mantener presionado, no destructivo)
+let peekTimer = null;
+function startPeek(e){
+  e.stopPropagation();
+  peekTimer = setTimeout(()=> document.getElementById('peek').classList.add('show'), 280);
+}
+function endPeek(e){
+  e.stopPropagation();
+  clearTimeout(peekTimer);
+  document.getElementById('peek').classList.remove('show');
+}
+
+// Conflicto — Ley 43
+function openConflict(){ document.getElementById('conflict-backdrop').classList.add('open'); }
+function closeConflict(){ document.getElementById('conflict-backdrop').classList.remove('open'); }
+
+// Modal crítico — acción irreversible: el botón de confirmar arranca
+// deshabilitado, solo se habilita tras marcar el checkbox de entendimiento.
+function openCritical(){ document.getElementById('critical-backdrop').classList.add('open'); }
+function closeCritical(){
+  document.getElementById('critical-backdrop').classList.remove('open');
+  document.getElementById('critical-check').checked = false;
+  document.getElementById('critical-confirm').disabled = true;
+}
+function toggleCriticalConfirm(checkbox){
+  document.getElementById('critical-confirm').disabled = !checkbox.checked;
+}
+</script>
+
+</body>
+</html>

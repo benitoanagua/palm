@@ -1,0 +1,11 @@
+:host { display: inline-flex; }
+.pm-spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: pm-spin var(--pm-motion-normal) linear infinite;
+}
+@keyframes pm-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .pm-spinner { animation: none; opacity: .7; } }

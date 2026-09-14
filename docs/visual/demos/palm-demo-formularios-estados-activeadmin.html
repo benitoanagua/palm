@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palm — Formularios y estados ActiveAdmin</title>
+<style>
+  :root{
+    /* Mismos tokens que las otras cuatro demos. Complementa con: login,
+       estado vacío, formulario anidado dinámico (agregar/quitar filas,
+       patrón real de AA con cocoon/nested_form), exportación CSV/JSON
+       (estándar en el header de cualquier index de AA) y switches. */
+    --header-bg:#2c2c2c;
+    --header-text:#ffffff;
+    --header-text-dim:#b8b8b8;
+    --page-bg:#f1f2f4;
+    --surface:#ffffff;
+    --surface-alt:#f5f5f5;
+    --surface-hover:#f9f9f9;
+    --border-color:#727272;
+    --border-color-light:#949494;
+
+    --text-primary:#333333;
+    --text-secondary:#666666;
+    --text-strong:#1a1a1a;
+    --on-color:#ffffff;
+
+    --action:#0b5a92;
+    --action-strong:#00426f;
+    --pending:#8d410b;
+    --confirmed:#086335;
+    --conflict:#ae0e20;
+
+    --font-ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-data: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+    --radius-base:3px;
+    --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+    --duration-base:180ms;
+    --easing-standard: ease-in-out;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:var(--page-bg);
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--text-primary);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px;
+  }
+  button, input, a, label{ font-family:inherit; font-size:inherit; }
+  button:focus-visible, input:focus-visible, a:focus-visible{ outline:2px solid var(--action); outline-offset:1px; }
+
+  .phone{
+    width:100%;
+    max-width:412px;
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    background:var(--page-bg);
+    min-height:900px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 1px 3px rgba(0,0,0,.2);
+    overflow:hidden;
+  }
+
+  header{ padding:12px 14px 10px; background:var(--header-bg); border-bottom:3px solid var(--action); display:flex; align-items:center; justify-content:space-between; }
+  header .wordmark{ font-size:16px; font-weight:700; color:var(--header-text); margin:0; }
+
+  nav.demo-nav{ display:flex; background:var(--surface-alt); border-bottom:1px solid var(--border-color-light); overflow-x:auto; }
+  nav.demo-nav button{ flex:0 0 auto; border:none; background:none; padding:10px 11px; font-size:11px; font-weight:700; color:var(--text-secondary); cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; }
+  nav.demo-nav button.active{ color:var(--action); background:var(--surface); border-bottom-color:var(--action); }
+
+  main{ flex:1; padding:14px; overflow-y:auto; }
+  .screen{ display:none; }
+  .screen.active{ display:block; }
+
+  .page-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .page-header h1{ font-size:16px; margin:0; color:var(--text-strong); }
+
+  .panel{ background:var(--surface); border:1px solid var(--border-color-light); border-radius:var(--radius-base); margin-bottom:12px; overflow:hidden; }
+  .panel .panel-title{ background:var(--surface-alt); border-bottom:1px solid var(--border-color-light); padding:8px 10px; font-size:12px; font-weight:700; color:var(--text-strong); }
+  .panel .panel-body{ padding:10px; }
+
+  .btn{
+    display:inline-block; border:1px solid #b0b0b0; background:linear-gradient(to bottom, #fdfdfd, #e2e2e2);
+    color:var(--text-primary); font-size:12px; font-weight:700; padding:7px 14px; border-radius:var(--radius-base);
+    cursor:pointer; box-shadow:0 1px 0 rgba(255,255,255,.7) inset; text-shadow:0 1px 0 rgba(255,255,255,.6); text-decoration:none;
+  }
+  .btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
+  .btn.primary{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action)); border-color:var(--action-strong); color:var(--on-color); text-shadow:0 -1px 0 rgba(0,0,0,.25); }
+  .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
+  .btn.small{ font-size:11px; padding:5px 10px; }
+  .btn.ghost{ background:none; border:1px solid var(--border-color-light); box-shadow:none; text-shadow:none; color:var(--text-secondary); }
+  .btn.danger-text{ background:none; border:none; box-shadow:none; text-shadow:none; color:var(--conflict); padding:5px 8px; }
+  .btn:disabled{ background:#e8e8e8; border-color:var(--border-color-light); color:#a0a0a0; text-shadow:none; box-shadow:none; cursor:not-allowed; }
+
+  /* ========== LOGIN (patrón clásico Devise/AA) ========== */
+  .login-screen{
+    min-height:100%;
+    background:var(--header-bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px 20px;
+  }
+  .login-box{
+    background:var(--surface);
+    border-radius:var(--radius-base);
+    box-shadow:0 4px 16px rgba(0,0,0,.4);
+    width:100%;
+    max-width:280px;
+    overflow:hidden;
+  }
+  .login-box .brand{ text-align:center; padding:20px 16px 10px; }
+  .login-box .brand .wordmark{ font-size:18px; font-weight:700; color:var(--text-strong); }
+  .login-box .brand .sub{ font-size:11px; color:var(--text-secondary); margin-top:2px; }
+  .login-box form{ padding:14px 16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .field label{ display:block; font-size:11px; font-weight:700; color:var(--text-primary); margin-bottom:3px; }
+  .field input{ width:100%; border:1px solid #999; border-radius:var(--radius-base); background:var(--surface); padding:7px 9px; box-shadow:0 1px 2px rgba(0,0,0,.1) inset; }
+  .field input:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
+  .remember{ display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-secondary); }
+  .login-box .forgot{ text-align:center; margin-top:6px; }
+  .login-box .forgot a{ font-size:11px; color:var(--action); text-decoration:underline; cursor:pointer; }
+
+  /* ========== EMPTY STATE ========== */
+  .empty-state{ text-align:center; padding:36px 16px; color:var(--text-secondary); }
+  .empty-state .icon{ font-size:34px; color:var(--border-color-light); margin-bottom:10px; }
+  .empty-state .title{ font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+  .empty-state .desc{ font-size:12px; margin-bottom:16px; }
+
+  /* ========== FORMULARIO ANIDADO DINÁMICO (cocoon/nested_form) ========== */
+  fieldset{ border:1px solid var(--border-color-light); border-radius:var(--radius-base); margin:0 0 12px; padding:0; }
+  fieldset legend{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--text-secondary); background:var(--surface-alt); padding:6px 10px; width:100%; border-bottom:1px solid var(--border-color-light); }
+  .nested-fields{ padding:10px; display:flex; flex-direction:column; gap:8px; background:var(--surface); }
+  .nested-row{
+    display:grid;
+    grid-template-columns:1fr 70px 24px;
+    gap:6px;
+    align-items:center;
+    padding:8px;
+    background:var(--surface-alt);
+    border:1px solid var(--border-color-light);
+    border-radius:var(--radius-base);
+  }
+  .nested-row input{ border:1px solid #999; border-radius:var(--radius-base); padding:6px 7px; background:var(--surface); font-size:12px; }
+  .nested-row input:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
+  .nested-row .remove{ border:1px solid var(--border-color-light); background:var(--surface); color:var(--conflict); width:24px; height:24px; border-radius:var(--radius-base); cursor:pointer; font-weight:700; }
+  .nested-row .remove:hover{ background:#fbe6e6; }
+  .add-nested{ border:1px dashed var(--action); background:none; color:var(--action); font-size:12px; font-weight:700; padding:8px; border-radius:var(--radius-base); cursor:pointer; width:100%; }
+  .add-nested:hover{ background:#eaf1f7; }
+  .nested-total{ display:flex; justify-content:space-between; padding:10px; border-top:1px solid var(--border-color-light); font-size:12px; font-weight:700; color:var(--text-strong); background:var(--surface-alt); }
+  .nested-total .amount{ font-family:var(--font-data); font-variant-numeric:tabular-nums; }
+
+  /* ========== EXPORTACIÓN ========== */
+  .export-row{ display:flex; align-items:center; gap:6px; margin-bottom:10px; }
+  .export-row .label{ font-size:11px; color:var(--text-secondary); margin-right:2px; }
+  .export-link{ font-size:11px; font-weight:700; color:var(--action); text-decoration:none; border:1px solid var(--border-color-light); border-radius:var(--radius-base); padding:3px 8px; cursor:pointer; }
+  .export-link:hover{ background:var(--surface-alt); }
+
+  /* ========== SWITCHES ========== */
+  .switch-row{ display:flex; align-items:center; justify-content:space-between; padding:10px; border-bottom:1px solid var(--border-color-light); }
+  .switch-row:last-child{ border-bottom:none; }
+  .switch-row .name{ font-size:12px; font-weight:700; color:var(--text-primary); }
+  .switch-row .desc{ font-size:11px; color:var(--text-secondary); margin-top:1px; }
+  .switch{ position:relative; display:inline-block; width:38px; height:20px; flex:0 0 auto; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .switch .track{ position:absolute; inset:0; background:var(--border-color-light); border-radius:999px; cursor:pointer; transition:background var(--duration-base) var(--easing-standard); }
+  .switch .track::before{ content:""; position:absolute; width:16px; height:16px; left:2px; top:2px; background:var(--surface); border-radius:50%; box-shadow:0 1px 2px rgba(0,0,0,.3); transition:transform var(--duration-base) var(--easing-standard); }
+  .switch input:checked + .track{ background:var(--confirmed); }
+  .switch input:checked + .track::before{ transform:translateX(18px); }
+  .switch input:focus-visible + .track{ outline:2px solid var(--action); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <header>
+    <p class="wordmark">PALM</p>
+  </header>
+
+  <nav class="demo-nav">
+    <button class="active" onclick="showScreen('login', this)">Login</button>
+    <button onclick="showScreen('empty', this)">Vacío</button>
+    <button onclick="showScreen('nested', this)">Ítems</button>
+    <button onclick="showScreen('export', this)">Exportar</button>
+    <button onclick="showScreen('switches', this)">Ajustes</button>
+  </nav>
+
+  <main style="padding:0; display:flex; flex-direction:column;">
+
+    <!-- ============ LOGIN ============ -->
+    <section class="screen active" id="screen-login" style="flex:1;">
+      <div class="login-screen">
+        <div class="login-box">
+          <div class="brand">
+            <div class="wordmark">PALM</div>
+            <div class="sub">Ingresá con tu cuenta</div>
+          </div>
+          <form onsubmit="return false;">
+            <div class="field">
+              <label for="login-email">Email</label>
+              <input id="login-email" type="email" placeholder="vos@empresa.com">
+            </div>
+            <div class="field">
+              <label for="login-pass">Contraseña</label>
+              <input id="login-pass" type="password" placeholder="••••••••">
+            </div>
+            <label class="remember"><input type="checkbox"> Recordarme en este dispositivo</label>
+            <button class="btn primary" type="submit">Ingresar</button>
+          </form>
+          <div class="login-box forgot"><a>¿Olvidaste tu contraseña?</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EMPTY STATE ============ -->
+    <section class="screen" id="screen-empty">
+      <div style="padding:14px;">
+        <div class="page-header"><h1>Conflictos</h1></div>
+        <div class="panel">
+          <div class="empty-state">
+            <div class="icon">✓</div>
+            <div class="title">Sin conflictos pendientes</div>
+            <div class="desc">Todos tus pedidos están sincronizados. Volvé más tarde o abrí el Hub para ver el detalle.</div>
+            <button class="btn primary small">Ir al Hub</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FORMULARIO ANIDADO DINÁMICO ============ -->
+    <section class="screen" id="screen-nested">
+      <div style="padding:14px;">
+        <div class="page-header"><h1>Pedido #1043</h1></div>
+        <fieldset>
+          <legend>Ítems del pedido</legend>
+          <div class="nested-fields" id="nested-fields">
+            <div class="nested-row">
+              <input type="text" placeholder="Descripción" value="Resma A4">
+              <input type="text" placeholder="$0,00" value="4.500,00">
+              <button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem">×</button>
+            </div>
+            <div class="nested-row">
+              <input type="text" placeholder="Descripción" value="Cartuchos de tinta">
+              <input type="text" placeholder="$0,00" value="12.900,00">
+              <button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem">×</button>
+            </div>
+            <button class="add-nested" onclick="addNestedRow()">+ Agregar ítem</button>
+          </div>
+          <div class="nested-total">
+            <span>Total</span>
+            <span class="amount" id="nested-total-amount">$17.400,00</span>
+          </div>
+        </fieldset>
+        <button class="btn primary">Guardar pedido</button>
+      </div>
+    </section>
+
+    <!-- ============ EXPORTACIÓN ============ -->
+    <section class="screen" id="screen-export">
+      <div style="padding:14px;">
+        <div class="page-header"><h1>Pedidos</h1></div>
+        <div class="export-row">
+          <span class="label">Exportar:</span>
+          <a class="export-link">CSV</a>
+          <a class="export-link">JSON</a>
+          <a class="export-link">XML</a>
+        </div>
+        <div class="panel">
+          <div class="panel-body" style="font-size:12px; color:var(--text-secondary);">
+            Los 12 pedidos filtrados actualmente se incluyen en la exportación — patrón estándar de cualquier índice de ActiveAdmin, siempre visible arriba de la tabla, nunca escondido en un menú.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SWITCHES ============ -->
+    <section class="screen" id="screen-switches">
+      <div style="padding:14px;">
+        <div class="page-header"><h1>Notificaciones</h1></div>
+        <div class="panel">
+          <div class="switch-row">
+            <div><div class="name">Conflictos de sync</div><div class="desc">Avisar apenas se detecta uno</div></div>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span></label>
+          </div>
+          <div class="switch-row">
+            <div><div class="name">Confirmaciones</div><div class="desc">Cuando el servidor confirma un pedido</div></div>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span></label>
+          </div>
+          <div class="switch-row">
+            <div><div class="name">Resumen diario</div><div class="desc">Un resumen a las 9am</div></div>
+            <label class="switch"><input type="checkbox"><span class="track"></span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+function showScreen(name, btn){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  document.querySelectorAll('.demo-nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function parseAmount(str){
+  return parseFloat(str.replace(/\./g,'').replace(',', '.')) || 0;
+}
+function formatAmount(n){
+  return n.toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function recalcTotal(){
+  let total = 0;
+  document.querySelectorAll('#nested-fields .nested-row').forEach(row => {
+    const amountInput = row.querySelectorAll('input')[1];
+    total += parseAmount(amountInput.value);
+  });
+  document.getElementById('nested-total-amount').textContent = '$' + formatAmount(total);
+}
+function addNestedRow(){
+  const container = document.getElementById('nested-fields');
+  const addBtn = container.querySelector('.add-nested');
+  const row = document.createElement('div');
+  row.className = 'nested-row';
+  row.innerHTML = '<input type="text" placeholder="Descripción"><input type="text" placeholder="$0,00" value="0,00"><button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem">×</button>';
+  container.insertBefore(row, addBtn);
+  row.querySelectorAll('input').forEach(i => i.addEventListener('input', recalcTotal));
+  recalcTotal();
+}
+function removeNestedRow(btn){
+  btn.closest('.nested-row').remove();
+  recalcTotal();
+}
+document.querySelectorAll('#nested-fields input').forEach(i => i.addEventListener('input', recalcTotal));
+</script>
+
+</body>
+</html>

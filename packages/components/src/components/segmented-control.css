@@ -1,0 +1,22 @@
+.pm-segmented-control {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: var(--pm-radius-md);
+  background: var(--pm-color-surface);
+  gap: 2px;
+}
+.pm-segmented-item {
+  padding: var(--pm-space-1) var(--pm-space-3);
+  border: 0;
+  border-radius: calc(var(--pm-radius-md) - 2px);
+  background: transparent;
+  color: var(--pm-color-text-muted);
+  font: inherit;
+  font-size: var(--pm-type-body-sm-size);
+  font-weight: var(--pm-font-weight-medium);
+  cursor: pointer;
+}
+.pm-segmented-item:hover:not(:disabled):not(.is-selected) { color: var(--pm-color-text); }
+.pm-segmented-item:focus-visible { outline: none; box-shadow: var(--pm-focus-ring); }
+.pm-segmented-item.is-selected { background: var(--pm-color-surface-raised); color: var(--pm-color-text); box-shadow: var(--pm-shadow-sm); }
+.pm-segmented-item:disabled { color: var(--pm-color-text-disabled); cursor: not-allowed; }

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palm — Dashboard ActiveAdmin</title>
+<style>
+  :root{
+    /* Mismos tokens que las otras dos demos — el clon de ActiveAdmin
+       ya establecido. Esta demo profundiza en el Dashboard: la
+       pantalla de inicio real de AA (paneles de stats, actividad
+       reciente, accesos rápidos), que ninguna de las otras mostraba. */
+    --header-bg:#2c2c2c;
+    --header-text:#ffffff;
+    --header-text-dim:#b8b8b8;
+    --page-bg:#f1f2f4;
+    --surface:#ffffff;
+    --surface-alt:#f5f5f5;
+    --surface-hover:#f9f9f9;
+    --border-color:#727272;
+    --border-color-light:#949494;
+
+    --text-primary:#333333;
+    --text-secondary:#666666;
+    --text-strong:#1a1a1a;
+    --on-color:#ffffff;
+
+    --action:#0b5a92;
+    --action-strong:#00426f;
+    --pending:#8d410b;
+    --confirmed:#086335;
+    --conflict:#ae0e20;
+
+    --font-ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-data: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+    --radius-base:3px;
+    --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:var(--page-bg);
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--text-primary);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px;
+  }
+  button, input, a{ font-family:inherit; font-size:inherit; }
+  button:focus-visible, a:focus-visible{ outline:2px solid var(--action); outline-offset:1px; }
+
+  .phone{
+    width:100%;
+    max-width:412px;
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    background:var(--page-bg);
+    min-height:900px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 1px 3px rgba(0,0,0,.2);
+  }
+
+  header{ padding:12px 14px 10px; background:var(--header-bg); border-bottom:3px solid var(--action); }
+  header .wordmark{ font-size:16px; font-weight:700; color:var(--header-text); margin:0 0 4px; }
+  .breadcrumb{ font-size:11px; color:var(--header-text-dim); margin:0; }
+  .breadcrumb .current{ color:var(--header-text); font-weight:700; }
+
+  main{ flex:1; padding:12px; overflow-y:auto; }
+
+  .page-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .page-header h1{ font-size:16px; margin:0; color:var(--text-strong); }
+  .page-header .timestamp{ font-size:10px; font-family:var(--font-data); color:var(--text-secondary); }
+
+  /* ---------- fila de stat callouts (AA dashboard clásico) ---------- */
+  .stats-row{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .stat{
+    background:var(--surface);
+    border:1px solid var(--border-color-light);
+    border-radius:var(--radius-base);
+    padding:10px 6px;
+    text-align:center;
+  }
+  .stat .value{
+    font-family:var(--font-data);
+    font-size:20px;
+    font-weight:700;
+    color:var(--text-strong);
+    font-variant-numeric:tabular-nums;
+    display:block;
+  }
+  .stat.pending .value{ color:var(--pending); }
+  .stat.confirmed .value{ color:var(--confirmed); }
+  .stat.conflict .value{ color:var(--conflict); }
+  .stat .label{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--text-secondary);
+    display:block;
+    margin-top:2px;
+  }
+
+  /* ---------- panel genérico (caja con franja de título), igual
+     que en las otras dos demos ---------- */
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--border-color-light);
+    border-radius:var(--radius-base);
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .panel .panel-title{
+    background:var(--surface-alt);
+    border-bottom:1px solid var(--border-color-light);
+    padding:8px 10px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--text-strong);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .panel .panel-title .see-all{ font-size:11px; font-weight:400; color:var(--action); text-decoration:none; cursor:pointer; }
+  .panel .panel-body{ padding:0; }
+
+  /* ---------- lista de actividad reciente dentro de un panel ---------- */
+  .activity-item{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    padding:9px 10px;
+    border-bottom:1px solid var(--border-color-light);
+    font-size:12px;
+  }
+  .activity-item:last-child{ border-bottom:none; }
+  .activity-item:nth-child(even){ background:var(--surface-hover); }
+  .activity-item .icon{
+    flex:0 0 auto;
+    width:18px; height:18px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--on-color);
+    font-size:10px;
+    font-weight:700;
+    margin-top:1px;
+  }
+  .activity-item .icon.pending{ background:var(--pending); }
+  .activity-item .icon.confirmed{ background:var(--confirmed); }
+  .activity-item .icon.conflict{ background:var(--conflict); }
+  .activity-item .body{ flex:1; min-width:0; }
+  .activity-item .text{ color:var(--text-primary); }
+  .activity-item .text b{ color:var(--text-strong); }
+  .activity-item .time{ font-size:10px; font-family:var(--font-data); color:var(--text-secondary); margin-top:2px; }
+
+  /* ---------- accesos rápidos: grilla de botones tipo AA ---------- */
+  .quick-links{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--border-color-light);
+  }
+  .quick-link{
+    background:var(--surface);
+    padding:12px 10px;
+    text-align:center;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:700;
+    color:var(--action);
+  }
+  .quick-link:hover{ background:#eaf1f7; }
+  .quick-link .big{ display:block; font-size:16px; margin-bottom:2px; }
+
+  /* ---------- comentarios (feature real de AA en páginas show) ---------- */
+  .comment{ padding:9px 10px; border-bottom:1px solid var(--border-color-light); font-size:12px; }
+  .comment:last-child{ border-bottom:none; }
+  .comment .meta{ font-size:10px; color:var(--text-secondary); margin-bottom:3px; }
+  .comment .meta b{ color:var(--text-primary); }
+  .comment-form{ padding:10px; background:var(--surface-alt); border-top:1px solid var(--border-color-light); display:flex; gap:6px; }
+  .comment-form textarea{
+    flex:1;
+    border:1px solid #999;
+    border-radius:var(--radius-base);
+    padding:6px 8px;
+    font-family:inherit;
+    font-size:12px;
+    resize:none;
+    box-shadow:0 1px 2px rgba(0,0,0,.1) inset;
+  }
+  .comment-form textarea:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
+  .btn{
+    display:inline-block;
+    border:1px solid #b0b0b0;
+    background:linear-gradient(to bottom, #fdfdfd, #e2e2e2);
+    color:var(--text-primary);
+    font-size:12px;
+    font-weight:700;
+    padding:7px 12px;
+    border-radius:var(--radius-base);
+    cursor:pointer;
+    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+    text-decoration:none;
+    align-self:flex-end;
+  }
+  .btn.primary{
+    background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action));
+    border-color:var(--action-strong);
+    color:var(--on-color);
+    text-shadow:0 -1px 0 rgba(0,0,0,.25);
+  }
+  .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <header>
+    <p class="wordmark">PALM</p>
+    <p class="breadcrumb"><span class="current">Panel de control</span></p>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h1>Buen día</h1>
+      <span class="timestamp">actualizado hace 1 min</span>
+    </div>
+
+    <!-- ============ STAT CALLOUTS ============ -->
+    <div class="stats-row">
+      <div class="stat pending">
+        <span class="value">3</span>
+        <span class="label">Pendientes</span>
+      </div>
+      <div class="stat confirmed">
+        <span class="value">8</span>
+        <span class="label">Confirmados</span>
+      </div>
+      <div class="stat conflict">
+        <span class="value">1</span>
+        <span class="label">Conflicto</span>
+      </div>
+    </div>
+
+    <!-- ============ SALDO ============ -->
+    <div class="panel">
+      <div class="panel-title">Cuenta corriente</div>
+      <div class="panel-body" style="padding:12px; display:flex; align-items:baseline; justify-content:space-between;">
+        <span style="font-family:var(--font-data); font-size:22px; font-weight:700; color:var(--text-strong); font-variant-numeric:tabular-nums;">$1.284.560,00</span>
+        <span style="font-size:10px; color:var(--text-secondary);">revisado hace 2 min</span>
+      </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD RECIENTE ============ -->
+    <div class="panel">
+      <div class="panel-title">Actividad reciente <a class="see-all">Ver todo →</a></div>
+      <div class="panel-body">
+        <div class="activity-item">
+          <span class="icon pending">!</span>
+          <div class="body">
+            <div class="text">Pedido <b>#1042</b> guardado localmente, esperando conexión.</div>
+            <div class="time">hace 2 min</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <span class="icon conflict">✕</span>
+          <div class="body">
+            <div class="text">Pedido <b>#1035</b> tiene un conflicto de sincronización.</div>
+            <div class="time">hace 8 min</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <span class="icon confirmed">✓</span>
+          <div class="body">
+            <div class="text">Pedido <b>#1039</b> confirmado por el servidor.</div>
+            <div class="time">hace 25 min</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <span class="icon confirmed">✓</span>
+          <div class="body">
+            <div class="text">Cliente <b>ACME</b> actualizado (teléfono, dirección).</div>
+            <div class="time">hace 1 h</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ACCESOS RÁPIDOS ============ -->
+    <div class="panel">
+      <div class="panel-title">Accesos rápidos</div>
+      <div class="quick-links">
+        <a class="quick-link"><span class="big">+</span>Nuevo pedido</a>
+        <a class="quick-link"><span class="big">☰</span>Ver Hub</a>
+        <a class="quick-link"><span class="big">⌕</span>Abrir Omnibar</a>
+        <a class="quick-link"><span class="big">◧</span>Filtros</a>
+      </div>
+    </div>
+
+    <!-- ============ COMENTARIOS (feature real de AA) ============ -->
+    <div class="panel">
+      <div class="panel-title">Comentarios — Pedido #1042</div>
+      <div class="panel-body">
+        <div class="comment">
+          <div class="meta"><b>Vos</b> · hace 3 h</div>
+          Cliente pidió que se facture a nombre de la sucursal, no de ACME matriz.
+        </div>
+        <div class="comment">
+          <div class="meta"><b>Sistema</b> · hace 2 min</div>
+          Guardado localmente. Se reintentará el envío cuando haya conexión.
+        </div>
+      </div>
+      <div class="comment-form">
+        <textarea rows="2" placeholder="Agregar un comentario…"></textarea>
+        <button class="btn primary">Enviar</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

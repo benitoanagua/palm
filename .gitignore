@@ -1,117 +1,46 @@
-# Compiled and build artifacts
-*.class
-*.o
-*.obj
-*.out
-*.pyc
-__pycache__/
-*.pyo
-*.pyd
-*.so
-*.dll
-*.exe
-build/
-dist/
-target/
-*.aar
-*.jar
-*.war
-*.apk
-*.aab
-*.class
-*.dex
-
 # Dependencies
 node_modules/
-.venv/
-venv/
+vendor/
+
+# Build outputs
+public/
+dist/
+
+# Environment files
 .env
 .env.local
-.env.*
-.gradle/
-.gradle
-local.properties
-.settings/
-bin/
-gen/
-out/
 
-# IDE specific
+# IDE
 .vscode/
 .idea/
-*.iml
-*.ipr
-*.iws
 *.swp
 *.swo
-tags
-*.log
-*.tmp
 
-# System files
+# OS
 .DS_Store
 Thumbs.db
-desktop.ini
-*.swp
-*.swo
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Python specific
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
+# Logs
 *.log
-.git/
-.mypy_cache/
-.pytest_cache/
-.hypothesis/
+npm-debug.log*
+pnpm-debug.log*
 
-# Android specific
-*.ap_
-*.arsc
-*.dex
-*.so
-*.jar
-*.class
-build/
-.gradle/
-local.properties
-.pro
-cxx/
-.externalNativeBuild/
-captures/
-.nativetestoutput/
-connected_android_test_additional_output/
-connected_check_additional_output/
+# Cache
+.cache/
+.parcel-cache/
 
-# Kotlin specific
-*.kotlin_metadata
-*.kotlin_builtins
+# Temporary files
+*.tmp
+*.temp
 
-# Gradle specific
-.gradle/
-build/
-!gradle/wrapper/gradle-wrapper.jar
+# PHP
+composer.phar
+composer.lock
+pnpm-lock.yaml
 
-# Temporary folders
-tmp/
-temp/
-.kotlin/
+# WordPress
+wp-config-local.php
+
+# Coverage
+coverage/
+.nyc_output/

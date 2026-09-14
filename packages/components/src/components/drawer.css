@@ -1,0 +1,30 @@
+:host { display: contents; }
+.drawer-root { position: fixed; inset: 0; z-index: var(--pm-z-drawer); display: grid; }
+.drawer-root[hidden] { display: none; }
+.scrim { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: rgb(0 0 0 / .42); }
+.drawer { position: absolute; top: 0; bottom: 0; width: min(24rem, calc(100vw - 2rem)); background: var(--pm-color-surface-raised); color: var(--pm-color-text); box-shadow: var(--pm-shadow-lg); display: grid; grid-template-rows: auto 1fr auto; }
+/* Drawer de navegación (offcanvas): oscuro, a juego con el header --
+   distinto de un drawer de contenido genérico (filtros, detalle),
+   que se queda claro. Ver palm-design-system.md §4.9. */
+.drawer.is-nav { background: var(--pm-color-neutral-900); color: var(--pm-color-neutral-0); }
+.drawer.is-nav header, .drawer.is-nav footer { border-color: var(--pm-color-neutral-700); }
+.drawer.is-nav .close { color: var(--pm-color-neutral-0); }
+.drawer.is-nav .close:hover { background: rgb(255 255 255 / .08); }
+.drawer.is-right { right: 0; } .drawer.is-left { left: 0; }
+.drawer.is-end { inset-inline-end: 0; } .drawer.is-start { inset-inline-start: 0; }
+.drawer header, .drawer footer { padding: var(--pm-space-4) var(--pm-space-5); display: flex; align-items: center; justify-content: space-between; gap: var(--pm-space-3); border-bottom: 1px solid var(--pm-color-border); }
+.drawer footer { border-top: 1px solid var(--pm-color-border); border-bottom: 0; justify-content: flex-end; }
+.drawer h2 { margin: 0; font-size: var(--pm-font-size-lg); } .drawer .body { padding-inline: var(--pm-space-5); padding-block: var(--pm-space-5); overflow: auto; }
+.close { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }.close:focus-visible { outline: none; box-shadow: var(--pm-focus-ring); }
+/* Note: transform: translateX() is a physical transform and is not flipped
+   by `dir="rtl"`, unlike inset-inline-*. The entrance direction below is
+   therefore correct for is-left/is-right (always physical) and for
+   is-start/is-end in LTR documents; a fully RTL-correct entrance animation
+   for is-start/is-end needs a JS-read `getComputedStyle(el).direction`
+   check (tracked as follow-up — see docs/foundations/rtl.md). */
+@media (prefers-reduced-motion: no-preference) {
+  .drawer.is-right, .drawer.is-end { animation: pm-drawer-in-end var(--pm-motion-normal) var(--pm-ease-standard); }
+  .drawer.is-left, .drawer.is-start { animation: pm-drawer-in-start var(--pm-motion-normal) var(--pm-ease-standard); }
+}
+@keyframes pm-drawer-in-end { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes pm-drawer-in-start { from { transform: translateX(-100%); } to { transform: translateX(0); } }

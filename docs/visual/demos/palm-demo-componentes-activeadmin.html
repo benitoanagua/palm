@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palm — Componentes ActiveAdmin</title>
+<style>
+  :root{
+    /* Mismos tokens que palm-demo-definitiva.html — el clon de
+       ActiveAdmin ya establecido. Esta demo profundiza en componentes
+       que la principal no mostraba (tabla índice, formulario, detalle,
+       scopes, flash, paginación), no reinventa el sistema de color. */
+    --header-bg:#2c2c2c;
+    --header-text:#ffffff;
+    --header-text-dim:#b8b8b8;
+    --page-bg:#f1f2f4;
+    --surface:#ffffff;
+    --surface-alt:#f5f5f5;
+    --surface-hover:#f9f9f9;
+    --border-color:#727272;
+    --border-color-light:#949494;
+
+    --text-primary:#333333;
+    --text-secondary:#666666;
+    --text-strong:#1a1a1a;
+    --on-color:#ffffff;
+
+    --action:#0b5a92;
+    --action-strong:#00426f;
+    --pending:#8d410b;
+    --confirmed:#086335;
+    --conflict:#ae0e20;
+
+    --font-ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-data: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+    --radius-base:3px;
+    --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:var(--page-bg);
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--text-primary);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px;
+  }
+  button, input, select, textarea, label{ font-family:inherit; font-size:inherit; }
+  button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible{
+    outline:2px solid var(--action);
+    outline-offset:1px;
+  }
+
+  .phone{
+    width:100%;
+    max-width:412px;
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-base);
+    background:var(--page-bg);
+    min-height:900px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 1px 3px rgba(0,0,0,.2);
+  }
+
+  /* ---------- header + breadcrumb (patrón AA: título + ruta arriba) ---------- */
+  header{
+    padding:12px 14px 10px;
+    background:var(--header-bg);
+    border-bottom:3px solid var(--action);
+  }
+  header .wordmark{ font-size:16px; font-weight:700; color:var(--header-text); margin:0 0 4px; }
+  .breadcrumb{
+    font-size:11px;
+    color:var(--header-text-dim);
+    margin:0;
+  }
+  .breadcrumb a{ color:var(--header-text-dim); text-decoration:underline; cursor:pointer; }
+  .breadcrumb .sep{ margin:0 4px; }
+  .breadcrumb .current{ color:var(--header-text); font-weight:700; }
+
+  /* Sub-nav de secciones de esta demo (no es la tabbar de la app real,
+     es solo para navegar entre las pantallas de ejemplo) */
+  nav.demo-nav{
+    display:flex;
+    background:var(--surface-alt);
+    border-bottom:1px solid var(--border-color-light);
+    overflow-x:auto;
+  }
+  nav.demo-nav button{
+    flex:0 0 auto;
+    border:none;
+    background:none;
+    padding:10px 12px;
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-secondary);
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+  }
+  nav.demo-nav button.active{ color:var(--action); background:var(--surface); border-bottom-color:var(--action); }
+
+  main{ flex:1; padding:12px; overflow-y:auto; }
+  .screen{ display:none; }
+  .screen.active{ display:block; }
+
+  /* ---------- page header: título + botón primario "Nuevo" ---------- */
+  .page-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:16px; margin:0; color:var(--text-strong); }
+
+  /* ---------- flash notices ---------- */
+  .flash{
+    padding:8px 10px;
+    border-radius:var(--radius-base);
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:10px;
+    border:1px solid transparent;
+  }
+  .flash.notice{ background:#e3f3e9; border-color:var(--confirmed); color:var(--confirmed); }
+  .flash.alert{ background:#fbe6e6; border-color:var(--conflict); color:var(--conflict); }
+
+  /* ---------- scopes (pestañas de filtro con contador) ---------- */
+  .scopes{
+    display:flex;
+    gap:0;
+    border-bottom:1px solid var(--border-color-light);
+    margin-bottom:10px;
+    overflow-x:auto;
+  }
+  .scopes button{
+    flex:0 0 auto;
+    border:none;
+    background:none;
+    padding:8px 12px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--text-secondary);
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+  }
+  .scopes button .n{ font-family:var(--font-data); font-weight:400; color:var(--text-secondary); margin-left:3px; }
+  .scopes button.active{ color:var(--action); border-bottom-color:var(--action); }
+
+  /* ---------- botón "Filtros" + panel colapsable ---------- */
+  .filters-toggle{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    border:1px solid var(--border-color);
+    background:linear-gradient(to bottom, #fdfdfd, #e6e6e6);
+    border-radius:var(--radius-base);
+    padding:5px 10px;
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-primary);
+    cursor:pointer;
+    margin-bottom:10px;
+  }
+  .filters-toggle:hover{ background:linear-gradient(to bottom, #ffffff, #ececec); }
+  .filters-panel{
+    display:none;
+    background:var(--surface);
+    border:1px solid var(--border-color-light);
+    border-radius:var(--radius-base);
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  .filters-panel.open{ display:block; }
+  .filters-panel .panel-title{
+    background:var(--surface-alt);
+    border-bottom:1px solid var(--border-color-light);
+    padding:6px 10px;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--text-secondary);
+  }
+  .filters-panel .panel-body{ padding:10px; display:flex; flex-direction:column; gap:8px; }
+  .field label{ display:block; font-size:11px; font-weight:700; color:var(--text-primary); margin-bottom:3px; }
+  .field input, .field select{
+    width:100%;
+    border:1px solid #999;
+    border-radius:var(--radius-base);
+    background:var(--surface);
+    padding:6px 8px;
+    box-shadow:0 1px 2px rgba(0,0,0,.1) inset;
+  }
+  .field input:focus, .field select:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
+  .field .hint{ font-size:10px; color:var(--text-secondary); margin-top:2px; }
+
+  /* ---------- tabla índice (index_table de AA) ---------- */
+  .table-scroll{ overflow-x:auto; border:1px solid var(--border-color-light); border-radius:var(--radius-base); margin-bottom:8px; }
+  table.index{ width:100%; border-collapse:collapse; font-size:12px; min-width:480px; }
+  table.index thead th{
+    background:var(--surface-alt);
+    border-bottom:1px solid var(--border-color);
+    padding:7px 8px;
+    text-align:left;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--text-secondary);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  table.index thead th .arrow{ font-size:9px; margin-left:3px; color:var(--action); }
+  table.index thead th.checkbox-col{ width:30px; }
+  table.index tbody td{
+    padding:7px 8px;
+    border-bottom:1px solid var(--border-color-light);
+    color:var(--text-primary);
+    white-space:nowrap;
+  }
+  table.index tbody tr:nth-child(even){ background:var(--surface-hover); }
+  table.index tbody tr:hover{ background:#eaf1f7; }
+  table.index td.num{ font-family:var(--font-data); text-align:right; font-variant-numeric:tabular-nums; }
+  table.index a.id-link{ color:var(--action); font-weight:700; text-decoration:none; }
+  table.index a.id-link:hover{ text-decoration:underline; }
+
+  .mini-tag{
+    display:inline-block;
+    font-size:9px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--on-color);
+    padding:1px 5px;
+    border-radius:var(--radius-base);
+  }
+  .mini-tag.pending{ background:var(--pending); }
+  .mini-tag.confirmed{ background:var(--confirmed); }
+  .mini-tag.conflict{ background:var(--conflict); }
+
+  /* ---------- barra de acciones por lote ---------- */
+  .batch-bar{
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    background:#fff6d9;
+    border:1px solid #e0c14a;
+    border-radius:var(--radius-base);
+    padding:7px 10px;
+    font-size:11px;
+    font-weight:700;
+    color:#6b5300;
+    margin-bottom:8px;
+  }
+  .batch-bar.show{ display:flex; }
+
+  /* ---------- paginación ---------- */
+  .pagination{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:12px;
+    margin:12px 0;
+  }
+  .pagination a, .pagination span{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:26px;
+    height:26px;
+    padding:0 6px;
+    border:1px solid var(--border-color-light);
+    border-radius:var(--radius-base);
+    color:var(--action);
+    text-decoration:none;
+    cursor:pointer;
+    background:var(--surface);
+  }
+  .pagination a:hover{ background:var(--surface-alt); }
+  .pagination .current{ background:var(--action); color:var(--on-color); border-color:var(--action-strong); font-weight:700; }
+  .pagination .gap{ border:none; color:var(--text-secondary); }
+
+  /* ---------- botones ---------- */
+  .btn{
+    display:inline-block;
+    border:1px solid #b0b0b0;
+    background:linear-gradient(to bottom, #fdfdfd, #e2e2e2);
+    color:var(--text-primary);
+    font-size:12px;
+    font-weight:700;
+    padding:7px 14px;
+    border-radius:var(--radius-base);
+    cursor:pointer;
+    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+    text-shadow:0 1px 0 rgba(255,255,255,.6);
+    text-decoration:none;
+  }
+  .btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
+  .btn.primary{
+    background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action));
+    border-color:var(--action-strong);
+    color:var(--on-color);
+    text-shadow:0 -1px 0 rgba(0,0,0,.25);
+  }
+  .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
+  .btn.small{ font-size:11px; padding:5px 10px; }
+
+  /* ---------- panel genérico (caja con franja de título) ---------- */
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--border-color-light);
+    border-radius:var(--radius-base);
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .panel .panel-title{
+    background:var(--surface-alt);
+    border-bottom:1px solid var(--border-color-light);
+    padding:8px 10px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--text-strong);
+  }
+  .panel .panel-body{ padding:10px; }
+
+  /* ---------- vista de detalle: lista de atributos ---------- */
+  .attributes{ width:100%; border-collapse:collapse; font-size:12px; }
+  .attributes tr{ border-bottom:1px solid var(--border-color-light); }
+  .attributes tr:last-child{ border-bottom:none; }
+  .attributes th{
+    text-align:left;
+    padding:7px 10px 7px 0;
+    width:110px;
+    font-weight:700;
+    color:var(--text-secondary);
+    vertical-align:top;
+  }
+  .attributes td{ padding:7px 0; color:var(--text-primary); }
+  .attributes td.num{ font-family:var(--font-data); font-variant-numeric:tabular-nums; }
+
+  /* ---------- formulario ---------- */
+  fieldset{ border:1px solid var(--border-color-light); border-radius:var(--radius-base); margin:0 0 12px; padding:0; }
+  fieldset legend{
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--text-secondary);
+    background:var(--surface-alt);
+    padding:6px 10px;
+    width:100%;
+    border-bottom:1px solid var(--border-color-light);
+  }
+  fieldset .fields{ padding:10px; display:flex; flex-direction:column; gap:10px; background:var(--surface); }
+  .form-actions{ display:flex; align-items:center; gap:10px; margin-top:4px; }
+  .form-actions a{ font-size:12px; color:var(--text-secondary); text-decoration:underline; cursor:pointer; }
+
+  h2.section-title{ font-size:13px; color:var(--text-strong); margin:16px 0 6px; }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <header>
+    <p class="wordmark">PALM</p>
+    <p class="breadcrumb"><a>Palm</a><span class="sep">/</span><a>Cuentas</a><span class="sep">/</span><span class="current">Pedidos</span></p>
+  </header>
+
+  <nav class="demo-nav">
+    <button class="active" onclick="showScreen('index', this)">Índice</button>
+    <button onclick="showScreen('detalle', this)">Detalle</button>
+    <button onclick="showScreen('form', this)">Formulario</button>
+  </nav>
+
+  <main>
+    <!-- ============ ÍNDICE ============ -->
+    <section class="screen active" id="screen-index">
+      <div class="page-header">
+        <h1>Pedidos</h1>
+        <button class="btn primary small" onclick="showScreen('form', document.querySelectorAll('.demo-nav button')[2])">+ Nuevo pedido</button>
+      </div>
+
+      <div class="flash notice">Pedido #1042 guardado correctamente.</div>
+
+      <div class="scopes">
+        <button class="active" onclick="setScope(this)">Todos <span class="n">(12)</span></button>
+        <button onclick="setScope(this)">Pendientes <span class="n">(3)</span></button>
+        <button onclick="setScope(this)">Confirmados <span class="n">(8)</span></button>
+        <button onclick="setScope(this)">Conflicto <span class="n">(1)</span></button>
+      </div>
+
+      <button class="filters-toggle" onclick="toggleFilters()">☰ Filtros</button>
+      <div class="filters-panel" id="filters-panel">
+        <div class="panel-title">Filtrar pedidos</div>
+        <div class="panel-body">
+          <div class="field">
+            <label for="f-cliente">Cliente</label>
+            <input id="f-cliente" type="text" placeholder="Nombre o cuenta">
+          </div>
+          <div class="field">
+            <label for="f-estado">Estado</label>
+            <select id="f-estado">
+              <option>Cualquiera</option>
+              <option>Pendiente</option>
+              <option>Confirmado</option>
+              <option>Conflicto</option>
+            </select>
+          </div>
+          <button class="btn primary small" style="align-self:flex-start;">Aplicar filtros</button>
+        </div>
+      </div>
+
+      <div class="batch-bar" id="batch-bar">
+        <span id="batch-count">0 seleccionados</span>
+        <button class="btn small">Marcar como confirmado</button>
+      </div>
+
+      <div class="table-scroll">
+        <table class="index">
+          <thead>
+            <tr>
+              <th class="checkbox-col"><input type="checkbox" onchange="toggleAll(this)"></th>
+              <th onclick="sortBy(this)">ID <span class="arrow">▾</span></th>
+              <th onclick="sortBy(this)">Cliente</th>
+              <th onclick="sortBy(this)">Monto</th>
+              <th onclick="sortBy(this)">Estado</th>
+            </tr>
+          </thead>
+          <tbody id="index-body">
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1042</a></td><td>ACME</td><td class="num">$128.400,00</td><td><span class="mini-tag pending">Pendiente</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1039</a></td><td>Beta SRL</td><td class="num">$45.000,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1035</a></td><td>ACME</td><td class="num">$980.200,00</td><td><span class="mini-tag conflict">Conflicto</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1031</a></td><td>Comercial Sur</td><td class="num">$12.500,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1028</a></td><td>ACME</td><td class="num">$300.000,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="gap">«</span>
+        <span class="current">1</span>
+        <a>2</a><a>3</a><span class="gap">…</span><a>9</a>
+        <a>»</a>
+      </div>
+    </section>
+
+    <!-- ============ DETALLE ============ -->
+    <section class="screen" id="screen-detalle">
+      <div class="page-header"><h1>Pedido #1042</h1></div>
+      <div class="panel">
+        <div class="panel-title">Datos del pedido</div>
+        <div class="panel-body">
+          <table class="attributes">
+            <tr><th>Cliente</th><td>ACME</td></tr>
+            <tr><th>Monto</th><td class="num">$128.400,00</td></tr>
+            <tr><th>Estado</th><td><span class="mini-tag pending">Pendiente</span></td></tr>
+            <tr><th>Creado</th><td>04 sep 2026, 14:12</td></tr>
+            <tr><th>Última sync</th><td>hace 2 min</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Historial</div>
+        <div class="panel-body" style="font-size:12px; color:var(--text-secondary);">
+          Guardado local → enviado hace 4 min → esperando confirmación del servidor.
+        </div>
+      </div>
+      <button class="btn primary">Editar pedido</button>
+    </section>
+
+    <!-- ============ FORMULARIO ============ -->
+    <section class="screen" id="screen-form">
+      <div class="page-header"><h1>Nuevo pedido</h1></div>
+      <fieldset>
+        <legend>Datos del pedido</legend>
+        <div class="fields">
+          <div class="field">
+            <label for="cliente">Cliente</label>
+            <input id="cliente" type="text" placeholder="Buscar cliente…">
+            <div class="hint">Empezá a tipear para buscar por nombre o cuenta.</div>
+          </div>
+          <div class="field">
+            <label for="monto">Monto</label>
+            <input id="monto" type="text" placeholder="0,00">
+          </div>
+          <div class="field">
+            <label for="nota">Nota (opcional)</label>
+            <input id="nota" type="text" placeholder="Referencia interna">
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-actions">
+        <button class="btn primary" onclick="showScreen('index', document.querySelectorAll('.demo-nav button')[0])">Crear pedido</button>
+        <a onclick="showScreen('index', document.querySelectorAll('.demo-nav button')[0])">Cancelar</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+function showScreen(name, btn){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  document.querySelectorAll('.demo-nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setScope(btn){
+  document.querySelectorAll('.scopes button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleFilters(){
+  document.getElementById('filters-panel').classList.toggle('open');
+}
+
+function toggleAll(checkbox){
+  document.querySelectorAll('.row-check').forEach(c => c.checked = checkbox.checked);
+  updateBatch();
+}
+
+function updateBatch(){
+  const checked = document.querySelectorAll('.row-check:checked').length;
+  const bar = document.getElementById('batch-bar');
+  document.getElementById('batch-count').textContent = checked + ' seleccionados';
+  bar.classList.toggle('show', checked > 0);
+}
+
+// Orden ascendente/descendente simple sobre la tabla índice, solo para
+// demostrar el patrón visual de encabezado ordenable de ActiveAdmin.
+let sortDir = {};
+function sortBy(th){
+  const idx = Array.from(th.parentNode.children).indexOf(th);
+  const tbody = document.getElementById('index-body');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const dir = sortDir[idx] = !sortDir[idx];
+  rows.sort((a, b) => {
+    const av = a.children[idx].textContent.trim();
+    const bv = b.children[idx].textContent.trim();
+    return dir ? av.localeCompare(bv, 'es', {numeric:true}) : bv.localeCompare(av, 'es', {numeric:true});
+  });
+  rows.forEach(r => tbody.appendChild(r));
+  th.parentNode.querySelectorAll('.arrow').forEach(a => a.remove());
+  const arrow = document.createElement('span');
+  arrow.className = 'arrow';
+  arrow.textContent = dir ? '▾' : '▴';
+  th.appendChild(arrow);
+}
+</script>
+
+</body>
+</html>

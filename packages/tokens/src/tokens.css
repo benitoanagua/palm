@@ -1,0 +1,226 @@
+:root {
+  /* Primitive color scale — PALM-owned values.
+     Reemplaza la paleta placeholder genérica (azul #155eef, escala
+     neutral estándar) por la paleta real de Palm: verificada con
+     simulación de protanopia/deuteranopia/tritanopia (matrices
+     Machado-Oliveira-Fernandes) y con contraste ≥7:1 (AAA) contra
+     blanco en los 4 colores semánticos — ver docs/foundations/palm-design-system.md
+     Sección 2.1. No son valores estéticos: son el resultado de una
+     búsqueda computacional sobre rangos de matiz semánticos. */
+  --pm-color-neutral-0: #ffffff;
+  --pm-color-neutral-50: #f5f5f5;
+  --pm-color-neutral-100: #f1f2f4;
+  --pm-color-neutral-200: #eeeeee;
+  --pm-color-neutral-300: #949494;
+  --pm-color-neutral-500: #727272;
+  --pm-color-neutral-700: #666666;
+  --pm-color-neutral-900: #1a1a1a;
+  --pm-color-blue-600: #0b5a92;
+  --pm-color-red-600: #ae0e20;
+  --pm-color-green-600: #086335;
+  --pm-color-yellow-500: #8d410b;
+
+  /* Semantic color. */
+  --pm-color-background: var(--pm-color-neutral-100);
+  --pm-color-surface: var(--pm-color-neutral-0);
+  --pm-color-surface-raised: var(--pm-color-neutral-50);
+  --pm-color-text: var(--pm-color-neutral-900);
+  --pm-color-text-muted: var(--pm-color-neutral-700);
+  --pm-color-text-disabled: var(--pm-color-neutral-300);
+  --pm-color-border: var(--pm-color-neutral-500);       /* 4.8:1 contra blanco, medido */
+  --pm-color-border-strong: var(--pm-color-neutral-900);
+  --pm-color-action: var(--pm-color-blue-600);
+  --pm-color-action-soft: color-mix(in srgb, var(--pm-color-action) 10%, var(--pm-color-background));
+  --pm-color-danger: var(--pm-color-red-600);
+  --pm-color-success: var(--pm-color-green-600);
+  --pm-color-warning: var(--pm-color-yellow-500);
+
+  /* Space / sizing. */
+  --pm-space-0: 0;
+  --pm-space-1: 0.25rem;
+  --pm-space-2: 0.5rem;
+  --pm-space-3: 0.75rem;
+  --pm-space-4: 1rem;
+  --pm-space-5: 1.25rem;
+  --pm-space-6: 1.5rem;
+  --pm-space-8: 2rem;
+  --pm-space-10: 2.5rem;
+  --pm-space-12: 3rem;
+  --pm-space-16: 4rem;
+
+  --pm-size-control-sm: 2rem;
+  --pm-size-control-md: 2.5rem;
+  --pm-size-control-lg: 3rem;
+
+  /* Shape. Palm usa un único radio (3px, medido contra el look real
+     que clona) en vez de una escala — se conservan los 4 nombres para
+     no romper el contrato de la API pública (ver docs/contracts/
+     public-api.md), pero todos apuntan al mismo valor. Un componente
+     nuevo nunca debe introducir un radio que no sea --pm-radius-base. */
+  --pm-radius-base: 0.1875rem; /* 3px */
+  --pm-radius-sm: var(--pm-radius-base);
+  --pm-radius-md: var(--pm-radius-base);
+  --pm-radius-lg: var(--pm-radius-base);
+  --pm-radius-xl: var(--pm-radius-base);
+  --pm-radius-pill: 999px; /* reservado a controles realmente circulares/pill (switch, avatar) */
+
+  /* Typography. Pila clásica de Rails/ActiveAdmin — Helvetica Neue,
+     no una tipografía de sistema moderna. Sin fuentes externas: no
+     depende de una red que puede no estar disponible. */
+  --pm-font-family-sans: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pm-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --pm-font-size-xs: 0.75rem;
+  --pm-font-size-sm: 0.875rem;
+  --pm-font-size-md: 1rem;
+  --pm-font-size-lg: 1.125rem;
+  --pm-font-size-xl: 1.5rem;
+  --pm-font-size-2xl: 2rem;
+  --pm-font-weight-regular: 400;
+  --pm-font-weight-medium: 500;
+  --pm-font-weight-semibold: 600;
+  --pm-font-weight-bold: 700;
+  --pm-line-height-tight: 1.2;
+  --pm-line-height-normal: 1.5;
+  --pm-line-height-relaxed: 1.7;
+  --pm-letter-spacing-tight: -0.01em;
+  --pm-letter-spacing-normal: 0;
+  --pm-letter-spacing-wide: 0.02em;
+  --pm-letter-spacing-overline: 0.08em;
+
+  /* Type scale — composed roles, not just raw sizes.
+     Use these (via the .pm-type-* utility classes in styles/type-scale.css,
+     or by referencing the -size/-line-height/-weight triplet directly)
+     instead of reaching for --pm-font-size-* in component/product code. */
+  --pm-type-display-size: 3rem;
+  --pm-type-display-line-height: 1.1;
+  --pm-type-display-weight: var(--pm-font-weight-bold);
+  --pm-type-display-letter-spacing: var(--pm-letter-spacing-tight);
+
+  --pm-type-h1-size: 2.25rem;
+  --pm-type-h1-line-height: 1.2;
+  --pm-type-h1-weight: var(--pm-font-weight-bold);
+  --pm-type-h1-letter-spacing: var(--pm-letter-spacing-tight);
+
+  --pm-type-h2-size: 1.75rem;
+  --pm-type-h2-line-height: 1.25;
+  --pm-type-h2-weight: var(--pm-font-weight-semibold);
+  --pm-type-h2-letter-spacing: var(--pm-letter-spacing-tight);
+
+  --pm-type-h3-size: 1.375rem;
+  --pm-type-h3-line-height: 1.3;
+  --pm-type-h3-weight: var(--pm-font-weight-semibold);
+  --pm-type-h3-letter-spacing: var(--pm-letter-spacing-normal);
+
+  --pm-type-h4-size: 1.125rem;
+  --pm-type-h4-line-height: 1.35;
+  --pm-type-h4-weight: var(--pm-font-weight-semibold);
+  --pm-type-h4-letter-spacing: var(--pm-letter-spacing-normal);
+
+  --pm-type-body-lg-size: 1.125rem;
+  --pm-type-body-lg-line-height: var(--pm-line-height-relaxed);
+  --pm-type-body-lg-weight: var(--pm-font-weight-regular);
+
+  --pm-type-body-md-size: 1rem;
+  --pm-type-body-md-line-height: var(--pm-line-height-normal);
+  --pm-type-body-md-weight: var(--pm-font-weight-regular);
+
+  --pm-type-body-sm-size: 0.875rem;
+  --pm-type-body-sm-line-height: var(--pm-line-height-normal);
+  --pm-type-body-sm-weight: var(--pm-font-weight-regular);
+
+  --pm-type-label-size: 0.875rem;
+  --pm-type-label-line-height: var(--pm-line-height-tight);
+  --pm-type-label-weight: var(--pm-font-weight-medium);
+
+  --pm-type-caption-size: 0.75rem;
+  --pm-type-caption-line-height: var(--pm-line-height-tight);
+  --pm-type-caption-weight: var(--pm-font-weight-regular);
+
+  --pm-type-overline-size: 0.75rem;
+  --pm-type-overline-line-height: var(--pm-line-height-tight);
+  --pm-type-overline-weight: var(--pm-font-weight-semibold);
+  --pm-type-overline-letter-spacing: var(--pm-letter-spacing-overline);
+
+  /* Motion. --pm-ease-standard es ease-in-out simple, no una curva
+     cubic-bezier de Material -- esa fase se abandonó explícitamente
+     al pivotar al clon de ActiveAdmin (ver palm-design-system.md,
+     nota de vigencia en la Sección 2). Se conserva una escala de 3
+     duraciones (fast/normal/slow) porque este sistema real cubre
+     bastantes más componentes que las 5 demos de referencia (slider,
+     date-picker, drawer) y necesitan distinguir un hover rápido de
+     una animación de panel más grande; la demo, al ser más simple,
+     usa un solo valor (180ms = --pm-motion-normal) para todo. */
+  --pm-motion-fast: 120ms;
+  --pm-motion-normal: 180ms;
+  --pm-motion-slow: 260ms;
+  --pm-ease-standard: ease-in-out;
+
+  /* Focus. */
+  --pm-focus-width: 2px;
+  --pm-focus-color: var(--pm-color-action);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --pm-motion-fast: 0ms;
+    --pm-motion-normal: 0ms;
+    --pm-motion-slow: 0ms;
+  }
+}
+
+/* Component semantics. */
+:root {
+  --pm-color-action-contrast: #ffffff;   /* 7.26:1 verificado */
+  --pm-color-danger-contrast: #ffffff;   /* 7.28:1 verificado */
+  --pm-color-success-contrast: #ffffff;  /* 7.38:1 verificado */
+  --pm-color-warning-contrast: #ffffff;  /* 7.26:1 verificado */
+  --pm-color-neutral-contrast: var(--pm-color-text); /* blanco solo da 3.03:1 sobre este gris, no alcanza AAA */
+  --pm-focus-ring: 0 0 0 var(--pm-focus-width) color-mix(in srgb, var(--pm-focus-color) 30%, transparent);
+}
+
+:root {
+  /* Sombras — reservadas a lo que realmente flota (modal, dropdown,
+     tooltip, toast); superficies del plano base (card, fila de tabla)
+     usan borde, nunca sombra. Valores tomados de las 5 demos de
+     referencia, no estéticos por sí solos. */
+  --pm-shadow-sm: 0 1px 3px rgb(0 0 0 / 0.20);
+  --pm-shadow-md: 0 2px 6px rgb(0 0 0 / 0.25);
+  --pm-shadow-lg: 0 4px 16px rgb(0 0 0 / 0.35);
+}
+
+/* Breakpoints / grid.
+   CSS custom properties cannot be interpolated inside @media conditions,
+   so these are also exported as plain numbers from @palm/tokens
+   (see src/breakpoints.ts) for use in JS (matchMedia, ResizeObserver
+   thresholds, etc). Treat the numeric values below and in breakpoints.ts
+   as the single source of truth — if one changes, change both. */
+:root {
+  --pm-breakpoint-xs: 0px;
+  --pm-breakpoint-sm: 480px;
+  --pm-breakpoint-md: 768px;
+  --pm-breakpoint-lg: 1024px;
+  --pm-breakpoint-xl: 1280px;
+  --pm-breakpoint-2xl: 1536px;
+
+  --pm-grid-columns: 12;
+  --pm-grid-gutter: var(--pm-space-4);
+  --pm-grid-margin-sm: var(--pm-space-4);
+  --pm-grid-margin-lg: var(--pm-space-8);
+  --pm-container-max-width: 1280px;
+}
+
+/* Z-index scale. Every stacking context in the system (dropdown, overlay,
+   drawer, modal, toast, tooltip) must reference one of these — never a
+   hardcoded number — so ordering stays centralized and predictable as
+   new layered components (menu, toast, combobox popover, ...) are added. */
+:root {
+  --pm-z-base: 0;
+  --pm-z-raised: 10;
+  --pm-z-sticky: 100;
+  --pm-z-dropdown: 500;
+  --pm-z-overlay: 800;
+  --pm-z-drawer: 900;
+  --pm-z-modal: 1000;
+  --pm-z-toast: 1100;
+  --pm-z-tooltip: 1200;
+}

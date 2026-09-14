@@ -1,0 +1,8 @@
+:host { display: inline-block; }
+.tooltip-root { position: relative; display: inline-flex; }
+.tooltip { position: absolute; z-index: var(--pm-z-tooltip); max-width: 18rem; padding-block: .375rem; padding-inline: .5rem; border-radius: var(--pm-radius-sm); background: var(--pm-color-neutral-900); color: var(--pm-color-neutral-0); font: 500 var(--pm-font-size-xs)/1.35 var(--pm-font-family-sans); white-space: normal; box-shadow: var(--pm-shadow-md); }
+.tooltip::after { content: ''; position: absolute; inset-inline-start: 50%; width: .625rem; height: .625rem; background: var(--pm-color-neutral-900); transform: translateX(-50%) rotate(45deg); }
+.tooltip.is-top { bottom: calc(100% + .5rem); inset-inline-start: 50%; transform: translateX(-50%); }
+.tooltip.is-top::after { top: 100%; margin-top: -.3125rem; }
+.tooltip.is-bottom { top: calc(100% + .5rem); inset-inline-start: 50%; transform: translateX(-50%); }
+.tooltip.is-bottom::after { bottom: 100%; margin-bottom: -.3125rem; }
