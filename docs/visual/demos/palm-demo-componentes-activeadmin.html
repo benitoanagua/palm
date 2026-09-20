@@ -36,6 +36,14 @@
 
     --radius-base:3px;
     --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+    /* Sombras y text-shadows -- tokenizadas (antes sueltas inline).
+       Reserva: solo aplicadas a lo que flota (frame del dispositivo,
+       paneles, modal, FAB, botones glossy); cards/filas siguen sin. */
+    --shadow-frame: 0 1px 3px rgba(0,0,0,.2);
+    --shadow-inset-field: 0 1px 2px rgba(0,0,0,.1) inset;
+    --shadow-inset-highlight: 0 1px 0 rgba(255,255,255,.7) inset;
+    --text-shadow-highlight: 0 1px 0 rgba(255,255,255,.6);
+    --text-shadow-recess: 0 -1px 0 rgba(0,0,0,.25);
   }
 
   *{ box-sizing:border-box; }
@@ -64,7 +72,7 @@
     min-height:900px;
     display:flex;
     flex-direction:column;
-    box-shadow:0 1px 3px rgba(0,0,0,.2);
+    box-shadow:var(--shadow-frame);
   }
 
   /* ---------- header + breadcrumb (patrón AA: título + ruta arriba) ---------- */
@@ -196,13 +204,33 @@
     border-radius:var(--radius-base);
     background:var(--surface);
     padding:6px 8px;
-    box-shadow:0 1px 2px rgba(0,0,0,.1) inset;
+    box-shadow:var(--shadow-inset-field);
   }
   .field input:focus, .field select:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
   .field .hint{ font-size:10px; color:var(--text-secondary); margin-top:2px; }
 
   /* ---------- tabla índice (index_table de AA) ---------- */
-  .table-scroll{ overflow-x:auto; border:1px solid var(--border-color-light); border-radius:var(--radius-base); margin-bottom:8px; }
+  /* Afordancia de scroll horizontal -- sin esto, en mobile no hay
+     scrollbar visible y el usuario puede no notar que hay más
+     columnas. El fade se apaga solo cuando ya no queda nada por
+     scrollear (detectado con JS real, no asumido). */
+  .table-scroll{ position:relative; overflow-x:auto; border:1px solid var(--border-color-light); border-radius:var(--radius-base); margin-bottom:4px; }
+  .table-scroll::after{
+    content:"";
+    position:sticky;
+    top:0; right:0;
+    float:right;
+    width:18px;
+    height:100%;
+    margin-left:-18px;
+    background:linear-gradient(to right, transparent, rgba(0,0,0,.10));
+    pointer-events:none;
+    opacity:1;
+    transition:opacity 150ms ease-in-out;
+  }
+  .table-scroll.at-end::after{ opacity:0; }
+  .scroll-hint{ font-size:10px; color:var(--text-secondary); text-align:right; margin:0 0 8px; display:none; }
+  .scroll-hint.show{ display:block; }
   table.index{ width:100%; border-collapse:collapse; font-size:12px; min-width:480px; }
   table.index thead th{
     background:var(--surface-alt);
@@ -298,8 +326,8 @@
     padding:7px 14px;
     border-radius:var(--radius-base);
     cursor:pointer;
-    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
-    text-shadow:0 1px 0 rgba(255,255,255,.6);
+    box-shadow:var(--shadow-inset-highlight);
+    text-shadow:var(--text-shadow-highlight);
     text-decoration:none;
   }
   .btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
@@ -307,7 +335,7 @@
     background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action));
     border-color:var(--action-strong);
     color:var(--on-color);
-    text-shadow:0 -1px 0 rgba(0,0,0,.25);
+    text-shadow:var(--text-shadow-recess);
   }
   .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
   .btn.small{ font-size:11px; padding:5px 10px; }
@@ -373,15 +401,15 @@
     <p class="breadcrumb"><a>Palm</a><span class="sep">/</span><a>Cuentas</a><span class="sep">/</span><span class="current">Pedidos</span></p>
   </header>
 
-  <nav class="demo-nav">
-    <button class="active" onclick="showScreen('index', this)">Índice</button>
-    <button onclick="showScreen('detalle', this)">Detalle</button>
-    <button onclick="showScreen('form', this)">Formulario</button>
+  <nav class="demo-nav" role="tablist" aria-label="Pantallas de la demo">
+    <button class="active" role="tab" aria-selected="true" aria-controls="screen-index" onclick="showScreen('index', this)">Índice</button>
+    <button role="tab" aria-selected="false" aria-controls="screen-detalle" onclick="showScreen('detalle', this)">Detalle</button>
+    <button role="tab" aria-selected="false" aria-controls="screen-form" onclick="showScreen('form', this)">Formulario</button>
   </nav>
 
   <main>
     <!-- ============ ÍNDICE ============ -->
-    <section class="screen active" id="screen-index">
+    <section class="screen active" id="screen-index" role="tabpanel" aria-label="Índice">
       <div class="page-header">
         <h1>Pedidos</h1>
         <button class="btn primary small" onclick="showScreen('form', document.querySelectorAll('.demo-nav button')[2])">+ Nuevo pedido</button>
@@ -390,13 +418,13 @@
       <div class="flash notice">Pedido #1042 guardado correctamente.</div>
 
       <div class="scopes">
-        <button class="active" onclick="setScope(this)">Todos <span class="n">(12)</span></button>
-        <button onclick="setScope(this)">Pendientes <span class="n">(3)</span></button>
-        <button onclick="setScope(this)">Confirmados <span class="n">(8)</span></button>
-        <button onclick="setScope(this)">Conflicto <span class="n">(1)</span></button>
+        <button class="active" onclick="setScope(this)" aria-pressed="true">Todos <span class="n">(12)</span></button>
+        <button onclick="setScope(this)" aria-pressed="false">Pendientes <span class="n">(3)</span></button>
+        <button onclick="setScope(this)" aria-pressed="false">Confirmados <span class="n">(8)</span></button>
+        <button onclick="setScope(this)" aria-pressed="false">Conflicto <span class="n">(1)</span></button>
       </div>
 
-      <button class="filters-toggle" onclick="toggleFilters()">☰ Filtros</button>
+      <button class="filters-toggle" id="filters-toggle" onclick="toggleFilters()" aria-expanded="false" aria-controls="filters-panel">☰ Filtros</button>
       <div class="filters-panel" id="filters-panel">
         <div class="panel-title">Filtrar pedidos</div>
         <div class="panel-body">
@@ -418,27 +446,28 @@
       </div>
 
       <div class="batch-bar" id="batch-bar">
-        <span id="batch-count">0 seleccionados</span>
+        <span id="batch-count" role="status" aria-live="polite">0 seleccionados</span>
         <button class="btn small">Marcar como confirmado</button>
       </div>
 
-      <div class="table-scroll">
+      <p class="scroll-hint" id="scroll-hint">desliza para ver más columnas →</p>
+      <div class="table-scroll" id="table-scroll">
         <table class="index">
           <thead>
             <tr>
-              <th class="checkbox-col"><input type="checkbox" onchange="toggleAll(this)"></th>
-              <th onclick="sortBy(this)">ID <span class="arrow">▾</span></th>
-              <th onclick="sortBy(this)">Cliente</th>
-              <th onclick="sortBy(this)">Monto</th>
-              <th onclick="sortBy(this)">Estado</th>
+              <th class="checkbox-col"><input type="checkbox" onchange="toggleAll(this)" aria-label="Seleccionar todos los pedidos"></th>
+              <th onclick="sortBy(this)" aria-sort="descending">ID <span class="arrow" aria-hidden="true">▾</span></th>
+              <th onclick="sortBy(this)" aria-sort="none">Cliente</th>
+              <th onclick="sortBy(this)" aria-sort="none">Monto</th>
+              <th onclick="sortBy(this)" aria-sort="none">Estado</th>
             </tr>
           </thead>
           <tbody id="index-body">
-            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1042</a></td><td>ACME</td><td class="num">$128.400,00</td><td><span class="mini-tag pending">Pendiente</span></td></tr>
-            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1039</a></td><td>Beta SRL</td><td class="num">$45.000,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
-            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1035</a></td><td>ACME</td><td class="num">$980.200,00</td><td><span class="mini-tag conflict">Conflicto</span></td></tr>
-            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1031</a></td><td>Comercial Sur</td><td class="num">$12.500,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
-            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()"></td><td><a class="id-link">#1028</a></td><td>ACME</td><td class="num">$300.000,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()" aria-label="Seleccionar pedido #1042"></td><td><a class="id-link">#1042</a></td><td>ACME</td><td class="num">$128.400,00</td><td><span class="mini-tag pending">Pendiente</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()" aria-label="Seleccionar pedido #1039"></td><td><a class="id-link">#1039</a></td><td>Beta SRL</td><td class="num">$45.000,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()" aria-label="Seleccionar pedido #1035"></td><td><a class="id-link">#1035</a></td><td>ACME</td><td class="num">$980.200,00</td><td><span class="mini-tag conflict">Conflicto</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()" aria-label="Seleccionar pedido #1031"></td><td><a class="id-link">#1031</a></td><td>Comercial Sur</td><td class="num">$12.500,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
+            <tr><td><input type="checkbox" class="row-check" onchange="updateBatch()" aria-label="Seleccionar pedido #1028"></td><td><a class="id-link">#1028</a></td><td>ACME</td><td class="num">$300.000,00</td><td><span class="mini-tag confirmed">Confirmado</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -452,7 +481,7 @@
     </section>
 
     <!-- ============ DETALLE ============ -->
-    <section class="screen" id="screen-detalle">
+    <section class="screen" id="screen-detalle" role="tabpanel" aria-label="Detalle">
       <div class="page-header"><h1>Pedido #1042</h1></div>
       <div class="panel">
         <div class="panel-title">Datos del pedido</div>
@@ -476,7 +505,7 @@
     </section>
 
     <!-- ============ FORMULARIO ============ -->
-    <section class="screen" id="screen-form">
+    <section class="screen" id="screen-form" role="tabpanel" aria-label="Formulario">
       <div class="page-header"><h1>Nuevo pedido</h1></div>
       <fieldset>
         <legend>Datos del pedido</legend>
@@ -505,20 +534,52 @@
 </div>
 
 <script>
+// Afordancia de scroll horizontal de la tabla índice -- se detecta
+// overflow real (no se asume que "en mobile siempre hace falta"),
+// y el fade se apaga cuando el usuario ya llegó al final.
+function initTableScrollHint(){
+  const wrap = document.getElementById('table-scroll');
+  const hint = document.getElementById('scroll-hint');
+  if(!wrap || !hint) return;
+  function update(){
+    const hasOverflow = wrap.scrollWidth > wrap.clientWidth + 1;
+    hint.classList.toggle('show', hasOverflow);
+    const atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 1;
+    wrap.classList.toggle('at-end', !hasOverflow || atEnd);
+  }
+  wrap.addEventListener('scroll', update);
+  window.addEventListener('resize', update);
+  update();
+}
+document.addEventListener('DOMContentLoaded', initTableScrollHint);
+// Por si el script corre después de DOMContentLoaded (ya interactivo)
+if(document.readyState !== 'loading') initTableScrollHint();
+
 function showScreen(name, btn){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + name).classList.add('active');
-  document.querySelectorAll('.demo-nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.demo-nav button').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
   btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
 }
 
 function setScope(btn){
-  document.querySelectorAll('.scopes button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.scopes button').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
   btn.classList.add('active');
+  btn.setAttribute('aria-pressed', 'true');
 }
 
 function toggleFilters(){
-  document.getElementById('filters-panel').classList.toggle('open');
+  const panel = document.getElementById('filters-panel');
+  panel.classList.toggle('open');
+  document.getElementById('filters-toggle')
+    .setAttribute('aria-expanded', panel.classList.contains('open') ? 'true' : 'false');
 }
 
 function toggleAll(checkbox){
@@ -548,8 +609,11 @@ function sortBy(th){
   });
   rows.forEach(r => tbody.appendChild(r));
   th.parentNode.querySelectorAll('.arrow').forEach(a => a.remove());
+  th.parentNode.querySelectorAll('th').forEach(h => h.setAttribute('aria-sort', 'none'));
+  th.setAttribute('aria-sort', dir ? 'descending' : 'ascending');
   const arrow = document.createElement('span');
   arrow.className = 'arrow';
+  arrow.setAttribute('aria-hidden', 'true');
   arrow.textContent = dir ? '▾' : '▴';
   th.appendChild(arrow);
 }

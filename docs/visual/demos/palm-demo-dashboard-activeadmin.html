@@ -36,6 +36,13 @@
 
     --radius-base:3px;
     --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+    /* Sombras y text-shadows -- tokenizadas (antes sueltas inline).
+       Reserva: solo aplicadas a lo que flota (frame del dispositivo,
+       paneles, modal, FAB, botones glossy); cards/filas siguen sin. */
+    --shadow-frame: 0 1px 3px rgba(0,0,0,.2);
+    --shadow-inset-field: 0 1px 2px rgba(0,0,0,.1) inset;
+    --shadow-inset-highlight: 0 1px 0 rgba(255,255,255,.7) inset;
+    --text-shadow-recess: 0 -1px 0 rgba(0,0,0,.25);
   }
 
   *{ box-sizing:border-box; }
@@ -61,7 +68,7 @@
     min-height:900px;
     display:flex;
     flex-direction:column;
-    box-shadow:0 1px 3px rgba(0,0,0,.2);
+    box-shadow:var(--shadow-frame);
   }
 
   header{ padding:12px 14px 10px; background:var(--header-bg); border-bottom:3px solid var(--action); }
@@ -195,7 +202,7 @@
     font-family:inherit;
     font-size:12px;
     resize:none;
-    box-shadow:0 1px 2px rgba(0,0,0,.1) inset;
+    box-shadow:var(--shadow-inset-field);
   }
   .comment-form textarea:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
   .btn{
@@ -208,7 +215,7 @@
     padding:7px 12px;
     border-radius:var(--radius-base);
     cursor:pointer;
-    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+    box-shadow:var(--shadow-inset-highlight);
     text-decoration:none;
     align-self:flex-end;
   }
@@ -216,7 +223,7 @@
     background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action));
     border-color:var(--action-strong);
     color:var(--on-color);
-    text-shadow:0 -1px 0 rgba(0,0,0,.25);
+    text-shadow:var(--text-shadow-recess);
   }
   .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
 </style>
@@ -265,28 +272,28 @@
       <div class="panel-title">Actividad reciente <a class="see-all">Ver todo →</a></div>
       <div class="panel-body">
         <div class="activity-item">
-          <span class="icon pending">!</span>
+          <span class="icon pending" aria-hidden="true">!</span>
           <div class="body">
             <div class="text">Pedido <b>#1042</b> guardado localmente, esperando conexión.</div>
             <div class="time">hace 2 min</div>
           </div>
         </div>
         <div class="activity-item">
-          <span class="icon conflict">✕</span>
+          <span class="icon conflict" aria-hidden="true">✕</span>
           <div class="body">
             <div class="text">Pedido <b>#1035</b> tiene un conflicto de sincronización.</div>
             <div class="time">hace 8 min</div>
           </div>
         </div>
         <div class="activity-item">
-          <span class="icon confirmed">✓</span>
+          <span class="icon confirmed" aria-hidden="true">✓</span>
           <div class="body">
             <div class="text">Pedido <b>#1039</b> confirmado por el servidor.</div>
             <div class="time">hace 25 min</div>
           </div>
         </div>
         <div class="activity-item">
-          <span class="icon confirmed">✓</span>
+          <span class="icon confirmed" aria-hidden="true">✓</span>
           <div class="body">
             <div class="text">Cliente <b>ACME</b> actualizado (teléfono, dirección).</div>
             <div class="time">hace 1 h</div>
@@ -299,10 +306,10 @@
     <div class="panel">
       <div class="panel-title">Accesos rápidos</div>
       <div class="quick-links">
-        <a class="quick-link"><span class="big">+</span>Nuevo pedido</a>
-        <a class="quick-link"><span class="big">☰</span>Ver Hub</a>
-        <a class="quick-link"><span class="big">⌕</span>Abrir Omnibar</a>
-        <a class="quick-link"><span class="big">◧</span>Filtros</a>
+        <a class="quick-link"><span class="big" aria-hidden="true">+</span>Nuevo pedido</a>
+        <a class="quick-link"><span class="big" aria-hidden="true">☰</span>Ver Hub</a>
+        <a class="quick-link"><span class="big" aria-hidden="true">⌕</span>Abrir Omnibar</a>
+        <a class="quick-link"><span class="big" aria-hidden="true">◧</span>Filtros</a>
       </div>
     </div>
 

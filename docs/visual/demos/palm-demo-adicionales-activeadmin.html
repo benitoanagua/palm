@@ -28,15 +28,22 @@
 
     --action:#0b5a92;
     --action-strong:#00426f;
-    --pending:#8d410b;
     --confirmed:#086335;
     --conflict:#ae0e20;
 
     --font-ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-data: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
     --radius-base:3px;
-    --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+    /* Sombras y text-shadows -- tokenizadas (antes sueltas inline).
+       Reserva: solo aplicadas a lo que flota (frame del dispositivo,
+       paneles, modal, FAB, botones glossy); cards/filas siguen sin. */
+    --shadow-dialog: 0 4px 16px rgba(0,0,0,.35);
+    --shadow-float-strong: 0 2px 8px rgba(0,0,0,.3);
+    --shadow-float-strong-alt: 0 2px 6px rgba(0,0,0,.3);
+    --shadow-frame: 0 1px 3px rgba(0,0,0,.2);
+    --shadow-inset-highlight: 0 1px 0 rgba(255,255,255,.7) inset;
+    --text-shadow-highlight: 0 1px 0 rgba(255,255,255,.6);
+    --text-shadow-recess: 0 -1px 0 rgba(0,0,0,.25);
     --duration-base:200ms;
     --easing-standard: ease-in-out;
   }
@@ -53,7 +60,7 @@
     padding:24px 12px;
   }
   button, input, a{ font-family:inherit; font-size:inherit; }
-  button:focus-visible, a:focus-visible{ outline:2px solid var(--action); outline-offset:1px; }
+  button:focus-visible, a:focus-visible, [role="button"]:focus-visible{ outline:2px solid var(--action); outline-offset:1px; }
 
   .phone{
     width:100%;
@@ -66,7 +73,7 @@
     flex-direction:column;
     position:relative;
     overflow:hidden;
-    box-shadow:0 1px 3px rgba(0,0,0,.2);
+    box-shadow:var(--shadow-frame);
   }
 
   header{
@@ -87,7 +94,7 @@
     font-size:14px;
     flex:0 0 auto;
   }
-  header .wordmark{ font-size:16px; font-weight:700; color:var(--header-text); margin:0; }
+  header .wordmark{ font-size:16px; font-weight:700; color:var(--header-text); margin:0; line-height:1.2; }
 
   main{ flex:1; padding:12px; overflow-y:auto; }
   h2.section-title{ font-size:13px; color:var(--text-strong); margin:0 0 6px; }
@@ -190,7 +197,7 @@
     background:var(--surface);
     border:1px solid var(--border-color);
     border-radius:var(--radius-base);
-    box-shadow:0 2px 8px rgba(0,0,0,.25);
+    box-shadow:var(--shadow-float-strong);
     z-index:5;
     min-width:140px;
   }
@@ -234,7 +241,7 @@
     width:190px;
     text-align:left;
     z-index:6;
-    box-shadow:0 2px 6px rgba(0,0,0,.3);
+    box-shadow:var(--shadow-float-strong-alt);
   }
   .tip-icon .tooltip::after{
     content:"";
@@ -264,7 +271,7 @@
     padding:10px 12px;
     border-radius:var(--radius-base);
     border-left:4px solid var(--confirmed);
-    box-shadow:0 2px 8px rgba(0,0,0,.3);
+    box-shadow:var(--shadow-float-strong);
     opacity:0;
     transform:translateY(8px);
     transition:opacity var(--duration-base) var(--easing-standard), transform var(--duration-base) var(--easing-standard);
@@ -282,13 +289,13 @@
     padding:7px 14px;
     border-radius:var(--radius-base);
     cursor:pointer;
-    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
-    text-shadow:0 1px 0 rgba(255,255,255,.6);
+    box-shadow:var(--shadow-inset-highlight);
+    text-shadow:var(--text-shadow-highlight);
   }
   .btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
-  .btn.primary{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action)); border-color:var(--action-strong); color:var(--on-color); text-shadow:0 -1px 0 rgba(0,0,0,.25); }
+  .btn.primary{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action)); border-color:var(--action-strong); color:var(--on-color); text-shadow:var(--text-shadow-recess); }
   .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
-  .btn.critical{ background:linear-gradient(to bottom, color-mix(in srgb, var(--conflict) 70%, white), var(--conflict)); border-color:color-mix(in srgb, var(--conflict) 70%, black); color:var(--on-color); text-shadow:0 -1px 0 rgba(0,0,0,.25); }
+  .btn.critical{ background:linear-gradient(to bottom, color-mix(in srgb, var(--conflict) 70%, white), var(--conflict)); border-color:color-mix(in srgb, var(--conflict) 70%, black); color:var(--on-color); text-shadow:var(--text-shadow-recess); }
 
   /* ========== MODAL de confirmación simple (distinto del modal de
      sync-conflict y del crítico -- este es el "¿estás seguro?" plano,
@@ -299,7 +306,7 @@
     background:var(--surface);
     border:1px solid var(--border-color);
     border-radius:var(--radius-base);
-    box-shadow:0 4px 16px rgba(0,0,0,.35);
+    box-shadow:var(--shadow-dialog);
     padding:16px;
     max-width:280px;
     width:100%;
@@ -313,23 +320,23 @@
 
 <div class="phone">
   <header>
-    <button class="hamburger" onclick="toggleOffcanvas(true)">☰</button>
-    <p class="wordmark">PALM</p>
+    <button class="hamburger" id="hamburger" onclick="toggleOffcanvas(true)" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="offcanvas-backdrop">☰</button>
+    <h1 class="wordmark">PALM</h1>
   </header>
 
   <main>
     <h2 class="section-title">Configuración (Accordion)</h2>
     <div class="panel">
       <div class="accordion-item open">
-        <div class="accordion-header" onclick="toggleAccordion(this)">Cuenta <span class="chevron">▶</span></div>
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleAccordion(this)">Cuenta <span class="chevron" aria-hidden="true">▶</span></div>
         <div class="accordion-body">Nombre, email y datos de facturación asociados a esta cuenta.</div>
       </div>
       <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">Notificaciones <span class="chevron">▶</span></div>
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleAccordion(this)">Notificaciones <span class="chevron" aria-hidden="true">▶</span></div>
         <div class="accordion-body">Elegí qué eventos generan una notificación push: conflictos de sync, confirmaciones, recordatorios.</div>
       </div>
       <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">Seguridad <span class="chevron">▶</span></div>
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleAccordion(this)">Seguridad <span class="chevron" aria-hidden="true">▶</span></div>
         <div class="accordion-body">Verificación en dos pasos, dispositivos conectados, cierre de sesión remoto.</div>
       </div>
     </div>
@@ -341,7 +348,7 @@
           <div class="name">ACME</div>
           <div class="sub">Cuenta corriente activa</div>
         </div>
-        <button class="kebab" onclick="toggleDropdown(this)">⋮</button>
+        <button class="kebab" onclick="toggleDropdown(this)" aria-label="Más acciones" aria-haspopup="true" aria-expanded="false">⋮</button>
         <div class="dropdown-menu">
           <a>Ver detalle</a>
           <a>Editar</a>
@@ -353,7 +360,7 @@
           <div class="name">Beta SRL</div>
           <div class="sub">3 pedidos este mes</div>
         </div>
-        <button class="kebab" onclick="toggleDropdown(this)">⋮</button>
+        <button class="kebab" onclick="toggleDropdown(this)" aria-label="Más acciones" aria-haspopup="true" aria-expanded="false">⋮</button>
         <div class="dropdown-menu">
           <a>Ver detalle</a>
           <a>Editar</a>
@@ -367,7 +374,7 @@
       <div class="panel-body">
         <div class="field-with-tip">
           Umbral de agrupación de cards
-          <span class="tip-icon" onclick="this.classList.toggle('show')">
+          <span class="tip-icon" role="button" tabindex="0" onclick="this.classList.toggle('show')">
             ?
             <span class="tooltip">Cantidad de tareas antes de agruparlas en un solo tile. Ver Regla A5 en la documentación.</span>
           </span>
@@ -382,13 +389,13 @@
 
   <!-- Offcanvas -->
   <div class="offcanvas-backdrop" id="offcanvas-backdrop" onclick="if(event.target===this) toggleOffcanvas(false)">
-    <nav class="offcanvas">
+    <nav class="offcanvas" role="dialog" aria-modal="true" aria-label="Menú de navegación">
       <div class="offcanvas-header">
         <div class="title">Palm</div>
         <div class="sub">Cuenta ACME</div>
       </div>
       <div class="offcanvas-nav">
-        <a class="active">Panel de control</a>
+        <a class="active" aria-current="page">Panel de control</a>
         <a>Pedidos</a>
         <a>Clientes</a>
         <a>Cuentas</a>
@@ -400,8 +407,8 @@
 
   <!-- Modal de confirmación simple -->
   <div class="modal-backdrop" id="confirm-backdrop">
-    <div class="confirm-modal">
-      <h3>¿Eliminar cliente?</h3>
+    <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <h3 id="confirm-title">¿Eliminar cliente?</h3>
       <p>Esta acción no se puede deshacer. ACME y sus pedidos asociados dejarán de aparecer en el Hub.</p>
       <div class="actions">
         <button class="btn" onclick="closeConfirm()">Cancelar</button>
@@ -410,24 +417,86 @@
     </div>
   </div>
 
-  <div class="toast-stack" id="toast-stack"></div>
+  <div class="toast-stack" id="toast-stack" role="status" aria-live="polite" aria-atomic="false"></div>
 </div>
 
 <script>
+// Enter/Espacio para cualquier control custom con role="button"
+// (accordion, ícono de tooltip) -- mismo patrón ya usado en el demo
+// principal para las filas del Hub.
+document.addEventListener('keydown', e => {
+  if((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"]')){
+    e.preventDefault();
+    e.target.click();
+  }
+  if(e.key === 'Escape'){
+    const confirmBackdrop = document.getElementById('confirm-backdrop');
+    const offcanvas = document.getElementById('offcanvas-backdrop');
+    const openDropdown = document.querySelector('.dropdown-menu.open');
+    const openTooltip = document.querySelector('.tip-icon.show');
+    if(confirmBackdrop.classList.contains('open')){ closeConfirm(); return; }
+    if(openDropdown){ openDropdown.classList.remove('open'); return; }
+    if(openTooltip){ openTooltip.classList.remove('show'); return; }
+    if(offcanvas.classList.contains('open')){ toggleOffcanvas(false); return; }
+  }
+});
+
+// Atrapado de foco + restauración -- Tab no debe escaparse al fondo
+// mientras un diálogo modal está abierto (WCAG 2.4.3), y al cerrar el
+// foco vuelve a quien lo abrió.
+const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+let lastFocusedBeforeModal = null;
+
+function trapFocus(modalEl){
+  lastFocusedBeforeModal = document.activeElement;
+  const focusables = modalEl.querySelectorAll(FOCUSABLE);
+  if(focusables.length) focusables[0].focus();
+  modalEl.addEventListener('keydown', onTrapKeydown);
+}
+function releaseFocus(modalEl){
+  modalEl.removeEventListener('keydown', onTrapKeydown);
+  if(lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
+  lastFocusedBeforeModal = null;
+}
+function onTrapKeydown(e){
+  if(e.key !== 'Tab') return;
+  const modalEl = e.currentTarget;
+  const focusables = Array.from(modalEl.querySelectorAll(FOCUSABLE));
+  if(!focusables.length) return;
+  const first = focusables[0], last = focusables[focusables.length - 1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+}
+
 function toggleOffcanvas(open){
-  document.getElementById('offcanvas-backdrop').classList.toggle('open', open);
+  const backdrop = document.getElementById('offcanvas-backdrop');
+  backdrop.classList.toggle('open', open);
+  document.getElementById('hamburger').setAttribute('aria-expanded', open ? 'true' : 'false');
+  const panel = backdrop.querySelector('.offcanvas');
+  if(open) trapFocus(panel); else releaseFocus(panel);
 }
 function toggleAccordion(header){
-  header.parentElement.classList.toggle('open');
+  const item = header.parentElement;
+  item.classList.toggle('open');
+  header.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
 }
 function toggleDropdown(btn){
   const menu = btn.nextElementSibling;
-  document.querySelectorAll('.dropdown-menu.open').forEach(m => { if(m !== menu) m.classList.remove('open'); });
+  document.querySelectorAll('.dropdown-menu.open').forEach(m => {
+    if(m !== menu){
+      m.classList.remove('open');
+      if(m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
+    }
+  });
   menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', menu.classList.contains('open') ? 'true' : 'false');
 }
 document.addEventListener('click', (e) => {
   if(!e.target.classList.contains('kebab')){
-    document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+    document.querySelectorAll('.dropdown-menu.open').forEach(m => {
+      m.classList.remove('open');
+      if(m.previousElementSibling) m.previousElementSibling.setAttribute('aria-expanded', 'false');
+    });
   }
 });
 function showToast(){
@@ -442,8 +511,16 @@ function showToast(){
     setTimeout(() => toast.remove(), 250);
   }, 2600);
 }
-function openConfirm(){ document.getElementById('confirm-backdrop').classList.add('open'); }
-function closeConfirm(){ document.getElementById('confirm-backdrop').classList.remove('open'); }
+function openConfirm(){
+  const backdrop = document.getElementById('confirm-backdrop');
+  backdrop.classList.add('open');
+  trapFocus(backdrop.querySelector('.confirm-modal'));
+}
+function closeConfirm(){
+  const backdrop = document.getElementById('confirm-backdrop');
+  backdrop.classList.remove('open');
+  releaseFocus(backdrop.querySelector('.confirm-modal'));
+}
 </script>
 
 </body>

@@ -12,11 +12,9 @@
        (estándar en el header de cualquier index de AA) y switches. */
     --header-bg:#2c2c2c;
     --header-text:#ffffff;
-    --header-text-dim:#b8b8b8;
     --page-bg:#f1f2f4;
     --surface:#ffffff;
     --surface-alt:#f5f5f5;
-    --surface-hover:#f9f9f9;
     --border-color:#727272;
     --border-color-light:#949494;
 
@@ -27,7 +25,6 @@
 
     --action:#0b5a92;
     --action-strong:#00426f;
-    --pending:#8d410b;
     --confirmed:#086335;
     --conflict:#ae0e20;
 
@@ -36,6 +33,15 @@
 
     --radius-base:3px;
     --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
+    /* Sombras y text-shadows -- tokenizadas (antes sueltas inline).
+       Reserva: solo aplicadas a lo que flota (frame del dispositivo,
+       paneles, modal, FAB, botones glossy); cards/filas siguen sin. */
+    --shadow-dialog: 0 4px 16px rgba(0,0,0,.35);
+    --shadow-frame: 0 1px 3px rgba(0,0,0,.2);
+    --shadow-inset-field: 0 1px 2px rgba(0,0,0,.1) inset;
+    --shadow-inset-highlight: 0 1px 0 rgba(255,255,255,.7) inset;
+    --text-shadow-highlight: 0 1px 0 rgba(255,255,255,.6);
+    --text-shadow-recess: 0 -1px 0 rgba(0,0,0,.25);
     --duration-base:180ms;
     --easing-standard: ease-in-out;
   }
@@ -63,7 +69,7 @@
     min-height:900px;
     display:flex;
     flex-direction:column;
-    box-shadow:0 1px 3px rgba(0,0,0,.2);
+    box-shadow:var(--shadow-frame);
     overflow:hidden;
   }
 
@@ -88,10 +94,10 @@
   .btn{
     display:inline-block; border:1px solid #b0b0b0; background:linear-gradient(to bottom, #fdfdfd, #e2e2e2);
     color:var(--text-primary); font-size:12px; font-weight:700; padding:7px 14px; border-radius:var(--radius-base);
-    cursor:pointer; box-shadow:0 1px 0 rgba(255,255,255,.7) inset; text-shadow:0 1px 0 rgba(255,255,255,.6); text-decoration:none;
+    cursor:pointer; box-shadow:var(--shadow-inset-highlight); text-shadow:var(--text-shadow-highlight); text-decoration:none;
   }
   .btn:hover{ background:linear-gradient(to bottom, #ffffff, #d8d8d8); }
-  .btn.primary{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action)); border-color:var(--action-strong); color:var(--on-color); text-shadow:0 -1px 0 rgba(0,0,0,.25); }
+  .btn.primary{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action)); border-color:var(--action-strong); color:var(--on-color); text-shadow:var(--text-shadow-recess); }
   .btn.primary:hover{ background:linear-gradient(to bottom, color-mix(in srgb, var(--action) 80%, white), color-mix(in srgb, var(--action) 90%, black)); }
   .btn.small{ font-size:11px; padding:5px 10px; }
   .btn.ghost{ background:none; border:1px solid var(--border-color-light); box-shadow:none; text-shadow:none; color:var(--text-secondary); }
@@ -110,7 +116,7 @@
   .login-box{
     background:var(--surface);
     border-radius:var(--radius-base);
-    box-shadow:0 4px 16px rgba(0,0,0,.4);
+    box-shadow:var(--shadow-dialog);
     width:100%;
     max-width:280px;
     overflow:hidden;
@@ -120,7 +126,7 @@
   .login-box .brand .sub{ font-size:11px; color:var(--text-secondary); margin-top:2px; }
   .login-box form{ padding:14px 16px 18px; display:flex; flex-direction:column; gap:10px; }
   .field label{ display:block; font-size:11px; font-weight:700; color:var(--text-primary); margin-bottom:3px; }
-  .field input{ width:100%; border:1px solid #999; border-radius:var(--radius-base); background:var(--surface); padding:7px 9px; box-shadow:0 1px 2px rgba(0,0,0,.1) inset; }
+  .field input{ width:100%; border:1px solid #999; border-radius:var(--radius-base); background:var(--surface); padding:7px 9px; box-shadow:var(--shadow-inset-field); }
   .field input:focus{ border-color:var(--action); box-shadow:var(--focus-ring); outline:none; }
   .remember{ display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-secondary); }
   .login-box .forgot{ text-align:center; margin-top:6px; }
@@ -182,18 +188,18 @@
     <p class="wordmark">PALM</p>
   </header>
 
-  <nav class="demo-nav">
-    <button class="active" onclick="showScreen('login', this)">Login</button>
-    <button onclick="showScreen('empty', this)">Vacío</button>
-    <button onclick="showScreen('nested', this)">Ítems</button>
-    <button onclick="showScreen('export', this)">Exportar</button>
-    <button onclick="showScreen('switches', this)">Ajustes</button>
+  <nav class="demo-nav" role="tablist" aria-label="Pantallas de la demo">
+    <button class="active" role="tab" aria-selected="true" aria-controls="screen-login" onclick="showScreen('login', this)">Login</button>
+    <button role="tab" aria-selected="false" aria-controls="screen-empty" onclick="showScreen('empty', this)">Vacío</button>
+    <button role="tab" aria-selected="false" aria-controls="screen-nested" onclick="showScreen('nested', this)">Ítems</button>
+    <button role="tab" aria-selected="false" aria-controls="screen-export" onclick="showScreen('export', this)">Exportar</button>
+    <button role="tab" aria-selected="false" aria-controls="screen-switches" onclick="showScreen('switches', this)">Ajustes</button>
   </nav>
 
   <main style="padding:0; display:flex; flex-direction:column;">
 
     <!-- ============ LOGIN ============ -->
-    <section class="screen active" id="screen-login" style="flex:1;">
+    <section class="screen active" id="screen-login" role="tabpanel" aria-label="Login" style="flex:1;">
       <div class="login-screen">
         <div class="login-box">
           <div class="brand">
@@ -218,7 +224,7 @@
     </section>
 
     <!-- ============ EMPTY STATE ============ -->
-    <section class="screen" id="screen-empty">
+    <section class="screen" id="screen-empty" role="tabpanel" aria-label="Vacío">
       <div style="padding:14px;">
         <div class="page-header"><h1>Conflictos</h1></div>
         <div class="panel">
@@ -233,27 +239,27 @@
     </section>
 
     <!-- ============ FORMULARIO ANIDADO DINÁMICO ============ -->
-    <section class="screen" id="screen-nested">
+    <section class="screen" id="screen-nested" role="tabpanel" aria-label="Ítems">
       <div style="padding:14px;">
         <div class="page-header"><h1>Pedido #1043</h1></div>
         <fieldset>
           <legend>Ítems del pedido</legend>
           <div class="nested-fields" id="nested-fields">
             <div class="nested-row">
-              <input type="text" placeholder="Descripción" value="Resma A4">
-              <input type="text" placeholder="$0,00" value="4.500,00">
-              <button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem">×</button>
+              <input type="text" placeholder="Descripción" value="Resma A4" aria-label="Descripción del ítem">
+              <input type="text" placeholder="$0,00" value="4.500,00" aria-label="Monto del ítem">
+              <button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem" aria-label="Quitar ítem">×</button>
             </div>
             <div class="nested-row">
-              <input type="text" placeholder="Descripción" value="Cartuchos de tinta">
-              <input type="text" placeholder="$0,00" value="12.900,00">
-              <button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem">×</button>
+              <input type="text" placeholder="Descripción" value="Cartuchos de tinta" aria-label="Descripción del ítem">
+              <input type="text" placeholder="$0,00" value="12.900,00" aria-label="Monto del ítem">
+              <button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem" aria-label="Quitar ítem">×</button>
             </div>
             <button class="add-nested" onclick="addNestedRow()">+ Agregar ítem</button>
           </div>
           <div class="nested-total">
             <span>Total</span>
-            <span class="amount" id="nested-total-amount">$17.400,00</span>
+            <span class="amount" id="nested-total-amount" role="status" aria-live="polite">$17.400,00</span>
           </div>
         </fieldset>
         <button class="btn primary">Guardar pedido</button>
@@ -261,7 +267,7 @@
     </section>
 
     <!-- ============ EXPORTACIÓN ============ -->
-    <section class="screen" id="screen-export">
+    <section class="screen" id="screen-export" role="tabpanel" aria-label="Exportar">
       <div style="padding:14px;">
         <div class="page-header"><h1>Pedidos</h1></div>
         <div class="export-row">
@@ -279,7 +285,7 @@
     </section>
 
     <!-- ============ SWITCHES ============ -->
-    <section class="screen" id="screen-switches">
+    <section class="screen" id="screen-switches" role="tabpanel" aria-label="Ajustes">
       <div style="padding:14px;">
         <div class="page-header"><h1>Notificaciones</h1></div>
         <div class="panel">
@@ -306,8 +312,12 @@
 function showScreen(name, btn){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + name).classList.add('active');
-  document.querySelectorAll('.demo-nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.demo-nav button').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
   btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
 }
 
 function parseAmount(str){
@@ -329,7 +339,7 @@ function addNestedRow(){
   const addBtn = container.querySelector('.add-nested');
   const row = document.createElement('div');
   row.className = 'nested-row';
-  row.innerHTML = '<input type="text" placeholder="Descripción"><input type="text" placeholder="$0,00" value="0,00"><button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem">×</button>';
+  row.innerHTML = '<input type="text" placeholder="Descripción" aria-label="Descripción del ítem"><input type="text" placeholder="$0,00" value="0,00" aria-label="Monto del ítem"><button class="remove" onclick="removeNestedRow(this)" title="Quitar ítem" aria-label="Quitar ítem">×</button>';
   container.insertBefore(row, addBtn);
   row.querySelectorAll('input').forEach(i => i.addEventListener('input', recalcTotal));
   recalcTotal();
