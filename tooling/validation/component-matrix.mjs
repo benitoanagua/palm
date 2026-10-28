@@ -17,7 +17,9 @@ function walk(directory) {
       walk(absolute);
     } else if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
       const source = fs.readFileSync(absolute, 'utf8');
-      for (const match of source.matchAll(/\btag\s*:\s*['"](pm-[a-z0-9-]+)['"]/g)) {
+      for (const match of source.matchAll(
+        /\btag\s*:\s*['"](pm-[a-z0-9-]+)['"]/g,
+      )) {
         componentTags.add(match[1]);
       }
     }
