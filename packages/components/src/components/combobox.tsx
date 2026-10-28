@@ -42,15 +42,7 @@ export class PmCombobox {
   @State() private activeIndex = 0;
   private input?: HTMLInputElement;
   private root?: HTMLElement;
-  private listbox?: HTMLElement;
   private listboxId = '';
-
-  private bindListbox = (el?: HTMLElement) => {
-    if (el === this.listbox) return;
-    this.listbox?.removeEventListener('pmSelect', this.onOptionSelect as EventListener);
-    this.listbox = el;
-    this.listbox?.addEventListener('pmSelect', this.onOptionSelect as EventListener);
-  };
 
   componentWillLoad() {
     this.listboxId = `${this.host.id || 'pm-combobox'}-listbox`;
@@ -58,15 +50,17 @@ export class PmCombobox {
   }
   componentDidLoad() {
     this.applyFilter();
+    this.host.addEventListener('pmSelect', this.onOptionSelect as EventListener);
     document.addEventListener('click', this.onDocumentClick, true);
   }
   disconnectedCallback() {
     document.removeEventListener('click', this.onDocumentClick, true);
-    this.listbox?.removeEventListener('pmSelect', this.onOptionSelect as EventListener);
+    this.host.removeEventListener('pmSelect', this.onOptionSelect as EventListener);
   }
 
   private options(): HTMLElement[] {
-    return Array.from(this.host.querySelectorAll(':scope > pm-combobox-option')) as HTMLElement[];
+    const options = this.host.querySelectorAll('pm-combobox-option');
+    return Array.from(options) as HTMLElement[];
   }
 
   private syncQueryFromValue() {
@@ -84,8 +78,10 @@ export class PmCombobox {
       if (!option.id) option.id = `${this.listboxId}-opt-${index}`;
       const text = (option.textContent || '').toLowerCase();
       const matches = !needle || text.includes(needle);
-      option.toggleAttribute('matched', matches);
-      option.toggleAttribute('selected', option.getAttribute('value') === this.value);
+      if (matches) option.setAttribute('matched', '');
+      else option.removeAttribute('matched');
+      if (option.getAttribute('value') === this.value) option.setAttribute('selected', '');
+      else option.removeAttribute('selected');
       if (matches) {
         visibleAt.push(index);
         visibleIndex++;
@@ -93,7 +89,8 @@ export class PmCombobox {
     });
     if (this.activeIndex >= visibleIndex) this.activeIndex = Math.max(visibleIndex - 1, 0);
     options.forEach((option, index) => {
-      option.toggleAttribute('active', visibleAt[this.activeIndex] === index);
+      if (visibleAt[this.activeIndex] === index) option.setAttribute('active', '');
+      else option.removeAttribute('active');
     });
   };
 
@@ -232,13 +229,7 @@ export class PmCombobox {
             <pm-icon-button name="x" label="Clear selection" size="small" onPmPress={this.clear} />
           ) : null}
         </div>
-        <div
-          id={this.listboxId}
-          class="pm-combobox__listbox"
-          role="listbox"
-          hidden={!this.open}
-          ref={(el) => this.bindListbox(el as HTMLElement | undefined)}
-        >
+        <div id={this.listboxId} class="pm-combobox__listbox" role="listbox" hidden={!this.open}>
           <slot onSlotchange={this.applyFilter} />
           {visible.length === 0 ? <p class="pm-combobox__empty">{this.noResultsText}</p> : null}
         </div>

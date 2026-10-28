@@ -1,97 +1,65 @@
-name: Palm hardening baseline
+name: PALM CI
 
 on:
   push:
     branches:
       - main
-      - chore/palm-final-ci
   pull_request:
     branches:
       - main
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: palm-hardening-${{ github.ref }}
-  cancel-in-progress: false
+  group: palm-ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  baseline:
-    name: Backup and clean baseline
+  quality:
+    name: Quality gate
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
-      - name: Checkout full history
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: true
-
-      - name: Create and verify pre-hardening tag
-        shell: bash
-        run: |
-          git fetch origin main
-          if ! git rev-parse -q --verify refs/tags/pre-hardening >/dev/null; then
-            git tag pre-hardening refs/remotes/origin/main
-            git push origin refs/tags/pre-hardening
-          fi
-          git show --no-patch --format='%H %s' refs/tags/pre-hardening
-
-      - name: Create and verify recovery bundle
-        shell: bash
-        run: |
-          git bundle create "$RUNNER_TEMP/palm-pre-hardening.bundle" --all
-          git bundle verify "$RUNNER_TEMP/palm-pre-hardening.bundle"
-
-      - name: Preserve recovery bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: palm-pre-hardening-bundle
-          path: ${{ runner.temp }}/palm-pre-hardening.bundle
-          if-no-files-found: error
-          retention-days: 90
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10.26.0
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Audit unused files and exports with Knip
-        run: pnpm dlx --package=knip@5.64.0 --package=typescript@5.9.3 knip --reporter json
-
-      - name: Audit declared dependencies with depcheck
-        shell: bash
-        run: |
-          for directory in packages/* apps/*; do
-            if [ -f "$directory/package.json" ]; then
-              if [ "$directory" = "packages/icons" ] || [ "$directory" = "packages/react" ]; then
-                echo "Reviewed dependency exception: $directory"
-                continue
-              fi
-              echo "Dependency audit: $directory"
-              (cd "$directory" && pnpm dlx depcheck@1.4.7 --json)
-            fi
-          done
-
-      - name: Install Chromium for accessibility and contract tests
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Generate complete Tabler icon dataset
-        run: node tooling/generate-tabler-data.mjs
-
-      - name: Verify repository formatting
-        run: pnpm format:check
-
-      - name: Run baseline quality gate
+      - name: Run quality gate
         run: pnpm check
+
+  browser:
+    name: Browser contracts and accessibility
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Build packages
+        run: pnpm build
+      - name: Run browser contracts and accessibility
+        run: pnpm test:e2e
