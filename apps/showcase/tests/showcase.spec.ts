@@ -17,12 +17,14 @@ test('navigation switches product surfaces', async ({ page }) => {
   await expect(page.locator('#page-title')).toHaveText('Activity');
   await expect(page.locator('[data-panel="activity"]')).toBeVisible();
   await expect(page.getByText('Recent events')).toBeVisible();
-  await expect(page.locator('#table-mount')).toBeVisible();
+  await expect(
+    page.getByText('Responsive tables, semantic status and toolbar composition.'),
+  ).toBeVisible();
 });
 
 test('create dialog opens and closes', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Create item', exact: true }).first().click();
+  await page.locator('#hero-create').click();
   const dialog = page.locator('#create-dialog dialog[open]');
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
