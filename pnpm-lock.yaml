@@ -87,8 +87,7 @@ importers:
         specifier: ^4.38.0
         version: 4.44.2
 
-  packages/foundation:
-    dependencies:
+  packages/foundation: {}
 
   packages/icons:
     devDependencies:
