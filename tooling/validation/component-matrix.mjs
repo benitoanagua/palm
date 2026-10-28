@@ -46,6 +46,4 @@ if (missing.length || stale.length) {
   }
   process.exit(1);
 }
-console.log(
-  `PALM component matrix covers all ${componentTags.size} @Component tags.`,
-);
+console.log(`PALM component matrix covers all ${componentTags.size} @Component tags.`);
