@@ -1,9 +1,0 @@
-:host {
-  display: block;
-}
-.pm-stack {
-  display: flex;
-  flex-direction: var(--pm-stack-direction, column);
-  gap: var(--pm-stack-gap, var(--pm-space-4));
-  align-items: var(--pm-stack-align, stretch);
-}
