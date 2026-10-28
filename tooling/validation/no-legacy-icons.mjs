@@ -19,7 +19,10 @@ function walk(dir) {
       walk(file);
       continue;
     }
-    const relativePath = file.slice(root.length + 1).split('\\\\').join('/');
+    const relativePath = file
+      .slice(root.length + 1)
+      .split('\\\\')
+      .join('/');
     if (ignoredFiles.has(relativePath)) continue;
     if (!/\.(ts|tsx|js|mjs|json|md|css|html|yaml|yml)$/.test(entry)) continue;
     const text = readFileSync(file, 'utf8');
