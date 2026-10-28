@@ -37,12 +37,23 @@ No other icon provider is supported.
 ## Quality gate
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm check
-pnpm test:visual
 ```
 
-Visual baselines cover 320×800, 375×812, 768×1024 and 1440×900.
+`pnpm check` runs static checks, formatting, lint, typecheck, unit tests, package builds and the Storybook build. It does not launch a browser.
+
+Browser checks require Chromium and Storybook:
+
+```bash
+pnpm test:e2e
+```
+
+On WSL, use the local `packages/testing/playwright.local.config.ts` with the system Chromium executable at `/usr/bin/chromium`. That local config is intentionally not committed. Visual checks and snapshot updates are local-only; baselines and image artifacts are not versioned:
+
+```bash
+pnpm test:visual:update
+```
 
 ## Showcase
 
