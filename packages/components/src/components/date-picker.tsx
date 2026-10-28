@@ -261,7 +261,7 @@ export class PmDatePicker {
             label="Open calendar"
             size="small"
             disabled={this.disabled}
-            onHhPress={this.toggleCalendar}
+            onPmPress={this.toggleCalendar}
           />
         </div>
         <div
@@ -276,7 +276,7 @@ export class PmDatePicker {
               name="chevron-left"
               label="Previous month"
               size="small"
-              onHhPress={() => this.changeMonth(-1)}
+              onPmPress={() => this.changeMonth(-1)}
             />
             <span class="pm-date-picker__month" aria-live="polite">
               {monthLabel}
@@ -285,7 +285,7 @@ export class PmDatePicker {
               name="chevron-right"
               label="Next month"
               size="small"
-              onHhPress={() => this.changeMonth(1)}
+              onPmPress={() => this.changeMonth(1)}
             />
           </div>
           <div
