@@ -28,7 +28,7 @@ export class PmAlert {
           </div>
         </div>
         {this.dismissible ? (
-          <pm-icon-button name="x" label="Dismiss" size="small" onHhPress={this.dismiss} />
+          <pm-icon-button name="x" label="Dismiss" size="small" onPmPress={this.dismiss} />
         ) : null}
       </section>
     );
