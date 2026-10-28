@@ -55,9 +55,13 @@ test.describe('PALM accessibility audit', () => {
     const frame = page.frameLocator('#storybook-preview-iframe');
     const button = frame.locator('pm-button button').first();
 
-    // Dispatch Tab in the preview browsing context; clicking the body can
-    // hang because Storybook's preview canvas may intercept pointer input.
+    // Start keyboard navigation inside the preview. The primary button may
+    // not be the first tab stop, so walk the sequence instead of assuming it is.
     await frame.locator('body').press('Tab');
+    for (let tab = 0; tab < 30; tab += 1) {
+      if (await button.evaluate((el) => el.matches(':focus'))) return;
+      await page.keyboard.press('Tab');
+    }
     await expect(button).toBeFocused();
   });
 
