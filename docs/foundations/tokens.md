@@ -1,6 +1,6 @@
 # PALM Foundations & Tokens
 
-PALM tokens are authored independently. They are not copied from STRATA.
+PALM tokens are authored and maintained as the source of truth for PALM.
 
 Token hierarchy:
 
