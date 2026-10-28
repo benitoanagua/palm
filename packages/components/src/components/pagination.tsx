@@ -42,7 +42,7 @@ export class PmPagination {
           label="Previous page"
           size="small"
           disabled={this.page <= 1}
-          onHhPress={() => this.goTo(this.page - 1)}
+          onPmPress={() => this.goTo(this.page - 1)}
         />
         <ul class="pm-pagination__list">
           {pages.map((token, index) =>
@@ -70,7 +70,7 @@ export class PmPagination {
           label="Next page"
           size="small"
           disabled={this.page >= this.pageCount}
-          onHhPress={() => this.goTo(this.page + 1)}
+          onPmPress={() => this.goTo(this.page + 1)}
         />
       </nav>
     );
