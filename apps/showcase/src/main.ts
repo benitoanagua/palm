@@ -1,5 +1,7 @@
 import '@palm/tokens/tokens.css';
-import '@palm/components';
+import { defineCustomElements as defineComponents } from '@palm/components/loader';
+
+defineComponents();
 import './styles.css';
 
 type View = 'overview' | 'activity' | 'forms' | 'settings';
