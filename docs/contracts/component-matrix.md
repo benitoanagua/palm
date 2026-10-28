@@ -14,4 +14,4 @@
 | `pm-card`        | content   | article               | header, default, footer | none       |
 | `pm-badge`       | feedback  | status                | default                 | none       |
 
-This matrix is a PALM contract and is not derived from STRATA APIs.
+This matrix is the authoritative PALM contract; component APIs are defined by PALM.
