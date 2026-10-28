@@ -25,7 +25,7 @@ const commands = [
   },
   {
     label: 'showcase browser tests',
-    args: ['--filter', '@palm/showcase', 'test'],
+    args: ['--filter', '@palm/showcase', 'test:e2e'],
   },
 ];
 
