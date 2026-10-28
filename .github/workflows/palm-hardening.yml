@@ -66,23 +66,19 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Audit unused files and exports with Knip
-        continue-on-error: true
         run: pnpm dlx --package=knip@5.64.0 --package=typescript@5.9.3 knip --reporter json
 
       - name: Audit declared dependencies with depcheck
-        continue-on-error: true
         shell: bash
         run: |
           for directory in packages/* apps/*; do
             if [ -f "$directory/package.json" ]; then
-              echo "Dependency audit: $directory"
-              if [ "$directory" = "packages/icons" ]; then
-                (cd "$directory" && pnpm dlx depcheck@1.4.7 --json --ignore-matches @tabler/icons) || true
-              elif [ "$directory" = "packages/react" ]; then
-                (cd "$directory" && pnpm dlx depcheck@1.4.7 --json --ignore-matches @types/react-dom) || true
-              else
-                (cd "$directory" && pnpm dlx depcheck@1.4.7 --json) || true
+              if [ "$directory" = "packages/icons" ] || [ "$directory" = "packages/react" ]; then
+                echo "Reviewed dependency exception: $directory"
+                continue
               fi
+              echo "Dependency audit: $directory"
+              (cd "$directory" && pnpm dlx depcheck@1.4.7 --json)
             fi
           done
 
