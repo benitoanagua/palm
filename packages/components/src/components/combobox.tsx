@@ -42,15 +42,7 @@ export class PmCombobox {
   @State() private activeIndex = 0;
   private input?: HTMLInputElement;
   private root?: HTMLElement;
-  private listbox?: HTMLElement;
   private listboxId = '';
-
-  private bindListbox = (el?: HTMLElement) => {
-    if (el === this.listbox) return;
-    this.listbox?.removeEventListener('pmSelect', this.onOptionSelect as EventListener);
-    this.listbox = el;
-    this.listbox?.addEventListener('pmSelect', this.onOptionSelect as EventListener);
-  };
 
   componentWillLoad() {
     this.listboxId = `${this.host.id || 'pm-combobox'}-listbox`;
@@ -58,17 +50,16 @@ export class PmCombobox {
   }
   componentDidLoad() {
     this.applyFilter();
+    this.host.addEventListener('pmSelect', this.onOptionSelect as EventListener);
     document.addEventListener('click', this.onDocumentClick, true);
   }
   disconnectedCallback() {
     document.removeEventListener('click', this.onDocumentClick, true);
-    this.listbox?.removeEventListener('pmSelect', this.onOptionSelect as EventListener);
+    this.host.removeEventListener('pmSelect', this.onOptionSelect as EventListener);
   }
 
   private options(): HTMLElement[] {
-    return Array.from(this.host.children).filter(
-      (child) => child.tagName.toLowerCase() === 'pm-combobox-option',
-    ) as HTMLElement[];
+    return Array.from(this.host.querySelectorAll('pm-combobox-option')) as HTMLElement[];
   }
 
   private syncQueryFromValue() {
@@ -239,7 +230,6 @@ export class PmCombobox {
           class="pm-combobox__listbox"
           role="listbox"
           hidden={!this.open}
-          ref={(el) => this.bindListbox(el as HTMLElement | undefined)}
         >
           <slot onSlotchange={this.applyFilter} />
           {visible.length === 0 ? <p class="pm-combobox__empty">{this.noResultsText}</p> : null}
