@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    "apps/storybook": {
+      "entry": [
+        ".storybook/main.ts",
+        ".storybook/preview.ts",
+        "src/**/*.stories.ts",
+        "src/story-helpers.ts"
+      ],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "packages/icons": {
+      "ignoreDependencies": ["@tabler/icons"]
+    }
+  }
+}
