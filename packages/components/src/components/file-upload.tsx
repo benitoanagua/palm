@@ -175,7 +175,7 @@ export class PmFileUpload {
                   name="x"
                   label={`Remove ${file.name}`}
                   size="small"
-                  onHhPress={() => this.removeFile(index)}
+                  onPmPress={() => this.removeFile(index)}
                 />
               </li>
             ))}
