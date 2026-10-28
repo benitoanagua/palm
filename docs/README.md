@@ -2,8 +2,6 @@
 
 PALM is an independent design system implemented with Stencil and Web Components.
 
-STRATA is referenced only for repository-organization ideas. No STRATA visual language, tokens, component logic, APIs, or behavior are inherited.
-
 Documentation areas:
 - architecture
 - foundations
