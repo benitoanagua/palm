@@ -41,9 +41,7 @@ describe('pm-file-upload', () => {
     expect(
       page.root?.querySelector('.pm-file-upload__list')?.textContent,
     ).not.toContain('photo.png');
-    expect(
-      page.root?.querySelector('[role="alert"]')?.textContent,
-    ).toContain('photo.png');
+    expect(page.root?.querySelector('[role="alert"]')?.textContent).toContain('photo.png');
   });
 
   it('rejects a file over maxSizeBytes', async () => {
