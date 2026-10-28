@@ -76,7 +76,7 @@ jobs:
           for directory in packages/* apps/*; do
             if [ -f "$directory/package.json" ]; then
               echo "Dependency audit: $directory"
-              pnpm dlx depcheck@1.4.7 --json "$directory" || true
+              (cd "$directory" && pnpm dlx depcheck@1.4.7 --json) || true
             fi
           done
 
