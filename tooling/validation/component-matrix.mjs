@@ -10,11 +10,10 @@ const matrixTags = new Set();
 function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const absolute = path.join(directory, entry.name);
-    if (
-      entry.isDirectory() &&
-      !['node_modules', 'dist', '.stencil'].includes(entry.name)
-    ) {
-      walk(absolute);
+    if (entry.isDirectory()) {
+      if (!['node_modules', 'dist', '.stencil'].includes(entry.name)) {
+        walk(absolute);
+      }
     } else if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
       const source = fs.readFileSync(absolute, 'utf8');
       for (const match of source.matchAll(/\btag\s*:\s*['"](pm-[a-z0-9-]+)['"]/g)) {
