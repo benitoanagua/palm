@@ -35,9 +35,7 @@ for (const line of matrix.split('\n')) {
 }
 
 const missing = [...componentTags].filter((tag) => !matrixTags.has(tag)).sort();
-const stale = [...matrixTags]
-  .filter((tag) => !componentTags.has(tag))
-  .sort();
+const stale = [...matrixTags].filter((tag) => !componentTags.has(tag)).sort();
 if (missing.length || stale.length) {
   console.error('PALM component matrix does not match @Component tags.');
   if (missing.length) {
