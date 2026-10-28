@@ -76,6 +76,7 @@ test.describe('PALM accessibility audit', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/?path=/story/palm-components-gallery--core');
     const frame = page.frameLocator('#storybook-preview-iframe');
+    await expect(frame.locator('pm-button button').first()).toBeVisible();
     const value = await frame
       .locator('html')
       .evaluate((el) => getComputedStyle(el).getPropertyValue('--pm-motion-normal').trim());
