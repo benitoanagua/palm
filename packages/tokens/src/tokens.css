@@ -1,12 +1,6 @@
 :root {
-  /* Primitive color scale — PALM-owned values.
-     Reemplaza la paleta placeholder genérica (azul #155eef, escala
-     neutral estándar) por la paleta real de Palm: verificada con
-     simulación de protanopia/deuteranopia/tritanopia (matrices
-     Machado-Oliveira-Fernandes) y con contraste ≥7:1 (AAA) contra
-     blanco en los 4 colores semánticos — ver docs/foundations/palm-design-system.md
-     Sección 2.1. No son valores estéticos: son el resultado de una
-     búsqueda computacional sobre rangos de matiz semánticos. */
+  /* PALM-owned primitive color scale. Semantic aliases below are the stable
+     component-facing contract; primitive values can change without renaming it. */
   --pm-color-neutral-0: #ffffff;
   --pm-color-neutral-50: #f5f5f5;
   --pm-color-neutral-100: #f1f2f4;
@@ -38,6 +32,14 @@
   --pm-color-danger: var(--pm-color-red-600);
   --pm-color-success: var(--pm-color-green-600);
   --pm-color-warning: var(--pm-color-yellow-500);
+  --pm-color-pending: var(--pm-color-warning);
+  --pm-color-confirmed: var(--pm-color-success);
+  --pm-color-conflict: var(--pm-color-danger);
+  --pm-color-on-color: var(--pm-color-neutral-0);
+  --pm-color-header-bg: var(--pm-color-neutral-900);
+  --pm-color-header-text: var(--pm-color-neutral-0);
+  --pm-color-header-text-dim: var(--pm-color-neutral-300);
+  --pm-color-border-light: var(--pm-color-neutral-300);
 
   /* Space / sizing. */
   --pm-space-0: 0;

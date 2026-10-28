@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "playwright test src/contracts.spec.ts",
+    "test": "node -e \"console.log('@palm/testing has no unit tests; use pnpm test:e2e for browser contracts.')\"",
     "test:visual": "playwright test visual",
     "test:a11y": "playwright test visual/a11y.spec.ts",
     "test:contracts": "playwright test src/contracts.spec.ts",

@@ -8,7 +8,6 @@ export class PmStatus {
   render() {
     return (
       <span class={`pm-status pm-status--${this.tone}`} role="status">
-        <span class="pm-status__dot" aria-hidden="true" />
         {this.label || <slot />}
       </span>
     );

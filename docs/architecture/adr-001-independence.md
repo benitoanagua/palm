@@ -1,8 +1,6 @@
 # ADR-001: PALM Independence
 
-## Status
-
-Accepted.
+**Estado:** aceptado
 
 ## Context
 
