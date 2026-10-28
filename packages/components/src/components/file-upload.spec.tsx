@@ -38,9 +38,7 @@ describe('pm-file-upload', () => {
     ]);
     await page.waitForChanges();
     expect(spy).toHaveBeenCalled();
-    expect(page.root?.querySelector('.pm-file-upload__list')?.textContent).not.toContain(
-      'photo.png',
-    );
+    expect(page.root?.querySelector('.pm-file-upload__list')).toBeNull();
     expect(page.root?.querySelector('[role="alert"]')?.textContent).toContain('photo.png');
   });
 
