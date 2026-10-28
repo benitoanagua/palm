@@ -54,10 +54,13 @@ test.describe('PALM accessibility audit', () => {
     await page.goto('/?path=/story/palm-components-gallery--core');
     const frame = page.frameLocator('#storybook-preview-iframe');
     const button = frame.locator('pm-button button').first();
-    await button.focus();
-    await expect(button).toBeFocused();
+
+    // Start from the preview document and use the keyboard rather than
+    // calling focus() directly, which bypasses the behavior under test.
+    await frame.locator('body').click({ position: { x: 1, y: 1 } });
     await page.keyboard.press('Tab');
     await expect(frame.locator(':focus')).toBeVisible();
+    await expect(button).toBeFocused();
   });
 
   test('dialog restores focus after Escape', async ({ page }) => {

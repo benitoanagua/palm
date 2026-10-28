@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - chore/palm-final-ci
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
