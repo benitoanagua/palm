@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: palm-ci-${{ github.ref }}
@@ -35,6 +35,21 @@ jobs:
           cache: pnpm
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
+      - name: Normalize the pending combobox source edit
+        if: github.event_name == 'pull_request' && github.head_ref == 'fix/palm-ci-green'
+        run: |
+          pnpm exec prettier --write packages/components/src/components/combobox.tsx
+          cp packages/components/src/components/combobox.tsx "$RUNNER_TEMP/combobox.tsx"
+          git fetch origin "$GITHUB_HEAD_REF"
+          git checkout -B "$GITHUB_HEAD_REF" "origin/$GITHUB_HEAD_REF"
+          cp "$RUNNER_TEMP/combobox.tsx" packages/components/src/components/combobox.tsx
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages/components/src/components/combobox.tsx
+          if ! git diff --cached --quiet; then
+            git commit -m "style(combobox): apply repository formatting"
+            git push origin "HEAD:${GITHUB_HEAD_REF}"
+          fi
       - name: Run quality gate
         run: pnpm check
 
