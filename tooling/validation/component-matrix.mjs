@@ -36,12 +36,22 @@ for (const line of matrix.split('\n')) {
   }
 }
 
-const missing = [...componentTags].filter((tag) => !matrixTags.has(tag)).sort();
-const stale = [...matrixTags].filter((tag) => !componentTags.has(tag)).sort();
+const missing = [...componentTags]
+  .filter((tag) => !matrixTags.has(tag))
+  .sort();
+const stale = [...matrixTags]
+  .filter((tag) => !componentTags.has(tag))
+  .sort();
 if (missing.length || stale.length) {
   console.error('PALM component matrix does not match @Component tags.');
-  if (missing.length) console.error('Missing matrix rows: ' + missing.join(', '));
-  if (stale.length) console.error('Rows without @Component source: ' + stale.join(', '));
+  if (missing.length) {
+    console.error('Missing matrix rows: ' + missing.join(', '));
+  }
+  if (stale.length) {
+    console.error('Rows without @Component source: ' + stale.join(', '));
+  }
   process.exit(1);
 }
-console.log(`PALM component matrix covers all ${componentTags.size} @Component tags.`);
+console.log(
+  `PALM component matrix covers all ${componentTags.size} @Component tags.`,
+);
