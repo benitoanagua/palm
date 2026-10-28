@@ -13,6 +13,7 @@
     "packages/icons": {
       "entry": ["src/index.ts"],
       "project": ["src/**/*.ts"],
+      "ignore": ["src/data/tabler-outline.json"],
       "ignoreDependencies": ["@tabler/icons"]
     },
     "apps/showcase": {
