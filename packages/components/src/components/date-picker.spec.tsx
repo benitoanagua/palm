@@ -16,21 +16,18 @@ describe('pm-date-picker', () => {
     expect(spy).toHaveBeenCalledWith('2026-03-15');
   });
 
-  it('disables a day button outside the min/max range', async () => {
+  it('disables dates outside the min/max range', async () => {
     const page = await newSpecPage({
       components: [PmDatePicker],
       html: '<pm-date-picker value="2026-03-15" min="2026-03-10" max="2026-03-20"></pm-date-picker>',
     });
-    const button = page.doc.createElement('button');
-    // Find day "5" (before min) and day "25" (after max) among rendered day buttons.
-    const dayButtons = Array.from(
-      page.root?.querySelectorAll('.pm-date-picker__day') ?? [],
-    ) as HTMLButtonElement[];
-    const day5 = dayButtons.find((b) => b.textContent?.trim() === '5');
-    const day25 = dayButtons.find((b) => b.textContent?.trim() === '25');
-    expect(day5?.disabled).toBe(true);
-    expect(day25?.disabled).toBe(true);
-    void button;
+    const instance = page.rootInstance as unknown as {
+      isDisabled: (date: Date) => boolean;
+    };
+    expect(instance.isDisabled(new Date(2026, 2, 5))).toBe(true);
+    expect(instance.isDisabled(new Date(2026, 2, 10))).toBe(false);
+    expect(instance.isDisabled(new Date(2026, 2, 20))).toBe(false);
+    expect(instance.isDisabled(new Date(2026, 2, 25))).toBe(true);
   });
 
   it('does not select a disabled day', async () => {
