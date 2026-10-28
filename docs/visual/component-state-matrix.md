@@ -1,6 +1,6 @@
 # PALM visual state matrix
 
-The visual contract is PALM-owned. STRATA is not a visual baseline.
+The visual contract is owned by PALM and uses PALM-approved baselines.
 
 ## Viewports
 
