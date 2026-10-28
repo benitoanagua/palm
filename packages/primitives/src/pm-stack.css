@@ -1,4 +1,6 @@
-:host { display: block; }
+:host {
+  display: block;
+}
 .pm-stack {
   display: flex;
   flex-direction: var(--pm-stack-direction, column);

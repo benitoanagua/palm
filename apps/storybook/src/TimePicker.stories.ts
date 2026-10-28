@@ -10,6 +10,10 @@ const meta = {
 export default meta;
 
 export const Default = { render: () => h('pm-time-picker', { label: 'Meeting time' }) };
-export const WithValue = { render: () => h('pm-time-picker', { label: 'Meeting time', value: '14:30' }) };
+export const WithValue = {
+  render: () => h('pm-time-picker', { label: 'Meeting time', value: '14:30' }),
+};
 export const WithStep = { render: () => h('pm-time-picker', { label: 'Meeting time', step: 900 }) };
-export const Disabled = { render: () => h('pm-time-picker', { label: 'Meeting time', disabled: true, value: '09:00' }) };
+export const Disabled = {
+  render: () => h('pm-time-picker', { label: 'Meeting time', disabled: true, value: '09:00' }),
+};

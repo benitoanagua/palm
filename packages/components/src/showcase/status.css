@@ -1,6 +1,31 @@
-.pm-status { display:inline-flex; align-items:center; gap:7px; min-height:28px; padding:4px 10px; border:1px solid var(--pm-color-border); border-radius:999px; font-size:.8125rem; font-weight:600; background:var(--pm-color-surface); color:var(--pm-color-text); }
-.pm-status__dot { width:7px; height:7px; border-radius:50%; background:currentColor; }
-.pm-status--success { color:var(--pm-color-success); }
-.pm-status--warning { color:var(--pm-color-warning); }
-.pm-status--danger { color:var(--pm-color-danger); }
-.pm-status--info { color:var(--pm-color-action); }
+.pm-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  padding: 4px 10px;
+  border: 1px solid var(--pm-color-border);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--pm-color-surface);
+  color: var(--pm-color-text);
+}
+.pm-status__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.pm-status--success {
+  color: var(--pm-color-success);
+}
+.pm-status--warning {
+  color: var(--pm-color-warning);
+}
+.pm-status--danger {
+  color: var(--pm-color-danger);
+}
+.pm-status--info {
+  color: var(--pm-color-action);
+}

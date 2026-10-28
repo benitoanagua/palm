@@ -21,9 +21,7 @@
     "lint": "node ../../tooling/lint/package-rules.mjs components"
   },
   "dependencies": {
-    "@palm/foundation": "workspace:*",
-    "@palm/icons": "workspace:*",
-    "@palm/tokens": "workspace:*"
+    "@palm/icons": "workspace:*"
   },
   "devDependencies": {
     "@stencil/core": "^4.38.0"

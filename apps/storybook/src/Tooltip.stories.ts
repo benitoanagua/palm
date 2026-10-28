@@ -10,12 +10,18 @@ const meta = {
 export default meta;
 
 export const Top = {
-  render: () => h('pm-tooltip', { text: 'Helpful context', placement: 'top' },
-    h('pm-icon', { name: 'info-circle', 'aria-label': 'Information' }),
-  ),
+  render: () =>
+    h(
+      'pm-tooltip',
+      { text: 'Helpful context', placement: 'top' },
+      h('pm-icon', { name: 'info-circle', 'aria-label': 'Information' }),
+    ),
 };
 export const Bottom = {
-  render: () => h('pm-tooltip', { text: 'Helpful context', placement: 'bottom' },
-    h('pm-icon', { name: 'info-circle', 'aria-label': 'Information' }),
-  ),
+  render: () =>
+    h(
+      'pm-tooltip',
+      { text: 'Helpful context', placement: 'bottom' },
+      h('pm-icon', { name: 'info-circle', 'aria-label': 'Information' }),
+    ),
 };

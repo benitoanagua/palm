@@ -5,7 +5,8 @@ export default {
 };
 
 export const Core = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
       <div style="display:grid;gap:24px;padding:32px;max-width:900px;background:var(--pm-color-background);color:var(--pm-color-text)">
         <section style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
           <pm-button variant="primary"><pm-icon slot="start" name="plus"></pm-icon>Primary</pm-button>

@@ -3,7 +3,8 @@ import { stencilContent } from './story-helpers';
 export default { title: 'PALM/Showcase' };
 
 export const ProductSurface = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
       <div style="display:grid;gap:24px;padding:32px;max-width:1100px;background:var(--pm-color-background);color:var(--pm-color-text)">
         <div style="display:grid;gap:8px">
           <span style="font-size:.75rem;color:var(--pm-color-text-muted);text-transform:uppercase;letter-spacing:.08em">Composable UI</span>
@@ -36,5 +37,8 @@ export const ProductSurface = {
 };
 
 export const Responsive = {
-  render: () => stencilContent(`<div style="padding:24px;max-width:720px"><pm-toolbar><span slot="start">Filters</span><pm-input placeholder="Search" aria-label="Search"></pm-input><div slot="end"><pm-button variant="secondary">Reset</pm-button><pm-button>Apply</pm-button></div></pm-toolbar></div>`),
+  render: () =>
+    stencilContent(
+      `<div style="padding:24px;max-width:720px"><pm-toolbar><span slot="start">Filters</span><pm-input placeholder="Search" aria-label="Search"></pm-input><div slot="end"><pm-button variant="secondary">Reset</pm-button><pm-button>Apply</pm-button></div></pm-toolbar></div>`,
+    ),
 };

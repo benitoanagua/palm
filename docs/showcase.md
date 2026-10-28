@@ -13,7 +13,7 @@ It intentionally contains no domain logic, API client, persistence or framework-
 
 ## Visual intent
 
-The application is a PALM consumer. It should be used to detect component inconsistencies without comparing pixels to STRATA.
+The application is a PALM consumer and the reference surface for detecting inconsistencies against PALM's own approved visual baselines.
 
 ## Commands
 

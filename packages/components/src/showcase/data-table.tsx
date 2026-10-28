@@ -67,7 +67,9 @@ export class PmDataTable {
   private filteredRows(): Record<string, string>[] {
     if (!this.filterable || !this.filterValue.trim()) return this.rows;
     const needle = this.filterValue.trim().toLowerCase();
-    return this.rows.filter((row) => this.columns.some((col) => (row[col.key] ?? '').toLowerCase().includes(needle)));
+    return this.rows.filter((row) =>
+      this.columns.some((col) => (row[col.key] ?? '').toLowerCase().includes(needle)),
+    );
   }
 
   private sortedRows(rows: Record<string, string>[]): Record<string, string>[] {
@@ -111,11 +113,16 @@ export class PmDataTable {
               placeholder={this.filterPlaceholder}
               aria-label={this.filterPlaceholder}
               value={this.filterValue}
-              onHhInput={this.onFilterInput}
+              onPmInput={this.onFilterInput}
             />
           </div>
         ) : null}
-        <div class="pm-data-table" role="region" aria-label={this.caption || 'Data table'} tabIndex={0}>
+        <div
+          class="pm-data-table"
+          role="region"
+          aria-label={this.caption || 'Data table'}
+          tabIndex={0}
+        >
           <table>
             {this.caption ? <caption>{this.caption}</caption> : null}
             <thead>
@@ -123,9 +130,17 @@ export class PmDataTable {
                 {this.columns.map((c) => {
                   const sortable = c.sortable !== false;
                   return (
-                    <th scope="col" class={c.numeric ? 'numeric' : ''} aria-sort={sortable ? this.ariaSortFor(c) : undefined}>
+                    <th
+                      scope="col"
+                      class={c.numeric ? 'numeric' : ''}
+                      aria-sort={sortable ? this.ariaSortFor(c) : undefined}
+                    >
                       {sortable ? (
-                        <button type="button" class="pm-data-table__sort" onClick={() => this.toggleSort(c)}>
+                        <button
+                          type="button"
+                          class="pm-data-table__sort"
+                          onClick={() => this.toggleSort(c)}
+                        >
                           <span>{c.label}</span>
                           <pm-icon
                             name={
@@ -148,10 +163,18 @@ export class PmDataTable {
             </thead>
             <tbody>
               {visibleRows.length === 0 ? (
-                <tr><td colSpan={this.columns.length} class="pm-data-table__empty">No matching rows.</td></tr>
+                <tr>
+                  <td colSpan={this.columns.length} class="pm-data-table__empty">
+                    No matching rows.
+                  </td>
+                </tr>
               ) : (
                 visibleRows.map((row) => (
-                  <tr>{this.columns.map((c) => <td class={c.numeric ? 'numeric' : ''}>{row[c.key]}</td>)}</tr>
+                  <tr>
+                    {this.columns.map((c) => (
+                      <td class={c.numeric ? 'numeric' : ''}>{row[c.key]}</td>
+                    ))}
+                  </tr>
                 ))
               )}
             </tbody>
@@ -159,7 +182,11 @@ export class PmDataTable {
         </div>
         {this.pageSize && sorted.length > this.pageSize ? (
           <div class="pm-data-table__footer">
-            <pm-pagination page={this.page} pageCount={pageCount} onHhChange={(event: CustomEvent<number>) => this.goToPage(event.detail)} />
+            <pm-pagination
+              page={this.page}
+              pageCount={pageCount}
+              onPmChange={(event: CustomEvent<number>) => this.goToPage(event.detail)}
+            />
           </div>
         ) : null}
       </div>

@@ -1,18 +1,71 @@
-:host { display: contents; }
-.dialog { width: min(32rem, calc(100vw - 2rem)); max-width: 100%; padding: 0; border: 0; border-radius: var(--pm-radius-lg); background: var(--pm-color-surface-raised); color: var(--pm-color-text); box-shadow: var(--pm-shadow-lg); }
+:host {
+  display: contents;
+}
+.dialog {
+  width: min(32rem, calc(100vw - 2rem));
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--pm-radius-lg);
+  background: var(--pm-color-surface-raised);
+  color: var(--pm-color-text);
+  box-shadow: var(--pm-shadow-lg);
+}
 /* Acento de color a modo de franja superior -- distingue el modal de
    conflicto de sync del modal de acción crítica sin agregar un
    segundo lenguaje visual (palm-design-system.md §4.3/4.4). */
-.dialog.is-accent-action { border-top: 3px solid var(--pm-color-action); }
-.dialog.is-accent-danger { border-top: 3px solid var(--pm-color-danger); }
-.dialog.is-accent-danger .dialog-header h2 { color: var(--pm-color-danger); }
-.dialog::backdrop { background: rgb(0 0 0 / .48); }
-.dialog-panel { display: grid; }
-.dialog-header, .dialog-footer { display: flex; align-items: center; gap: var(--pm-space-3); padding: var(--pm-space-4) var(--pm-space-5); }
-.dialog-header { justify-content: space-between; border-bottom: 1px solid var(--pm-color-border); }
-.dialog-header h2 { margin: 0; font-size: var(--pm-font-size-lg); }
-.dialog-body { padding: var(--pm-space-5); }
-.dialog-footer { justify-content: flex-end; border-top: 1px solid var(--pm-color-border); }
-.close { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
-.close:hover { background: var(--pm-color-neutral-100); }
-.close:focus-visible { outline: none; box-shadow: var(--pm-focus-ring); }
+.dialog.is-accent-action {
+  border-top: 3px solid var(--pm-color-action);
+}
+.dialog.is-accent-danger {
+  border-top: 3px solid var(--pm-color-danger);
+}
+.dialog.is-accent-danger .dialog-header h2 {
+  color: var(--pm-color-danger);
+}
+.dialog::backdrop {
+  background: rgb(0 0 0 / 0.48);
+}
+.dialog-panel {
+  display: grid;
+}
+.dialog-header,
+.dialog-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--pm-space-3);
+  padding: var(--pm-space-4) var(--pm-space-5);
+}
+.dialog-header {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--pm-color-border);
+}
+.dialog-header h2 {
+  margin: 0;
+  font-size: var(--pm-font-size-lg);
+}
+.dialog-body {
+  padding: var(--pm-space-5);
+}
+.dialog-footer {
+  justify-content: flex-end;
+  border-top: 1px solid var(--pm-color-border);
+}
+.close {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.close:hover {
+  background: var(--pm-color-neutral-100);
+}
+.close:focus-visible {
+  outline: none;
+  box-shadow: var(--pm-focus-ring);
+}

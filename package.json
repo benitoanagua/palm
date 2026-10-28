@@ -16,7 +16,7 @@
     "test:showcase": "pnpm --filter @palm/showcase test",
     "test:visual": "pnpm --filter @palm/testing test:visual",
     "test:visual:update": "pnpm --filter @palm/testing test:visual -- --update-snapshots",
-    "check": "pnpm check:icons && pnpm check:framework && pnpm check:api && pnpm check:dependencies && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:storybook",
+    "check": "pnpm check:icons && pnpm check:framework && pnpm check:api && pnpm check:docs-links && pnpm check:dependencies && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm test:a11y && pnpm build && pnpm build:storybook",
     "release": "changeset publish",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
@@ -26,7 +26,8 @@
     "format:repair": "prettier --write .",
     "check:framework": "node tooling/validation/no-lit.mjs",
     "check:dependencies": "node tooling/validation/dependency-consistency.mjs",
-    "check:api": "node tooling/validation/public-api.mjs"
+    "check:api": "node tooling/validation/public-api.mjs",
+    "check:docs-links": "node tooling/validation/docs-links.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.0",

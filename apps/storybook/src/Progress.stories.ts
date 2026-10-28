@@ -10,11 +10,16 @@ const meta = {
 export default meta;
 
 export const Default = { render: () => h('pm-progress', { value: 60, label: 'Uploading' }) };
-export const Indeterminate = { render: () => h('pm-progress', { indeterminate: true, label: 'Loading' }) };
+export const Indeterminate = {
+  render: () => h('pm-progress', { indeterminate: true, label: 'Loading' }),
+};
 export const Tones = {
-  render: () => h('div', { style: { display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '280px' } },
-    h('pm-progress', { value: 80, tone: 'success', label: 'Success' }),
-    h('pm-progress', { value: 40, tone: 'warning', label: 'Warning' }),
-    h('pm-progress', { value: 20, tone: 'danger', label: 'Danger' }),
-  ),
+  render: () =>
+    h(
+      'div',
+      { style: { display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '280px' } },
+      h('pm-progress', { value: 80, tone: 'success', label: 'Success' }),
+      h('pm-progress', { value: 40, tone: 'warning', label: 'Warning' }),
+      h('pm-progress', { value: 20, tone: 'danger', label: 'Danger' }),
+    ),
 };

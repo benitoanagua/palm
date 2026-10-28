@@ -21,9 +21,6 @@
     "test": "stencil test --spec",
     "lint": "node ../../tooling/lint/package-rules.mjs primitives"
   },
-  "dependencies": {
-    "@palm/tokens": "workspace:*"
-  },
   "devDependencies": {
     "@stencil/core": "^4.38.0"
   }

@@ -11,17 +11,20 @@ const meta = {
 export default meta;
 
 export const Default = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
     <pm-button onclick="document.querySelector('pm-toast-region').show({ heading: 'Saved', message: 'Your changes were saved.', tone: 'success' })">Show toast</pm-button>
     <pm-toast-region placement="bottom"></pm-toast-region>`),
 };
 export const TopPlacement = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
     <pm-button onclick="document.querySelector('pm-toast-region').show({ heading: 'Heads up', message: 'A new update is available.', tone: 'info' })">Show toast</pm-button>
     <pm-toast-region placement="top"></pm-toast-region>`),
 };
 export const Persistent = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
     <pm-button onclick="document.querySelector('pm-toast-region').show({ heading: 'Action required', message: 'Confirm your email address.', tone: 'warning', duration: 0 })">Show persistent toast</pm-button>
     <pm-toast-region placement="bottom"></pm-toast-region>`),
 };

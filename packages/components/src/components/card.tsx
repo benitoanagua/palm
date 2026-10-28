@@ -22,9 +22,15 @@ export class PmCard {
         onClick={(event) => this.interactive && this.pmPress.emit(event)}
         onKeyDown={this.handleKeyDown}
       >
-        <header><slot name="header" /></header>
-        <div class="body"><slot /></div>
-        <footer><slot name="footer" /></footer>
+        <header>
+          <slot name="header" />
+        </header>
+        <div class="body">
+          <slot />
+        </div>
+        <footer>
+          <slot name="footer" />
+        </footer>
       </article>
     );
   }

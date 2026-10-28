@@ -1,8 +1,7 @@
 /*
  * Utility classes for the type scale defined in tokens.css.
  * Optional — components/products can also reference --pm-type-*-size etc.
- * directly, but these classes give product teams a documented, Material
- * Type Scale / Carbon Type–style scale they can reach for without
+ * directly, but these classes provide a consistent typographic scale without
  * re-deriving font-size + line-height + weight + letter-spacing by hand.
  */
 .pm-type-display {

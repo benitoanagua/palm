@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - chore/palm-hardening
+      - chore/palm-hardening-docs
+      - chore/palm-hardening-docs
+      - chore/palm-hardening-docs
   workflow_dispatch:
 
 permissions:
@@ -62,6 +65,32 @@ jobs:
 
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Audit unused files and exports with Knip
+        run: pnpm dlx --package=knip@5.64.0 --package=typescript@5.9.3 knip --reporter json
+
+      - name: Audit declared dependencies with depcheck
+        shell: bash
+        run: |
+          for directory in packages/* apps/*; do
+            if [ -f "$directory/package.json" ]; then
+              if [ "$directory" = "packages/icons" ] || [ "$directory" = "packages/react" ]; then
+                echo "Reviewed dependency exception: $directory"
+                continue
+              fi
+              echo "Dependency audit: $directory"
+              (cd "$directory" && pnpm dlx depcheck@1.4.7 --json)
+            fi
+          done
+
+      - name: Install Chromium for accessibility and contract tests
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Generate complete Tabler icon dataset
+        run: node tooling/generate-tabler-data.mjs
+
+      - name: Verify repository formatting
+        run: pnpm format:check
 
       - name: Run baseline quality gate
         run: pnpm check

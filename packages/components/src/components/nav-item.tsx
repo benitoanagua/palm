@@ -7,8 +7,25 @@ export class PmNavItem {
   @Prop() disabled = false;
   @Event() pmNavigate!: EventEmitter<string>;
   render() {
-    return this.href && !this.disabled
-      ? <a class={{ nav: true, active: this.active }} href={this.href} aria-current={this.active ? 'page' : undefined} onClick={() => this.pmNavigate.emit(this.href)}><slot /></a>
-      : <button class={{ nav: true, active: this.active }} type="button" disabled={this.disabled} aria-current={this.active ? 'page' : undefined} onClick={() => this.pmNavigate.emit(this.href)}><slot /></button>;
+    return this.href && !this.disabled ? (
+      <a
+        class={{ nav: true, active: this.active }}
+        href={this.href}
+        aria-current={this.active ? 'page' : undefined}
+        onClick={() => this.pmNavigate.emit(this.href)}
+      >
+        <slot />
+      </a>
+    ) : (
+      <button
+        class={{ nav: true, active: this.active }}
+        type="button"
+        disabled={this.disabled}
+        aria-current={this.active ? 'page' : undefined}
+        onClick={() => this.pmNavigate.emit(this.href)}
+      >
+        <slot />
+      </button>
+    );
   }
 }

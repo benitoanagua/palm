@@ -1,4 +1,6 @@
-:host { display: inline-block; }
+:host {
+  display: inline-block;
+}
 .pm-button {
   display: inline-flex;
   align-items: center;
@@ -15,31 +17,85 @@
   /* Glossy real de AA: degradé + resalto interior, no un lift moderno
      de tarjeta SaaS -- ver docs/foundations/palm-design-system.md 2.2 */
   background: linear-gradient(to bottom, #fdfdfd, #e2e2e2);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
-  transition: background var(--pm-motion-fast) var(--pm-ease-standard), border-color var(--pm-motion-fast) var(--pm-ease-standard), box-shadow var(--pm-motion-fast) var(--pm-ease-standard);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition:
+    background var(--pm-motion-fast) var(--pm-ease-standard),
+    border-color var(--pm-motion-fast) var(--pm-ease-standard),
+    box-shadow var(--pm-motion-fast) var(--pm-ease-standard);
 }
-.pm-button:hover:not(:disabled) { background: linear-gradient(to bottom, #ffffff, #d8d8d8); }
-.pm-button:active:not(:disabled) { background: #cfcfcf; box-shadow: none; }
-.pm-button:focus-visible { outline: none; box-shadow: var(--pm-focus-ring); }
-.pm-button:disabled { cursor: not-allowed; opacity: .55; }
-.pm-button.is-small { min-height: var(--pm-size-control-sm); padding-inline: var(--pm-space-3); font-size: var(--pm-font-size-sm); }
-.pm-button.is-large { min-height: var(--pm-size-control-lg); padding-inline: var(--pm-space-5); }
-.pm-button.is-full { width: 100%; }
+.pm-button:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #ffffff, #d8d8d8);
+}
+.pm-button:active:not(:disabled) {
+  background: #cfcfcf;
+  box-shadow: none;
+}
+.pm-button:focus-visible {
+  outline: none;
+  box-shadow: var(--pm-focus-ring);
+}
+.pm-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.pm-button.is-small {
+  min-height: var(--pm-size-control-sm);
+  padding-inline: var(--pm-space-3);
+  font-size: var(--pm-font-size-sm);
+}
+.pm-button.is-large {
+  min-height: var(--pm-size-control-lg);
+  padding-inline: var(--pm-space-5);
+}
+.pm-button.is-full {
+  width: 100%;
+}
 .pm-button.is-primary {
   color: var(--pm-color-action-contrast);
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--pm-color-action) 70%, white), var(--pm-color-action));
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--pm-color-action) 70%, white),
+    var(--pm-color-action)
+  );
   border-color: color-mix(in srgb, var(--pm-color-action) 70%, black);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.pm-button.is-primary:hover:not(:disabled) { background: linear-gradient(to bottom, color-mix(in srgb, var(--pm-color-action) 80%, white), color-mix(in srgb, var(--pm-color-action) 90%, black)); }
-.pm-button.is-secondary { color: var(--pm-color-text); background: var(--pm-color-surface-raised); border-color: var(--pm-color-border); text-shadow: none; box-shadow: none; }
-.pm-button.is-tertiary { color: var(--pm-color-action); background: transparent; border-color: transparent; text-shadow: none; box-shadow: none; }
+.pm-button.is-primary:hover:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--pm-color-action) 80%, white),
+    color-mix(in srgb, var(--pm-color-action) 90%, black)
+  );
+}
+.pm-button.is-secondary {
+  color: var(--pm-color-text);
+  background: var(--pm-color-surface-raised);
+  border-color: var(--pm-color-border);
+  text-shadow: none;
+  box-shadow: none;
+}
+.pm-button.is-tertiary {
+  color: var(--pm-color-action);
+  background: transparent;
+  border-color: transparent;
+  text-shadow: none;
+  box-shadow: none;
+}
 .pm-button.is-danger {
   color: var(--pm-color-danger-contrast);
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--pm-color-danger) 70%, white), var(--pm-color-danger));
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--pm-color-danger) 70%, white),
+    var(--pm-color-danger)
+  );
   border-color: color-mix(in srgb, var(--pm-color-danger) 70%, black);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.pm-button.is-loading { cursor: wait; }
-.start:empty, .end:empty { display: none; }
+.pm-button.is-loading {
+  cursor: wait;
+}
+.start:empty,
+.end:empty {
+  display: none;
+}

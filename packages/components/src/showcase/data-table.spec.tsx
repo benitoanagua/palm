@@ -23,12 +23,16 @@ describe('pm-data-table', () => {
     const header = table.querySelector('.pm-data-table__sort') as HTMLButtonElement;
     header.click();
     await page.waitForChanges();
-    let names = Array.from(table.querySelectorAll('tbody tr td:first-child')).map((td) => td.textContent);
+    let names = Array.from(table.querySelectorAll('tbody tr td:first-child')).map(
+      (td) => td.textContent,
+    );
     expect(names).toEqual(['Ann', 'Bea', 'Cid']);
 
     header.click();
     await page.waitForChanges();
-    names = Array.from(table.querySelectorAll('tbody tr td:first-child')).map((td) => td.textContent);
+    names = Array.from(table.querySelectorAll('tbody tr td:first-child')).map(
+      (td) => td.textContent,
+    );
     expect(names).toEqual(['Cid', 'Bea', 'Ann']);
   });
 
@@ -44,7 +48,9 @@ describe('pm-data-table', () => {
     const input = table.querySelector('pm-input') as HTMLElement;
     input.dispatchEvent(new CustomEvent('pmInput', { detail: 'ann' }));
     await page.waitForChanges();
-    const names = Array.from(table.querySelectorAll('tbody tr td:first-child')).map((td) => td.textContent);
+    const names = Array.from(table.querySelectorAll('tbody tr td:first-child')).map(
+      (td) => td.textContent,
+    );
     expect(names).toEqual(['Ann']);
   });
 

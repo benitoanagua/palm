@@ -1,0 +1,41 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    "apps/storybook": {
+      "entry": [
+        ".storybook/main.ts",
+        ".storybook/preview.ts",
+        "src/**/*.stories.ts",
+        "src/story-helpers.ts"
+      ],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "packages/icons": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.ts"],
+      "ignore": ["src/data/tabler-outline.json"],
+      "ignoreDependencies": ["@tabler/icons"]
+    },
+    "apps/showcase": {
+      "entry": ["src/main.ts", "vite.config.ts", "src/**/*.spec.ts", "src/**/*.spec.tsx"],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "packages/components": {
+      "entry": [
+        "stencil.config.ts",
+        "src/index.ts",
+        "src/components/**/*.{ts,tsx}",
+        "src/showcase/**/*.{ts,tsx}"
+      ],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "packages/primitives": {
+      "entry": ["stencil.config.ts", "src/index.ts", "src/pm-*.tsx"],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "packages/react": {
+      "ignoreDependencies": ["@types/react-dom"]
+    }
+  },
+  "entry": ["tooling/generate-tabler-data.mjs"]
+}

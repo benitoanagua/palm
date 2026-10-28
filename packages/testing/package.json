@@ -5,9 +5,10 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test src/contracts.spec.ts",
     "test:visual": "playwright test visual",
     "test:a11y": "playwright test visual/a11y.spec.ts",
+    "test:contracts": "playwright test src/contracts.spec.ts",
     "lint": "node ../../tooling/lint/package-rules.mjs testing"
   },
   "devDependencies": {

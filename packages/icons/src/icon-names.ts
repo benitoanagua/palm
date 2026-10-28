@@ -5,7 +5,7 @@
  * (see the `(string & {})` escape hatch below) — the curated list only affects autocomplete,
  * it does not restrict which icons can actually be used.
  */
-export type CommonTablerIconName =
+type CommonTablerIconName =
   | 'activity'
   | 'adjustments'
   | 'alert-circle'

@@ -12,12 +12,14 @@ export class PmIconButton {
   private control?: HTMLButtonElement;
 
   @Method()
-  async focusControl() { this.control?.focus(); }
+  async focusControl() {
+    this.control?.focus();
+  }
 
   render() {
     return (
       <button
-        ref={(el) => this.control = el as HTMLButtonElement}
+        ref={(el) => (this.control = el as HTMLButtonElement)}
         class={{ 'pm-icon-button': true, [`is-${this.size}`]: true }}
         aria-label={this.label}
         aria-busy={this.loading ? 'true' : undefined}

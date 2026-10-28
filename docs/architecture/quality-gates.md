@@ -13,4 +13,4 @@ A component is production-ready only when all applicable gates pass:
 9. Dependency-rule validation.
 10. No legacy icon provider references.
 
-Visual snapshots are PALM-owned acceptance artifacts; they are not compared to STRATA.
+Visual snapshots are PALM-owned acceptance artifacts and must be reviewed against PALM-approved baselines.

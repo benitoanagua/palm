@@ -24,7 +24,9 @@ export class PmBreadcrumbs {
   private collapsed = true;
   private ellipsis?: HTMLLIElement;
 
-  componentDidLoad() { this.refresh(); }
+  componentDidLoad() {
+    this.refresh();
+  }
 
   private items() {
     return Array.from(this.host.querySelectorAll(':scope > pm-breadcrumb-item')) as HTMLElement[];
@@ -41,7 +43,9 @@ export class PmBreadcrumbs {
   private applyCollapse(items: HTMLElement[]) {
     const shouldCollapse = Boolean(this.maxItems) && items.length > this.maxItems && this.collapsed;
     if (!shouldCollapse) {
-      items.forEach((item) => { item.hidden = false; });
+      items.forEach((item) => {
+        item.hidden = false;
+      });
       this.ellipsis?.remove();
       this.ellipsis = undefined;
       return;
@@ -60,7 +64,10 @@ export class PmBreadcrumbs {
       button.className = 'pm-breadcrumbs__ellipsis';
       button.setAttribute('aria-label', 'Show all breadcrumbs');
       button.textContent = '…';
-      button.addEventListener('click', () => { this.collapsed = false; this.refresh(); });
+      button.addEventListener('click', () => {
+        this.collapsed = false;
+        this.refresh();
+      });
       li.appendChild(button);
       const sep = document.createElement('pm-icon');
       sep.setAttribute('name', 'chevron-right');

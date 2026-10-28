@@ -1,17 +1,40 @@
 .pm-skeleton {
   display: block;
   background: var(--pm-color-surface);
-  background-image: linear-gradient(90deg, var(--pm-color-surface) 0%, var(--pm-color-neutral-100) 50%, var(--pm-color-surface) 100%);
+  background-image: linear-gradient(
+    90deg,
+    var(--pm-color-surface) 0%,
+    var(--pm-color-neutral-100) 50%,
+    var(--pm-color-surface) 100%
+  );
   background-size: 200% 100%;
 }
-.pm-skeleton.is-text { width: 100%; height: 1em; border-radius: var(--pm-radius-sm); }
-.pm-skeleton.is-circle { width: 2.5rem; height: 2.5rem; border-radius: 50%; }
-.pm-skeleton.is-rect { width: 100%; height: 6rem; border-radius: var(--pm-radius-md); }
+.pm-skeleton.is-text {
+  width: 100%;
+  height: 1em;
+  border-radius: var(--pm-radius-sm);
+}
+.pm-skeleton.is-circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+.pm-skeleton.is-rect {
+  width: 100%;
+  height: 6rem;
+  border-radius: var(--pm-radius-md);
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  .pm-skeleton { animation: pm-skeleton-shimmer 1.6s linear infinite; }
+  .pm-skeleton {
+    animation: pm-skeleton-shimmer 1.6s linear infinite;
+  }
 }
 @keyframes pm-skeleton-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

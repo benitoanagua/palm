@@ -61,7 +61,10 @@ export class PmToastRegion {
   @Method()
   async dismiss(id: string, opts: { silent?: boolean } = {}) {
     const timer = this.timers.get(id);
-    if (timer) { clearTimeout(timer); this.timers.delete(id); }
+    if (timer) {
+      clearTimeout(timer);
+      this.timers.delete(id);
+    }
     const wasActive = this.active.some((t) => t.id === id);
     this.active = this.active.filter((t) => t.id !== id);
     this.queue = this.queue.filter((t) => t.id !== id);
@@ -110,7 +113,12 @@ export class PmToastRegion {
               {t.heading ? <strong>{t.heading}</strong> : null}
               <div>{t.message}</div>
             </div>
-            <pm-icon-button name="x" label="Dismiss" size="small" onHhPress={() => this.dismiss(t.id)} />
+            <pm-icon-button
+              name="x"
+              label="Dismiss"
+              size="small"
+              onPmPress={() => this.dismiss(t.id)}
+            />
           </div>
         ))}
       </div>

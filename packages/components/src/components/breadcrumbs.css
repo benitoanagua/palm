@@ -1,10 +1,53 @@
-.pm-breadcrumbs ol { display: flex; align-items: center; flex-wrap: wrap; gap: var(--pm-space-1); margin: 0; padding: 0; list-style: none; }
-.pm-breadcrumbs__item { display: flex; align-items: center; gap: var(--pm-space-1); }
-.pm-breadcrumbs__item a { color: var(--pm-color-text-muted); text-decoration: none; font-size: var(--pm-type-body-sm-size); }
-.pm-breadcrumbs__item a:hover { color: var(--pm-color-action); text-decoration: underline; }
-.pm-breadcrumbs__item span[aria-current] { color: var(--pm-color-text); font-weight: var(--pm-font-weight-medium); font-size: var(--pm-type-body-sm-size); }
-.pm-breadcrumbs__sep { width: 1rem; height: 1rem; color: var(--pm-color-text-disabled); }
-.pm-breadcrumbs__ellipsis-item { display: flex; align-items: center; gap: var(--pm-space-1); }
-.pm-breadcrumbs__ellipsis { border: 0; background: transparent; color: var(--pm-color-text-muted); cursor: pointer; font: inherit; padding: 0 var(--pm-space-1); }
-.pm-breadcrumbs__ellipsis:hover { color: var(--pm-color-action); }
-.pm-breadcrumbs__ellipsis:focus-visible { outline: none; box-shadow: var(--pm-focus-ring); }
+.pm-breadcrumbs ol {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--pm-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pm-breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  gap: var(--pm-space-1);
+}
+.pm-breadcrumbs__item a {
+  color: var(--pm-color-text-muted);
+  text-decoration: none;
+  font-size: var(--pm-type-body-sm-size);
+}
+.pm-breadcrumbs__item a:hover {
+  color: var(--pm-color-action);
+  text-decoration: underline;
+}
+.pm-breadcrumbs__item span[aria-current] {
+  color: var(--pm-color-text);
+  font-weight: var(--pm-font-weight-medium);
+  font-size: var(--pm-type-body-sm-size);
+}
+.pm-breadcrumbs__sep {
+  width: 1rem;
+  height: 1rem;
+  color: var(--pm-color-text-disabled);
+}
+.pm-breadcrumbs__ellipsis-item {
+  display: flex;
+  align-items: center;
+  gap: var(--pm-space-1);
+}
+.pm-breadcrumbs__ellipsis {
+  border: 0;
+  background: transparent;
+  color: var(--pm-color-text-muted);
+  cursor: pointer;
+  font: inherit;
+  padding: 0 var(--pm-space-1);
+}
+.pm-breadcrumbs__ellipsis:hover {
+  color: var(--pm-color-action);
+}
+.pm-breadcrumbs__ellipsis:focus-visible {
+  outline: none;
+  box-shadow: var(--pm-focus-ring);
+}

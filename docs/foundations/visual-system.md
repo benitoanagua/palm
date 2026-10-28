@@ -1,6 +1,6 @@
 # Palm Visual System
 
-Palm is designed independently from STRATA. Its look is a deliberate clone of ActiveAdmin (Ruby on Rails) — not a generic modern flat theme — because the target user is the same one ActiveAdmin was built for: someone doing dense, repetitive data work, who values legibility and predictability over decoration.
+Palm's visual system uses a deliberate ActiveAdmin-inspired visual vocabulary — not a generic modern flat theme — because it is designed for dense, repetitive data work where legibility and predictability matter more than decoration.
 
 ## Principles
 

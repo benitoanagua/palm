@@ -141,7 +141,10 @@ app.innerHTML = `
   <pm-drawer id="mobile-drawer" label="Navigation"><div class="drawer-nav"><button type="button" data-view="overview">Overview</button><button type="button" data-view="activity">Activity</button><button type="button" data-view="forms">Forms</button><button type="button" data-view="settings">Settings</button></div></pm-drawer>
 `;
 
-const table = document.createElement('pm-data-table') as HTMLElement & { columns: unknown; rows: unknown };
+const table = document.createElement('pm-data-table') as HTMLElement & {
+  columns: unknown;
+  rows: unknown;
+};
 table.columns = [
   { key: 'name', label: 'Event' },
   { key: 'status', label: 'Status' },
@@ -156,18 +159,42 @@ table.rows = [
 ];
 document.querySelector('#table-mount')!.appendChild(table);
 
-const dialog = document.querySelector('#create-dialog') as HTMLElement & { show: () => Promise<void> };
-document.querySelectorAll('#create-button, #hero-create').forEach((button) => button.addEventListener('pmPress', () => dialog.show()));
-document.querySelector('#cancel-dialog')?.addEventListener('pmPress', () => (dialog as HTMLElement & { close: () => Promise<void> }).close());
-document.querySelector('#confirm-dialog')?.addEventListener('pmPress', () => (dialog as HTMLElement & { close: () => Promise<void> }).close());
+const dialog = document.querySelector('#create-dialog') as HTMLElement & {
+  show: () => Promise<void>;
+};
+document
+  .querySelectorAll('#create-button, #hero-create')
+  .forEach((button) => button.addEventListener('pmPress', () => dialog.show()));
+document
+  .querySelector('#cancel-dialog')
+  ?.addEventListener('pmPress', () =>
+    (dialog as HTMLElement & { close: () => Promise<void> }).close(),
+  );
+document
+  .querySelector('#confirm-dialog')
+  ?.addEventListener('pmPress', () =>
+    (dialog as HTMLElement & { close: () => Promise<void> }).close(),
+  );
 
 document.querySelector('#theme-toggle')?.addEventListener('click', () => {
   const dark = document.documentElement.dataset.theme === 'dark';
   document.documentElement.dataset.theme = dark ? 'light' : 'dark';
 });
 
-document.querySelector('#menu-toggle')?.addEventListener('click', () => (document.querySelector('#mobile-drawer') as HTMLElement & { show: () => Promise<void> }).show());
-document.querySelector('#open-drawer')?.addEventListener('pmPress', () => (document.querySelector('#mobile-drawer') as HTMLElement & { show: () => Promise<void> }).show());
+document
+  .querySelector('#menu-toggle')
+  ?.addEventListener('click', () =>
+    (
+      document.querySelector('#mobile-drawer') as HTMLElement & { show: () => Promise<void> }
+    ).show(),
+  );
+document
+  .querySelector('#open-drawer')
+  ?.addEventListener('pmPress', () =>
+    (
+      document.querySelector('#mobile-drawer') as HTMLElement & { show: () => Promise<void> }
+    ).show(),
+  );
 
 document.querySelector('#settings-dark')?.addEventListener('pmChange', (event) => {
   const checked = (event as CustomEvent<boolean>).detail;
@@ -177,7 +204,8 @@ document.querySelector('#settings-dark')?.addEventListener('pmChange', (event) =
 document.querySelector('#demo-form')?.addEventListener('submit', (event) => {
   event.preventDefault();
   const feedback = document.querySelector('#form-feedback')!;
-  feedback.innerHTML = '<pm-alert tone="success" heading="Workspace created">The demo workflow completed successfully.</pm-alert>';
+  feedback.innerHTML =
+    '<pm-alert tone="success" heading="Workspace created">The demo workflow completed successfully.</pm-alert>';
 });
 
 document.querySelectorAll('.nav-link, .drawer-nav button').forEach((item) => {
@@ -187,9 +215,15 @@ document.querySelectorAll('.nav-link, .drawer-nav button').forEach((item) => {
 document.querySelector('#activity-link')?.addEventListener('pmPress', () => switchView('activity'));
 
 function switchView(view: View) {
-  document.querySelectorAll<HTMLElement>('.view').forEach((panel) => { panel.hidden = panel.dataset.panel !== view; });
-  document.querySelectorAll('.nav-link').forEach((item) => item.classList.toggle('is-active', item.getAttribute('data-view') === view));
+  document.querySelectorAll<HTMLElement>('.view').forEach((panel) => {
+    panel.hidden = panel.dataset.panel !== view;
+  });
+  document
+    .querySelectorAll('.nav-link')
+    .forEach((item) => item.classList.toggle('is-active', item.getAttribute('data-view') === view));
   const title = document.querySelector('#page-title');
   if (title) title.textContent = view[0].toUpperCase() + view.slice(1);
-  document.querySelectorAll('.drawer-nav button').forEach((item) => item.classList.toggle('is-active', item.getAttribute('data-view') === view));
+  document
+    .querySelectorAll('.drawer-nav button')
+    .forEach((item) => item.classList.toggle('is-active', item.getAttribute('data-view') === view));
 }

@@ -7,7 +7,7 @@
   --pm-color-text: var(--pm-color-neutral-900);
   --pm-color-text-muted: var(--pm-color-neutral-700);
   --pm-color-text-disabled: var(--pm-color-neutral-300);
-  --pm-color-border: var(--pm-color-neutral-500);       /* 4.8:1 contra blanco, medido */
+  --pm-color-border: var(--pm-color-neutral-500); /* 4.8:1 contra blanco, medido */
   --pm-color-border-strong: var(--pm-color-neutral-900);
 }
 
@@ -22,4 +22,3 @@
   --pm-color-border: #4b555f;
   --pm-color-border-strong: #78818a;
 }
-
