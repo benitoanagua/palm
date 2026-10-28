@@ -3,10 +3,8 @@ name: Palm hardening baseline
 on:
   push:
     branches:
-      - chore/palm-hardening
-      - chore/palm-hardening-docs
-      - chore/palm-hardening-docs
-      - chore/palm-hardening-docs
+      - main
+      - chore/palm-final-ci
   workflow_dispatch:
 
 permissions:
