@@ -229,7 +229,7 @@ export class PmCombobox {
             onKeyDown={this.onKeyDown}
           />
           {this.value ? (
-            <pm-icon-button name="x" label="Clear selection" size="small" onHhPress={this.clear} />
+            <pm-icon-button name="x" label="Clear selection" size="small" onPmPress={this.clear} />
           ) : null}
         </div>
         <div
