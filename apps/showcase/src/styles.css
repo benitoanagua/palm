@@ -83,7 +83,7 @@ a:focus-visible,
   width: 36px;
   height: 36px;
   border: 1px solid #334155;
-  border-radius: 10px;
+  border-radius: var(--pm-radius-base);
   font-weight: 800;
 }
 .brand strong,
@@ -111,7 +111,7 @@ a:focus-visible,
   gap: 10px;
   padding: 10px 12px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--pm-radius-base);
   background: transparent;
   color: var(--showcase-sidebar-muted);
   text-align: left;
@@ -171,7 +171,7 @@ a:focus-visible,
   height: 44px;
   padding: 0;
   border: 1px solid var(--showcase-border);
-  border-radius: 8px;
+  border-radius: var(--pm-radius-base);
   background: var(--showcase-raised);
   cursor: pointer;
 }
@@ -292,7 +292,7 @@ a:focus-visible,
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: var(--pm-radius-base);
   background: var(--showcase-bg);
 }
 .composition-demo {
@@ -379,7 +379,7 @@ a:focus-visible,
   min-height: 44px;
   padding: 12px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--pm-radius-base);
   background: transparent;
   text-align: left;
   cursor: pointer;
