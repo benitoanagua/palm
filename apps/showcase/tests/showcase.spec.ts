@@ -4,24 +4,27 @@ test('showcase renders the system surface', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Overview' })).toBeVisible();
   await expect(page.locator('pm-metric-card')).toHaveCount(4);
-  await expect(page.locator('pm-alert')).toHaveCount(1);
+  await expect(
+    page.getByRole('status').filter({
+      hasText: 'Every element below is composed from PALM Web Components',
+    }),
+  ).toBeVisible();
 });
 
 test('navigation switches product surfaces', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: /Activity/ }).click();
+  await page.locator('.sidebar-nav').getByRole('button', { name: 'Activity' }).click();
   await expect(page.getByRole('heading', { name: 'Activity' })).toBeVisible();
   await expect(page.locator('pm-data-table')).toBeVisible();
 });
 
 test('create dialog opens and closes', async ({ page }) => {
   await page.goto('/');
-  await page
-    .getByRole('button', { name: /Create$/ })
-    .first()
-    .click();
-  await expect(page.locator('pm-dialog')).toBeVisible();
-  await page.getByRole('button', { name: 'Cancel' }).click();
+  await page.locator('#hero-create button').click();
+  const dialog = page.locator('pm-dialog dialog[open]');
+  await expect(dialog).toBeVisible();
+  await page.locator('#cancel-dialog button').click();
+  await expect(dialog).not.toBeVisible();
 });
 
 test('mobile navigation is available', async ({ page }) => {
