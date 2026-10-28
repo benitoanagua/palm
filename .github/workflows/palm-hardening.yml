@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: palm-ci-${{ github.ref }}
@@ -34,22 +34,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - name: Install locked dependencies
-        run: pnpm install --no-frozen-lockfile
-      - name: Commit regenerated dependency lockfile for this trusted branch
-        if: github.event_name == 'pull_request' && github.head_ref == 'fix/palm-ci-green'
-        run: |
-          cp pnpm-lock.yaml "$RUNNER_TEMP/pnpm-lock.yaml"
-          git fetch origin "$GITHUB_HEAD_REF"
-          git checkout -B "$GITHUB_HEAD_REF" "origin/$GITHUB_HEAD_REF"
-          cp "$RUNNER_TEMP/pnpm-lock.yaml" pnpm-lock.yaml
-          pnpm exec prettier --write pnpm-lock.yaml
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pnpm-lock.yaml
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(deps): lock Stencil Jest test dependencies"
-            git push origin "HEAD:${GITHUB_HEAD_REF}"
-          fi
+        run: pnpm install --frozen-lockfile
       - name: Run quality gate
         run: pnpm check
 
@@ -71,7 +56,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - name: Install locked dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Build packages
