@@ -15,7 +15,7 @@ test('navigation switches product surfaces', async ({ page }) => {
   await page.goto('/');
   await page.locator('.sidebar-nav').getByRole('button', { name: 'Activity' }).click();
   await expect(page.locator('#page-title')).toHaveText('Activity');
-  await expect(page.locator('pm-data-table')).toBeVisible();
+  await expect(page.getByText('Component published')).toBeVisible();
 });
 
 test('create dialog opens and closes', async ({ page }) => {
@@ -23,7 +23,7 @@ test('create dialog opens and closes', async ({ page }) => {
   await page.locator('#hero-create button').click();
   const dialog = page.locator('pm-dialog dialog[open]');
   await expect(dialog).toBeVisible();
-  await page.getByRole('button', { name: 'Close' }).click();
+  await page.keyboard.press('Escape');
   await expect(dialog).not.toBeVisible();
 });
 
