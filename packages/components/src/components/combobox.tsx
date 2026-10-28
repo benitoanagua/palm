@@ -59,9 +59,8 @@ export class PmCombobox {
   }
 
   private options(): HTMLElement[] {
-    return Array.from(
-      this.host.querySelectorAll('pm-combobox-option'),
-    ) as HTMLElement[];
+    const options = this.host.querySelectorAll('pm-combobox-option');
+    return Array.from(options) as HTMLElement[];
   }
 
   private syncQueryFromValue() {
