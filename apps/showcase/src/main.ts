@@ -143,11 +143,14 @@ app.innerHTML = `
   <pm-drawer id="mobile-drawer" label="Navigation"><div class="drawer-nav"><button type="button" data-view="overview">Overview</button><button type="button" data-view="activity">Activity</button><button type="button" data-view="forms">Forms</button><button type="button" data-view="settings">Settings</button></div></pm-drawer>
 `;
 
-void customElements.whenDefined('pm-data-table').then(() => {
+void customElements.whenDefined('pm-data-table').then(async () => {
   const table = document.createElement('pm-data-table') as HTMLElement & {
     columns: unknown;
     rows: unknown;
+    componentOnReady: () => Promise<unknown>;
   };
+  document.querySelector('#table-mount')?.appendChild(table);
+  await table.componentOnReady();
   table.columns = [
     { key: 'name', label: 'Event' },
     { key: 'status', label: 'Status' },
@@ -160,7 +163,6 @@ void customElements.whenDefined('pm-data-table').then(() => {
     { name: 'A11y audit', status: 'Ready', owner: 'Nina', amount: '$1,240' },
     { name: 'Token update', status: 'Ready', owner: 'Owen', amount: '$540' },
   ];
-  document.querySelector('#table-mount')?.appendChild(table);
 });
 
 const dialog = document.querySelector('#create-dialog') as HTMLElement & {
