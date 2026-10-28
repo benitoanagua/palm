@@ -15,13 +15,15 @@ test('navigation switches product surfaces', async ({ page }) => {
   await page.goto('/');
   await page.locator('.sidebar-nav').getByRole('button', { name: 'Activity' }).click();
   await expect(page.locator('#page-title')).toHaveText('Activity');
-  await expect(page.getByText('Component published')).toBeVisible();
+  await expect(page.locator('[data-panel="activity"]')).toBeVisible();
+  await expect(page.getByText('Recent events')).toBeVisible();
+  await expect(page.locator('#table-mount')).toBeVisible();
 });
 
 test('create dialog opens and closes', async ({ page }) => {
   await page.goto('/');
-  await page.locator('#hero-create button').click();
-  const dialog = page.locator('pm-dialog dialog[open]');
+  await page.getByRole('button', { name: 'Create item', exact: true }).first().click();
+  const dialog = page.locator('#create-dialog dialog[open]');
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(dialog).not.toBeVisible();
