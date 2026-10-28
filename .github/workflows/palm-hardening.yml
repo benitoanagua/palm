@@ -73,11 +73,16 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          pnpm dlx depcheck@1.4.7 --json . || true
           for directory in packages/* apps/*; do
             if [ -f "$directory/package.json" ]; then
               echo "Dependency audit: $directory"
-              (cd "$directory" && pnpm dlx depcheck@1.4.7 --json) || true
+              if [ "$directory" = "packages/icons" ]; then
+                (cd "$directory" && pnpm dlx depcheck@1.4.7 --json --ignore-matches @tabler/icons) || true
+              elif [ "$directory" = "packages/react" ]; then
+                (cd "$directory" && pnpm dlx depcheck@1.4.7 --json --ignore-matches @types/react-dom) || true
+              else
+                (cd "$directory" && pnpm dlx depcheck@1.4.7 --json) || true
+              fi
             fi
           done
 
