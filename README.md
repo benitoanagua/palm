@@ -4,8 +4,7 @@ PALM is a design system built from scratch with Stencil, TypeScript and Web Comp
 
 ## Principles
 
-- STRATA is used only as a repository-organization reference.
-- No STRATA component logic, tokens, visual rules, APIs or behavior are inherited.
+- PALM owns its component logic, tokens, visual rules, APIs and behavior.
 - Tabler Icons is the only icon family used by PALM.
 - `pm-icon` has a deliberately minimal API: `name` and `aria-label`.
 - Native HTML semantics are preferred over custom behavior.
