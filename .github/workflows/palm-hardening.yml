@@ -6,7 +6,6 @@ on:
       - chore/palm-hardening
       - chore/palm-hardening-docs
       - chore/palm-hardening-docs
-      - chore/palm-hardening-docs
   workflow_dispatch:
 
 permissions:
