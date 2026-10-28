@@ -35,13 +35,12 @@ describe('pm-date-picker', () => {
       components: [PmDatePicker],
       html: '<pm-date-picker value="2026-03-15" min="2026-03-10"></pm-date-picker>',
     });
-    const instance = page.rootInstance as PmDatePicker;
+    const instance = page.rootInstance as unknown as {
+      value: string;
+      selectDay: (day: number) => void;
+    };
     const before = instance.value;
-    const dayButtons = Array.from(
-      page.root?.querySelectorAll('.pm-date-picker__day') ?? [],
-    ) as HTMLButtonElement[];
-    const day5 = dayButtons.find((b) => b.textContent?.trim() === '5');
-    day5?.click();
+    instance.selectDay(5);
     await page.waitForChanges();
     expect(instance.value).toBe(before);
   });
