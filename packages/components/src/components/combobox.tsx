@@ -66,7 +66,7 @@ export class PmCombobox {
   }
 
   private options(): HTMLElement[] {
-    return Array.from(this.host.querySelectorAll(':scope > pm-combobox-option')) as HTMLElement[];
+    return Array.from(this.host.children).filter((child) => child.tagName.toLowerCase() === 'pm-combobox-option') as HTMLElement[];
   }
 
   private syncQueryFromValue() {
