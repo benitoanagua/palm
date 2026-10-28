@@ -6,7 +6,6 @@ on:
       - chore/palm-hardening
       - chore/palm-hardening-docs
       - chore/palm-hardening-docs
-      - chore/palm-hardening-docs
   workflow_dispatch:
 
 permissions:
@@ -92,20 +91,6 @@ jobs:
 
       - name: Generate complete Tabler icon dataset
         run: node tooling/generate-tabler-data.mjs
-
-      - name: Format audit configuration and utilities
-        shell: bash
-        run: |
-          pnpm exec prettier --write knip.json packages/icons/src/tabler.ts tooling/validation/docs-links.mjs
-          if git diff --quiet -- knip.json packages/icons/src/tabler.ts tooling/validation/docs-links.mjs; then
-            echo "Audit files already formatted."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add knip.json packages/icons/src/tabler.ts tooling/validation/docs-links.mjs
-          git commit -m "style: format audit configuration and utilities"
-          git push origin "HEAD:$GITHUB_REF_NAME"
 
       - name: Verify repository formatting
         run: pnpm format:check
