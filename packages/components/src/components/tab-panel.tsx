@@ -6,6 +6,16 @@ export class PmTabPanel {
   @Prop() value!: string;
   render() {
     const id = `${this.host.id || `pm-tab-panel-${this.value}`}`;
-    return <section id={id} class="tab-panel" role="tabpanel" aria-labelledby={`pm-tab-${this.value}`} tabIndex={0}><slot /></section>;
+    return (
+      <section
+        id={id}
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby={`pm-tab-${this.value}`}
+        tabIndex={0}
+      >
+        <slot />
+      </section>
+    );
   }
 }

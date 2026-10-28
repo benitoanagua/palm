@@ -1,8 +1,8 @@
 # Palm — Design System para Power Users Mobile-First
 
-*(Palm: nombrado por lo que cabe en la palma de una mano, no por un sistema operativo — el power user que a veces no tiene una computadora cerca, solo el teléfono que sostiene con una mano mientras hace todo lo demás con la otra. No es un clon de Haiku OS ni un ERP de escritorio achicado — es lo que queda de esa tradición cuando la única pantalla disponible es la del bolsillo.)*
+_(Palm: nombrado por lo que cabe en la palma de una mano, no por un sistema operativo — el power user que a veces no tiene una computadora cerca, solo el teléfono que sostiene con una mano mientras hace todo lo demás con la otra. No es un clon de Haiku OS ni un ERP de escritorio achicado — es lo que queda de esa tradición cuando la única pantalla disponible es la del bolsillo.)_
 
-*(Estructura de este documento tomada como referencia de formato de otro proyecto, "Bench" — la organización en Filosofía → Reglas → Tokens → Accesibilidad → Catálogo de patrones → Research → Checklist se adopta porque ya demostró servir para dejar de repetir contenido entre secciones. El contenido es 100% de Palm.)*
+_(Estructura de este documento tomada como referencia de formato de otro proyecto, "Bench" — la organización en Filosofía → Reglas → Tokens → Accesibilidad → Catálogo de patrones → Research → Checklist se adopta porque ya demostró servir para dejar de repetir contenido entre secciones. El contenido es 100% de Palm.)_
 
 Estructura: **0 Filosofía** (por qué existe) → **1 Reglas inviolables** → **2 Tokens** (fuente única de verdad visual) → **3 Accesibilidad** → **4 Catálogo de patrones** → **5 Research** (de qué sistema viene cada decisión) → **6 Checklist**.
 
@@ -16,15 +16,15 @@ Palm existe para que un power user que a veces no tiene una computadora cerca pu
 
 La mayoría de las apps mobile están diseñadas asumiendo que el teléfono es el dispositivo secundario — la notificación que te lleva de vuelta a la compu. Palm parte de la premisa contraria: **el teléfono es a veces el único dispositivo disponible**, y la interfaz tiene que sostener trabajo real, no solo consulta rápida.
 
-| Problema real del power user mobile-only | Cómo responde Palm |
-|---|---|
-| No tiene con qué "dejar algo abierto" al lado — el teléfono es la única pantalla | Cards de tareas (4.2), Hub centralizado (4.3) |
-| Su conexión es intermitente, no ausente ni constante | Sync en 3 estados + conflicto (4.3), escritura local optimista |
-| Escribe rápido y busca funciones sin navegar menús | Omnibar vía FAB (4.1) |
-| A veces usa teclado plegable, a veces solo el pulgar | Atajos de teclado físico + FAB alcanzable con una mano |
-| Necesita ver el dato crítico (saldo, estado) sin abrir nada | Densidad glanceable, contraste AAA en datos financieros (2.7) |
-| Un error de lectura de un monto le puede costar dinero real | Extensión financiera (2.7), tipografía tabular (2.4) |
-| No puede permitirse perder una tarea a medio hacer si el sistema mata el proceso | Persistencia en dos capas (4.6) |
+| Problema real del power user mobile-only                                                | Cómo responde Palm                                                          |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| No tiene con qué "dejar algo abierto" al lado — el teléfono es la única pantalla        | Cards de tareas (4.2), Hub centralizado (4.3)                               |
+| Su conexión es intermitente, no ausente ni constante                                    | Sync en 3 estados + conflicto (4.3), escritura local optimista              |
+| Escribe rápido y busca funciones sin navegar menús                                      | Omnibar vía FAB (4.1)                                                       |
+| A veces usa teclado plegable, a veces solo el pulgar                                    | Atajos de teclado físico + FAB alcanzable con una mano                      |
+| Necesita ver el dato crítico (saldo, estado) sin abrir nada                             | Densidad glanceable, contraste AAA en datos financieros (2.7)               |
+| Un error de lectura de un monto le puede costar dinero real                             | Extensión financiera (2.7), tipografía tabular (2.4)                        |
+| No puede permitirse perder una tarea a medio hacer si el sistema mata el proceso        | Persistencia en dos capas (4.6)                                             |
 | Ya aprendió cómo funciona esto — un cambio de comportamiento sin razón le cuesta tiempo | Reglas de Categoría B (1), delegación a convención en vez de reinventar (5) |
 
 Esta tabla es el criterio de aceptación de cualquier propuesta nueva — incluidas las que llegan como prompt externo. Antes de aplicar algo, la pregunta es a cuál de estos problemas reales le resuelve algo a alguien que abre esta app parado en la calle, sin señal, con una mano ocupada.
@@ -39,28 +39,28 @@ Nueve reglas en dos categorías. La implementación concreta de las reglas 7-9 v
 
 Todo lo que no está en esta lista se resuelve citando convención de plataforma (Nielsen, Ley de Fitts, WCAG, Material Design 3, guía de arquitectura Android, APIs nativas) — no se redocumenta acá.
 
-1. **Omnibar como comando universal único.** Un solo punto de entrada para registros y funciones, accesible por FAB persistente, nunca por gesto (los gestos de Android cambian entre versiones/OEMs). *Se viola cuando* una función solo es alcanzable navegando menús y no aparece en el índice del Omnibar.
-2. **Todo estado de sincronización es honesto y visible en 3 niveles + conflicto** (guardado local / enviado-esperando / confirmado / conflicto-revisar), nunca colapsado en un spinner genérico. *Se viola cuando* dos estados distintos comparten la misma representación visual, o un conflicto se resuelve en silencio sin que el usuario decida.
-3. **"Power to the User": el modo experto coexiste con el modo simple, nunca lo reemplaza.** Densidad alta es una elección del perfil, no del tamaño de pantalla. *Se viola cuando* el sistema infiere densidad por el dispositivo en vez de por la preferencia explícita del usuario.
-4. **Un mismo gesto o color tiene un solo significado en todo el sistema.** *Se viola cuando* el mismo swipe hace cosas distintas según la pantalla, o un color usado para "interactivo" se reutiliza para un estado no interactivo (por eso `--pending` nunca puede ser azul: azul ya es `--action`).
-5. **Cierre explícito, nunca silencioso.** Una tarea o card solo desaparece por acción directa del usuario (swipe/botón) o por completarse — nunca por decisión del sistema sin avisar. *Se viola cuando* el proceso de Android muere y el usuario percibe eso como "el sistema cerró mi tarea".
+1. **Omnibar como comando universal único.** Un solo punto de entrada para registros y funciones, accesible por FAB persistente, nunca por gesto (los gestos de Android cambian entre versiones/OEMs). _Se viola cuando_ una función solo es alcanzable navegando menús y no aparece en el índice del Omnibar.
+2. **Todo estado de sincronización es honesto y visible en 3 niveles + conflicto** (guardado local / enviado-esperando / confirmado / conflicto-revisar), nunca colapsado en un spinner genérico. _Se viola cuando_ dos estados distintos comparten la misma representación visual, o un conflicto se resuelve en silencio sin que el usuario decida.
+3. **"Power to the User": el modo experto coexiste con el modo simple, nunca lo reemplaza.** Densidad alta es una elección del perfil, no del tamaño de pantalla. _Se viola cuando_ el sistema infiere densidad por el dispositivo en vez de por la preferencia explícita del usuario.
+4. **Un mismo gesto o color tiene un solo significado en todo el sistema.** _Se viola cuando_ el mismo swipe hace cosas distintas según la pantalla, o un color usado para "interactivo" se reutiliza para un estado no interactivo (por eso `--pending` nunca puede ser azul: azul ya es `--action`).
+5. **Cierre explícito, nunca silencioso.** Una tarea o card solo desaparece por acción directa del usuario (swipe/botón) o por completarse — nunca por decisión del sistema sin avisar. _Se viola cuando_ el proceso de Android muere y el usuario percibe eso como "el sistema cerró mi tarea".
 
 ### Categoría B — Visual, autoral, no negociable
 
-6. **Forma: clon deliberado de ActiveAdmin (Ruby on Rails)** *(05/sep, reemplaza tres direcciones visuales anteriores: calibración Haiku, escala Material/HIG, piel plana tipo panel profesional — el usuario pidió expresamente "debería ser un clon")* → **ver Tokens 2.2**. Radio único de 3px, degradé glossy en botones, header oscuro, tags de estado en color sólido. *Se viola cuando* un componente nuevo no sigue el vocabulario visual de AA documentado en 2.2/4, o inventa un radio/degradé fuera de lo ya establecido.
-7. **La única desviación permitida al clon es la evidencia de accesibilidad ya construida** → **ver Tokens 2.1/2.2**. Paleta semántica verificada contra daltonismo (no el azul histórico de AA) y bordes con contraste real medido (no el gris casi invisible de AA). *Se viola cuando* alguien "por fidelidad al clon" revierte esta paleta o estos bordes a los valores originales de AA.
-8. **Color verificado con simulación real de los 3 tipos de daltonismo (protanopia, deuteranopia, tritanopia), nunca solo "parece distinguible".** Contraste mínimo AAA (7:1) en todo texto de dato financiero → **ver Tokens 2.1**. *Se viola cuando* se agrega un color semántico sin correr la simulación contra los 3 tipos.
-9. **Los estados semánticos se comunican como `status_tag`: rectángulo de esquina chica, color sólido, texto blanco en mayúsculas** *(05/sep, reemplaza el tag en píldora con tinte de la iteración anterior — así se ven los status_tag reales de AA)* → **ver Tokens 2.1/4.3**. *Se viola cuando* un estado nuevo usa tinte suave en vez de color sólido, o depende solo de un ícono sin texto.
+6. **Forma: clon deliberado de ActiveAdmin (Ruby on Rails)** _(05/sep, reemplaza tres direcciones visuales anteriores: calibración Haiku, escala Material/HIG, piel plana tipo panel profesional — el usuario pidió expresamente "debería ser un clon")_ → **ver Tokens 2.2**. Radio único de 3px, degradé glossy en botones, header oscuro, tags de estado en color sólido. _Se viola cuando_ un componente nuevo no sigue el vocabulario visual de AA documentado en 2.2/4, o inventa un radio/degradé fuera de lo ya establecido.
+7. **La única desviación permitida al clon es la evidencia de accesibilidad ya construida** → **ver Tokens 2.1/2.2**. Paleta semántica verificada contra daltonismo (no el azul histórico de AA) y bordes con contraste real medido (no el gris casi invisible de AA). _Se viola cuando_ alguien "por fidelidad al clon" revierte esta paleta o estos bordes a los valores originales de AA.
+8. **Color verificado con simulación real de los 3 tipos de daltonismo (protanopia, deuteranopia, tritanopia), nunca solo "parece distinguible".** Contraste mínimo AAA (7:1) en todo texto de dato financiero → **ver Tokens 2.1**. _Se viola cuando_ se agrega un color semántico sin correr la simulación contra los 3 tipos.
+9. **Los estados semánticos se comunican como `status_tag`: rectángulo de esquina chica, color sólido, texto blanco en mayúsculas** _(05/sep, reemplaza el tag en píldora con tinte de la iteración anterior — así se ven los status_tag reales de AA)_ → **ver Tokens 2.1/4.3**. _Se viola cuando_ un estado nuevo usa tinte suave en vez de color sólido, o depende solo de un ícono sin texto.
 
 ### Tabla de decisión rápida
 
-| Pregunta | Si la respuesta es sí → |
-|---|---|
-| ¿La función solo es alcanzable por un gesto, sin equivalente en el Omnibar? | No se acepta — agregar al índice del Omnibar primero |
-| ¿Es un color semántico nuevo? | Correr la simulación de 2.1 contra los 3 tipos de daltonismo antes de aprobarlo |
-| ¿Es un radio, sombra o curva de movimiento nueva? | Tomarlo de Tokens (2.2/2.4/2.5), nunca inventarlo a ojo |
-| ¿El módulo edita un saldo o registra una transacción real? | Activa la extensión financiera (2.7) |
-| ¿Depende de que el proceso de Android siga vivo en memoria? | No es persistencia válida — debe sobrevivir a `Room`/`DataStore` (4.6) |
+| Pregunta                                                                    | Si la respuesta es sí →                                                         |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| ¿La función solo es alcanzable por un gesto, sin equivalente en el Omnibar? | No se acepta — agregar al índice del Omnibar primero                            |
+| ¿Es un color semántico nuevo?                                               | Correr la simulación de 2.1 contra los 3 tipos de daltonismo antes de aprobarlo |
+| ¿Es un radio, sombra o curva de movimiento nueva?                           | Tomarlo de Tokens (2.2/2.4/2.5), nunca inventarlo a ojo                         |
+| ¿El módulo edita un saldo o registra una transacción real?                  | Activa la extensión financiera (2.7)                                            |
+| ¿Depende de que el proceso de Android siga vivo en memoria?                 | No es persistencia válida — debe sobrevivir a `Room`/`DataStore` (4.6)          |
 
 ---
 
@@ -71,18 +71,25 @@ Todo lo que no está en esta lista se resuelve citando convención de plataforma
 ### 2.1 Color — semántico, verificado contra daltonismo, con el tratamiento de AA
 
 ```css
---header-bg:#2c2c2c; --header-text:#ffffff; --header-text-dim:#b8b8b8;
---page-bg:#f1f2f4; --surface:#ffffff; --surface-alt:#f5f5f5; --surface-hover:#f9f9f9;
---border-color:#727272;       /* 4.8:1 */
---border-color-light:#949494;  /* 3.0:1 */
---text-primary:#333333; --text-secondary:#666666; --text-strong:#1a1a1a;
---on-color:#ffffff;
+--header-bg: #2c2c2c;
+--header-text: #ffffff;
+--header-text-dim: #b8b8b8;
+--page-bg: #f1f2f4;
+--surface: #ffffff;
+--surface-alt: #f5f5f5;
+--surface-hover: #f9f9f9;
+--border-color: #727272; /* 4.8:1 */
+--border-color-light: #949494; /* 3.0:1 */
+--text-primary: #333333;
+--text-secondary: #666666;
+--text-strong: #1a1a1a;
+--on-color: #ffffff;
 
---action:#0b5a92;     /* 7.26:1 con --on-color encima */
---action-strong:#00426f;
---pending:#8d410b;    /* 7.26:1 */
---confirmed:#086335;  /* 7.38:1 */
---conflict:#ae0e20;   /* 7.28:1 */
+--action: #0b5a92; /* 7.26:1 con --on-color encima */
+--action-strong: #00426f;
+--pending: #8d410b; /* 7.26:1 */
+--confirmed: #086335; /* 7.38:1 */
+--conflict: #ae0e20; /* 7.28:1 */
 ```
 
 **Verificación obligatoria (Regla 8):** los 4 colores semánticos se simularon con matrices de Machado-Oliveira-Fernandes para protanopia, deuteranopia y tritanopia. Queda una debilidad matemática irreductible bajo tritanopia entre `--action`/`--confirmed` (dist. ~25) — es el límite real de 4 colores planos, no un descuido. La red de seguridad final es la Regla 9: cada estado se comunica como `status_tag` con texto, nunca solo color.
@@ -94,17 +101,21 @@ Todo lo que no está en esta lista se resuelve citando convención de plataforma
 ### 2.2 Forma, degradé y sombra (implementa Reglas 6-7)
 
 ```css
---radius-base:3px; /* único radio del sistema — así es AA, sin escala */
+--radius-base: 3px; /* único radio del sistema — así es AA, sin escala */
 --focus-ring: 0 0 0 2px color-mix(in srgb, var(--action) 30%, transparent);
 ```
 
 **Degradé glossy en botones** (marca de fábrica de AA, vuelve después de haberlo prohibido en una iteración anterior — el clon lo exige):
 
 ```css
-background: linear-gradient(to bottom, #fdfdfd, #e2e2e2);   /* botón default */
-background: linear-gradient(to bottom, color-mix(in srgb, var(--action) 70%, white), var(--action)); /* botón primary */
-box-shadow: 0 1px 0 rgba(255,255,255,.7) inset;               /* resalto superior */
-text-shadow: 0 1px 0 rgba(255,255,255,.6);                    /* letra con relieve leve */
+background: linear-gradient(to bottom, #fdfdfd, #e2e2e2); /* botón default */
+background: linear-gradient(
+  to bottom,
+  color-mix(in srgb, var(--action) 70%, white),
+  var(--action)
+); /* botón primary */
+box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset; /* resalto superior */
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6); /* letra con relieve leve */
 ```
 
 **Sombras** — no están tokenizadas globalmente (cada componente flotante define la suya inline: `.phone` usa `0 1px 3px rgba(0,0,0,.2)`, `.peek` usa `0 2px 6px rgba(0,0,0,.25)`, `.modal` usa `0 -2px 8px rgba(0,0,0,.3)`). Es deuda técnica menor, no un problema de diseño — ver Checklist.
@@ -132,11 +143,11 @@ El swipe-to-dismiss de las cards lee estos tokens en tiempo real vía `getComput
 
 **3 niveles, cíclicos desde un único control** (ver 4.6 para el detalle de uso previsto de cada uno):
 
-| Nivel | Card `min-height` | Fila del Hub, padding | `row-title` |
-|---|---|---|---|
-| Compacto | 104px | 6px 8px | 12px |
-| Normal | 132px | 10px 8px | 13px |
-| Aireado | 160px | 16px 14px | 15px / line-height 1.4 |
+| Nivel    | Card `min-height` | Fila del Hub, padding | `row-title`            |
+| -------- | ----------------- | --------------------- | ---------------------- |
+| Compacto | 104px             | 6px 8px               | 12px                   |
+| Normal   | 132px             | 10px 8px              | 13px                   |
+| Aireado  | 160px             | 16px 14px             | 15px / line-height 1.4 |
 
 El vocabulario visual de AA no cambia entre niveles — solo espaciado, tamaño de letra y `line-height`. Mobile es el form factor primario.
 
@@ -148,22 +159,24 @@ El vocabulario visual de AA no cambia entre niveles — solo espaciado, tamaño 
 
 ### 2.8 Componentes de listado y formulario (05/sep, nuevo — de `palm-demo-componentes-activeadmin.html`)
 
-| Componente | Vocabulario visual AA aplicado |
-|---|---|
-| Breadcrumb | Texto tenue sobre el header oscuro, separador `/`, último tramo en blanco |
-| Scopes (pestañas de filtro) | Igual que la tabbar: texto gris, activo en `--action` con borde inferior de color, contador en monoespaciado |
-| Flash notice / alert | Banda de color con fondo tinte muy claro y texto del color semántico — única superficie del sistema que sigue usando tinte en vez de sólido, porque un flash de página completa en color sólido sería agresivo |
-| `index_table` | Encabezados grises con texto en mayúsculas chicas, flecha de orden en `--action`, columna de checkbox, filas alternadas + hover, `mini-tag` de estado en color sólido |
-| Barra de acciones por lote | Aparece solo con selección activa, fondo ámbar claro (color de "atención", no semántico) |
-| Paginación | Números con borde, actual en `--action` sólido |
-| Panel de filtros | Caja con franja de título gris, colapsable, mismos `.field`/`label`/`input` que el formulario |
-| Vista de detalle | Tabla de atributos: `<th>` gris a la izquierda, valor a la derecha, sin bordes verticales |
-| Formulario | `fieldset`+`legend` con franja gris, campos con hint chico debajo, acciones "Crear/Cancelar" al pie |
+| Componente                  | Vocabulario visual AA aplicado                                                                                                                                                                                 |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Breadcrumb                  | Texto tenue sobre el header oscuro, separador `/`, último tramo en blanco                                                                                                                                      |
+| Scopes (pestañas de filtro) | Igual que la tabbar: texto gris, activo en `--action` con borde inferior de color, contador en monoespaciado                                                                                                   |
+| Flash notice / alert        | Banda de color con fondo tinte muy claro y texto del color semántico — única superficie del sistema que sigue usando tinte en vez de sólido, porque un flash de página completa en color sólido sería agresivo |
+| `index_table`               | Encabezados grises con texto en mayúsculas chicas, flecha de orden en `--action`, columna de checkbox, filas alternadas + hover, `mini-tag` de estado en color sólido                                          |
+| Barra de acciones por lote  | Aparece solo con selección activa, fondo ámbar claro (color de "atención", no semántico)                                                                                                                       |
+| Paginación                  | Números con borde, actual en `--action` sólido                                                                                                                                                                 |
+| Panel de filtros            | Caja con franja de título gris, colapsable, mismos `.field`/`label`/`input` que el formulario                                                                                                                  |
+| Vista de detalle            | Tabla de atributos: `<th>` gris a la izquierda, valor a la derecha, sin bordes verticales                                                                                                                      |
+| Formulario                  | `fieldset`+`legend` con franja gris, campos con hint chico debajo, acciones "Crear/Cancelar" al pie                                                                                                            |
 
 ## 3. Accesibilidad: foco visible
 
 ```css
-button:focus-visible, input:focus-visible, .row:focus-visible {
+button:focus-visible,
+input:focus-visible,
+.row:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 1px; /* WCAG 2.4.7 */
 }
@@ -192,17 +205,17 @@ button:focus-visible, input:focus-visible, .row:focus-visible {
 
 ### 4.2 Multitarea: Cards
 
-**Patrón** *(herencia: grid de pestañas de Chrome para Android, no un sistema de cards propio)*: cada tarea es una card con miniatura real de su último estado. Umbral de **6 cards visibles sin scroll** (grilla 2×3); de 7 a 12 se agrupan por relación (mismo cliente/pedido) en un tile colapsable; más de 12, el sistema sugiere cerrar tareas completadas sin auto-cerrar (Regla A5).
+**Patrón** _(herencia: grid de pestañas de Chrome para Android, no un sistema de cards propio)_: cada tarea es una card con miniatura real de su último estado. Umbral de **6 cards visibles sin scroll** (grilla 2×3); de 7 a 12 se agrupan por relación (mismo cliente/pedido) en un tile colapsable; más de 12, el sistema sugiere cerrar tareas completadas sin auto-cerrar (Regla A5).
 
 **Swipe-to-dismiss:** convención nativa de Android (RecyclerView/ItemTouchHelper). El botón "×" se mantiene como alternativa accesible — no todo el mundo puede gesticular.
 
 ### 4.3 Hub: sync, conflicto y Peek
 
-**Hub centralizado** *(convención: NotificationChannel nativo de Android)*: todas las fuentes de interrupción en un solo lugar, con 3 niveles de detalle (resumen → expandir → actuar).
+**Hub centralizado** _(convención: NotificationChannel nativo de Android)_: todas las fuentes de interrupción en un solo lugar, con 3 niveles de detalle (resumen → expandir → actuar).
 
 **Estados de sync (Regla A2):** cada estado es un `status_tag` completo en color sólido — gris para guardado local, ámbar (`--pending`) para enviado-esperando, verde (`--confirmed`) para confirmado. Un 4° estado, **conflicto-revisar** (`--conflict`), se resuelve con comparación de 2 columnas ("Tu versión" / "Versión del servidor") y 3 acciones explícitas: mantener la mía, mantener la del servidor, revisar campo por campo. Ninguna resolución es automática.
 
-**Peek** *(convención: long-press preview estándar de Android)*: mantener presionado revela un vistazo temporal y no-destructivo — si se suelta sin actuar, no marca como leído ni consume el elemento. Es una caja blanca simple con borde y sombra (`0 2px 6px rgba(0,0,0,.25)`) — sin translúcido, sin esquina especial: el mismo `--radius-base` de 3px que todo lo demás. AA no tiene materiales translúcidos.
+**Peek** _(convención: long-press preview estándar de Android)_: mantener presionado revela un vistazo temporal y no-destructivo — si se suelta sin actuar, no marca como leído ni consume el elemento. Es una caja blanca simple con borde y sombra (`0 2px 6px rgba(0,0,0,.25)`) — sin translúcido, sin esquina especial: el mismo `--radius-base` de 3px que todo lo demás. AA no tiene materiales translúcidos.
 
 ### 4.4 Acciones irreversibles
 
@@ -211,20 +224,21 @@ button:focus-visible, input:focus-visible, .row:focus-visible {
 ### 4.5 Persistencia
 
 **Dos capas, nunca una sola:**
+
 1. Estado de UI efímero (tab activo, scroll) → `ViewModel` + `SavedStateHandle`.
 2. Estado real de la tarea (formulario a medio llenar) → `Room`/`DataStore`, escrito en cada cambio significativo.
 
-*Por qué:* `SavedStateHandle` se pierde si el usuario fuerza el cierre desde Ajustes en algunos OEMs — el contenido real de una tarea no puede depender de eso (Regla A5).
+_Por qué:_ `SavedStateHandle` se pierde si el usuario fuerza el cierre desde Ajustes en algunos OEMs — el contenido real de una tarea no puede depender de eso (Regla A5).
 
 ### 4.6 Modos y feedback ("Power to the User")
 
 **3 niveles de densidad (05/sep, implementado)**, cíclicos desde un único control, elección explícita del usuario, nunca inferida por tamaño de pantalla (Regla A3):
 
-| Nivel | Uso previsto |
-|---|---|
-| Compacto | Uso intensivo, máxima densidad glanceable |
-| Normal | Uso general (default) |
-| Aireado | Lectura relajada, primer uso, o cualquier momento en que el usuario prefiera más aire — ya no está atado a un flujo de onboarding que no existe |
+| Nivel    | Uso previsto                                                                                                                                    |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Compacto | Uso intensivo, máxima densidad glanceable                                                                                                       |
+| Normal   | Uso general (default)                                                                                                                           |
+| Aireado  | Lectura relajada, primer uso, o cualquier momento en que el usuario prefiera más aire — ya no está atado a un flujo de onboarding que no existe |
 
 El vocabulario visual de AA (franja de título, borde, `status_tag` sólido) es idéntico en los 3 niveles — solo cambian espaciado, tamaño de letra y `line-height`. El modo experto (densidad compacta + Omnibar + atajos de teclado físico) coexiste con los otros dos — nunca los reemplaza.
 
@@ -261,19 +275,19 @@ Quinta demo, 5 pantallas navegables:
 
 ## 5. Sistemas y convenciones de origen (research base)
 
-*Nota (05/sep): las filas marcadas con † fueron la base de pieles visuales ya reemplazadas (Haiku, Material 3, panel plano) — se mantienen como historial, no como fuente vigente. ActiveAdmin es la fuente activa de la piel actual.*
+_Nota (05/sep): las filas marcadas con † fueron la base de pieles visuales ya reemplazadas (Haiku, Material 3, panel plano) — se mantienen como historial, no como fuente vigente. ActiveAdmin es la fuente activa de la piel actual._
 
-| Fuente | Qué aportó | Dónde vive |
-|---|---|---|
-| **ActiveAdmin (Ruby on Rails)** | Header oscuro, botones glossy con degradé, `status_tag` sólido, `index_table`, breadcrumb, scopes, flash notices, paginación, panel de filtros — vocabulario visual vigente completo | **2, 4.1-4.4, 4.7** |
-| Haiku OS (capturas reales) † | Forma rectangular, pestaña de ventana redondeada, bisel de botón medido en píxel | histórico |
-| AmigaOS Style Guide | Herencia original de "Power to the User", consistencia como necesidad maestra | 0, 4.6 |
-| Material Design 3 † | Elevación con nombre de propósito, state layers, sistema de movimiento completo | histórico |
-| Android (App Shortcuts, Quick Settings, NotificationChannel, ItemTouchHelper) | Delegación de toda función que la plataforma ya resuelve | 4.1-4.3 |
-| WCAG 2.4.7 / 2.4.11 | Foco visible, contraste mínimo | 3 |
-| Machado-Oliveira-Fernandes (simulación de daltonismo) | Verificación real de los 4 colores semánticos contra 3 tipos de CVD — **vigente sin cambios en todos los pivots visuales** | 2.1 |
-| Nielsen Norman Group (10 heurísticas) | Lenguaje llano, prevención de error, consistencia | Categoría A (delegado, no redocumentado) |
-| Ley de Fitts | Tamaño/distancia de objetivos táctiles | Delegado, no redocumentado |
+| Fuente                                                                        | Qué aportó                                                                                                                                                                           | Dónde vive                               |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| **ActiveAdmin (Ruby on Rails)**                                               | Header oscuro, botones glossy con degradé, `status_tag` sólido, `index_table`, breadcrumb, scopes, flash notices, paginación, panel de filtros — vocabulario visual vigente completo | **2, 4.1-4.4, 4.7**                      |
+| Haiku OS (capturas reales) †                                                  | Forma rectangular, pestaña de ventana redondeada, bisel de botón medido en píxel                                                                                                     | histórico                                |
+| AmigaOS Style Guide                                                           | Herencia original de "Power to the User", consistencia como necesidad maestra                                                                                                        | 0, 4.6                                   |
+| Material Design 3 †                                                           | Elevación con nombre de propósito, state layers, sistema de movimiento completo                                                                                                      | histórico                                |
+| Android (App Shortcuts, Quick Settings, NotificationChannel, ItemTouchHelper) | Delegación de toda función que la plataforma ya resuelve                                                                                                                             | 4.1-4.3                                  |
+| WCAG 2.4.7 / 2.4.11                                                           | Foco visible, contraste mínimo                                                                                                                                                       | 3                                        |
+| Machado-Oliveira-Fernandes (simulación de daltonismo)                         | Verificación real de los 4 colores semánticos contra 3 tipos de CVD — **vigente sin cambios en todos los pivots visuales**                                                           | 2.1                                      |
+| Nielsen Norman Group (10 heurísticas)                                         | Lenguaje llano, prevención de error, consistencia                                                                                                                                    | Categoría A (delegado, no redocumentado) |
+| Ley de Fitts                                                                  | Tamaño/distancia de objetivos táctiles                                                                                                                                               | Delegado, no redocumentado               |
 
 ---
 

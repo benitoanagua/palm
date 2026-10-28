@@ -11,7 +11,8 @@ const meta = {
 export default meta;
 
 export const Default = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
     <pm-button onclick="document.querySelector('pm-drawer').show()">Open drawer</pm-button>
     <pm-drawer label="Navigation">
       <pm-nav>
@@ -21,7 +22,8 @@ export const Default = {
     </pm-drawer>`),
 };
 export const LeftSide = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
     <pm-button onclick="document.querySelector('pm-drawer').show()">Open drawer</pm-button>
     <pm-drawer label="Navigation" side="left">
       <pm-nav>

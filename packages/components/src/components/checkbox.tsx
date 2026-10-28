@@ -9,5 +9,26 @@ export class PmCheckbox {
   @Prop() value = 'on';
   @Prop() required = false;
   @Event() pmChange!: EventEmitter<boolean>;
-  render() { return <label class="choice"><input type="checkbox" name={this.name || undefined} value={this.value} checked={this.checked} disabled={this.disabled} required={this.required} onChange={(event) => { this.checked = (event.target as HTMLInputElement).checked; this.pmChange.emit(this.checked); }} /><span>{this.label}<slot /></span></label>; }
+  render() {
+    return (
+      <label class="choice">
+        <input
+          type="checkbox"
+          name={this.name || undefined}
+          value={this.value}
+          checked={this.checked}
+          disabled={this.disabled}
+          required={this.required}
+          onChange={(event) => {
+            this.checked = (event.target as HTMLInputElement).checked;
+            this.pmChange.emit(this.checked);
+          }}
+        />
+        <span>
+          {this.label}
+          <slot />
+        </span>
+      </label>
+    );
+  }
 }

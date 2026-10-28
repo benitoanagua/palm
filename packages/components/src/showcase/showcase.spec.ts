@@ -8,7 +8,10 @@ import { PmToolbar } from './toolbar';
 
 describe('showcase components', () => {
   it('renders the compositional set', async () => {
-    const page = await newSpecPage({ components: [PmMetricCard, PmStatus, PmAlert, PmEmptyState, PmDataTable, PmToolbar], html: '<pm-metric-card label=Users value=42></pm-metric-card>' });
+    const page = await newSpecPage({
+      components: [PmMetricCard, PmStatus, PmAlert, PmEmptyState, PmDataTable, PmToolbar],
+      html: '<pm-metric-card label=Users value=42></pm-metric-card>',
+    });
     expect(page.root).toBeTruthy();
   });
 });

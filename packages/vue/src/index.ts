@@ -7,7 +7,6 @@ export const PalmVue: Plugin = {
   },
 };
 
-
 declare module 'vue' {
   interface GlobalComponents {
     'pm-button': HTMLElement;

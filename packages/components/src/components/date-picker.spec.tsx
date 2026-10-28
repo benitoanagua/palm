@@ -3,7 +3,10 @@ import { PmDatePicker } from './date-picker';
 
 describe('pm-date-picker', () => {
   it('accepts a typed ISO date and emits pmChange', async () => {
-    const page = await newSpecPage({ components: [PmDatePicker], html: '<pm-date-picker></pm-date-picker>' });
+    const page = await newSpecPage({
+      components: [PmDatePicker],
+      html: '<pm-date-picker></pm-date-picker>',
+    });
     const spy = jest.fn();
     page.root?.addEventListener('pmChange', (e: Event) => spy((e as CustomEvent<string>).detail));
     const input = page.root?.querySelector('input') as HTMLInputElement;
@@ -20,7 +23,9 @@ describe('pm-date-picker', () => {
     });
     const button = page.doc.createElement('button');
     // Find day "5" (before min) and day "25" (after max) among rendered day buttons.
-    const dayButtons = Array.from(page.root?.querySelectorAll('.pm-date-picker__day') ?? []) as HTMLButtonElement[];
+    const dayButtons = Array.from(
+      page.root?.querySelectorAll('.pm-date-picker__day') ?? [],
+    ) as HTMLButtonElement[];
     const day5 = dayButtons.find((b) => b.textContent?.trim() === '5');
     const day25 = dayButtons.find((b) => b.textContent?.trim() === '25');
     expect(day5?.disabled).toBe(true);
@@ -35,7 +40,9 @@ describe('pm-date-picker', () => {
     });
     const instance = page.rootInstance as PmDatePicker;
     const before = instance.value;
-    const dayButtons = Array.from(page.root?.querySelectorAll('.pm-date-picker__day') ?? []) as HTMLButtonElement[];
+    const dayButtons = Array.from(
+      page.root?.querySelectorAll('.pm-date-picker__day') ?? [],
+    ) as HTMLButtonElement[];
     const day5 = dayButtons.find((b) => b.textContent?.trim() === '5');
     day5?.click();
     await page.waitForChanges();

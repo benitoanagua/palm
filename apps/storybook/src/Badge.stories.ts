@@ -11,11 +11,14 @@ export default meta;
 
 export const Default = { render: () => h('pm-badge', null, 'Neutral') };
 export const Tones = {
-  render: () => h('div', { style: { display: 'flex', gap: '8px' } },
-    h('pm-badge', { tone: 'neutral' }, 'Neutral'),
-    h('pm-badge', { tone: 'info' }, 'Info'),
-    h('pm-badge', { tone: 'success' }, 'Active'),
-    h('pm-badge', { tone: 'warning' }, 'Pending'),
-    h('pm-badge', { tone: 'danger' }, 'Failed'),
-  ),
+  render: () =>
+    h(
+      'div',
+      { style: { display: 'flex', gap: '8px' } },
+      h('pm-badge', { tone: 'neutral' }, 'Neutral'),
+      h('pm-badge', { tone: 'info' }, 'Info'),
+      h('pm-badge', { tone: 'success' }, 'Active'),
+      h('pm-badge', { tone: 'warning' }, 'Pending'),
+      h('pm-badge', { tone: 'danger' }, 'Failed'),
+    ),
 };

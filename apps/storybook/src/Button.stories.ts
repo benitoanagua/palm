@@ -18,11 +18,5 @@ export const Secondary = {
 };
 
 export const WithIcons = {
-  render: () =>
-    h(
-      'pm-button',
-      null,
-      h('pm-icon', { slot: 'start', name: 'plus' }),
-      'Create',
-    ),
+  render: () => h('pm-button', null, h('pm-icon', { slot: 'start', name: 'plus' }), 'Create'),
 };

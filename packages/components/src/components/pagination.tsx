@@ -47,7 +47,9 @@ export class PmPagination {
         <ul class="pm-pagination__list">
           {pages.map((token, index) =>
             token === 'ellipsis' ? (
-              <li key={`e-${index}`} class="pm-pagination__ellipsis" aria-hidden="true">…</li>
+              <li key={`e-${index}`} class="pm-pagination__ellipsis" aria-hidden="true">
+                …
+              </li>
             ) : (
               <li key={token}>
                 <button

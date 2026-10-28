@@ -9,6 +9,14 @@ const meta = {
 
 export default meta;
 
-export const Default = { render: () => h('pm-switch', { label: 'Enable notifications', name: 'notifications' }) };
-export const Checked = { render: () => h('pm-switch', { label: 'Enable notifications', name: 'notifications', checked: true }) };
-export const Disabled = { render: () => h('pm-switch', { label: 'Enable notifications', name: 'notifications', disabled: true }) };
+export const Default = {
+  render: () => h('pm-switch', { label: 'Enable notifications', name: 'notifications' }),
+};
+export const Checked = {
+  render: () =>
+    h('pm-switch', { label: 'Enable notifications', name: 'notifications', checked: true }),
+};
+export const Disabled = {
+  render: () =>
+    h('pm-switch', { label: 'Enable notifications', name: 'notifications', disabled: true }),
+};

@@ -7,5 +7,25 @@ export class PmSwitch {
   @Prop() disabled = false;
   @Prop() name = '';
   @Event() pmChange!: EventEmitter<boolean>;
-  render() { return <label class="choice"><input type="checkbox" role="switch" name={this.name || undefined} checked={this.checked} disabled={this.disabled} onChange={(event) => { this.checked = (event.target as HTMLInputElement).checked; this.pmChange.emit(this.checked); }} /><span>{this.label}<slot /></span></label>; }
+  render() {
+    return (
+      <label class="choice">
+        <input
+          type="checkbox"
+          role="switch"
+          name={this.name || undefined}
+          checked={this.checked}
+          disabled={this.disabled}
+          onChange={(event) => {
+            this.checked = (event.target as HTMLInputElement).checked;
+            this.pmChange.emit(this.checked);
+          }}
+        />
+        <span>
+          {this.label}
+          <slot />
+        </span>
+      </label>
+    );
+  }
 }

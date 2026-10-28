@@ -15,7 +15,10 @@ export class PmComboboxOption {
         role="option"
         aria-selected={this.selected ? 'true' : 'false'}
         class={{ 'pm-combobox__option': true, 'is-active': this.active }}
-        onMouseDown={(event) => { event.preventDefault(); this.pmSelect.emit(this.value); }}
+        onMouseDown={(event) => {
+          event.preventDefault();
+          this.pmSelect.emit(this.value);
+        }}
       >
         <slot />
       </div>

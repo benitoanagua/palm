@@ -1,6 +1,11 @@
 import { Component, Event, type EventEmitter, Prop, h } from '@stencil/core';
 
-@Component({ tag: 'pm-segmented-item', styleUrl: 'segmented-control.css', shadow: false, scoped: true })
+@Component({
+  tag: 'pm-segmented-item',
+  styleUrl: 'segmented-control.css',
+  shadow: false,
+  scoped: true,
+})
 export class PmSegmentedItem {
   @Prop() value = '';
   @Prop() disabled = false;

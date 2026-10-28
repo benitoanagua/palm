@@ -10,7 +10,13 @@ const meta = {
 export default meta;
 
 export const Default = { render: () => h('pm-textarea', { label: 'Message' }) };
-export const WithHint = { render: () => h('pm-textarea', { label: 'Message', hint: 'Max 500 characters' }) };
-export const WithError = { render: () => h('pm-textarea', { label: 'Message', error: 'Message is required' }) };
-export const Disabled = { render: () => h('pm-textarea', { label: 'Message', disabled: true, value: 'Locked content' }) };
+export const WithHint = {
+  render: () => h('pm-textarea', { label: 'Message', hint: 'Max 500 characters' }),
+};
+export const WithError = {
+  render: () => h('pm-textarea', { label: 'Message', error: 'Message is required' }),
+};
+export const Disabled = {
+  render: () => h('pm-textarea', { label: 'Message', disabled: true, value: 'Locked content' }),
+};
 export const Rows = { render: () => h('pm-textarea', { label: 'Long message', rows: 8 }) };

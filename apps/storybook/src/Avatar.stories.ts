@@ -10,20 +10,28 @@ const meta = {
 export default meta;
 
 export const Initials = { render: () => h('pm-avatar', { name: 'Ada Lovelace' }) };
-export const WithImage = { render: () => h('pm-avatar', { name: 'Ada Lovelace', src: 'https://i.pravatar.cc/64?img=5' }) };
+export const WithImage = {
+  render: () => h('pm-avatar', { name: 'Ada Lovelace', src: 'https://i.pravatar.cc/64?img=5' }),
+};
 export const Sizes = {
-  render: () => h('div', { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
-    h('pm-avatar', { name: 'Ada Lovelace', size: 'small' }),
-    h('pm-avatar', { name: 'Ada Lovelace', size: 'medium' }),
-    h('pm-avatar', { name: 'Ada Lovelace', size: 'large' }),
-  ),
+  render: () =>
+    h(
+      'div',
+      { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
+      h('pm-avatar', { name: 'Ada Lovelace', size: 'small' }),
+      h('pm-avatar', { name: 'Ada Lovelace', size: 'medium' }),
+      h('pm-avatar', { name: 'Ada Lovelace', size: 'large' }),
+    ),
 };
 export const Status = {
-  render: () => h('div', { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
-    h('pm-avatar', { name: 'Ada Lovelace', status: 'online' }),
-    h('pm-avatar', { name: 'Ada Lovelace', status: 'busy' }),
-    h('pm-avatar', { name: 'Ada Lovelace', status: 'away' }),
-    h('pm-avatar', { name: 'Ada Lovelace', status: 'offline' }),
-  ),
+  render: () =>
+    h(
+      'div',
+      { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
+      h('pm-avatar', { name: 'Ada Lovelace', status: 'online' }),
+      h('pm-avatar', { name: 'Ada Lovelace', status: 'busy' }),
+      h('pm-avatar', { name: 'Ada Lovelace', status: 'away' }),
+      h('pm-avatar', { name: 'Ada Lovelace', status: 'offline' }),
+    ),
 };
 export const Square = { render: () => h('pm-avatar', { name: 'Ada Lovelace', shape: 'square' }) };

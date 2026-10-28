@@ -8,10 +8,16 @@ export class PmEmptyState {
   render() {
     return (
       <section class="pm-empty-state">
-        <div class="pm-empty-state__icon"><slot name="icon"><pm-icon name="inbox" aria-label=""></pm-icon></slot></div>
+        <div class="pm-empty-state__icon">
+          <slot name="icon">
+            <pm-icon name="inbox" aria-label=""></pm-icon>
+          </slot>
+        </div>
         <h3>{this.heading}</h3>
         {this.description ? <p>{this.description}</p> : null}
-        <div class="pm-empty-state__actions"><slot name="actions" /></div>
+        <div class="pm-empty-state__actions">
+          <slot name="actions" />
+        </div>
       </section>
     );
   }

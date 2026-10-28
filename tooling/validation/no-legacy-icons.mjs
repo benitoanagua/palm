@@ -3,8 +3,8 @@ import { join, resolve } from 'node:path';
 
 const root = resolve(new URL('../..', import.meta.url).pathname);
 const forbidden = [
-  new RegExp(String.fromCharCode(99,97,114,98,111,110), 'i'),
-  new RegExp(String.fromCharCode(105,99,111,110,105,102,121), 'i'),
+  new RegExp(String.fromCharCode(99, 97, 114, 98, 111, 110), 'i'),
+  new RegExp(String.fromCharCode(105, 99, 111, 110, 105, 102, 121), 'i'),
 ];
 const ignored = new Set(['node_modules', 'dist', '.git', 'coverage', 'test-results']);
 const violations = [];

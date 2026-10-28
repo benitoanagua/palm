@@ -1,9 +1,59 @@
-:host { display: block; }
-.nav-list { display: flex; gap: var(--pm-space-1); }.nav-list.is-vertical { flex-direction: column; }.nav-list.is-horizontal { align-items: center; overflow-x: auto; }
-.nav { display: flex; align-items: center; min-height: 2.5rem; padding: 0 var(--pm-space-3); border-radius: var(--pm-radius-md); border: 0; border-inline-start: 3px solid transparent; background: transparent; color: var(--pm-color-text-muted); text-decoration: none; font: 650 var(--pm-font-size-sm)/1 var(--pm-font-family-sans); cursor: pointer; }.nav:hover:not(:disabled) { background: var(--pm-color-neutral-100); color: var(--pm-color-text); }.nav.active { background: var(--pm-color-action-soft); color: var(--pm-color-action); }.nav:disabled { opacity: .5; cursor: not-allowed; }.nav:focus-visible { outline: none; box-shadow: var(--pm-focus-ring); }
+:host {
+  display: block;
+}
+.nav-list {
+  display: flex;
+  gap: var(--pm-space-1);
+}
+.nav-list.is-vertical {
+  flex-direction: column;
+}
+.nav-list.is-horizontal {
+  align-items: center;
+  overflow-x: auto;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0 var(--pm-space-3);
+  border-radius: var(--pm-radius-md);
+  border: 0;
+  border-inline-start: 3px solid transparent;
+  background: transparent;
+  color: var(--pm-color-text-muted);
+  text-decoration: none;
+  font: 650 var(--pm-font-size-sm)/1 var(--pm-font-family-sans);
+  cursor: pointer;
+}
+.nav:hover:not(:disabled) {
+  background: var(--pm-color-neutral-100);
+  color: var(--pm-color-text);
+}
+.nav.active {
+  background: var(--pm-color-action-soft);
+  color: var(--pm-color-action);
+}
+.nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.nav:focus-visible {
+  outline: none;
+  box-shadow: var(--pm-focus-ring);
+}
 /* Dentro de un drawer.is-nav (offcanvas oscuro): el activo se marca
    con un borde de acento a la izquierda sobre fondo oscuro, no con
    un tinte de fondo pensado para superficie clara. */
-.drawer.is-nav .nav { color: var(--pm-color-neutral-300); }
-.drawer.is-nav .nav:hover:not(:disabled) { background: rgb(255 255 255 / .06); color: var(--pm-color-neutral-0); }
-.drawer.is-nav .nav.active { background: rgb(255 255 255 / .06); border-inline-start-color: var(--pm-color-action); color: var(--pm-color-neutral-0); }
+.drawer.is-nav .nav {
+  color: var(--pm-color-neutral-300);
+}
+.drawer.is-nav .nav:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.06);
+  color: var(--pm-color-neutral-0);
+}
+.drawer.is-nav .nav.active {
+  background: rgb(255 255 255 / 0.06);
+  border-inline-start-color: var(--pm-color-action);
+  color: var(--pm-color-neutral-0);
+}

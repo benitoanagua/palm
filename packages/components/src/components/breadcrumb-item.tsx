@@ -10,11 +10,17 @@ export class PmBreadcrumbItem {
     return (
       <li class="pm-breadcrumbs__item">
         {this.current || !this.href ? (
-          <span aria-current={this.current ? 'page' : undefined}><slot /></span>
+          <span aria-current={this.current ? 'page' : undefined}>
+            <slot />
+          </span>
         ) : (
-          <a href={this.href}><slot /></a>
+          <a href={this.href}>
+            <slot />
+          </a>
         )}
-        {!this.current ? <pm-icon name="chevron-right" class="pm-breadcrumbs__sep" aria-hidden="true" /> : null}
+        {!this.current ? (
+          <pm-icon name="chevron-right" class="pm-breadcrumbs__sep" aria-hidden="true" />
+        ) : null}
       </li>
     );
   }

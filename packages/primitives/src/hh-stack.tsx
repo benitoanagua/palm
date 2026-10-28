@@ -7,6 +7,17 @@ export class PmStack {
   @Prop() align: 'start' | 'center' | 'end' | 'stretch' = 'stretch';
 
   render() {
-    return <div class="pm-stack" style={{ '--pm-stack-direction': this.direction, '--pm-stack-gap': this.gap, '--pm-stack-align': this.align }}><slot /></div>;
+    return (
+      <div
+        class="pm-stack"
+        style={{
+          '--pm-stack-direction': this.direction,
+          '--pm-stack-gap': this.gap,
+          '--pm-stack-align': this.align,
+        }}
+      >
+        <slot />
+      </div>
+    );
   }
 }

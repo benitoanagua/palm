@@ -22,13 +22,25 @@ export class PmAvatar {
     return (
       <span class={{ 'pm-avatar': true, [`is-${this.size}`]: true, [`is-${this.shape}`]: true }}>
         {showImage ? (
-          <img src={this.src} alt={this.name} onError={() => { this.imageFailed = true; }} />
+          <img
+            src={this.src}
+            alt={this.name}
+            onError={() => {
+              this.imageFailed = true;
+            }}
+          />
         ) : (
           <span class="pm-avatar__initials" aria-hidden={this.name ? undefined : 'true'}>
             {this.name ? initialsFrom(this.name) : <pm-icon name="user" aria-hidden="true" />}
           </span>
         )}
-        {this.status ? <span class={`pm-avatar__status is-${this.status}`} aria-label={`Status: ${this.status}`} role="img" /> : null}
+        {this.status ? (
+          <span
+            class={`pm-avatar__status is-${this.status}`}
+            aria-label={`Status: ${this.status}`}
+            role="img"
+          />
+        ) : null}
       </span>
     );
   }

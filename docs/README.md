@@ -3,6 +3,7 @@
 PALM is an independent design system implemented with Stencil and Web Components.
 
 Documentation areas:
+
 - architecture
 - foundations
 - components

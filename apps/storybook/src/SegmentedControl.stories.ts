@@ -10,16 +10,22 @@ const meta = {
 export default meta;
 
 export const Default = {
-  render: () => h('pm-segmented-control', { label: 'View', value: 'list' },
-    h('pm-segmented-item', { value: 'list', selected: true }, 'List'),
-    h('pm-segmented-item', { value: 'grid' }, 'Grid'),
-    h('pm-segmented-item', { value: 'map' }, 'Map'),
-  ),
+  render: () =>
+    h(
+      'pm-segmented-control',
+      { label: 'View', value: 'list' },
+      h('pm-segmented-item', { value: 'list', selected: true }, 'List'),
+      h('pm-segmented-item', { value: 'grid' }, 'Grid'),
+      h('pm-segmented-item', { value: 'map' }, 'Map'),
+    ),
 };
 export const WithDisabledOption = {
-  render: () => h('pm-segmented-control', { label: 'View', value: 'list' },
-    h('pm-segmented-item', { value: 'list', selected: true }, 'List'),
-    h('pm-segmented-item', { value: 'grid' }, 'Grid'),
-    h('pm-segmented-item', { value: 'map', disabled: true }, 'Map'),
-  ),
+  render: () =>
+    h(
+      'pm-segmented-control',
+      { label: 'View', value: 'list' },
+      h('pm-segmented-item', { value: 'list', selected: true }, 'List'),
+      h('pm-segmented-item', { value: 'grid' }, 'Grid'),
+      h('pm-segmented-item', { value: 'map', disabled: true }, 'Map'),
+    ),
 };

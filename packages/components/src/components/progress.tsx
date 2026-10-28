@@ -14,14 +14,21 @@ export class PmProgress {
       <div class="pm-progress">
         {this.label ? <span class="pm-progress__label">{this.label}</span> : null}
         <div
-          class={{ 'pm-progress__track': true, [`is-${this.tone}`]: true, 'is-indeterminate': this.indeterminate }}
+          class={{
+            'pm-progress__track': true,
+            [`is-${this.tone}`]: true,
+            'is-indeterminate': this.indeterminate,
+          }}
           role="progressbar"
           aria-label={this.label || undefined}
           aria-valuemin={this.indeterminate ? undefined : 0}
           aria-valuemax={this.indeterminate ? undefined : 100}
           aria-valuenow={this.indeterminate ? undefined : clamped}
         >
-          <div class="pm-progress__fill" style={this.indeterminate ? undefined : { width: `${clamped}%` }} />
+          <div
+            class="pm-progress__fill"
+            style={this.indeterminate ? undefined : { width: `${clamped}%` }}
+          />
         </div>
       </div>
     );

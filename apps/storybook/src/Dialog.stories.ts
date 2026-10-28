@@ -11,7 +11,8 @@ const meta = {
 export default meta;
 
 export const Default = {
-  render: () => stencilContent(`
+  render: () =>
+    stencilContent(`
     <pm-button onclick="document.querySelector('pm-dialog').show()">Open dialog</pm-button>
     <pm-dialog label="Confirm action">
       <p>This dialog uses the native dialog element and restores focus on close.</p>
