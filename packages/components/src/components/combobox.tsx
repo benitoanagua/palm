@@ -78,8 +78,10 @@ export class PmCombobox {
       if (!option.id) option.id = `${this.listboxId}-opt-${index}`;
       const text = (option.textContent || '').toLowerCase();
       const matches = !needle || text.includes(needle);
-      option.toggleAttribute('matched', matches);
-      option.toggleAttribute('selected', option.getAttribute('value') === this.value);
+      if (matches) option.setAttribute('matched', '');
+      else option.removeAttribute('matched');
+      if (option.getAttribute('value') === this.value) option.setAttribute('selected', '');
+      else option.removeAttribute('selected');
       if (matches) {
         visibleAt.push(index);
         visibleIndex++;
@@ -87,7 +89,8 @@ export class PmCombobox {
     });
     if (this.activeIndex >= visibleIndex) this.activeIndex = Math.max(visibleIndex - 1, 0);
     options.forEach((option, index) => {
-      option.toggleAttribute('active', visibleAt[this.activeIndex] === index);
+      if (visibleAt[this.activeIndex] === index) option.setAttribute('active', '');
+      else option.removeAttribute('active');
     });
   };
 
