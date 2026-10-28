@@ -1,6 +1,6 @@
 # PALM — Criterios de aceptación visual
 
-El Showcase es la superficie de referencia de PALM. Las comparaciones visuales se generan desde PALM y no contra STRATA.
+El Showcase es la superficie de referencia de PALM. Las comparaciones visuales se generan y revisan contra las propias baselines aprobadas de PALM.
 
 ## Viewports
 
