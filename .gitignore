@@ -30,6 +30,16 @@ coverage/
 .nyc_output/
 *-snapshots/
 
+# Images and local visual artifacts (never version baselines)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.avif
+*.bmp
+*.ico
+
 # Generated Stencil declarations and Tabler dataset
 packages/*/src/components.d.ts
 packages/icons/src/data/tabler-outline.json
