@@ -117,7 +117,7 @@ export class PmToastRegion {
               name="x"
               label="Dismiss"
               size="small"
-              onHhPress={() => this.dismiss(t.id)}
+              onPmPress={() => this.dismiss(t.id)}
             />
           </div>
         ))}
