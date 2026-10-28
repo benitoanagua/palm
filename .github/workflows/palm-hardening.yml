@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - chore/palm-hardening
+      - chore/palm-hardening-docs
   workflow_dispatch:
 
 permissions:
