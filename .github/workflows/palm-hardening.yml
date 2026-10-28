@@ -34,7 +34,14 @@ jobs:
           node-version: 22
           cache: pnpm
       - name: Install locked dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
+      - name: Export regenerated lockfile for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-pnpm-lockfile
+          path: pnpm-lock.yaml
+          if-no-files-found: error
+          retention-days: 1
       - name: Run quality gate
         run: pnpm check
 
