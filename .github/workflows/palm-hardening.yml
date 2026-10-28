@@ -1,0 +1,67 @@
+name: Palm hardening baseline
+
+on:
+  push:
+    branches:
+      - chore/palm-hardening
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: palm-hardening-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  baseline:
+    name: Backup and clean baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Create and verify pre-hardening tag
+        shell: bash
+        run: |
+          git fetch origin main
+          if ! git rev-parse -q --verify refs/tags/pre-hardening >/dev/null; then
+            git tag pre-hardening refs/remotes/origin/main
+            git push origin refs/tags/pre-hardening
+          fi
+          git show --no-patch --format='%H %s' refs/tags/pre-hardening
+
+      - name: Create and verify recovery bundle
+        shell: bash
+        run: |
+          git bundle create "$RUNNER_TEMP/palm-pre-hardening.bundle" --all
+          git bundle verify "$RUNNER_TEMP/palm-pre-hardening.bundle"
+
+      - name: Preserve recovery bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: palm-pre-hardening-bundle
+          path: ${{ runner.temp }}/palm-pre-hardening.bundle
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run baseline quality gate
+        run: pnpm check
