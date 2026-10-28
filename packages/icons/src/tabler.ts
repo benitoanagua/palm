@@ -1,7 +1,7 @@
 import iconData from './data/tabler-outline.json';
 import type { TablerIconName } from './icon-names';
 
-export type { TablerIconName, CommonTablerIconName } from './icon-names';
+export type { TablerIconName } from './icon-names';
 
 export type TablerNode = readonly [string, Record<string, string | number>];
 
@@ -27,10 +27,3 @@ export function isTablerIconName(name: string): name is TablerIconName {
   return Boolean(resolveTablerIcon(name));
 }
 
-/** Total number of icons available in the resolved set. Useful for tests/docs. */
-export const tablerIconCount = Object.keys(icons).length;
-
-/** All available icon names, sorted. Useful for a documentation/icon-picker page. */
-export function listTablerIconNames(): string[] {
-  return Object.keys(icons).sort();
-}
