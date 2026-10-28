@@ -79,15 +79,9 @@ importers:
 
   packages/components:
     dependencies:
-      '@palm/foundation':
-        specifier: workspace:*
-        version: link:../foundation
       '@palm/icons':
         specifier: workspace:*
         version: link:../icons
-      '@palm/tokens':
-        specifier: workspace:*
-        version: link:../tokens
     devDependencies:
       '@stencil/core':
         specifier: ^4.38.0
@@ -95,9 +89,6 @@ importers:
 
   packages/foundation:
     dependencies:
-      '@palm/tokens':
-        specifier: workspace:*
-        version: link:../tokens
 
   packages/icons:
     devDependencies:
@@ -110,9 +101,6 @@ importers:
 
   packages/primitives:
     dependencies:
-      '@palm/tokens':
-        specifier: workspace:*
-        version: link:../tokens
     devDependencies:
       '@stencil/core':
         specifier: ^4.38.0
@@ -133,9 +121,6 @@ importers:
       '@types/react':
         specifier: ^18.3.0
         version: 18.3.31
-      '@types/react-dom':
-        specifier: ^18.3.7
-        version: 18.3.7(@types/react@18.3.31)
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
