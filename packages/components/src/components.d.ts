@@ -943,130 +943,130 @@ export namespace Components {
 }
 export interface PmAccordionCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhAccordionElement;
+  target: HTMLPmAccordionElement;
 }
 export interface PmAccordionItemCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhAccordionItemElement;
+  target: HTMLPmAccordionItemElement;
 }
 export interface PmAlertCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhAlertElement;
+  target: HTMLPmAlertElement;
 }
 export interface PmButtonCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhButtonElement;
+  target: HTMLPmButtonElement;
 }
 export interface PmCardCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhCardElement;
+  target: HTMLPmCardElement;
 }
 export interface PmCheckboxCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhCheckboxElement;
+  target: HTMLPmCheckboxElement;
 }
 export interface PmComboboxCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhComboboxElement;
+  target: HTMLPmComboboxElement;
 }
 export interface PmComboboxOptionCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhComboboxOptionElement;
+  target: HTMLPmComboboxOptionElement;
 }
 export interface PmDataTableCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhDataTableElement;
+  target: HTMLPmDataTableElement;
 }
 export interface PmDatePickerCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhDatePickerElement;
+  target: HTMLPmDatePickerElement;
 }
 export interface PmDialogCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhDialogElement;
+  target: HTMLPmDialogElement;
 }
 export interface PmDrawerCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhDrawerElement;
+  target: HTMLPmDrawerElement;
 }
 export interface PmFileUploadCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhFileUploadElement;
+  target: HTMLPmFileUploadElement;
 }
 export interface PmIconButtonCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhIconButtonElement;
+  target: HTMLPmIconButtonElement;
 }
 export interface PmInputCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhInputElement;
+  target: HTMLPmInputElement;
 }
 export interface PmMenuCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhMenuElement;
+  target: HTMLPmMenuElement;
 }
 export interface PmMenuItemCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhMenuItemElement;
+  target: HTMLPmMenuItemElement;
 }
 export interface PmNavItemCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhNavItemElement;
+  target: HTMLPmNavItemElement;
 }
 export interface PmPaginationCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhPaginationElement;
+  target: HTMLPmPaginationElement;
 }
 export interface PmRadioCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhRadioElement;
+  target: HTMLPmRadioElement;
 }
 export interface PmSegmentedControlCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhSegmentedControlElement;
+  target: HTMLPmSegmentedControlElement;
 }
 export interface PmSegmentedItemCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhSegmentedItemElement;
+  target: HTMLPmSegmentedItemElement;
 }
 export interface PmSelectCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhSelectElement;
+  target: HTMLPmSelectElement;
 }
 export interface PmSliderCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhSliderElement;
+  target: HTMLPmSliderElement;
 }
 export interface PmSwitchCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhSwitchElement;
+  target: HTMLPmSwitchElement;
 }
 export interface PmTabCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhTabElement;
+  target: HTMLPmTabElement;
 }
 export interface PmTabsCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhTabsElement;
+  target: HTMLPmTabsElement;
 }
 export interface PmTextareaCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhTextareaElement;
+  target: HTMLPmTextareaElement;
 }
 export interface PmTimePickerCustomEvent<T> extends CustomEvent<T> {
   detail: T;
-  target: HTMLHhTimePickerElement;
+  target: HTMLPmTimePickerElement;
 }
 declare global {
-  interface HTMLHhAccordionElementEventMap {
+  interface HTMLPmAccordionElementEventMap {
     pmChange: string[];
   }
-  interface HTMLHhAccordionElement extends Components.PmAccordion, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhAccordionElementEventMap>(
+  interface HTMLPmAccordionElement extends Components.PmAccordion, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmAccordionElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhAccordionElement,
-        ev: PmAccordionCustomEvent<HTMLHhAccordionElementEventMap[K]>,
+        this: HTMLPmAccordionElement,
+        ev: PmAccordionCustomEvent<HTMLPmAccordionElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1085,11 +1085,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhAccordionElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmAccordionElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhAccordionElement,
-        ev: PmAccordionCustomEvent<HTMLHhAccordionElementEventMap[K]>,
+        this: HTMLPmAccordionElement,
+        ev: PmAccordionCustomEvent<HTMLPmAccordionElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1109,19 +1109,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhAccordionElement: {
-    prototype: HTMLHhAccordionElement;
-    new (): HTMLHhAccordionElement;
+  var HTMLPmAccordionElement: {
+    prototype: HTMLPmAccordionElement;
+    new (): HTMLPmAccordionElement;
   };
-  interface HTMLHhAccordionItemElementEventMap {
+  interface HTMLPmAccordionItemElementEventMap {
     pmToggle: boolean;
   }
-  interface HTMLHhAccordionItemElement extends Components.PmAccordionItem, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhAccordionItemElementEventMap>(
+  interface HTMLPmAccordionItemElement extends Components.PmAccordionItem, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmAccordionItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhAccordionItemElement,
-        ev: PmAccordionItemCustomEvent<HTMLHhAccordionItemElementEventMap[K]>,
+        this: HTMLPmAccordionItemElement,
+        ev: PmAccordionItemCustomEvent<HTMLPmAccordionItemElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1140,11 +1140,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhAccordionItemElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmAccordionItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhAccordionItemElement,
-        ev: PmAccordionItemCustomEvent<HTMLHhAccordionItemElementEventMap[K]>,
+        this: HTMLPmAccordionItemElement,
+        ev: PmAccordionItemCustomEvent<HTMLPmAccordionItemElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1164,19 +1164,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhAccordionItemElement: {
-    prototype: HTMLHhAccordionItemElement;
-    new (): HTMLHhAccordionItemElement;
+  var HTMLPmAccordionItemElement: {
+    prototype: HTMLPmAccordionItemElement;
+    new (): HTMLPmAccordionItemElement;
   };
-  interface HTMLHhAlertElementEventMap {
+  interface HTMLPmAlertElementEventMap {
     pmDismiss: void;
   }
-  interface HTMLHhAlertElement extends Components.PmAlert, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhAlertElementEventMap>(
+  interface HTMLPmAlertElement extends Components.PmAlert, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmAlertElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhAlertElement,
-        ev: PmAlertCustomEvent<HTMLHhAlertElementEventMap[K]>,
+        this: HTMLPmAlertElement,
+        ev: PmAlertCustomEvent<HTMLPmAlertElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1195,11 +1195,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhAlertElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmAlertElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhAlertElement,
-        ev: PmAlertCustomEvent<HTMLHhAlertElementEventMap[K]>,
+        this: HTMLPmAlertElement,
+        ev: PmAlertCustomEvent<HTMLPmAlertElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1219,24 +1219,24 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhAlertElement: {
-    prototype: HTMLHhAlertElement;
-    new (): HTMLHhAlertElement;
+  var HTMLPmAlertElement: {
+    prototype: HTMLPmAlertElement;
+    new (): HTMLPmAlertElement;
   };
-  interface HTMLHhAvatarElement extends Components.PmAvatar, HTMLStencilElement {}
-  var HTMLHhAvatarElement: {
-    prototype: HTMLHhAvatarElement;
-    new (): HTMLHhAvatarElement;
+  interface HTMLPmAvatarElement extends Components.PmAvatar, HTMLStencilElement {}
+  var HTMLPmAvatarElement: {
+    prototype: HTMLPmAvatarElement;
+    new (): HTMLPmAvatarElement;
   };
-  interface HTMLHhBadgeElement extends Components.PmBadge, HTMLStencilElement {}
-  var HTMLHhBadgeElement: {
-    prototype: HTMLHhBadgeElement;
-    new (): HTMLHhBadgeElement;
+  interface HTMLPmBadgeElement extends Components.PmBadge, HTMLStencilElement {}
+  var HTMLPmBadgeElement: {
+    prototype: HTMLPmBadgeElement;
+    new (): HTMLPmBadgeElement;
   };
-  interface HTMLHhBreadcrumbItemElement extends Components.PmBreadcrumbItem, HTMLStencilElement {}
-  var HTMLHhBreadcrumbItemElement: {
-    prototype: HTMLHhBreadcrumbItemElement;
-    new (): HTMLHhBreadcrumbItemElement;
+  interface HTMLPmBreadcrumbItemElement extends Components.PmBreadcrumbItem, HTMLStencilElement {}
+  var HTMLPmBreadcrumbItemElement: {
+    prototype: HTMLPmBreadcrumbItemElement;
+    new (): HTMLPmBreadcrumbItemElement;
   };
   /**
    * Wraps slotted `<pm-breadcrumb-item>` children, marking the last item as
@@ -1252,20 +1252,20 @@ declare global {
    * host, so collapsing is done by inserting/removing a real ellipsis <li>
    * node next to them rather than trying to reorder projected slot content.
    */
-  interface HTMLHhBreadcrumbsElement extends Components.PmBreadcrumbs, HTMLStencilElement {}
-  var HTMLHhBreadcrumbsElement: {
-    prototype: HTMLHhBreadcrumbsElement;
-    new (): HTMLHhBreadcrumbsElement;
+  interface HTMLPmBreadcrumbsElement extends Components.PmBreadcrumbs, HTMLStencilElement {}
+  var HTMLPmBreadcrumbsElement: {
+    prototype: HTMLPmBreadcrumbsElement;
+    new (): HTMLPmBreadcrumbsElement;
   };
-  interface HTMLHhButtonElementEventMap {
+  interface HTMLPmButtonElementEventMap {
     pmPress: MouseEvent;
   }
-  interface HTMLHhButtonElement extends Components.PmButton, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhButtonElementEventMap>(
+  interface HTMLPmButtonElement extends Components.PmButton, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmButtonElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhButtonElement,
-        ev: PmButtonCustomEvent<HTMLHhButtonElementEventMap[K]>,
+        this: HTMLPmButtonElement,
+        ev: PmButtonCustomEvent<HTMLPmButtonElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1284,11 +1284,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhButtonElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmButtonElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhButtonElement,
-        ev: PmButtonCustomEvent<HTMLHhButtonElementEventMap[K]>,
+        this: HTMLPmButtonElement,
+        ev: PmButtonCustomEvent<HTMLPmButtonElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1308,19 +1308,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhButtonElement: {
-    prototype: HTMLHhButtonElement;
-    new (): HTMLHhButtonElement;
+  var HTMLPmButtonElement: {
+    prototype: HTMLPmButtonElement;
+    new (): HTMLPmButtonElement;
   };
-  interface HTMLHhCardElementEventMap {
+  interface HTMLPmCardElementEventMap {
     pmPress: MouseEvent | KeyboardEvent;
   }
-  interface HTMLHhCardElement extends Components.PmCard, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhCardElementEventMap>(
+  interface HTMLPmCardElement extends Components.PmCard, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmCardElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhCardElement,
-        ev: PmCardCustomEvent<HTMLHhCardElementEventMap[K]>,
+        this: HTMLPmCardElement,
+        ev: PmCardCustomEvent<HTMLPmCardElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1339,11 +1339,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhCardElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmCardElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhCardElement,
-        ev: PmCardCustomEvent<HTMLHhCardElementEventMap[K]>,
+        this: HTMLPmCardElement,
+        ev: PmCardCustomEvent<HTMLPmCardElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1363,19 +1363,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhCardElement: {
-    prototype: HTMLHhCardElement;
-    new (): HTMLHhCardElement;
+  var HTMLPmCardElement: {
+    prototype: HTMLPmCardElement;
+    new (): HTMLPmCardElement;
   };
-  interface HTMLHhCheckboxElementEventMap {
+  interface HTMLPmCheckboxElementEventMap {
     pmChange: boolean;
   }
-  interface HTMLHhCheckboxElement extends Components.PmCheckbox, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhCheckboxElementEventMap>(
+  interface HTMLPmCheckboxElement extends Components.PmCheckbox, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmCheckboxElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhCheckboxElement,
-        ev: PmCheckboxCustomEvent<HTMLHhCheckboxElementEventMap[K]>,
+        this: HTMLPmCheckboxElement,
+        ev: PmCheckboxCustomEvent<HTMLPmCheckboxElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1394,11 +1394,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhCheckboxElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmCheckboxElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhCheckboxElement,
-        ev: PmCheckboxCustomEvent<HTMLHhCheckboxElementEventMap[K]>,
+        this: HTMLPmCheckboxElement,
+        ev: PmCheckboxCustomEvent<HTMLPmCheckboxElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1418,11 +1418,11 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhCheckboxElement: {
-    prototype: HTMLHhCheckboxElement;
-    new (): HTMLHhCheckboxElement;
+  var HTMLPmCheckboxElement: {
+    prototype: HTMLPmCheckboxElement;
+    new (): HTMLPmCheckboxElement;
   };
-  interface HTMLHhComboboxElementEventMap {
+  interface HTMLPmComboboxElementEventMap {
     pmChange: string;
     pmInput: string;
   }
@@ -1444,12 +1444,12 @@ declare global {
    * it doesn't match any option (e.g. a tags field); otherwise the input
    * reverts to the last matched option's label on blur/Escape.
    */
-  interface HTMLHhComboboxElement extends Components.PmCombobox, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhComboboxElementEventMap>(
+  interface HTMLPmComboboxElement extends Components.PmCombobox, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmComboboxElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhComboboxElement,
-        ev: PmComboboxCustomEvent<HTMLHhComboboxElementEventMap[K]>,
+        this: HTMLPmComboboxElement,
+        ev: PmComboboxCustomEvent<HTMLPmComboboxElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1468,11 +1468,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhComboboxElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmComboboxElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhComboboxElement,
-        ev: PmComboboxCustomEvent<HTMLHhComboboxElementEventMap[K]>,
+        this: HTMLPmComboboxElement,
+        ev: PmComboboxCustomEvent<HTMLPmComboboxElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1492,19 +1492,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhComboboxElement: {
-    prototype: HTMLHhComboboxElement;
-    new (): HTMLHhComboboxElement;
+  var HTMLPmComboboxElement: {
+    prototype: HTMLPmComboboxElement;
+    new (): HTMLPmComboboxElement;
   };
-  interface HTMLHhComboboxOptionElementEventMap {
+  interface HTMLPmComboboxOptionElementEventMap {
     pmSelect: string;
   }
-  interface HTMLHhComboboxOptionElement extends Components.PmComboboxOption, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhComboboxOptionElementEventMap>(
+  interface HTMLPmComboboxOptionElement extends Components.PmComboboxOption, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmComboboxOptionElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhComboboxOptionElement,
-        ev: PmComboboxOptionCustomEvent<HTMLHhComboboxOptionElementEventMap[K]>,
+        this: HTMLPmComboboxOptionElement,
+        ev: PmComboboxOptionCustomEvent<HTMLPmComboboxOptionElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1523,11 +1523,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhComboboxOptionElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmComboboxOptionElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhComboboxOptionElement,
-        ev: PmComboboxOptionCustomEvent<HTMLHhComboboxOptionElementEventMap[K]>,
+        this: HTMLPmComboboxOptionElement,
+        ev: PmComboboxOptionCustomEvent<HTMLPmComboboxOptionElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1547,11 +1547,11 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhComboboxOptionElement: {
-    prototype: HTMLHhComboboxOptionElement;
-    new (): HTMLHhComboboxOptionElement;
+  var HTMLPmComboboxOptionElement: {
+    prototype: HTMLPmComboboxOptionElement;
+    new (): HTMLPmComboboxOptionElement;
   };
-  interface HTMLHhDataTableElementEventMap {
+  interface HTMLPmDataTableElementEventMap {
     pmSortChange: { key: string; direction: SortDirection };
     pmFilterChange: string;
     pmPageChange: number;
@@ -1564,12 +1564,12 @@ declare global {
    * server-side paging, listen for `pmPageChange`/`pmSortChange`/`pmFilterChange`
    * and re-fetch instead of relying on the internal state.
    */
-  interface HTMLHhDataTableElement extends Components.PmDataTable, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhDataTableElementEventMap>(
+  interface HTMLPmDataTableElement extends Components.PmDataTable, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmDataTableElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDataTableElement,
-        ev: PmDataTableCustomEvent<HTMLHhDataTableElementEventMap[K]>,
+        this: HTMLPmDataTableElement,
+        ev: PmDataTableCustomEvent<HTMLPmDataTableElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1588,11 +1588,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhDataTableElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmDataTableElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDataTableElement,
-        ev: PmDataTableCustomEvent<HTMLHhDataTableElementEventMap[K]>,
+        this: HTMLPmDataTableElement,
+        ev: PmDataTableCustomEvent<HTMLPmDataTableElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1612,11 +1612,11 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhDataTableElement: {
-    prototype: HTMLHhDataTableElement;
-    new (): HTMLHhDataTableElement;
+  var HTMLPmDataTableElement: {
+    prototype: HTMLPmDataTableElement;
+    new (): HTMLPmDataTableElement;
   };
-  interface HTMLHhDatePickerElementEventMap {
+  interface HTMLPmDatePickerElementEventMap {
     pmChange: string;
     pmInput: string;
   }
@@ -1632,12 +1632,12 @@ declare global {
    * changing what other code needs to parse.
    *   <pm-date-picker label="Fecha de viaje" locale="es-BO" first-day-of-week="1" />
    */
-  interface HTMLHhDatePickerElement extends Components.PmDatePicker, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhDatePickerElementEventMap>(
+  interface HTMLPmDatePickerElement extends Components.PmDatePicker, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmDatePickerElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDatePickerElement,
-        ev: PmDatePickerCustomEvent<HTMLHhDatePickerElementEventMap[K]>,
+        this: HTMLPmDatePickerElement,
+        ev: PmDatePickerCustomEvent<HTMLPmDatePickerElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1656,11 +1656,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhDatePickerElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmDatePickerElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDatePickerElement,
-        ev: PmDatePickerCustomEvent<HTMLHhDatePickerElementEventMap[K]>,
+        this: HTMLPmDatePickerElement,
+        ev: PmDatePickerCustomEvent<HTMLPmDatePickerElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1680,20 +1680,20 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhDatePickerElement: {
-    prototype: HTMLHhDatePickerElement;
-    new (): HTMLHhDatePickerElement;
+  var HTMLPmDatePickerElement: {
+    prototype: HTMLPmDatePickerElement;
+    new (): HTMLPmDatePickerElement;
   };
-  interface HTMLHhDialogElementEventMap {
+  interface HTMLPmDialogElementEventMap {
     pmOpen: void;
     pmClose: void;
   }
-  interface HTMLHhDialogElement extends Components.PmDialog, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhDialogElementEventMap>(
+  interface HTMLPmDialogElement extends Components.PmDialog, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmDialogElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDialogElement,
-        ev: PmDialogCustomEvent<HTMLHhDialogElementEventMap[K]>,
+        this: HTMLPmDialogElement,
+        ev: PmDialogCustomEvent<HTMLPmDialogElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1712,11 +1712,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhDialogElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmDialogElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDialogElement,
-        ev: PmDialogCustomEvent<HTMLHhDialogElementEventMap[K]>,
+        this: HTMLPmDialogElement,
+        ev: PmDialogCustomEvent<HTMLPmDialogElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1736,20 +1736,20 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhDialogElement: {
-    prototype: HTMLHhDialogElement;
-    new (): HTMLHhDialogElement;
+  var HTMLPmDialogElement: {
+    prototype: HTMLPmDialogElement;
+    new (): HTMLPmDialogElement;
   };
-  interface HTMLHhDrawerElementEventMap {
+  interface HTMLPmDrawerElementEventMap {
     pmOpen: void;
     pmClose: void;
   }
-  interface HTMLHhDrawerElement extends Components.PmDrawer, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhDrawerElementEventMap>(
+  interface HTMLPmDrawerElement extends Components.PmDrawer, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmDrawerElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDrawerElement,
-        ev: PmDrawerCustomEvent<HTMLHhDrawerElementEventMap[K]>,
+        this: HTMLPmDrawerElement,
+        ev: PmDrawerCustomEvent<HTMLPmDrawerElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1768,11 +1768,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhDrawerElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmDrawerElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhDrawerElement,
-        ev: PmDrawerCustomEvent<HTMLHhDrawerElementEventMap[K]>,
+        this: HTMLPmDrawerElement,
+        ev: PmDrawerCustomEvent<HTMLPmDrawerElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1792,16 +1792,16 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhDrawerElement: {
-    prototype: HTMLHhDrawerElement;
-    new (): HTMLHhDrawerElement;
+  var HTMLPmDrawerElement: {
+    prototype: HTMLPmDrawerElement;
+    new (): HTMLPmDrawerElement;
   };
-  interface HTMLHhEmptyStateElement extends Components.PmEmptyState, HTMLStencilElement {}
-  var HTMLHhEmptyStateElement: {
-    prototype: HTMLHhEmptyStateElement;
-    new (): HTMLHhEmptyStateElement;
+  interface HTMLPmEmptyStateElement extends Components.PmEmptyState, HTMLStencilElement {}
+  var HTMLPmEmptyStateElement: {
+    prototype: HTMLPmEmptyStateElement;
+    new (): HTMLPmEmptyStateElement;
   };
-  interface HTMLHhFileUploadElementEventMap {
+  interface HTMLPmFileUploadElementEventMap {
     pmFilesChange: File[];
     pmFileError: PmFileUploadError[];
   }
@@ -1814,12 +1814,12 @@ declare global {
    * Client-side validation is a UX convenience, not a security boundary —
    * always re-validate file type/size server-side.
    */
-  interface HTMLHhFileUploadElement extends Components.PmFileUpload, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhFileUploadElementEventMap>(
+  interface HTMLPmFileUploadElement extends Components.PmFileUpload, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmFileUploadElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhFileUploadElement,
-        ev: PmFileUploadCustomEvent<HTMLHhFileUploadElementEventMap[K]>,
+        this: HTMLPmFileUploadElement,
+        ev: PmFileUploadCustomEvent<HTMLPmFileUploadElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1838,11 +1838,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhFileUploadElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmFileUploadElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhFileUploadElement,
-        ev: PmFileUploadCustomEvent<HTMLHhFileUploadElementEventMap[K]>,
+        this: HTMLPmFileUploadElement,
+        ev: PmFileUploadCustomEvent<HTMLPmFileUploadElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1862,29 +1862,29 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhFileUploadElement: {
-    prototype: HTMLHhFileUploadElement;
-    new (): HTMLHhFileUploadElement;
+  var HTMLPmFileUploadElement: {
+    prototype: HTMLPmFileUploadElement;
+    new (): HTMLPmFileUploadElement;
   };
-  interface HTMLHhFormFieldElement extends Components.PmFormField, HTMLStencilElement {}
-  var HTMLHhFormFieldElement: {
-    prototype: HTMLHhFormFieldElement;
-    new (): HTMLHhFormFieldElement;
+  interface HTMLPmFormFieldElement extends Components.PmFormField, HTMLStencilElement {}
+  var HTMLPmFormFieldElement: {
+    prototype: HTMLPmFormFieldElement;
+    new (): HTMLPmFormFieldElement;
   };
-  interface HTMLHhIconElement extends Components.PmIcon, HTMLStencilElement {}
-  var HTMLHhIconElement: {
-    prototype: HTMLHhIconElement;
-    new (): HTMLHhIconElement;
+  interface HTMLPmIconElement extends Components.PmIcon, HTMLStencilElement {}
+  var HTMLPmIconElement: {
+    prototype: HTMLPmIconElement;
+    new (): HTMLPmIconElement;
   };
-  interface HTMLHhIconButtonElementEventMap {
+  interface HTMLPmIconButtonElementEventMap {
     pmPress: MouseEvent;
   }
-  interface HTMLHhIconButtonElement extends Components.PmIconButton, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhIconButtonElementEventMap>(
+  interface HTMLPmIconButtonElement extends Components.PmIconButton, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmIconButtonElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhIconButtonElement,
-        ev: PmIconButtonCustomEvent<HTMLHhIconButtonElementEventMap[K]>,
+        this: HTMLPmIconButtonElement,
+        ev: PmIconButtonCustomEvent<HTMLPmIconButtonElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1903,11 +1903,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhIconButtonElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmIconButtonElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhIconButtonElement,
-        ev: PmIconButtonCustomEvent<HTMLHhIconButtonElementEventMap[K]>,
+        this: HTMLPmIconButtonElement,
+        ev: PmIconButtonCustomEvent<HTMLPmIconButtonElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1927,20 +1927,20 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhIconButtonElement: {
-    prototype: HTMLHhIconButtonElement;
-    new (): HTMLHhIconButtonElement;
+  var HTMLPmIconButtonElement: {
+    prototype: HTMLPmIconButtonElement;
+    new (): HTMLPmIconButtonElement;
   };
-  interface HTMLHhInputElementEventMap {
+  interface HTMLPmInputElementEventMap {
     pmInput: string;
     pmChange: string;
   }
-  interface HTMLHhInputElement extends Components.PmInput, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhInputElementEventMap>(
+  interface HTMLPmInputElement extends Components.PmInput, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmInputElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhInputElement,
-        ev: PmInputCustomEvent<HTMLHhInputElementEventMap[K]>,
+        this: HTMLPmInputElement,
+        ev: PmInputCustomEvent<HTMLPmInputElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -1959,11 +1959,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhInputElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmInputElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhInputElement,
-        ev: PmInputCustomEvent<HTMLHhInputElementEventMap[K]>,
+        this: HTMLPmInputElement,
+        ev: PmInputCustomEvent<HTMLPmInputElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -1983,11 +1983,11 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhInputElement: {
-    prototype: HTMLHhInputElement;
-    new (): HTMLHhInputElement;
+  var HTMLPmInputElement: {
+    prototype: HTMLPmInputElement;
+    new (): HTMLPmInputElement;
   };
-  interface HTMLHhMenuElementEventMap {
+  interface HTMLPmMenuElementEventMap {
     pmOpenChange: boolean;
     pmSelect: string;
   }
@@ -2002,12 +2002,12 @@ declare global {
    *     <pm-menu-item value="delete" tone="danger">Delete</pm-menu-item>
    *   </pm-menu>
    */
-  interface HTMLHhMenuElement extends Components.PmMenu, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhMenuElementEventMap>(
+  interface HTMLPmMenuElement extends Components.PmMenu, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmMenuElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhMenuElement,
-        ev: PmMenuCustomEvent<HTMLHhMenuElementEventMap[K]>,
+        this: HTMLPmMenuElement,
+        ev: PmMenuCustomEvent<HTMLPmMenuElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2026,11 +2026,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhMenuElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmMenuElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhMenuElement,
-        ev: PmMenuCustomEvent<HTMLHhMenuElementEventMap[K]>,
+        this: HTMLPmMenuElement,
+        ev: PmMenuCustomEvent<HTMLPmMenuElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2050,19 +2050,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhMenuElement: {
-    prototype: HTMLHhMenuElement;
-    new (): HTMLHhMenuElement;
+  var HTMLPmMenuElement: {
+    prototype: HTMLPmMenuElement;
+    new (): HTMLPmMenuElement;
   };
-  interface HTMLHhMenuItemElementEventMap {
+  interface HTMLPmMenuItemElementEventMap {
     pmSelect: string;
   }
-  interface HTMLHhMenuItemElement extends Components.PmMenuItem, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhMenuItemElementEventMap>(
+  interface HTMLPmMenuItemElement extends Components.PmMenuItem, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmMenuItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhMenuItemElement,
-        ev: PmMenuItemCustomEvent<HTMLHhMenuItemElementEventMap[K]>,
+        this: HTMLPmMenuItemElement,
+        ev: PmMenuItemCustomEvent<HTMLPmMenuItemElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2081,11 +2081,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhMenuItemElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmMenuItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhMenuItemElement,
-        ev: PmMenuItemCustomEvent<HTMLHhMenuItemElementEventMap[K]>,
+        this: HTMLPmMenuItemElement,
+        ev: PmMenuItemCustomEvent<HTMLPmMenuItemElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2105,29 +2105,29 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhMenuItemElement: {
-    prototype: HTMLHhMenuItemElement;
-    new (): HTMLHhMenuItemElement;
+  var HTMLPmMenuItemElement: {
+    prototype: HTMLPmMenuItemElement;
+    new (): HTMLPmMenuItemElement;
   };
-  interface HTMLHhMetricCardElement extends Components.PmMetricCard, HTMLStencilElement {}
-  var HTMLHhMetricCardElement: {
-    prototype: HTMLHhMetricCardElement;
-    new (): HTMLHhMetricCardElement;
+  interface HTMLPmMetricCardElement extends Components.PmMetricCard, HTMLStencilElement {}
+  var HTMLPmMetricCardElement: {
+    prototype: HTMLPmMetricCardElement;
+    new (): HTMLPmMetricCardElement;
   };
-  interface HTMLHhNavElement extends Components.PmNav, HTMLStencilElement {}
-  var HTMLHhNavElement: {
-    prototype: HTMLHhNavElement;
-    new (): HTMLHhNavElement;
+  interface HTMLPmNavElement extends Components.PmNav, HTMLStencilElement {}
+  var HTMLPmNavElement: {
+    prototype: HTMLPmNavElement;
+    new (): HTMLPmNavElement;
   };
-  interface HTMLHhNavItemElementEventMap {
+  interface HTMLPmNavItemElementEventMap {
     pmNavigate: string;
   }
-  interface HTMLHhNavItemElement extends Components.PmNavItem, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhNavItemElementEventMap>(
+  interface HTMLPmNavItemElement extends Components.PmNavItem, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmNavItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhNavItemElement,
-        ev: PmNavItemCustomEvent<HTMLHhNavItemElementEventMap[K]>,
+        this: HTMLPmNavItemElement,
+        ev: PmNavItemCustomEvent<HTMLPmNavItemElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2146,11 +2146,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhNavItemElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmNavItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhNavItemElement,
-        ev: PmNavItemCustomEvent<HTMLHhNavItemElementEventMap[K]>,
+        this: HTMLPmNavItemElement,
+        ev: PmNavItemCustomEvent<HTMLPmNavItemElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2170,19 +2170,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhNavItemElement: {
-    prototype: HTMLHhNavItemElement;
-    new (): HTMLHhNavItemElement;
+  var HTMLPmNavItemElement: {
+    prototype: HTMLPmNavItemElement;
+    new (): HTMLPmNavItemElement;
   };
-  interface HTMLHhPaginationElementEventMap {
+  interface HTMLPmPaginationElementEventMap {
     pmChange: number;
   }
-  interface HTMLHhPaginationElement extends Components.PmPagination, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhPaginationElementEventMap>(
+  interface HTMLPmPaginationElement extends Components.PmPagination, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmPaginationElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhPaginationElement,
-        ev: PmPaginationCustomEvent<HTMLHhPaginationElementEventMap[K]>,
+        this: HTMLPmPaginationElement,
+        ev: PmPaginationCustomEvent<HTMLPmPaginationElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2201,11 +2201,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhPaginationElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmPaginationElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhPaginationElement,
-        ev: PmPaginationCustomEvent<HTMLHhPaginationElementEventMap[K]>,
+        this: HTMLPmPaginationElement,
+        ev: PmPaginationCustomEvent<HTMLPmPaginationElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2225,27 +2225,27 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhPaginationElement: {
-    prototype: HTMLHhPaginationElement;
-    new (): HTMLHhPaginationElement;
+  var HTMLPmPaginationElement: {
+    prototype: HTMLPmPaginationElement;
+    new (): HTMLPmPaginationElement;
   };
   /**
    * Linear progress bar. Pairs with `<pm-spinner>` (circular, indeterminate-only).
    */
-  interface HTMLHhProgressElement extends Components.PmProgress, HTMLStencilElement {}
-  var HTMLHhProgressElement: {
-    prototype: HTMLHhProgressElement;
-    new (): HTMLHhProgressElement;
+  interface HTMLPmProgressElement extends Components.PmProgress, HTMLStencilElement {}
+  var HTMLPmProgressElement: {
+    prototype: HTMLPmProgressElement;
+    new (): HTMLPmProgressElement;
   };
-  interface HTMLHhRadioElementEventMap {
+  interface HTMLPmRadioElementEventMap {
     pmChange: string;
   }
-  interface HTMLHhRadioElement extends Components.PmRadio, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhRadioElementEventMap>(
+  interface HTMLPmRadioElement extends Components.PmRadio, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmRadioElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhRadioElement,
-        ev: PmRadioCustomEvent<HTMLHhRadioElementEventMap[K]>,
+        this: HTMLPmRadioElement,
+        ev: PmRadioCustomEvent<HTMLPmRadioElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2264,11 +2264,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhRadioElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmRadioElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhRadioElement,
-        ev: PmRadioCustomEvent<HTMLHhRadioElementEventMap[K]>,
+        this: HTMLPmRadioElement,
+        ev: PmRadioCustomEvent<HTMLPmRadioElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2288,11 +2288,11 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhRadioElement: {
-    prototype: HTMLHhRadioElement;
-    new (): HTMLHhRadioElement;
+  var HTMLPmRadioElement: {
+    prototype: HTMLPmRadioElement;
+    new (): HTMLPmRadioElement;
   };
-  interface HTMLHhSegmentedControlElementEventMap {
+  interface HTMLPmSegmentedControlElementEventMap {
     pmChange: string;
   }
   /**
@@ -2302,13 +2302,13 @@ declare global {
    *   <pm-segmented-item value="month">Month</pm-segmented-item>
    * </pm-segmented-control>
    */
-  interface HTMLHhSegmentedControlElement
+  interface HTMLPmSegmentedControlElement
     extends Components.PmSegmentedControl, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhSegmentedControlElementEventMap>(
+    addEventListener<K extends keyof HTMLPmSegmentedControlElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSegmentedControlElement,
-        ev: PmSegmentedControlCustomEvent<HTMLHhSegmentedControlElementEventMap[K]>,
+        this: HTMLPmSegmentedControlElement,
+        ev: PmSegmentedControlCustomEvent<HTMLPmSegmentedControlElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2327,11 +2327,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhSegmentedControlElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmSegmentedControlElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSegmentedControlElement,
-        ev: PmSegmentedControlCustomEvent<HTMLHhSegmentedControlElementEventMap[K]>,
+        this: HTMLPmSegmentedControlElement,
+        ev: PmSegmentedControlCustomEvent<HTMLPmSegmentedControlElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2351,19 +2351,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhSegmentedControlElement: {
-    prototype: HTMLHhSegmentedControlElement;
-    new (): HTMLHhSegmentedControlElement;
+  var HTMLPmSegmentedControlElement: {
+    prototype: HTMLPmSegmentedControlElement;
+    new (): HTMLPmSegmentedControlElement;
   };
-  interface HTMLHhSegmentedItemElementEventMap {
+  interface HTMLPmSegmentedItemElementEventMap {
     pmSelect: string;
   }
-  interface HTMLHhSegmentedItemElement extends Components.PmSegmentedItem, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhSegmentedItemElementEventMap>(
+  interface HTMLPmSegmentedItemElement extends Components.PmSegmentedItem, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmSegmentedItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSegmentedItemElement,
-        ev: PmSegmentedItemCustomEvent<HTMLHhSegmentedItemElementEventMap[K]>,
+        this: HTMLPmSegmentedItemElement,
+        ev: PmSegmentedItemCustomEvent<HTMLPmSegmentedItemElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2382,11 +2382,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhSegmentedItemElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmSegmentedItemElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSegmentedItemElement,
-        ev: PmSegmentedItemCustomEvent<HTMLHhSegmentedItemElementEventMap[K]>,
+        this: HTMLPmSegmentedItemElement,
+        ev: PmSegmentedItemCustomEvent<HTMLPmSegmentedItemElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2406,19 +2406,19 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhSegmentedItemElement: {
-    prototype: HTMLHhSegmentedItemElement;
-    new (): HTMLHhSegmentedItemElement;
+  var HTMLPmSegmentedItemElement: {
+    prototype: HTMLPmSegmentedItemElement;
+    new (): HTMLPmSegmentedItemElement;
   };
-  interface HTMLHhSelectElementEventMap {
+  interface HTMLPmSelectElementEventMap {
     pmChange: string;
   }
-  interface HTMLHhSelectElement extends Components.PmSelect, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhSelectElementEventMap>(
+  interface HTMLPmSelectElement extends Components.PmSelect, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmSelectElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSelectElement,
-        ev: PmSelectCustomEvent<HTMLHhSelectElementEventMap[K]>,
+        this: HTMLPmSelectElement,
+        ev: PmSelectCustomEvent<HTMLPmSelectElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2437,11 +2437,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhSelectElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmSelectElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSelectElement,
-        ev: PmSelectCustomEvent<HTMLHhSelectElementEventMap[K]>,
+        this: HTMLPmSelectElement,
+        ev: PmSelectCustomEvent<HTMLPmSelectElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2461,25 +2461,25 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhSelectElement: {
-    prototype: HTMLHhSelectElement;
-    new (): HTMLHhSelectElement;
+  var HTMLPmSelectElement: {
+    prototype: HTMLPmSelectElement;
+    new (): HTMLPmSelectElement;
   };
-  interface HTMLHhSkeletonElement extends Components.PmSkeleton, HTMLStencilElement {}
-  var HTMLHhSkeletonElement: {
-    prototype: HTMLHhSkeletonElement;
-    new (): HTMLHhSkeletonElement;
+  interface HTMLPmSkeletonElement extends Components.PmSkeleton, HTMLStencilElement {}
+  var HTMLPmSkeletonElement: {
+    prototype: HTMLPmSkeletonElement;
+    new (): HTMLPmSkeletonElement;
   };
-  interface HTMLHhSliderElementEventMap {
+  interface HTMLPmSliderElementEventMap {
     pmInput: number;
     pmChange: number;
   }
-  interface HTMLHhSliderElement extends Components.PmSlider, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhSliderElementEventMap>(
+  interface HTMLPmSliderElement extends Components.PmSlider, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmSliderElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSliderElement,
-        ev: PmSliderCustomEvent<HTMLHhSliderElementEventMap[K]>,
+        this: HTMLPmSliderElement,
+        ev: PmSliderCustomEvent<HTMLPmSliderElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2498,11 +2498,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhSliderElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmSliderElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSliderElement,
-        ev: PmSliderCustomEvent<HTMLHhSliderElementEventMap[K]>,
+        this: HTMLPmSliderElement,
+        ev: PmSliderCustomEvent<HTMLPmSliderElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2522,29 +2522,29 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhSliderElement: {
-    prototype: HTMLHhSliderElement;
-    new (): HTMLHhSliderElement;
+  var HTMLPmSliderElement: {
+    prototype: HTMLPmSliderElement;
+    new (): HTMLPmSliderElement;
   };
-  interface HTMLHhSpinnerElement extends Components.PmSpinner, HTMLStencilElement {}
-  var HTMLHhSpinnerElement: {
-    prototype: HTMLHhSpinnerElement;
-    new (): HTMLHhSpinnerElement;
+  interface HTMLPmSpinnerElement extends Components.PmSpinner, HTMLStencilElement {}
+  var HTMLPmSpinnerElement: {
+    prototype: HTMLPmSpinnerElement;
+    new (): HTMLPmSpinnerElement;
   };
-  interface HTMLHhStatusElement extends Components.PmStatus, HTMLStencilElement {}
-  var HTMLHhStatusElement: {
-    prototype: HTMLHhStatusElement;
-    new (): HTMLHhStatusElement;
+  interface HTMLPmStatusElement extends Components.PmStatus, HTMLStencilElement {}
+  var HTMLPmStatusElement: {
+    prototype: HTMLPmStatusElement;
+    new (): HTMLPmStatusElement;
   };
-  interface HTMLHhSwitchElementEventMap {
+  interface HTMLPmSwitchElementEventMap {
     pmChange: boolean;
   }
-  interface HTMLHhSwitchElement extends Components.PmSwitch, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhSwitchElementEventMap>(
+  interface HTMLPmSwitchElement extends Components.PmSwitch, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmSwitchElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSwitchElement,
-        ev: PmSwitchCustomEvent<HTMLHhSwitchElementEventMap[K]>,
+        this: HTMLPmSwitchElement,
+        ev: PmSwitchCustomEvent<HTMLPmSwitchElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2563,11 +2563,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhSwitchElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmSwitchElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhSwitchElement,
-        ev: PmSwitchCustomEvent<HTMLHhSwitchElementEventMap[K]>,
+        this: HTMLPmSwitchElement,
+        ev: PmSwitchCustomEvent<HTMLPmSwitchElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2587,17 +2587,17 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhSwitchElement: {
-    prototype: HTMLHhSwitchElement;
-    new (): HTMLHhSwitchElement;
+  var HTMLPmSwitchElement: {
+    prototype: HTMLPmSwitchElement;
+    new (): HTMLPmSwitchElement;
   };
-  interface HTMLHhTabElementEventMap {
+  interface HTMLPmTabElementEventMap {
     pmPress: string;
   }
-  interface HTMLHhTabElement extends Components.PmTab, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhTabElementEventMap>(
+  interface HTMLPmTabElement extends Components.PmTab, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmTabElementEventMap>(
       type: K,
-      listener: (this: HTMLHhTabElement, ev: PmTabCustomEvent<HTMLHhTabElementEventMap[K]>) => any,
+      listener: (this: HTMLPmTabElement, ev: PmTabCustomEvent<HTMLPmTabElementEventMap[K]>) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
     addEventListener<K extends keyof DocumentEventMap>(
@@ -2615,9 +2615,9 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhTabElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmTabElementEventMap>(
       type: K,
-      listener: (this: HTMLHhTabElement, ev: PmTabCustomEvent<HTMLHhTabElementEventMap[K]>) => any,
+      listener: (this: HTMLPmTabElement, ev: PmTabCustomEvent<HTMLPmTabElementEventMap[K]>) => any,
       options?: boolean | EventListenerOptions,
     ): void;
     removeEventListener<K extends keyof DocumentEventMap>(
@@ -2636,24 +2636,24 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhTabElement: {
-    prototype: HTMLHhTabElement;
-    new (): HTMLHhTabElement;
+  var HTMLPmTabElement: {
+    prototype: HTMLPmTabElement;
+    new (): HTMLPmTabElement;
   };
-  interface HTMLHhTabPanelElement extends Components.PmTabPanel, HTMLStencilElement {}
-  var HTMLHhTabPanelElement: {
-    prototype: HTMLHhTabPanelElement;
-    new (): HTMLHhTabPanelElement;
+  interface HTMLPmTabPanelElement extends Components.PmTabPanel, HTMLStencilElement {}
+  var HTMLPmTabPanelElement: {
+    prototype: HTMLPmTabPanelElement;
+    new (): HTMLPmTabPanelElement;
   };
-  interface HTMLHhTabsElementEventMap {
+  interface HTMLPmTabsElementEventMap {
     pmChange: string;
   }
-  interface HTMLHhTabsElement extends Components.PmTabs, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhTabsElementEventMap>(
+  interface HTMLPmTabsElement extends Components.PmTabs, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmTabsElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhTabsElement,
-        ev: PmTabsCustomEvent<HTMLHhTabsElementEventMap[K]>,
+        this: HTMLPmTabsElement,
+        ev: PmTabsCustomEvent<HTMLPmTabsElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2672,11 +2672,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhTabsElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmTabsElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhTabsElement,
-        ev: PmTabsCustomEvent<HTMLHhTabsElementEventMap[K]>,
+        this: HTMLPmTabsElement,
+        ev: PmTabsCustomEvent<HTMLPmTabsElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2696,20 +2696,20 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhTabsElement: {
-    prototype: HTMLHhTabsElement;
-    new (): HTMLHhTabsElement;
+  var HTMLPmTabsElement: {
+    prototype: HTMLPmTabsElement;
+    new (): HTMLPmTabsElement;
   };
-  interface HTMLHhTextareaElementEventMap {
+  interface HTMLPmTextareaElementEventMap {
     pmInput: string;
     pmChange: string;
   }
-  interface HTMLHhTextareaElement extends Components.PmTextarea, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhTextareaElementEventMap>(
+  interface HTMLPmTextareaElement extends Components.PmTextarea, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmTextareaElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhTextareaElement,
-        ev: PmTextareaCustomEvent<HTMLHhTextareaElementEventMap[K]>,
+        this: HTMLPmTextareaElement,
+        ev: PmTextareaCustomEvent<HTMLPmTextareaElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2728,11 +2728,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhTextareaElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmTextareaElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhTextareaElement,
-        ev: PmTextareaCustomEvent<HTMLHhTextareaElementEventMap[K]>,
+        this: HTMLPmTextareaElement,
+        ev: PmTextareaCustomEvent<HTMLPmTextareaElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2752,11 +2752,11 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhTextareaElement: {
-    prototype: HTMLHhTextareaElement;
-    new (): HTMLHhTextareaElement;
+  var HTMLPmTextareaElement: {
+    prototype: HTMLPmTextareaElement;
+    new (): HTMLPmTextareaElement;
   };
-  interface HTMLHhTimePickerElementEventMap {
+  interface HTMLPmTimePickerElementEventMap {
     pmChange: string;
     pmInput: string;
   }
@@ -2772,12 +2772,12 @@ declare global {
    * `<input type="time">` doesn't have the same problem, so this component
    * is a thin, consistently-styled wrapper instead of a reimplementation.
    */
-  interface HTMLHhTimePickerElement extends Components.PmTimePicker, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLHhTimePickerElementEventMap>(
+  interface HTMLPmTimePickerElement extends Components.PmTimePicker, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLPmTimePickerElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhTimePickerElement,
-        ev: PmTimePickerCustomEvent<HTMLHhTimePickerElementEventMap[K]>,
+        this: HTMLPmTimePickerElement,
+        ev: PmTimePickerCustomEvent<HTMLPmTimePickerElementEventMap[K]>,
       ) => any,
       options?: boolean | AddEventListenerOptions,
     ): void;
@@ -2796,11 +2796,11 @@ declare global {
       listener: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions,
     ): void;
-    removeEventListener<K extends keyof HTMLHhTimePickerElementEventMap>(
+    removeEventListener<K extends keyof HTMLPmTimePickerElementEventMap>(
       type: K,
       listener: (
-        this: HTMLHhTimePickerElement,
-        ev: PmTimePickerCustomEvent<HTMLHhTimePickerElementEventMap[K]>,
+        this: HTMLPmTimePickerElement,
+        ev: PmTimePickerCustomEvent<HTMLPmTimePickerElementEventMap[K]>,
       ) => any,
       options?: boolean | EventListenerOptions,
     ): void;
@@ -2820,9 +2820,9 @@ declare global {
       options?: boolean | EventListenerOptions,
     ): void;
   }
-  var HTMLHhTimePickerElement: {
-    prototype: HTMLHhTimePickerElement;
-    new (): HTMLHhTimePickerElement;
+  var HTMLPmTimePickerElement: {
+    prototype: HTMLPmTimePickerElement;
+    new (): HTMLPmTimePickerElement;
   };
   /**
    * A single region that owns a real dismiss queue (not just a visual list) —
@@ -2833,68 +2833,68 @@ declare global {
    *   const region = document.querySelector('pm-toast-region');
    *   await region.show({ tone: 'success', message: 'Saved.' });
    */
-  interface HTMLHhToastRegionElement extends Components.PmToastRegion, HTMLStencilElement {}
-  var HTMLHhToastRegionElement: {
-    prototype: HTMLHhToastRegionElement;
-    new (): HTMLHhToastRegionElement;
+  interface HTMLPmToastRegionElement extends Components.PmToastRegion, HTMLStencilElement {}
+  var HTMLPmToastRegionElement: {
+    prototype: HTMLPmToastRegionElement;
+    new (): HTMLPmToastRegionElement;
   };
-  interface HTMLHhToolbarElement extends Components.PmToolbar, HTMLStencilElement {}
-  var HTMLHhToolbarElement: {
-    prototype: HTMLHhToolbarElement;
-    new (): HTMLHhToolbarElement;
+  interface HTMLPmToolbarElement extends Components.PmToolbar, HTMLStencilElement {}
+  var HTMLPmToolbarElement: {
+    prototype: HTMLPmToolbarElement;
+    new (): HTMLPmToolbarElement;
   };
-  interface HTMLHhTooltipElement extends Components.PmTooltip, HTMLStencilElement {}
-  var HTMLHhTooltipElement: {
-    prototype: HTMLHhTooltipElement;
-    new (): HTMLHhTooltipElement;
+  interface HTMLPmTooltipElement extends Components.PmTooltip, HTMLStencilElement {}
+  var HTMLPmTooltipElement: {
+    prototype: HTMLPmTooltipElement;
+    new (): HTMLPmTooltipElement;
   };
   interface HTMLElementTagNameMap {
-    'pm-accordion': HTMLHhAccordionElement;
-    'pm-accordion-item': HTMLHhAccordionItemElement;
-    'pm-alert': HTMLHhAlertElement;
-    'pm-avatar': HTMLHhAvatarElement;
-    'pm-badge': HTMLHhBadgeElement;
-    'pm-breadcrumb-item': HTMLHhBreadcrumbItemElement;
-    'pm-breadcrumbs': HTMLHhBreadcrumbsElement;
-    'pm-button': HTMLHhButtonElement;
-    'pm-card': HTMLHhCardElement;
-    'pm-checkbox': HTMLHhCheckboxElement;
-    'pm-combobox': HTMLHhComboboxElement;
-    'pm-combobox-option': HTMLHhComboboxOptionElement;
-    'pm-data-table': HTMLHhDataTableElement;
-    'pm-date-picker': HTMLHhDatePickerElement;
-    'pm-dialog': HTMLHhDialogElement;
-    'pm-drawer': HTMLHhDrawerElement;
-    'pm-empty-state': HTMLHhEmptyStateElement;
-    'pm-file-upload': HTMLHhFileUploadElement;
-    'pm-form-field': HTMLHhFormFieldElement;
-    'pm-icon': HTMLHhIconElement;
-    'pm-icon-button': HTMLHhIconButtonElement;
-    'pm-input': HTMLHhInputElement;
-    'pm-menu': HTMLHhMenuElement;
-    'pm-menu-item': HTMLHhMenuItemElement;
-    'pm-metric-card': HTMLHhMetricCardElement;
-    'pm-nav': HTMLHhNavElement;
-    'pm-nav-item': HTMLHhNavItemElement;
-    'pm-pagination': HTMLHhPaginationElement;
-    'pm-progress': HTMLHhProgressElement;
-    'pm-radio': HTMLHhRadioElement;
-    'pm-segmented-control': HTMLHhSegmentedControlElement;
-    'pm-segmented-item': HTMLHhSegmentedItemElement;
-    'pm-select': HTMLHhSelectElement;
-    'pm-skeleton': HTMLHhSkeletonElement;
-    'pm-slider': HTMLHhSliderElement;
-    'pm-spinner': HTMLHhSpinnerElement;
-    'pm-status': HTMLHhStatusElement;
-    'pm-switch': HTMLHhSwitchElement;
-    'pm-tab': HTMLHhTabElement;
-    'pm-tab-panel': HTMLHhTabPanelElement;
-    'pm-tabs': HTMLHhTabsElement;
-    'pm-textarea': HTMLHhTextareaElement;
-    'pm-time-picker': HTMLHhTimePickerElement;
-    'pm-toast-region': HTMLHhToastRegionElement;
-    'pm-toolbar': HTMLHhToolbarElement;
-    'pm-tooltip': HTMLHhTooltipElement;
+    'pm-accordion': HTMLPmAccordionElement;
+    'pm-accordion-item': HTMLPmAccordionItemElement;
+    'pm-alert': HTMLPmAlertElement;
+    'pm-avatar': HTMLPmAvatarElement;
+    'pm-badge': HTMLPmBadgeElement;
+    'pm-breadcrumb-item': HTMLPmBreadcrumbItemElement;
+    'pm-breadcrumbs': HTMLPmBreadcrumbsElement;
+    'pm-button': HTMLPmButtonElement;
+    'pm-card': HTMLPmCardElement;
+    'pm-checkbox': HTMLPmCheckboxElement;
+    'pm-combobox': HTMLPmComboboxElement;
+    'pm-combobox-option': HTMLPmComboboxOptionElement;
+    'pm-data-table': HTMLPmDataTableElement;
+    'pm-date-picker': HTMLPmDatePickerElement;
+    'pm-dialog': HTMLPmDialogElement;
+    'pm-drawer': HTMLPmDrawerElement;
+    'pm-empty-state': HTMLPmEmptyStateElement;
+    'pm-file-upload': HTMLPmFileUploadElement;
+    'pm-form-field': HTMLPmFormFieldElement;
+    'pm-icon': HTMLPmIconElement;
+    'pm-icon-button': HTMLPmIconButtonElement;
+    'pm-input': HTMLPmInputElement;
+    'pm-menu': HTMLPmMenuElement;
+    'pm-menu-item': HTMLPmMenuItemElement;
+    'pm-metric-card': HTMLPmMetricCardElement;
+    'pm-nav': HTMLPmNavElement;
+    'pm-nav-item': HTMLPmNavItemElement;
+    'pm-pagination': HTMLPmPaginationElement;
+    'pm-progress': HTMLPmProgressElement;
+    'pm-radio': HTMLPmRadioElement;
+    'pm-segmented-control': HTMLPmSegmentedControlElement;
+    'pm-segmented-item': HTMLPmSegmentedItemElement;
+    'pm-select': HTMLPmSelectElement;
+    'pm-skeleton': HTMLPmSkeletonElement;
+    'pm-slider': HTMLPmSliderElement;
+    'pm-spinner': HTMLPmSpinnerElement;
+    'pm-status': HTMLPmStatusElement;
+    'pm-switch': HTMLPmSwitchElement;
+    'pm-tab': HTMLPmTabElement;
+    'pm-tab-panel': HTMLPmTabPanelElement;
+    'pm-tabs': HTMLPmTabsElement;
+    'pm-textarea': HTMLPmTextareaElement;
+    'pm-time-picker': HTMLPmTimePickerElement;
+    'pm-toast-region': HTMLPmToastRegionElement;
+    'pm-toolbar': HTMLPmToolbarElement;
+    'pm-tooltip': HTMLPmTooltipElement;
   }
 }
 declare namespace LocalJSX {
@@ -2907,14 +2907,14 @@ declare namespace LocalJSX {
      * @default false
      */
     multiple?: boolean;
-    onHhChange?: (event: PmAccordionCustomEvent<string[]>) => void;
+    onPmChange?: (event: PmAccordionCustomEvent<string[]>) => void;
   }
   interface PmAccordionItem {
     /**
      * @default ''
      */
     label?: string;
-    onHhToggle?: (event: PmAccordionItemCustomEvent<boolean>) => void;
+    onPmToggle?: (event: PmAccordionItemCustomEvent<boolean>) => void;
     /**
      * @default false
      */
@@ -2933,7 +2933,7 @@ declare namespace LocalJSX {
      * @default ''
      */
     heading?: string;
-    onHhDismiss?: (event: PmAlertCustomEvent<void>) => void;
+    onPmDismiss?: (event: PmAlertCustomEvent<void>) => void;
     /**
      * @default 'info'
      */
@@ -3012,7 +3012,7 @@ declare namespace LocalJSX {
      * @default false
      */
     loading?: boolean;
-    onHhPress?: (event: PmButtonCustomEvent<MouseEvent>) => void;
+    onPmPress?: (event: PmButtonCustomEvent<MouseEvent>) => void;
     /**
      * @default 'medium'
      */
@@ -3031,7 +3031,7 @@ declare namespace LocalJSX {
      * @default false
      */
     interactive?: boolean;
-    onHhPress?: (event: PmCardCustomEvent<MouseEvent | KeyboardEvent>) => void;
+    onPmPress?: (event: PmCardCustomEvent<MouseEvent | KeyboardEvent>) => void;
   }
   interface PmCheckbox {
     /**
@@ -3050,7 +3050,7 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmCheckboxCustomEvent<boolean>) => void;
+    onPmChange?: (event: PmCheckboxCustomEvent<boolean>) => void;
     /**
      * @default false
      */
@@ -3107,8 +3107,8 @@ declare namespace LocalJSX {
      * @default 'No results'
      */
     noResultsText?: string;
-    onHhChange?: (event: PmComboboxCustomEvent<string>) => void;
-    onHhInput?: (event: PmComboboxCustomEvent<string>) => void;
+    onPmChange?: (event: PmComboboxCustomEvent<string>) => void;
+    onPmInput?: (event: PmComboboxCustomEvent<string>) => void;
     /**
      * @default ''
      */
@@ -3132,7 +3132,7 @@ declare namespace LocalJSX {
      * @default true
      */
     matched?: boolean;
-    onHhSelect?: (event: PmComboboxOptionCustomEvent<string>) => void;
+    onPmSelect?: (event: PmComboboxOptionCustomEvent<string>) => void;
     /**
      * @default false
      */
@@ -3167,9 +3167,9 @@ declare namespace LocalJSX {
      * @default false
      */
     filterable?: boolean;
-    onHhFilterChange?: (event: PmDataTableCustomEvent<string>) => void;
-    onHhPageChange?: (event: PmDataTableCustomEvent<number>) => void;
-    onHhSortChange?: (
+    onPmFilterChange?: (event: PmDataTableCustomEvent<string>) => void;
+    onPmPageChange?: (event: PmDataTableCustomEvent<number>) => void;
+    onPmSortChange?: (
       event: PmDataTableCustomEvent<{ key: string; direction: SortDirection }>,
     ) => void;
     /**
@@ -3221,8 +3221,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmDatePickerCustomEvent<string>) => void;
-    onHhInput?: (event: PmDatePickerCustomEvent<string>) => void;
+    onPmChange?: (event: PmDatePickerCustomEvent<string>) => void;
+    onPmInput?: (event: PmDatePickerCustomEvent<string>) => void;
     /**
      * @default 'YYYY-MM-DD'
      */
@@ -3245,8 +3245,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     label?: string;
-    onHhClose?: (event: PmDialogCustomEvent<void>) => void;
-    onHhOpen?: (event: PmDialogCustomEvent<void>) => void;
+    onPmClose?: (event: PmDialogCustomEvent<void>) => void;
+    onPmOpen?: (event: PmDialogCustomEvent<void>) => void;
     /**
      * @default false
      */
@@ -3261,8 +3261,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     label?: string;
-    onHhClose?: (event: PmDrawerCustomEvent<void>) => void;
-    onHhOpen?: (event: PmDrawerCustomEvent<void>) => void;
+    onPmClose?: (event: PmDrawerCustomEvent<void>) => void;
+    onPmOpen?: (event: PmDrawerCustomEvent<void>) => void;
     /**
      * @default false
      */
@@ -3330,8 +3330,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhFileError?: (event: PmFileUploadCustomEvent<PmFileUploadError[]>) => void;
-    onHhFilesChange?: (event: PmFileUploadCustomEvent<File[]>) => void;
+    onPmFileError?: (event: PmFileUploadCustomEvent<PmFileUploadError[]>) => void;
+    onPmFilesChange?: (event: PmFileUploadCustomEvent<File[]>) => void;
     /**
      * @default false
      */
@@ -3370,7 +3370,7 @@ declare namespace LocalJSX {
      */
     loading?: boolean;
     name: string;
-    onHhPress?: (event: PmIconButtonCustomEvent<MouseEvent>) => void;
+    onPmPress?: (event: PmIconButtonCustomEvent<MouseEvent>) => void;
     /**
      * @default 'medium'
      */
@@ -3399,8 +3399,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmInputCustomEvent<string>) => void;
-    onHhInput?: (event: PmInputCustomEvent<string>) => void;
+    onPmChange?: (event: PmInputCustomEvent<string>) => void;
+    onPmInput?: (event: PmInputCustomEvent<string>) => void;
     /**
      * @default ''
      */
@@ -3438,8 +3438,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     label?: string;
-    onHhOpenChange?: (event: PmMenuCustomEvent<boolean>) => void;
-    onHhSelect?: (event: PmMenuCustomEvent<string>) => void;
+    onPmOpenChange?: (event: PmMenuCustomEvent<boolean>) => void;
+    onPmSelect?: (event: PmMenuCustomEvent<string>) => void;
     /**
      * @default false
      */
@@ -3454,7 +3454,7 @@ declare namespace LocalJSX {
      * @default false
      */
     disabled?: boolean;
-    onHhSelect?: (event: PmMenuItemCustomEvent<string>) => void;
+    onPmSelect?: (event: PmMenuItemCustomEvent<string>) => void;
     /**
      * @default 'default'
      */
@@ -3501,14 +3501,14 @@ declare namespace LocalJSX {
      * @default ''
      */
     href?: string;
-    onHhNavigate?: (event: PmNavItemCustomEvent<string>) => void;
+    onPmNavigate?: (event: PmNavItemCustomEvent<string>) => void;
   }
   interface PmPagination {
     /**
      * @default 'Pagination'
      */
     label?: string;
-    onHhChange?: (event: PmPaginationCustomEvent<number>) => void;
+    onPmChange?: (event: PmPaginationCustomEvent<number>) => void;
     /**
      * @default 1
      */
@@ -3560,7 +3560,7 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmRadioCustomEvent<string>) => void;
+    onPmChange?: (event: PmRadioCustomEvent<string>) => void;
     /**
      * @default false
      */
@@ -3582,7 +3582,7 @@ declare namespace LocalJSX {
      * @default ''
      */
     label?: string;
-    onHhChange?: (event: PmSegmentedControlCustomEvent<string>) => void;
+    onPmChange?: (event: PmSegmentedControlCustomEvent<string>) => void;
     /**
      * @default ''
      */
@@ -3593,7 +3593,7 @@ declare namespace LocalJSX {
      * @default false
      */
     disabled?: boolean;
-    onHhSelect?: (event: PmSegmentedItemCustomEvent<string>) => void;
+    onPmSelect?: (event: PmSegmentedItemCustomEvent<string>) => void;
     /**
      * Set by the parent <pm-segmented-control>.
      * @default false
@@ -3625,7 +3625,7 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmSelectCustomEvent<string>) => void;
+    onPmChange?: (event: PmSelectCustomEvent<string>) => void;
     /**
      * @default false
      */
@@ -3660,8 +3660,8 @@ declare namespace LocalJSX {
      * @default 0
      */
     min?: number;
-    onHhChange?: (event: PmSliderCustomEvent<number>) => void;
-    onHhInput?: (event: PmSliderCustomEvent<number>) => void;
+    onPmChange?: (event: PmSliderCustomEvent<number>) => void;
+    onPmInput?: (event: PmSliderCustomEvent<number>) => void;
     /**
      * @default false
      */
@@ -3708,7 +3708,7 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmSwitchCustomEvent<boolean>) => void;
+    onPmChange?: (event: PmSwitchCustomEvent<boolean>) => void;
   }
   interface PmTab {
     /**
@@ -3719,14 +3719,14 @@ declare namespace LocalJSX {
      * @default false
      */
     disabled?: boolean;
-    onHhPress?: (event: PmTabCustomEvent<string>) => void;
+    onPmPress?: (event: PmTabCustomEvent<string>) => void;
     value: string;
   }
   interface PmTabPanel {
     value: string;
   }
   interface PmTabs {
-    onHhChange?: (event: PmTabsCustomEvent<string>) => void;
+    onPmChange?: (event: PmTabsCustomEvent<string>) => void;
     /**
      * @default ''
      */
@@ -3753,8 +3753,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmTextareaCustomEvent<string>) => void;
-    onHhInput?: (event: PmTextareaCustomEvent<string>) => void;
+    onPmChange?: (event: PmTextareaCustomEvent<string>) => void;
+    onPmInput?: (event: PmTextareaCustomEvent<string>) => void;
     /**
      * @default ''
      */
@@ -3811,8 +3811,8 @@ declare namespace LocalJSX {
      * @default ''
      */
     name?: string;
-    onHhChange?: (event: PmTimePickerCustomEvent<string>) => void;
-    onHhInput?: (event: PmTimePickerCustomEvent<string>) => void;
+    onPmChange?: (event: PmTimePickerCustomEvent<string>) => void;
+    onPmInput?: (event: PmTimePickerCustomEvent<string>) => void;
     /**
      * @default false
      */
@@ -4443,17 +4443,17 @@ declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
       'pm-accordion': LocalJSX.IntrinsicElements['pm-accordion'] &
-        JSXBase.HTMLAttributes<HTMLHhAccordionElement>;
+        JSXBase.HTMLAttributes<HTMLPmAccordionElement>;
       'pm-accordion-item': LocalJSX.IntrinsicElements['pm-accordion-item'] &
-        JSXBase.HTMLAttributes<HTMLHhAccordionItemElement>;
+        JSXBase.HTMLAttributes<HTMLPmAccordionItemElement>;
       'pm-alert': LocalJSX.IntrinsicElements['pm-alert'] &
-        JSXBase.HTMLAttributes<HTMLHhAlertElement>;
+        JSXBase.HTMLAttributes<HTMLPmAlertElement>;
       'pm-avatar': LocalJSX.IntrinsicElements['pm-avatar'] &
-        JSXBase.HTMLAttributes<HTMLHhAvatarElement>;
+        JSXBase.HTMLAttributes<HTMLPmAvatarElement>;
       'pm-badge': LocalJSX.IntrinsicElements['pm-badge'] &
-        JSXBase.HTMLAttributes<HTMLHhBadgeElement>;
+        JSXBase.HTMLAttributes<HTMLPmBadgeElement>;
       'pm-breadcrumb-item': LocalJSX.IntrinsicElements['pm-breadcrumb-item'] &
-        JSXBase.HTMLAttributes<HTMLHhBreadcrumbItemElement>;
+        JSXBase.HTMLAttributes<HTMLPmBreadcrumbItemElement>;
       /**
        * Wraps slotted `<pm-breadcrumb-item>` children, marking the last item as
        * the current page and (optionally) collapsing the middle items behind a
@@ -4469,12 +4469,12 @@ declare module '@stencil/core' {
        * node next to them rather than trying to reorder projected slot content.
        */
       'pm-breadcrumbs': LocalJSX.IntrinsicElements['pm-breadcrumbs'] &
-        JSXBase.HTMLAttributes<HTMLHhBreadcrumbsElement>;
+        JSXBase.HTMLAttributes<HTMLPmBreadcrumbsElement>;
       'pm-button': LocalJSX.IntrinsicElements['pm-button'] &
-        JSXBase.HTMLAttributes<HTMLHhButtonElement>;
-      'pm-card': LocalJSX.IntrinsicElements['pm-card'] & JSXBase.HTMLAttributes<HTMLHhCardElement>;
+        JSXBase.HTMLAttributes<HTMLPmButtonElement>;
+      'pm-card': LocalJSX.IntrinsicElements['pm-card'] & JSXBase.HTMLAttributes<HTMLPmCardElement>;
       'pm-checkbox': LocalJSX.IntrinsicElements['pm-checkbox'] &
-        JSXBase.HTMLAttributes<HTMLHhCheckboxElement>;
+        JSXBase.HTMLAttributes<HTMLPmCheckboxElement>;
       /**
        * Type-ahead combobox following the WAI-ARIA 1.2 combobox pattern (input
        * with `role="combobox"` + a `role="listbox"` popup, `aria-activedescendant`
@@ -4494,9 +4494,9 @@ declare module '@stencil/core' {
        * reverts to the last matched option's label on blur/Escape.
        */
       'pm-combobox': LocalJSX.IntrinsicElements['pm-combobox'] &
-        JSXBase.HTMLAttributes<HTMLHhComboboxElement>;
+        JSXBase.HTMLAttributes<HTMLPmComboboxElement>;
       'pm-combobox-option': LocalJSX.IntrinsicElements['pm-combobox-option'] &
-        JSXBase.HTMLAttributes<HTMLHhComboboxOptionElement>;
+        JSXBase.HTMLAttributes<HTMLPmComboboxOptionElement>;
       /**
        * A real interactive table: click a sortable column header to sort by it
        * (asc → desc → none), type in the filter box to filter across all column
@@ -4506,7 +4506,7 @@ declare module '@stencil/core' {
        * and re-fetch instead of relying on the internal state.
        */
       'pm-data-table': LocalJSX.IntrinsicElements['pm-data-table'] &
-        JSXBase.HTMLAttributes<HTMLHhDataTableElement>;
+        JSXBase.HTMLAttributes<HTMLPmDataTableElement>;
       /**
        * Calendar-grid date picker (WAI-ARIA date picker dialog pattern: a text
        * input + a `role="dialog"` popup containing a `role="grid"` of real day
@@ -4520,13 +4520,13 @@ declare module '@stencil/core' {
        *   <pm-date-picker label="Fecha de viaje" locale="es-BO" first-day-of-week="1" />
        */
       'pm-date-picker': LocalJSX.IntrinsicElements['pm-date-picker'] &
-        JSXBase.HTMLAttributes<HTMLHhDatePickerElement>;
+        JSXBase.HTMLAttributes<HTMLPmDatePickerElement>;
       'pm-dialog': LocalJSX.IntrinsicElements['pm-dialog'] &
-        JSXBase.HTMLAttributes<HTMLHhDialogElement>;
+        JSXBase.HTMLAttributes<HTMLPmDialogElement>;
       'pm-drawer': LocalJSX.IntrinsicElements['pm-drawer'] &
-        JSXBase.HTMLAttributes<HTMLHhDrawerElement>;
+        JSXBase.HTMLAttributes<HTMLPmDrawerElement>;
       'pm-empty-state': LocalJSX.IntrinsicElements['pm-empty-state'] &
-        JSXBase.HTMLAttributes<HTMLHhEmptyStateElement>;
+        JSXBase.HTMLAttributes<HTMLPmEmptyStateElement>;
       /**
        * Real drag-and-drop + click-to-browse upload with client-side accept/size
        * validation — not just a styled `<input type="file">`. The native input
@@ -4537,14 +4537,14 @@ declare module '@stencil/core' {
        * always re-validate file type/size server-side.
        */
       'pm-file-upload': LocalJSX.IntrinsicElements['pm-file-upload'] &
-        JSXBase.HTMLAttributes<HTMLHhFileUploadElement>;
+        JSXBase.HTMLAttributes<HTMLPmFileUploadElement>;
       'pm-form-field': LocalJSX.IntrinsicElements['pm-form-field'] &
-        JSXBase.HTMLAttributes<HTMLHhFormFieldElement>;
-      'pm-icon': LocalJSX.IntrinsicElements['pm-icon'] & JSXBase.HTMLAttributes<HTMLHhIconElement>;
+        JSXBase.HTMLAttributes<HTMLPmFormFieldElement>;
+      'pm-icon': LocalJSX.IntrinsicElements['pm-icon'] & JSXBase.HTMLAttributes<HTMLPmIconElement>;
       'pm-icon-button': LocalJSX.IntrinsicElements['pm-icon-button'] &
-        JSXBase.HTMLAttributes<HTMLHhIconButtonElement>;
+        JSXBase.HTMLAttributes<HTMLPmIconButtonElement>;
       'pm-input': LocalJSX.IntrinsicElements['pm-input'] &
-        JSXBase.HTMLAttributes<HTMLHhInputElement>;
+        JSXBase.HTMLAttributes<HTMLPmInputElement>;
       /**
        * A trigger + popover menu. The first slotted element (typically an
        * `<pm-button>` or `<pm-icon-button>` with `slot="trigger"`) opens the menu;
@@ -4556,23 +4556,23 @@ declare module '@stencil/core' {
        *     <pm-menu-item value="delete" tone="danger">Delete</pm-menu-item>
        *   </pm-menu>
        */
-      'pm-menu': LocalJSX.IntrinsicElements['pm-menu'] & JSXBase.HTMLAttributes<HTMLHhMenuElement>;
+      'pm-menu': LocalJSX.IntrinsicElements['pm-menu'] & JSXBase.HTMLAttributes<HTMLPmMenuElement>;
       'pm-menu-item': LocalJSX.IntrinsicElements['pm-menu-item'] &
-        JSXBase.HTMLAttributes<HTMLHhMenuItemElement>;
+        JSXBase.HTMLAttributes<HTMLPmMenuItemElement>;
       'pm-metric-card': LocalJSX.IntrinsicElements['pm-metric-card'] &
-        JSXBase.HTMLAttributes<HTMLHhMetricCardElement>;
-      'pm-nav': LocalJSX.IntrinsicElements['pm-nav'] & JSXBase.HTMLAttributes<HTMLHhNavElement>;
+        JSXBase.HTMLAttributes<HTMLPmMetricCardElement>;
+      'pm-nav': LocalJSX.IntrinsicElements['pm-nav'] & JSXBase.HTMLAttributes<HTMLPmNavElement>;
       'pm-nav-item': LocalJSX.IntrinsicElements['pm-nav-item'] &
-        JSXBase.HTMLAttributes<HTMLHhNavItemElement>;
+        JSXBase.HTMLAttributes<HTMLPmNavItemElement>;
       'pm-pagination': LocalJSX.IntrinsicElements['pm-pagination'] &
-        JSXBase.HTMLAttributes<HTMLHhPaginationElement>;
+        JSXBase.HTMLAttributes<HTMLPmPaginationElement>;
       /**
        * Linear progress bar. Pairs with `<pm-spinner>` (circular, indeterminate-only).
        */
       'pm-progress': LocalJSX.IntrinsicElements['pm-progress'] &
-        JSXBase.HTMLAttributes<HTMLHhProgressElement>;
+        JSXBase.HTMLAttributes<HTMLPmProgressElement>;
       'pm-radio': LocalJSX.IntrinsicElements['pm-radio'] &
-        JSXBase.HTMLAttributes<HTMLHhRadioElement>;
+        JSXBase.HTMLAttributes<HTMLPmRadioElement>;
       /**
        * <pm-segmented-control value="week" label="Range">
        *   <pm-segmented-item value="day">Day</pm-segmented-item>
@@ -4581,27 +4581,27 @@ declare module '@stencil/core' {
        * </pm-segmented-control>
        */
       'pm-segmented-control': LocalJSX.IntrinsicElements['pm-segmented-control'] &
-        JSXBase.HTMLAttributes<HTMLHhSegmentedControlElement>;
+        JSXBase.HTMLAttributes<HTMLPmSegmentedControlElement>;
       'pm-segmented-item': LocalJSX.IntrinsicElements['pm-segmented-item'] &
-        JSXBase.HTMLAttributes<HTMLHhSegmentedItemElement>;
+        JSXBase.HTMLAttributes<HTMLPmSegmentedItemElement>;
       'pm-select': LocalJSX.IntrinsicElements['pm-select'] &
-        JSXBase.HTMLAttributes<HTMLHhSelectElement>;
+        JSXBase.HTMLAttributes<HTMLPmSelectElement>;
       'pm-skeleton': LocalJSX.IntrinsicElements['pm-skeleton'] &
-        JSXBase.HTMLAttributes<HTMLHhSkeletonElement>;
+        JSXBase.HTMLAttributes<HTMLPmSkeletonElement>;
       'pm-slider': LocalJSX.IntrinsicElements['pm-slider'] &
-        JSXBase.HTMLAttributes<HTMLHhSliderElement>;
+        JSXBase.HTMLAttributes<HTMLPmSliderElement>;
       'pm-spinner': LocalJSX.IntrinsicElements['pm-spinner'] &
-        JSXBase.HTMLAttributes<HTMLHhSpinnerElement>;
+        JSXBase.HTMLAttributes<HTMLPmSpinnerElement>;
       'pm-status': LocalJSX.IntrinsicElements['pm-status'] &
-        JSXBase.HTMLAttributes<HTMLHhStatusElement>;
+        JSXBase.HTMLAttributes<HTMLPmStatusElement>;
       'pm-switch': LocalJSX.IntrinsicElements['pm-switch'] &
-        JSXBase.HTMLAttributes<HTMLHhSwitchElement>;
-      'pm-tab': LocalJSX.IntrinsicElements['pm-tab'] & JSXBase.HTMLAttributes<HTMLHhTabElement>;
+        JSXBase.HTMLAttributes<HTMLPmSwitchElement>;
+      'pm-tab': LocalJSX.IntrinsicElements['pm-tab'] & JSXBase.HTMLAttributes<HTMLPmTabElement>;
       'pm-tab-panel': LocalJSX.IntrinsicElements['pm-tab-panel'] &
-        JSXBase.HTMLAttributes<HTMLHhTabPanelElement>;
-      'pm-tabs': LocalJSX.IntrinsicElements['pm-tabs'] & JSXBase.HTMLAttributes<HTMLHhTabsElement>;
+        JSXBase.HTMLAttributes<HTMLPmTabPanelElement>;
+      'pm-tabs': LocalJSX.IntrinsicElements['pm-tabs'] & JSXBase.HTMLAttributes<HTMLPmTabsElement>;
       'pm-textarea': LocalJSX.IntrinsicElements['pm-textarea'] &
-        JSXBase.HTMLAttributes<HTMLHhTextareaElement>;
+        JSXBase.HTMLAttributes<HTMLPmTextareaElement>;
       /**
        * Wraps the native `<input type="time">` rather than a hand-rolled
        * scroll-wheel widget: native time inputs already give consistent keyboard
@@ -4615,7 +4615,7 @@ declare module '@stencil/core' {
        * is a thin, consistently-styled wrapper instead of a reimplementation.
        */
       'pm-time-picker': LocalJSX.IntrinsicElements['pm-time-picker'] &
-        JSXBase.HTMLAttributes<HTMLHhTimePickerElement>;
+        JSXBase.HTMLAttributes<HTMLPmTimePickerElement>;
       /**
        * A single region that owns a real dismiss queue (not just a visual list) —
        * new toasts queue behind `maxVisible` active ones and promote automatically
@@ -4626,11 +4626,11 @@ declare module '@stencil/core' {
        *   await region.show({ tone: 'success', message: 'Saved.' });
        */
       'pm-toast-region': LocalJSX.IntrinsicElements['pm-toast-region'] &
-        JSXBase.HTMLAttributes<HTMLHhToastRegionElement>;
+        JSXBase.HTMLAttributes<HTMLPmToastRegionElement>;
       'pm-toolbar': LocalJSX.IntrinsicElements['pm-toolbar'] &
-        JSXBase.HTMLAttributes<HTMLHhToolbarElement>;
+        JSXBase.HTMLAttributes<HTMLPmToolbarElement>;
       'pm-tooltip': LocalJSX.IntrinsicElements['pm-tooltip'] &
-        JSXBase.HTMLAttributes<HTMLHhTooltipElement>;
+        JSXBase.HTMLAttributes<HTMLPmTooltipElement>;
     }
   }
 }
