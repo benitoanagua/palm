@@ -5,16 +5,16 @@ test('showcase renders the system surface', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Overview' })).toBeVisible();
   await expect(page.locator('pm-metric-card')).toHaveCount(4);
   await expect(
-    page.getByRole('status').filter({
-      hasText: 'Every element below is composed from PALM Web Components',
-    }),
+    page.getByText(
+      'Every element below is composed from PALM Web Components, tokens and Tabler Icons.',
+    ),
   ).toBeVisible();
 });
 
 test('navigation switches product surfaces', async ({ page }) => {
   await page.goto('/');
   await page.locator('.sidebar-nav').getByRole('button', { name: 'Activity' }).click();
-  await expect(page.getByRole('heading', { name: 'Activity' })).toBeVisible();
+  await expect(page.locator('#page-title')).toHaveText('Activity');
   await expect(page.locator('pm-data-table')).toBeVisible();
 });
 
@@ -23,7 +23,7 @@ test('create dialog opens and closes', async ({ page }) => {
   await page.locator('#hero-create button').click();
   const dialog = page.locator('pm-dialog dialog[open]');
   await expect(dialog).toBeVisible();
-  await page.locator('#cancel-dialog button').click();
+  await page.getByRole('button', { name: 'Close' }).click();
   await expect(dialog).not.toBeVisible();
 });
 
