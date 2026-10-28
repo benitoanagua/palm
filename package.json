@@ -28,7 +28,7 @@
     "check:dependencies": "node tooling/validation/dependency-consistency.mjs",
     "check:api": "node tooling/validation/public-api.mjs",
     "check:docs-links": "node tooling/validation/docs-links.mjs",
-    "test:e2e": "pnpm test:contracts && pnpm test:a11y",
+    "test:e2e": "node tooling/run-e2e.mjs",
     "check:matrix": "node tooling/validation/component-matrix.mjs"
   },
   "devDependencies": {
