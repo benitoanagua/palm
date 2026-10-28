@@ -64,6 +64,14 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Audit unused files and exports with Knip
+        continue-on-error: true
+        run: pnpm dlx knip@5.64.0 --reporter compact
+
+      - name: Audit declared dependencies with depcheck
+        continue-on-error: true
+        run: pnpm dlx depcheck@1.4.7 --json
+
       - name: Install Chromium for accessibility and contract tests
         run: pnpm exec playwright install --with-deps chromium
 
