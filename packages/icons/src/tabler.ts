@@ -26,4 +26,3 @@ export function resolveTablerIcon(name: string): readonly TablerNode[] | undefin
 export function isTablerIconName(name: string): name is TablerIconName {
   return Boolean(resolveTablerIcon(name));
 }
-

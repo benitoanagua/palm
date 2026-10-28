@@ -8,31 +8,16 @@
         "src/**/*.stories.ts",
         "src/story-helpers.ts"
       ],
-      "project": [
-        "**/*.{ts,tsx}"
-      ]
+      "project": ["**/*.{ts,tsx}"]
     },
     "packages/icons": {
-      "entry": [
-        "src/index.ts"
-      ],
-      "project": [
-        "src/**/*.ts"
-      ],
-      "ignoreDependencies": [
-        "@tabler/icons"
-      ]
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.ts"],
+      "ignoreDependencies": ["@tabler/icons"]
     },
     "apps/showcase": {
-      "entry": [
-        "src/main.ts",
-        "vite.config.ts",
-        "src/**/*.spec.ts",
-        "src/**/*.spec.tsx"
-      ],
-      "project": [
-        "**/*.{ts,tsx}"
-      ]
+      "entry": ["src/main.ts", "vite.config.ts", "src/**/*.spec.ts", "src/**/*.spec.tsx"],
+      "project": ["**/*.{ts,tsx}"]
     },
     "packages/components": {
       "entry": [
@@ -41,19 +26,11 @@
         "src/components/**/*.{ts,tsx}",
         "src/showcase/**/*.{ts,tsx}"
       ],
-      "project": [
-        "**/*.{ts,tsx}"
-      ]
+      "project": ["**/*.{ts,tsx}"]
     },
     "packages/primitives": {
-      "entry": [
-        "stencil.config.ts",
-        "src/index.ts",
-        "src/pm-*.tsx"
-      ],
-      "project": [
-        "**/*.{ts,tsx}"
-      ]
+      "entry": ["stencil.config.ts", "src/index.ts", "src/pm-*.tsx"],
+      "project": ["**/*.{ts,tsx}"]
     }
   }
 }
