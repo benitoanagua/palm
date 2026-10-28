@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - chore/palm-hardening
-      - chore/palm-hardening-docs
   workflow_dispatch:
 
 permissions:
@@ -70,19 +69,8 @@ jobs:
       - name: Generate complete Tabler icon dataset
         run: node tooling/generate-tabler-data.mjs
 
-      - name: Repair repository formatting
-        shell: bash
-        run: |
-          pnpm format
-          if git diff --quiet; then
-            echo "Formatting is already clean."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "style: apply Prettier formatting"
-          git push origin "HEAD:$GITHUB_REF_NAME"
+      - name: Verify repository formatting
+        run: pnpm format:check
 
       - name: Run baseline quality gate
         run: pnpm check
