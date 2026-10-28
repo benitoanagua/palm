@@ -31,7 +31,7 @@ const tokenSources = [
 ];
 const declaredTokens = new Set(
   tokenSources.flatMap((file) =>
-    [...readFileSync(file, 'utf8').matchAll(/(--pm-[\\w-]+)\\s*:/g)].map((match) => match[1]),
+    [...readFileSync(file, 'utf8').matchAll(/(--pm-[\w-]+)\s*:/g)].map((match) => match[1]),
   ),
 );
 const tokenPrefixes = [
@@ -67,12 +67,12 @@ function walkCss(dir) {
 
 for (const file of [...walkCss(join(root, 'packages')), ...walkCss(join(root, 'apps'))]) {
   const text = readFileSync(file, 'utf8');
-  for (const match of text.matchAll(/var\\(\\s*(--pm-[\\w-]+)/g)) {
+  for (const match of text.matchAll(/var\(\s*(--pm-[\w-]+)/g)) {
     const token = match[1];
     if (tokenPrefixes.some((prefix) => token.startsWith(prefix)) && !declaredTokens.has(token)) {
       violations.push(`${file}: undefined design token ${token}`);
     }
-}
+  }
 }
 
 if (violations.length) {
