@@ -34,9 +34,7 @@ for (const line of matrix.split('\n')) {
   }
 }
 
-const missing = [...componentTags]
-  .filter((tag) => !matrixTags.has(tag))
-  .sort();
+const missing = [...componentTags].filter((tag) => !matrixTags.has(tag)).sort();
 const stale = [...matrixTags]
   .filter((tag) => !componentTags.has(tag))
   .sort();
