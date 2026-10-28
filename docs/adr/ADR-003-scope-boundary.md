@@ -11,20 +11,12 @@ The normative Palm design-system specification includes reusable interface patte
 
 Classify patterns by ownership:
 
-| Pattern or capability | Ownership | Scope |
-| --- | --- | --- |
-| Omnibar UI | Palm web component | Backlog; not implemented in this closure |
-| Floating action button | Palm web component | Backlog; not implemented in this closure |
-| Task card | Palm web component/composition | Backlog; not implemented in this closure |
-| Sync status tag | Palm web component | Existing status component alignment and contract review |
-| Critical confirmation modal | Palm web component/composition | Backlog; not implemented in this closure |
-| Scopes and batch action bar | Palm web components/composition | Backlog; not implemented in this closure |
-| Filter panel and detail view | Palm web composition | Backlog; not implemented in this closure |
-| Flash/toast | Palm web component | Existing toast primitives; verify behavior against spec |
-| Parser and tabular amount formatting | Stateless helper | Separate helper package only when a concrete consumer exists |
-| Room/DataStore persistence | Android application guide | Outside the web component library |
-| SavedStateHandle and offline persistence | Android application guide | Outside the web component library |
-| Native Android gestures | Android application guide | Outside the web component library |
+- **Palm web component/composition, backlog:** Omnibar UI, floating action button, task card, critical confirmation modal, scopes and batch action bar, filter panel, and detail view.
+- **Palm web component, existing behavior to verify:** sync status tag and flash/toast.
+- **Stateless helper, only when a concrete consumer exists:** parser and tabular amount formatting.
+- **Android application guide, outside the web component library:** Room/DataStore persistence, SavedStateHandle and offline persistence, and native Android gestures.
+
+The closure must not implement the Omnibar, FAB, task cards, Hub, synchronization workflows, density system, or critical modal. Those remain explicit backlog items rather than implicit promises of the component library.
 
 ## Alternativas
 
@@ -33,7 +25,7 @@ Classify patterns by ownership:
 
 ## Criterio y evidencia
 
-The repository's canonical specification is `palm-design-system.md`; component APIs live in `packages/components`. The Android persistence and lifecycle patterns are not Web Component responsibilities.
+The repository's canonical specification is `palm-design-system.md`; component APIs live in `packages/components`. Android persistence and lifecycle patterns are not Web Component responsibilities.
 
 ## Reversión
 
