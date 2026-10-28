@@ -226,12 +226,7 @@ export class PmCombobox {
             <pm-icon-button name="x" label="Clear selection" size="small" onPmPress={this.clear} />
           ) : null}
         </div>
-        <div
-          id={this.listboxId}
-          class="pm-combobox__listbox"
-          role="listbox"
-          hidden={!this.open}
-        >
+        <div id={this.listboxId} class="pm-combobox__listbox" role="listbox" hidden={!this.open}>
           <slot onSlotchange={this.applyFilter} />
           {visible.length === 0 ? <p class="pm-combobox__empty">{this.noResultsText}</p> : null}
         </div>
