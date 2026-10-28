@@ -38,6 +38,10 @@ jobs:
       - name: Commit regenerated dependency lockfile for this trusted branch
         if: github.event_name == 'pull_request' && github.head_ref == 'fix/palm-ci-green'
         run: |
+          cp pnpm-lock.yaml "$RUNNER_TEMP/pnpm-lock.yaml"
+          git fetch origin "$GITHUB_HEAD_REF"
+          git checkout -B "$GITHUB_HEAD_REF" "origin/$GITHUB_HEAD_REF"
+          cp "$RUNNER_TEMP/pnpm-lock.yaml" pnpm-lock.yaml
           pnpm exec prettier --write pnpm-lock.yaml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
