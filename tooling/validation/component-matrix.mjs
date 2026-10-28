@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const componentsRoot = path.join(root, 'packages/components/src');
+const packagesRoot = path.join(root, 'packages');
 const matrixPath = path.join(root, 'docs/components/component-matrix.md');
 const componentTags = new Set();
 const matrixTags = new Set();
@@ -10,7 +10,7 @@ const matrixTags = new Set();
 function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) walk(absolute);
+    if (entry.isDirectory() && !['node_modules', 'dist', '.stencil'].includes(entry.name)) walk(absolute);
     else if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
       const source = fs.readFileSync(absolute, 'utf8');
       for (const match of source.matchAll(/\btag\s*:\s*['"](pm-[a-z0-9-]+)['"]/g)) {
@@ -20,7 +20,7 @@ function walk(directory) {
   }
 }
 
-walk(componentsRoot);
+walk(packagesRoot);
 const matrix = fs.readFileSync(matrixPath, 'utf8');
 for (const line of matrix.split('\n')) {
   if (!line.startsWith('|')) continue;
