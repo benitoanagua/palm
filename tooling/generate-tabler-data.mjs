@@ -2,7 +2,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync } from 'nod
 import { dirname, resolve } from 'node:path';
 
 const root = resolve(new URL('..', import.meta.url).pathname);
-const source = resolve(root, 'node_modules/@tabler/icons/tabler-nodes-outline.json');
+const source = resolve(root, 'packages/icons/node_modules/@tabler/icons/tabler-nodes-outline.json');
 const destination = resolve(root, 'packages/icons/src/data/tabler-outline.json');
 
 if (!existsSync(source)) {
