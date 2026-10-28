@@ -9,8 +9,5 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test",
     "lint": "node ../../tooling/lint/package-rules.mjs foundation"
-  },
-  "dependencies": {
-    "@palm/tokens": "workspace:*"
   }
 }
