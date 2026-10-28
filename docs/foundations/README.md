@@ -1,6 +1,6 @@
 # Palm Foundations
 
-Palm foundations are independently defined and are not inherited from STRATA.
+PALM foundations are defined by PALM's own tokens and component contracts.
 
 ## Why Palm exists
 
