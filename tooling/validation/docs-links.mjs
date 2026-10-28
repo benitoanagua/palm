@@ -44,11 +44,7 @@ function checkMarkdown(file) {
 
   while ((match = links.exec(source)) !== null) {
     const target = extractTarget(match[1]);
-    if (
-      !target ||
-      /^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(target) ||
-      target.startsWith('#')
-    ) {
+    if (!target || /^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(target) || target.startsWith('#')) {
       continue;
     }
 
@@ -62,7 +58,7 @@ function checkMarkdown(file) {
     if (!existsSync(resolved)) {
       const line = source.slice(0, match.index).split('\n').length;
       failures.push(
-        `${relative(root, file).split(sep).join('/') }:${line} -> ${target}`,
+        `${relative(root, file).split(sep).join('/')}:${line} -> ${target}`,
       );
     }
   }
