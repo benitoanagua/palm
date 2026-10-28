@@ -1,6 +1,6 @@
 # PALM Architecture
 
-PALM is an independent design system. STRATA is referenced only for repository organization; no STRATA design, component logic, tokens, APIs, or behavior are inherited.
+PALM is an independent design system. It owns its visual language, component logic, tokens, APIs, and behavior.
 
 ## Layers
 
