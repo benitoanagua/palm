@@ -65,11 +65,19 @@ jobs:
 
       - name: Audit unused files and exports with Knip
         continue-on-error: true
-        run: pnpm dlx knip@5.64.0 --reporter compact
+        run: pnpm dlx --package=knip@5.64.0 --package=typescript@5.9.3 knip --reporter compact
 
       - name: Audit declared dependencies with depcheck
         continue-on-error: true
-        run: pnpm dlx depcheck@1.4.7 --json
+        shell: bash
+        run: |
+          pnpm dlx depcheck@1.4.7 --json . || true
+          for directory in packages/* apps/*; do
+            if [ -f "$directory/package.json" ]; then
+              echo "Dependency audit: $directory"
+              pnpm dlx depcheck@1.4.7 --json "$directory" || true
+            fi
+          done
 
       - name: Install Chromium for accessibility and contract tests
         run: pnpm exec playwright install --with-deps chromium
