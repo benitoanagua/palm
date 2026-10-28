@@ -10,8 +10,12 @@ const matrixTags = new Set();
 function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory() && !['node_modules', 'dist', '.stencil'].includes(entry.name)) walk(absolute);
-    else if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
+    if (
+      entry.isDirectory() &&
+      !['node_modules', 'dist', '.stencil'].includes(entry.name)
+    ) {
+      walk(absolute);
+    } else if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
       const source = fs.readFileSync(absolute, 'utf8');
       for (const match of source.matchAll(/\btag\s*:\s*['"](pm-[a-z0-9-]+)['"]/g)) {
         componentTags.add(match[1]);
@@ -25,7 +29,9 @@ const matrix = fs.readFileSync(matrixPath, 'utf8');
 for (const line of matrix.split('\n')) {
   if (!line.startsWith('|')) continue;
   const firstCell = line.split('|')[1] ?? '';
-  for (const match of firstCell.matchAll(/\b(pm-[a-z0-9-]+)\b/g)) matrixTags.add(match[1]);
+  for (const match of firstCell.matchAll(/\b(pm-[a-z0-9-]+)\b/g)) {
+    matrixTags.add(match[1]);
+  }
 }
 
 const missing = [...componentTags].filter((tag) => !matrixTags.has(tag)).sort();
