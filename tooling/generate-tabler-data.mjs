@@ -25,4 +25,6 @@ mkdirSync(dirname(destination), { recursive: true });
 copyFileSync(source, destination);
 
 const bytes = statSync(destination).size;
-console.log(`Generated ${iconCount} Tabler outline icons (${bytes} bytes): packages/icons/src/data/tabler-outline.json`);
+console.log(
+  `Generated ${iconCount} Tabler outline icons (${bytes} bytes): packages/icons/src/data/tabler-outline.json`,
+);
