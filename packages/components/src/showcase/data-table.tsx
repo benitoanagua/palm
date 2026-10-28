@@ -113,7 +113,7 @@ export class PmDataTable {
               placeholder={this.filterPlaceholder}
               aria-label={this.filterPlaceholder}
               value={this.filterValue}
-              onHhInput={this.onFilterInput}
+              onPmInput={this.onFilterInput}
             />
           </div>
         ) : null}
@@ -185,7 +185,7 @@ export class PmDataTable {
             <pm-pagination
               page={this.page}
               pageCount={pageCount}
-              onHhChange={(event: CustomEvent<number>) => this.goToPage(event.detail)}
+              onPmChange={(event: CustomEvent<number>) => this.goToPage(event.detail)}
             />
           </div>
         ) : null}
