@@ -28,19 +28,19 @@ export namespace Components {
   }
 }
 declare global {
-  interface HTMLHhStackElement extends Components.PmStack, HTMLStencilElement {}
-  var HTMLHhStackElement: {
-    prototype: HTMLHhStackElement;
-    new (): HTMLHhStackElement;
+  interface HTMLPmStackElement extends Components.PmStack, HTMLStencilElement {}
+  var HTMLPmStackElement: {
+    prototype: HTMLPmStackElement;
+    new (): HTMLPmStackElement;
   };
-  interface HTMLHhSurfaceElement extends Components.PmSurface, HTMLStencilElement {}
-  var HTMLHhSurfaceElement: {
-    prototype: HTMLHhSurfaceElement;
-    new (): HTMLHhSurfaceElement;
+  interface HTMLPmSurfaceElement extends Components.PmSurface, HTMLStencilElement {}
+  var HTMLPmSurfaceElement: {
+    prototype: HTMLPmSurfaceElement;
+    new (): HTMLPmSurfaceElement;
   };
   interface HTMLElementTagNameMap {
-    'pm-stack': HTMLHhStackElement;
-    'pm-surface': HTMLHhSurfaceElement;
+    'pm-stack': HTMLPmStackElement;
+    'pm-surface': HTMLPmSurfaceElement;
   }
 }
 declare namespace LocalJSX {
@@ -92,9 +92,9 @@ declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
       'pm-stack': LocalJSX.IntrinsicElements['pm-stack'] &
-        JSXBase.HTMLAttributes<HTMLHhStackElement>;
+        JSXBase.HTMLAttributes<HTMLPmStackElement>;
       'pm-surface': LocalJSX.IntrinsicElements['pm-surface'] &
-        JSXBase.HTMLAttributes<HTMLHhSurfaceElement>;
+        JSXBase.HTMLAttributes<HTMLPmSurfaceElement>;
     }
   }
 }
