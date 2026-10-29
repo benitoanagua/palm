@@ -3,7 +3,21 @@ import { join } from 'node:path';
 
 const root = new URL('../..', import.meta.url).pathname;
 const forbidden = [/from\s+['"]lit(?:\/|['"])/, /from\s+['"]lit-html['"]/, /LitElement/];
-const ignored = new Set(['node_modules', 'dist', '.git']);
+const ignored = new Set([
+  'node_modules',
+  'dist',
+  '.git',
+  '.stencil',
+  'www',
+  'loader',
+  '.turbo',
+  '.cache',
+  'storybook-static',
+  'playwright-report',
+  'blob-report',
+  'coverage',
+  'test-results',
+]);
 
 function walk(dir) {
   const files = [];
@@ -72,6 +86,35 @@ for (const file of [...walkCss(join(root, 'packages')), ...walkCss(join(root, 'a
     if (tokenPrefixes.some((prefix) => token.startsWith(prefix)) && !declaredTokens.has(token)) {
       violations.push(`${file}: undefined design token ${token}`);
     }
+  }
+}
+
+// --- Rule: no hardcoded px border-radius in packages/ source CSS ---
+// Allowed: 50% (circles), calc(var(...) ± Npx) structural offsets, 999px (pill), var(--pm-radius-*), 0
+const tokenFiles = new Set(tokenSources);
+const hexColorPattern = /#[0-9a-fA-F]{3,8}(?=[\s;,)!]|$)/gm;
+
+for (const file of walkCss(join(root, 'packages'))) {
+  // Token definition files are allowed to contain hex values and raw px
+  if (tokenFiles.has(file)) continue;
+  const text = readFileSync(file, 'utf8');
+
+  // No hardcoded standalone px border-radius (calc() offsets with var() are OK)
+  for (const match of text.matchAll(/border-radius\s*:[^;]+;/g)) {
+    const value = match[0];
+    // Skip if the only px usage is inside a calc() that already references a token var
+    if (/calc\(\s*var\(--pm-/.test(value)) continue;
+    // Skip 999px (pill definition), 50% (circles), 0 values
+    if (/\b999px\b/.test(value)) continue;
+    // Flag bare px values not wrapped in calc+var
+    if (/\b\d+px\b/.test(value)) {
+      violations.push(`${file}: hardcoded px border-radius – use var(--pm-radius-*) instead`);
+    }
+  }
+
+  // No hardcoded hex colors in component CSS (must use tokens or CSS vars)
+  for (const match of text.matchAll(hexColorPattern)) {
+    violations.push(`${file}: hardcoded hex color ${match[0]} – use a --pm-color-* token instead`);
   }
 }
 
