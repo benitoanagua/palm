@@ -6,7 +6,21 @@ const forbidden = [
   new RegExp(String.fromCharCode(99, 97, 114, 98, 111, 110), 'i'),
   new RegExp(String.fromCharCode(105, 99, 111, 110, 105, 102, 121), 'i'),
 ];
-const ignored = new Set(['node_modules', 'dist', '.git', 'coverage', 'test-results']);
+const ignored = new Set([
+  'node_modules',
+  'dist',
+  '.git',
+  'coverage',
+  'test-results',
+  'storybook-static',
+  '.stencil',
+  'www',
+  'loader',
+  '.turbo',
+  '.cache',
+  'playwright-report',
+  'blob-report',
+]);
 const ignoredFiles = new Set(['packages/icons/src/data/tabler-outline.json']);
 const violations = [];
 
