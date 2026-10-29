@@ -33,6 +33,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
-A regeneration script lives at `tooling/validation/no-legacy-icons.mjs` (icon-name
-validation) — if `@tabler/icons` is upgraded, regenerate `tabler-outline.json` from
-the new package's `tabler-nodes-outline.json` and re-run `pnpm check:icons`.
+Icon dataset generation is handled by `tooling/generate-tabler-data.mjs` (`pnpm --filter @palm/icons generate`), and legacy icon checks are verified by `tooling/validation/no-legacy-icons.mjs` (`pnpm check:icons`).

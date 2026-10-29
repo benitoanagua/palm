@@ -149,15 +149,11 @@
   --pm-type-overline-weight: var(--pm-font-weight-semibold);
   --pm-type-overline-letter-spacing: var(--pm-letter-spacing-overline);
 
-  /* Motion. --pm-ease-standard es ease-in-out simple, no una curva
-     cubic-bezier de Material -- esa fase se abandonó explícitamente
-     al pivotar al clon de ActiveAdmin (ver palm-design-system.md,
-     nota de vigencia en la Sección 2). Se conserva una escala de 3
-     duraciones (fast/normal/slow) porque este sistema real cubre
-     bastantes más componentes que las 5 demos de referencia (slider,
-     date-picker, drawer) y necesitan distinguir un hover rápido de
-     una animación de panel más grande; la demo, al ser más simple,
-     usa un solo valor (180ms = --pm-motion-normal) para todo. */
+  /* Motion. --pm-ease-standard es ease-in-out para alinearse con el
+     vocabulario visual de ActiveAdmin (ver palm-design-system.md §2). Se
+     conserva una escala de 3 duraciones (fast/normal/slow) para
+     distinguir interacciones inmediatas (hover/focus) de transiciones
+     de paneles y diálogos (drawer, date-picker). */
   --pm-motion-fast: 120ms;
   --pm-motion-normal: 180ms;
   --pm-motion-slow: 260ms;

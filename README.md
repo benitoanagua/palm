@@ -18,6 +18,9 @@ PALM is a design system built from scratch with Stencil, TypeScript and Web Comp
 - `@palm/primitives` — small layout/surface primitives.
 - `@palm/icons` — the Tabler icon data used by `pm-icon`.
 - `@palm/components` — canonical Web Components.
+- `@palm/react` — React component adapters.
+- `@palm/vue` — Vue component adapters.
+- `@palm/angular` — Angular component registration adapter.
 - `@palm/testing` — visual and accessibility test infrastructure.
 
 ## Icon usage
