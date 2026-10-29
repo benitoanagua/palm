@@ -36,8 +36,15 @@
   background: var(--pm-color-action);
 }
 .tab:focus-visible {
-  outline: none;
+  outline: var(--pm-focus-width) solid var(--pm-focus-color);
+  outline-offset: var(--pm-focus-offset);
   box-shadow: var(--pm-focus-ring) inset;
+}
+@media (forced-colors: active) {
+  .tab:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 .tab:disabled {
   opacity: 0.5;

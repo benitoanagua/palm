@@ -10,11 +10,9 @@ export type TablerNode = readonly [string, Record<string, string | number>];
  * @tabler/icons (MIT License, (c) Pawel Kuna) at build time. See
  * packages/icons/THIRD_PARTY_NOTICES.md for attribution details.
  *
- * Previously this file hand-authored ~20 icons as inline SVG node arrays,
- * which meant any icon name outside that list silently failed to render
- * (see docs/architecture/adr-007-icon-coverage.md). This module resolves
- * against the complete icon set instead, so `name="add"`-style lookups
- * only fail for names that genuinely don't exist in Tabler.
+ * This module resolves against the complete Tabler outline icon set generated
+ * at build time, so `pm-icon` supports the full Tabler catalog without silent
+ * rendering failures (see docs/architecture/adr-007-icon-coverage.md).
  */
 const icons = iconData as unknown as Record<string, readonly TablerNode[]>;
 

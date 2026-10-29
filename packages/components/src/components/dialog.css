@@ -66,6 +66,13 @@
   background: var(--pm-color-neutral-100);
 }
 .close:focus-visible {
-  outline: none;
+  outline: var(--pm-focus-width) solid var(--pm-focus-color);
+  outline-offset: var(--pm-focus-offset);
   box-shadow: var(--pm-focus-ring);
+}
+@media (forced-colors: active) {
+  .close:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }

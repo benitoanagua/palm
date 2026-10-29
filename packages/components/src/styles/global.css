@@ -12,8 +12,15 @@
   font: inherit;
 }
 :where(button, input, textarea, select):focus-visible {
-  outline: none;
+  outline: var(--pm-focus-width) solid var(--pm-focus-color);
+  outline-offset: var(--pm-focus-offset);
   box-shadow: var(--pm-focus-ring);
+}
+@media (forced-colors: active) {
+  :where(button, input, textarea, select):focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 :where(pm-icon) {
   color: inherit;

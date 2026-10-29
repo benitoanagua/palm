@@ -1,11 +1,9 @@
 :host {
   display: inline-block;
 }
-/* status_tag real de AA: relleno sólido + texto de contraste, nunca
-   tinte suave -- ver docs/foundations/visual-system.md y
-   palm-design-system.md Regla 9. El tinte quedó descartado en una
-   iteración visual anterior; esto es lo que reemplaza al placeholder
-   genérico de "badge suave" que traía el sistema por defecto. */
+/* status_tag de ActiveAdmin: relleno sólido + texto de contraste (on-color),
+   nunca tinte suave -- ver docs/foundations/visual-system.md y
+   palm-design-system.md Regla 9. */
 .badge {
   display: inline-flex;
   align-items: center;

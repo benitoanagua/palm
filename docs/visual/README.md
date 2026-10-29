@@ -1,6 +1,6 @@
-# Visual Quality
+# Visual Quality and Acceptance
 
-PALM visual regression is defined by PALM itself, not by comparison with another design system.
+PALM visual regression is defined by PALM itself, not by comparison with another design system. Visual baselines are generated from PALM Storybook stories and tested against PALM's approved contracts.
 
 ## Viewports
 
@@ -26,9 +26,17 @@ Components are captured in the states that apply to them:
 - dark theme
 - reduced motion
 
+## Acceptance criteria
+
+1. No content causes horizontal overflow in any supported viewport.
+2. Interactive controls preserve comfortable touch targets and visible focus.
+3. Semantic tokens are the sole source for color, typography, spacing, radius and motion.
+4. Icons are rendered exclusively through `pm-icon` and Tabler Icons.
+5. Intentional visual differences must be documented before updating a baseline.
+
 ## Baseline policy
 
-Baselines are generated from Palm Storybook stories. They are deterministic artifacts and must only change when the visual contract intentionally changes.
+Baselines are generated from PALM Storybook stories. They are deterministic artifacts and must only change when the visual contract intentionally changes. Visual snapshot artifacts are local-only and never versioned in Git.
 
 ## Reference demos (unchanged)
 

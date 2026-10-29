@@ -4,7 +4,6 @@
   --pm-color-neutral-0: #ffffff;
   --pm-color-neutral-50: #f5f5f5;
   --pm-color-neutral-100: #f1f2f4;
-  --pm-color-neutral-200: #eeeeee;
   --pm-color-neutral-300: #949494;
   --pm-color-neutral-500: #727272;
   --pm-color-neutral-700: #666666;
@@ -67,7 +66,6 @@
   --pm-radius-sm: var(--pm-radius-base);
   --pm-radius-md: var(--pm-radius-base);
   --pm-radius-lg: var(--pm-radius-base);
-  --pm-radius-xl: var(--pm-radius-base);
   --pm-radius-pill: 999px; /* reservado a controles realmente circulares/pill (switch, avatar) */
 
   /* Typography. Pila clásica de Rails/ActiveAdmin — Helvetica Neue,
@@ -149,15 +147,11 @@
   --pm-type-overline-weight: var(--pm-font-weight-semibold);
   --pm-type-overline-letter-spacing: var(--pm-letter-spacing-overline);
 
-  /* Motion. --pm-ease-standard es ease-in-out simple, no una curva
-     cubic-bezier de Material -- esa fase se abandonó explícitamente
-     al pivotar al clon de ActiveAdmin (ver palm-design-system.md,
-     nota de vigencia en la Sección 2). Se conserva una escala de 3
-     duraciones (fast/normal/slow) porque este sistema real cubre
-     bastantes más componentes que las 5 demos de referencia (slider,
-     date-picker, drawer) y necesitan distinguir un hover rápido de
-     una animación de panel más grande; la demo, al ser más simple,
-     usa un solo valor (180ms = --pm-motion-normal) para todo. */
+  /* Motion. --pm-ease-standard es ease-in-out para alinearse con el
+     vocabulario visual de ActiveAdmin (ver palm-design-system.md §2). Se
+     conserva una escala de 3 duraciones (fast/normal/slow) para
+     distinguir interacciones inmediatas (hover/focus) de transiciones
+     de paneles y diálogos (drawer, date-picker). */
   --pm-motion-fast: 120ms;
   --pm-motion-normal: 180ms;
   --pm-motion-slow: 260ms;
@@ -166,6 +160,13 @@
   /* Focus. */
   --pm-focus-width: 2px;
   --pm-focus-color: var(--pm-color-action);
+  --pm-focus-offset: 2px;
+  --pm-button-border: #b0b0b0;
+  --pm-button-bg-gradient-start: #fdfdfd;
+  --pm-button-bg-gradient-end: #e2e2e2;
+  --pm-button-hover-bg-gradient-start: #ffffff;
+  --pm-button-hover-bg-gradient-end: #d8d8d8;
+  --pm-button-active-bg: #cfcfcf;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -197,6 +198,9 @@
   --pm-shadow-sm: 0 1px 3px rgb(0 0 0 / 0.2);
   --pm-shadow-md: 0 2px 6px rgb(0 0 0 / 0.25);
   --pm-shadow-lg: 0 4px 16px rgb(0 0 0 / 0.35);
+  --pm-shadow-button-inset: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  --pm-shadow-switch-handle: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --pm-shadow-field-inset: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
 }
 
 /* Breakpoints / grid.

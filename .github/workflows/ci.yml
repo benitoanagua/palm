@@ -1,4 +1,4 @@
-name: PALM CI
+name: CI
 
 on:
   push:
@@ -13,12 +13,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: palm-ci-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  quality:
-    name: Quality gate
+  check:
+    name: Check
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -38,9 +38,9 @@ jobs:
       - name: Run quality gate
         run: pnpm check
 
-  browser:
-    name: Browser contracts and accessibility
-    needs: quality
+  e2e:
+    name: End-to-end tests
+    needs: check
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -61,5 +61,5 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Build packages
         run: pnpm build
-      - name: Run browser contracts and accessibility
+      - name: Run E2E tests
         run: pnpm test:e2e

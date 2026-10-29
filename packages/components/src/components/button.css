@@ -8,16 +8,20 @@
   gap: var(--pm-space-2);
   min-height: var(--pm-size-control-md);
   padding: 0 var(--pm-space-4);
-  border: 1px solid #b0b0b0;
-  border-radius: var(--pm-radius-md);
+  border: 1px solid var(--pm-button-border);
+  border-radius: var(--pm-radius-base);
   font: inherit;
   font-weight: var(--pm-font-weight-semibold);
   line-height: 1;
   cursor: pointer;
   /* Glossy real de AA: degradé + resalto interior, no un lift moderno
-     de tarjeta SaaS -- ver docs/foundations/palm-design-system.md 2.2 */
-  background: linear-gradient(to bottom, #fdfdfd, #e2e2e2);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+     de tarjeta SaaS -- ver palm-design-system.md §2.2 */
+  background: linear-gradient(
+    to bottom,
+    var(--pm-button-bg-gradient-start),
+    var(--pm-button-bg-gradient-end)
+  );
+  box-shadow: var(--pm-shadow-button-inset);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
   transition:
     background var(--pm-motion-fast) var(--pm-ease-standard),
@@ -25,15 +29,26 @@
     box-shadow var(--pm-motion-fast) var(--pm-ease-standard);
 }
 .pm-button:hover:not(:disabled) {
-  background: linear-gradient(to bottom, #ffffff, #d8d8d8);
+  background: linear-gradient(
+    to bottom,
+    var(--pm-button-hover-bg-gradient-start),
+    var(--pm-button-hover-bg-gradient-end)
+  );
 }
 .pm-button:active:not(:disabled) {
-  background: #cfcfcf;
+  background: var(--pm-button-active-bg);
   box-shadow: none;
 }
 .pm-button:focus-visible {
-  outline: none;
+  outline: var(--pm-focus-width) solid var(--pm-focus-color);
+  outline-offset: var(--pm-focus-offset);
   box-shadow: var(--pm-focus-ring);
+}
+@media (forced-colors: active) {
+  .pm-button:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 .pm-button:disabled {
   cursor: not-allowed;

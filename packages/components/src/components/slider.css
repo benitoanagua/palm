@@ -32,7 +32,14 @@
   opacity: 0.5;
 }
 .pm-slider__input:focus-visible {
-  outline: none;
+  outline: var(--pm-focus-width) solid var(--pm-focus-color);
+  outline-offset: var(--pm-focus-offset);
+}
+@media (forced-colors: active) {
+  .pm-slider__input:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 
 /* Track: a linear-gradient split at the current value gives a filled/unfilled
