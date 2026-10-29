@@ -15,7 +15,7 @@
   line-height: 1;
   cursor: pointer;
   /* Glossy real de AA: degradé + resalto interior, no un lift moderno
-     de tarjeta SaaS -- ver docs/foundations/palm-design-system.md 2.2 */
+     de tarjeta SaaS -- ver palm-design-system.md §2.2 */
   background: linear-gradient(to bottom, #fdfdfd, #e2e2e2);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);

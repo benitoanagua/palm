@@ -2,7 +2,7 @@
 
 _(Palm: nombrado por lo que cabe en la palma de una mano, no por un sistema operativo — el power user que a veces no tiene una computadora cerca, solo el teléfono que sostiene con una mano mientras hace todo lo demás con la otra. No es un clon de Haiku OS ni un ERP de escritorio achicado — es lo que queda de esa tradición cuando la única pantalla disponible es la del bolsillo.)_
 
-_(Estructura de este documento tomada como referencia de formato de otro proyecto, "Bench" — la organización en Filosofía → Reglas → Tokens → Accesibilidad → Catálogo de patrones → Research → Checklist se adopta porque ya demostró servir para dejar de repetir contenido entre secciones. El contenido es 100% de Palm.)_
+_(Estructura de este documento: la organización en Filosofía → Reglas → Tokens → Accesibilidad → Catálogo de patrones → Research → Checklist se adopta porque sirve para no repetir contenido entre secciones. El contenido es 100% de Palm.)_
 
 Estructura: **0 Filosofía** (por qué existe) → **1 Reglas inviolables** → **2 Tokens** (fuente única de verdad visual) → **3 Accesibilidad** → **4 Catálogo de patrones** → **5 Research** (de qué sistema viene cada decisión) → **6 Checklist**.
 
@@ -66,7 +66,7 @@ Todo lo que no está en esta lista se resuelve citando convención de plataforma
 
 ## 2. Tokens de Palm
 
-**Fuente de verdad:** `palm-mobile-mockup.html` / `palm-demo-definitiva.html` (idénticos salvo el `<title>`) y `palm-demo-componentes-activeadmin.html` (componentes adicionales: tabla índice, formulario, detalle). Esta sección se reescribió completa el 05/sep para describir el clon de ActiveAdmin (Ruby on Rails) tal como quedó implementado — ya no describe ninguna piel anterior.
+**Fuente de verdad:** Las demos reales ubicadas en `docs/visual/demos/` (`palm-demo-definitiva.html`, `palm-demo-componentes-activeadmin.html`, `palm-demo-adicionales-activeadmin.html`, `palm-demo-dashboard-activeadmin.html` y `palm-demo-formularios-estados-activeadmin.html`). Esta sección describe el clon de ActiveAdmin (Ruby on Rails) tal como quedó implementado — ya no describe ninguna piel anterior.
 
 ### 2.1 Color — semántico, verificado contra daltonismo, con el tratamiento de AA
 
@@ -197,7 +197,7 @@ input:focus-visible,
 
 ### 4.1 Navegación: Omnibar
 
-**Patrón:** FAB persistente (nunca gesto — los gestos de Android cambian entre versiones/OEMs) que abre una búsqueda de pantalla completa sobre registros y funciones, agrupados y filtrados en vivo. Sin sintaxis de campo:valor ni macros todavía — eso existe en sistemas de referencia (Oracle EBS, Bench) pero Palm no lo necesitó hasta ahora; queda como extensión posible, no como deuda.
+**Patrón:** FAB persistente (nunca gesto — los gestos de Android cambian entre versiones/OEMs) que abre una búsqueda de pantalla completa sobre registros y funciones, agrupados y filtrados en vivo. Sin sintaxis de campo:valor ni macros todavía — eso existe en sistemas de referencia (Oracle EBS) pero Palm no lo necesitó hasta ahora; queda como extensión posible, no como deuda.
 
 **Por qué FAB y no gesto (decisión cerrada):** swipe-down choca con el notification shade; long-press en home choca con el asistente de voz en varios OEMs; swipe-up choca con "ir a home" en gesture nav. El FAB es la única superficie que no depende de qué modo de navegación tenga activado el dispositivo.
 

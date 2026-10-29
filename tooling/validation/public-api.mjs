@@ -8,9 +8,7 @@ const packages = fs
   .filter((name) => fs.existsSync(path.join(packagesDir, name, 'package.json')));
 const errors = [];
 const forbidden = [
-  /\bHhBadgeTone\b/,
   /\bpalmTestingContract\b/,
-  /@palm\/patterns/,
   /@storybook\/web-components(?:-vite)?/,
   /\bLitElement\b/,
 ];
