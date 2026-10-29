@@ -20,7 +20,7 @@
   padding: var(--pm-space-3);
   background: var(--pm-color-surface);
   color: inherit;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: var(--pm-shadow-field-inset);
   transition:
     border-color var(--pm-motion-fast) var(--pm-ease-standard),
     box-shadow var(--pm-motion-fast) var(--pm-ease-standard);
@@ -28,9 +28,18 @@
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
-  outline: none;
+  outline: var(--pm-focus-width) solid var(--pm-focus-color);
+  outline-offset: var(--pm-focus-offset);
   border-color: var(--pm-color-action);
   box-shadow: var(--pm-focus-ring);
+}
+@media (forced-colors: active) {
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 .message {
   font-size: var(--pm-font-size-xs);

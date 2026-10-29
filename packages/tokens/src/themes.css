@@ -21,4 +21,12 @@
   --pm-color-text-disabled: #78818a;
   --pm-color-border: #4b555f;
   --pm-color-border-strong: #78818a;
+  --pm-color-pending: var(--pm-color-warning);
+  --pm-color-confirmed: var(--pm-color-success);
+  --pm-color-conflict: var(--pm-color-danger);
+  --pm-color-on-color: #ffffff;
+  --pm-color-header-bg: #0d1013;
+  --pm-color-header-text: #f5f7f9;
+  --pm-color-header-text-dim: #78818a;
+  --pm-color-border-light: #323b44;
 }

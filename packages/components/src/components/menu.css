@@ -53,8 +53,15 @@
   background: var(--pm-color-surface);
 }
 .pm-menu-item:focus-visible {
-  outline: none;
+  outline: var(--pm-focus-width) solid var(--pm-focus-color);
+  outline-offset: var(--pm-focus-offset);
   box-shadow: var(--pm-focus-ring);
+}
+@media (forced-colors: active) {
+  .pm-menu-item:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 .pm-menu-item.is-danger {
   color: var(--pm-color-danger);
