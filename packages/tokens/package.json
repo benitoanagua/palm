@@ -29,6 +29,9 @@
     "access": "public"
   },
   "sideEffects": true,
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

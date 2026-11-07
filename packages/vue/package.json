@@ -30,6 +30,9 @@
     "access": "public"
   },
   "sideEffects": true,
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "vue": "^3.5.0"
   },

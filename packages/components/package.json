@@ -30,6 +30,9 @@
     "access": "public"
   },
   "sideEffects": true,
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

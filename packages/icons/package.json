@@ -30,6 +30,10 @@
     "access": "public"
   },
   "sideEffects": false,
+  "files": [
+    "dist",
+    "THIRD_PARTY_NOTICES.md"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json && node -e \"require('node:fs').cpSync('src/data','dist/data',{recursive:true})\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",
