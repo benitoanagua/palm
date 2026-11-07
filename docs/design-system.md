@@ -66,8 +66,6 @@ Todo lo que no está en esta lista se resuelve citando convención de plataforma
 
 ## 2. Tokens de Palm
 
-**Fuente de verdad:** Las demos reales ubicadas en `docs/visual/demos/` (`palm-demo-definitiva.html`, `palm-demo-componentes-activeadmin.html`, `palm-demo-adicionales-activeadmin.html`, `palm-demo-dashboard-activeadmin.html` y `palm-demo-formularios-estados-activeadmin.html`). Esta sección describe el clon de ActiveAdmin (Ruby on Rails) tal como quedó implementado — ya no describe ninguna piel anterior.
-
 ### 2.1 Color — semántico, verificado contra daltonismo, con el tratamiento de AA
 
 ```css

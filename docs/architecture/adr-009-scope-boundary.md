@@ -23,7 +23,7 @@ The closure must not implement the Omnibar, FAB, task cards, Hub, synchronizatio
 
 ## Criterio y evidencia
 
-The canonical specification is `palm-design-system.md`; component APIs live in `packages/components`. Android persistence and lifecycle patterns are not Web Component responsibilities.
+The canonical specification is `docs/design-system.md`; component APIs live in `packages/components`. Android persistence and lifecycle patterns are not Web Component responsibilities.
 
 ## Reversión
 

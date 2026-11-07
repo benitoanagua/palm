@@ -30,7 +30,3 @@ Interactive components must define default, hover, active, focus-visible, disabl
 ## Touch
 
 Interactive targets should normally provide at least a 44px effective hit area even when their visual glyph is smaller.
-
-## Reference demos
-
-Five approved HTML demos live at [`../visual/demos/`](../visual/demos/) and are kept unchanged as delivered — they are the visual reference this system implements, not a living spec. See [`../../palm-design-system.md`](../../palm-design-system.md) §4 for what each one covers.

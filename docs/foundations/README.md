@@ -4,7 +4,7 @@ PALM foundations are defined by PALM's own tokens and component contracts.
 
 ## Why Palm exists
 
-Palm is a design system for power users who sometimes don't have a computer nearby — the phone has to carry real work, not just quick lookups. It borrows its visual vocabulary from ActiveAdmin (Ruby on Rails): dark header, glossy gradient buttons, solid-color `status_tag`s, dense `index_table` listings. That heritage was chosen deliberately, not by accident — see [`visual-system.md`](./visual-system.md) for the reasoning and [`../../palm-design-system.md`](../../palm-design-system.md) for the full specification these foundations implement.
+Palm is a design system for power users who sometimes don't have a computer nearby — the phone has to carry real work, not just quick lookups. It borrows its visual vocabulary from ActiveAdmin (Ruby on Rails): dark header, glossy gradient buttons, solid-color `status_tag`s, dense `index_table` listings. That heritage was chosen deliberately, not by accident — see [`visual-system.md`](./visual-system.md) for the reasoning and [`../../docs/design-system.md`](../../docs/design-system.md) for the full specification these foundations implement.
 
 Five product decisions sit above the token layer and are treated as non-negotiable (Category A in the full spec):
 
@@ -24,5 +24,4 @@ Five product decisions sit above the token layer and are treated as non-negotiab
 
 ## Reference material
 
-- [`../../palm-design-system.md`](../../palm-design-system.md) — the full specification (philosophy, rules, tokens, accessibility, pattern catalog, research sources, checklist).
-- [`../visual/demos/`](../visual/demos/) — five approved HTML reference demos showing the visual system applied end to end. These are reference only — kept as delivered, not living source of truth for this repo's components.
+- [`../../docs/design-system.md`](../../docs/design-system.md) — the full specification (philosophy, rules, tokens, accessibility, pattern catalog, research sources, checklist).
