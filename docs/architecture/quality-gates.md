@@ -13,4 +13,6 @@ A component is production-ready only when all applicable gates pass:
 9. Dependency-rule validation.
 10. No legacy icon provider references.
 
-Visual snapshots are PALM-owned acceptance artifacts and must be reviewed against PALM-approved baselines.
+The canonical validation command is `pnpm check`, which runs browser-free across all packages. Browser contracts and accessibility tests run separately via `pnpm test:e2e` per [ADR-010](./adr-010-hardening-and-structural-boundaries.md).
+
+Visual snapshots are PALM-owned acceptance artifacts and must be reviewed against PALM-approved baselines. Visual baselines are developer-local and intentionally not committed to version control.

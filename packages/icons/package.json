@@ -13,7 +13,6 @@
     "prebuild": "pnpm generate",
     "pretypecheck": "pnpm generate"
   },
-  "dependencies": {},
   "devDependencies": {
     "@tabler/icons": "3.46.0",
     "typescript": "^5.7.0"

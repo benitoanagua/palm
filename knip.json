@@ -11,13 +11,12 @@
       "project": ["**/*.{ts,tsx}"]
     },
     "packages/icons": {
-      "entry": ["src/index.ts"],
       "project": ["src/**/*.ts"],
       "ignore": ["src/data/tabler-outline.json"],
       "ignoreDependencies": ["@tabler/icons"]
     },
     "apps/showcase": {
-      "entry": ["src/main.ts", "vite.config.ts", "src/**/*.spec.ts", "src/**/*.spec.tsx"],
+      "entry": ["src/main.ts", "tests/**/*.spec.ts"],
       "project": ["**/*.{ts,tsx}"]
     },
     "packages/components": {
@@ -27,7 +26,8 @@
         "src/components/**/*.{ts,tsx}",
         "src/showcase/**/*.{ts,tsx}"
       ],
-      "project": ["**/*.{ts,tsx}"]
+      "project": ["**/*.{ts,tsx}"],
+      "ignoreDependencies": ["jest", "jest-cli"]
     },
     "packages/primitives": {
       "entry": ["stencil.config.ts", "src/index.ts", "src/pm-*.tsx"],
@@ -36,6 +36,5 @@
     "packages/react": {
       "ignoreDependencies": ["@types/react-dom"]
     }
-  },
-  "entry": ["tooling/generate-tabler-data.mjs"]
+  }
 }

@@ -4,7 +4,6 @@ tests/
 
 # Config files
 tsconfig.json
-vitest.config.ts
 .gitignore
 
 # Development files
@@ -19,8 +18,6 @@ vitest.config.ts
 # Package managers
 node_modules/
 pnpm-lock.yaml
-yarn.lock
-package-lock.json
 
 # Logs and temp files
 *.log

@@ -7,10 +7,11 @@
 - ADR-007 — Full Tabler outline data: accepted.
 - ADR-008 — Icon providers by platform: accepted.
 - ADR-009 — Web design-system and mobile-app scope: accepted.
+- ADR-010 — Hardening, tooling exceptions, and quality gate boundaries: accepted.
 
 ## Numbering gaps
 
-ADR-003 through ADR-006 are intentionally unassigned in the current repository. They are not missing files referenced by the current index; the numbering is preserved to avoid renumbering published decision references. New decisions continue at ADR-008 and ADR-009.
+ADR-003 through ADR-006 are intentionally unassigned in the current repository. They are not missing files referenced by the current index; the numbering is preserved to avoid renumbering published decision references. New decisions continue at ADR-008 through ADR-010.
 
 ## Rule
 
