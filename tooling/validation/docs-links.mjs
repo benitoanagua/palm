@@ -10,6 +10,7 @@ const ignoredDirectories = new Set([
   'dist',
   'node_modules',
   'storybook-static',
+  'cosmos-export',
   'test-results',
 ]);
 const markdownExtensions = new Set(['.md', '.mdx']);

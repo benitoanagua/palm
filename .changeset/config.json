@@ -5,7 +5,7 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "minor",
-  "ignore": ["@palm/storybook", "@palm/showcase", "@palm/testing"],
+  "ignore": ["@palm/cosmos"],
   "groups": {
     "palm": {
       "access": "public",

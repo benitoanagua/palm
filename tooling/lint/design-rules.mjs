@@ -13,6 +13,7 @@ const ignored = new Set([
   '.turbo',
   '.cache',
   'storybook-static',
+  'cosmos-export',
   'playwright-report',
   'blob-report',
   'coverage',

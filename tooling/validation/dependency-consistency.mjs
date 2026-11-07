@@ -3,17 +3,17 @@ import path from 'node:path';
 
 const root = process.cwd();
 const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
-const storybook = readJson('apps/storybook/package.json');
+const cosmos = readJson('apps/cosmos/package.json');
 const react = readJson('packages/react/package.json');
 
-const storybookVersion = storybook.devDependencies.storybook;
-const pluginVersion = storybook.devDependencies['@stencil/storybook-plugin'];
+const cosmosVersion = cosmos.dependencies['react-cosmos'] ?? cosmos.devDependencies['react-cosmos'];
+const pluginVersion = cosmos.devDependencies['react-cosmos-plugin-vite'];
 
 const major = (range) => Number(String(range).match(/\d+/)?.[0]);
 const errors = [];
-if (major(storybookVersion) !== 10)
+if (major(cosmosVersion) !== 7)
   errors.push(
-    `storybook must be major 10 for @stencil/storybook-plugin ${pluginVersion}; found ${storybookVersion}`,
+    `react-cosmos must be major 7 for react-cosmos-plugin-vite ${pluginVersion}; found ${cosmosVersion}`,
   );
 if (
   major(react.devDependencies['@types/react']) !== 18 ||
