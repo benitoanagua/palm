@@ -1,9 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 const FIXTURE = (path: string, name: string) =>
-  `/palm/renderer.html?fixtureId=${encodeURIComponent(
-    JSON.stringify({ path, name })
-  )}&locked=true`;
+  `/palm/renderer.html?fixtureId=${encodeURIComponent(JSON.stringify({ path, name }))}&locked=true`;
 
 async function assertAccessibleBasics(page: any) {
   const problems = await page.evaluate(() => {

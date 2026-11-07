@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const FIXTURE = (path: string, name: string) =>
-  `/palm/renderer.html?fixtureId=${encodeURIComponent(
-    JSON.stringify({ path, name })
-  )}&locked=true`;
+  `/palm/renderer.html?fixtureId=${encodeURIComponent(JSON.stringify({ path, name }))}&locked=true`;
 
 test.describe('PALM public contracts', () => {
   test('button exposes a native button with its accessible name', async ({ page }) => {

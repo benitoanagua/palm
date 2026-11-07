@@ -14,6 +14,7 @@ apps/storybook/.stencil/
 apps/storybook/storybook-static/
 cosmos-export/
 apps/cosmos/cosmos-export/
+apps/cosmos/index.html
 *.tsbuildinfo
 .turbo/
 .cache/
