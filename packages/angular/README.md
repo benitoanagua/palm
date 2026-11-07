@@ -31,6 +31,6 @@ defineCustomElements();
 export class AppModule {}
 ```
 
-## Storybook
+## Cosmos
 
 Documentación y ejemplos interactivos: https://benitoanagua.github.io/palm/

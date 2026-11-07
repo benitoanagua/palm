@@ -35,6 +35,6 @@ import '@palm/components/loader';
 
 Ninguna.
 
-## Storybook
+## Cosmos
 
 Documentación y ejemplos interactivos: https://benitoanagua.github.io/palm/

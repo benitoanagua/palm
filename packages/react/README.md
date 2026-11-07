@@ -32,6 +32,6 @@ Registra los elementos personalizados una vez en la aplicación:
 import '@palm/components/loader';
 ```
 
-## Storybook
+## Cosmos
 
 Documentación y ejemplos interactivos: https://benitoanagua.github.io/palm/

@@ -31,6 +31,6 @@ que ambos paquetes deben instalarse juntos.
 
 Ninguna.
 
-## Storybook
+## Cosmos
 
 Documentación y ejemplos interactivos: https://benitoanagua.github.io/palm/

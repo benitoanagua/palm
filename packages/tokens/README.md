@@ -38,6 +38,6 @@ import { palmTokens } from '@palm/tokens';
 
 Ninguna.
 
-## Storybook
+## Cosmos
 
 Documentación y ejemplos interactivos: https://benitoanagua.github.io/palm/
