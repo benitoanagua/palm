@@ -1,5 +1,6 @@
 import type { Meta } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
+import { action } from 'storybook/actions';
 import { PmCard } from '@palm/components';
 
 const meta = {
@@ -32,7 +33,7 @@ export const Interactive = {
   render: () =>
     h(
       'pm-card',
-      { interactive: true, onHhPress: () => console.log('card pressed') },
+      { interactive: true, onHhPress: action('card pressed') },
       h('span', { slot: 'header' }, 'Clickable card'),
       h('p', null, 'This card responds to click and keyboard activation.'),
     ),
