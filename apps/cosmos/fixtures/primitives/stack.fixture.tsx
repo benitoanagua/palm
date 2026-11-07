@@ -5,10 +5,11 @@ export const Default = () => (
     <pm-surface>Surface content</pm-surface>
   </pm-stack>
 );
-
 export const WithGap = () => (
   <pm-stack gap="var(--pm-space-8)">
     <pm-surface>Raised surface</pm-surface>
     <pm-surface>Another surface</pm-surface>
   </pm-stack>
 );
+
+export default { Default, WithGap };

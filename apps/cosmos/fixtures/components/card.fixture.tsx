@@ -6,7 +6,6 @@ export const Default = () => (
     <p>Reusable content surface.</p>
   </pm-card>
 );
-
 export const WithFooter = () => (
   <pm-card>
     <span slot="header">Account</span>
@@ -16,10 +15,11 @@ export const WithFooter = () => (
     </span>
   </pm-card>
 );
-
 export const Interactive = () => (
   <pm-card interactive>
     <span slot="header">Clickable card</span>
     <p>This card responds to click and keyboard activation.</p>
   </pm-card>
 );
+
+export default { Default, WithFooter, Interactive };
