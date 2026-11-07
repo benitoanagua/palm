@@ -1,5 +1,5 @@
 ---
-'@palm/tokens': minor
+'@palm/tokens': major
 ---
 
 Add semantic color aliases, component-scoped tokens and WCAG 2.4.7 focus tokens.

@@ -4,7 +4,7 @@
   "repo": "benitoanagua/palm",
   "access": "public",
   "baseBranch": "main",
-  "updateInternalDependencies": "always",
+  "updateInternalDependencies": "minor",
   "ignore": ["@palm/storybook", "@palm/showcase", "@palm/testing"],
   "groups": {
     "palm": {
