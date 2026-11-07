@@ -73,3 +73,26 @@ pnpm build:showcase
 ```
 
 The showcase is intentionally domain-agnostic: it demonstrates the design system without introducing business logic.
+
+## Storybook en GitHub Pages
+
+El artefacto principal de despliegue es el Storybook, publicado en GitHub Pages (no Cloudflare) mediante `.github/workflows/storybook-pages.yml`.
+
+El workflow se dispara en cada `push` a `main` y bajo `workflow_dispatch`. Construye los paquetes (`pnpm build`, obligatorio antes de Storybook), construye el Storybook (`pnpm build:storybook`) y despliega el contenido de `apps/storybook/storybook-static`.
+
+### Activarlo (una sola vez)
+
+En GitHub, ve a **Settings → Pages → Build and deployment → Source** y selecciona **GitHub Actions**. El despliegue usa el entorno `github-pages`.
+
+Una vez activo, el sitio queda disponible en:
+
+```
+https://benitoanagua.github.io/palm/
+```
+
+El build se sirve bajo el subpath `/palm/` (definido con `STORYBOOK_BASE` en el workflow y `viteFinal` en `.storybook/main.ts`). El archivo `.nojekyll` se añade al artefacto para evitar el procesamiento de Jekyll.
+
+### Calidad pendiente (decisiones no tomadas)
+
+- Agregar `@storybook/addon-a11y`: `preview.ts` declara `a11y: { test: 'todo' }` pero el paquete no está instalado. Añadirlo da cobertura de accesibilidad en las historias a costa de una dependencia nueva y compatibilidad con Storybook 10.
+- Conectar el toggle de tema (`globalTypes.theme`) con un decorator que fije `data-pm-theme` en `documentElement`: hoy el selector light/dark de la barra de herramientas no se refleja en los componentes.
