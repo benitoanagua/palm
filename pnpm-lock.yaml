@@ -82,6 +82,9 @@ importers:
       '@palm/icons':
         specifier: workspace:*
         version: link:../icons
+      '@palm/tokens':
+        specifier: workspace:*
+        version: link:../tokens
     devDependencies:
       '@stencil/core':
         specifier: ^4.38.0
@@ -108,6 +111,10 @@ importers:
         version: 5.9.3
 
   packages/primitives:
+    dependencies:
+      '@palm/tokens':
+        specifier: workspace:*
+        version: link:../tokens
     devDependencies:
       '@stencil/core':
         specifier: ^4.38.0
