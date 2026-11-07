@@ -12,6 +12,8 @@ loader/
 storybook-static/
 apps/storybook/.stencil/
 apps/storybook/storybook-static/
+cosmos-export/
+apps/cosmos/cosmos-export/
 *.tsbuildinfo
 .turbo/
 .cache/

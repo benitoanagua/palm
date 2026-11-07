@@ -1,0 +1,14 @@
+{
+  "$schema": "https://react-cosmos.io/schema/v7.json",
+  "plugins": ["react-cosmos-plugin-vite"],
+  "fixturesDir": "fixtures",
+  "fixtureFileSuffix": ".fixture",
+  "globalImports": [
+    "./cosmos.global.ts",
+    "@palm/tokens/tokens.css",
+    "@palm/tokens/themes.css",
+    "@palm/tokens/type-scale.css"
+  ],
+  "ignore": ["dist", "node_modules", "cosmos-export"],
+  "publicUrl": "/palm/"
+}
