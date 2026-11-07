@@ -4,16 +4,42 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "description": "PALM design tokens and themes (CSS custom properties).",
+  "keywords": [
+    "palm",
+    "design-system",
+    "tokens",
+    "css-custom-properties",
+    "stencil"
+  ],
+  "homepage": "https://github.com/benitoanagua/palm",
+  "bugs": {
+    "url": "https://github.com/benitoanagua/palm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benitoanagua/palm.git",
+    "directory": "packages/tokens"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": true,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./tokens.css": "./src/tokens.css",
-    "./themes.css": "./src/themes.css"
+    "./tokens.css": "./dist/tokens.css",
+    "./themes.css": "./dist/themes.css",
+    "./type-scale.css": "./dist/type-scale.css"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node -e \"const fs=require('node:fs');for(const f of ['tokens.css','themes.css','type-scale.css'])fs.cpSync('src/'+f,'dist/'+f)\"",
     "typecheck": "tsc --noEmit",
     "test": "node --test",
     "lint": "node ../../tooling/lint/package-rules.mjs tokens"

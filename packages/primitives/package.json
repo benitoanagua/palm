@@ -1,19 +1,52 @@
 {
   "name": "@palm/primitives",
   "version": "0.1.0",
+  "private": false,
   "type": "module",
   "main": "./dist/index.cjs.js",
   "types": "./dist/types/index.d.ts",
   "collection": "./dist/collection/collection-manifest.json",
+  "license": "MIT",
+  "description": "PALM layout and surface primitives (pm-stack, pm-surface).",
+  "keywords": [
+    "palm",
+    "design-system",
+    "primitives",
+    "stencil",
+    "web-components"
+  ],
+  "homepage": "https://github.com/benitoanagua/palm",
+  "bugs": {
+    "url": "https://github.com/benitoanagua/palm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benitoanagua/palm.git",
+    "directory": "packages/primitives"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": true,
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/index.js"
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./loader": {
       "types": "./dist/loader/index.d.ts",
-      "import": "./dist/loader/index.js"
+      "require": "./dist/loader/index.cjs.js",
+      "import": "./dist/loader/index.js",
+      "default": "./dist/loader/index.js"
     }
+  },
+  "dependencies": {
+    "@palm/tokens": "workspace:*"
   },
   "scripts": {
     "build": "stencil build --docs-readme false",

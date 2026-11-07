@@ -1,9 +1,32 @@
 {
   "name": "@palm/testing",
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "description": "PALM visual and accessibility test infrastructure.",
+  "keywords": [
+    "palm",
+    "design-system",
+    "testing",
+    "playwright",
+    "accessibility"
+  ],
+  "homepage": "https://github.com/benitoanagua/palm",
+  "bugs": {
+    "url": "https://github.com/benitoanagua/palm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benitoanagua/palm.git",
+    "directory": "packages/testing"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
   "scripts": {
     "test": "node -e \"console.log('@palm/testing has no unit tests; use pnpm test:e2e for browser contracts.')\"",
     "test:visual": "playwright test visual",

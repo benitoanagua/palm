@@ -5,6 +5,31 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "description": "PALM Angular component registration adapter.",
+  "keywords": [
+    "palm",
+    "design-system",
+    "angular",
+    "adapters",
+    "web-components"
+  ],
+  "homepage": "https://github.com/benitoanagua/palm",
+  "bugs": {
+    "url": "https://github.com/benitoanagua/palm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benitoanagua/palm.git",
+    "directory": "packages/angular"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": true,
   "peerDependencies": {
     "@angular/core": ">=17"
   },

@@ -1,9 +1,35 @@
 {
   "name": "@palm/icons",
   "version": "0.1.0",
+  "private": false,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "description": "PALM Tabler Icons dataset for pm-icon.",
+  "keywords": [
+    "palm",
+    "design-system",
+    "icons",
+    "tabler",
+    "pm-icon"
+  ],
+  "homepage": "https://github.com/benitoanagua/palm",
+  "bugs": {
+    "url": "https://github.com/benitoanagua/palm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benitoanagua/palm.git",
+    "directory": "packages/icons"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.json && node -e \"require('node:fs').cpSync('src/data','dist/data',{recursive:true})\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",

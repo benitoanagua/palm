@@ -5,6 +5,31 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "description": "PALM React component adapters.",
+  "keywords": [
+    "palm",
+    "design-system",
+    "react",
+    "adapters",
+    "web-components"
+  ],
+  "homepage": "https://github.com/benitoanagua/palm",
+  "bugs": {
+    "url": "https://github.com/benitoanagua/palm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benitoanagua/palm.git",
+    "directory": "packages/react"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": true,
   "peerDependencies": {
     "react": "^18.3.0",
     "react-dom": ">=18"
