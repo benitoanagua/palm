@@ -8,7 +8,7 @@ export type { BreakpointKey } from './breakpoints';
 export const palmTokens = {
   prefix: 'pm',
   spacing: ['0', '1', '2', '3', '4', '5', '6', '8', '10', '12', '16'],
-  radii: ['sm', 'md', 'lg', 'xl', 'pill'],
+  radii: ['sm', 'md', 'lg', 'pill'],
   controlSizes: ['sm', 'md', 'lg'],
   themes: ['light', 'dark'],
   breakpointKeys: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
