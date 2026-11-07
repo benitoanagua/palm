@@ -1,0 +1,16 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
+  "changelog": "@changesets/changelog-github",
+  "repo": "benitoanagua/palm",
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "always",
+  "ignore": ["@palm/storybook", "@palm/showcase", "@palm/testing"],
+  "groups": {
+    "palm": {
+      "access": "public",
+      "baseBranch": "main",
+      "packages": ["@palm/*"]
+    }
+  }
+}
