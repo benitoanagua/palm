@@ -57,8 +57,16 @@ export const Default = () => (
 
     <pm-data-table
       caption="Recent items"
-      columns='[{"key":"name","label":"Name"},{"key":"status","label":"Status"},{"key":"amount","label":"Amount","numeric":true}]'
-      rows='[{"name":"Alpha","status":"Ready","amount":"$1,240"},{"name":"Beta","status":"Review","amount":"$860"},{"name":"Gamma","status":"Ready","amount":"$2,410"}]'
+      columns={[
+        { key: 'name', label: 'Name' },
+        { key: 'status', label: 'Status' },
+        { key: 'amount', label: 'Amount', numeric: true },
+      ]}
+      rows={[
+        { name: 'Alpha', status: 'Ready', amount: '$1,240' },
+        { name: 'Beta', status: 'Review', amount: '$860' },
+        { name: 'Gamma', status: 'Ready', amount: '$2,410' },
+      ]}
     ></pm-data-table>
 
     <div
