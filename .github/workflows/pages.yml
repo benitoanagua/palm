@@ -38,6 +38,9 @@ jobs:
       - name: Build packages and Cosmos export
         run: pnpm build
 
+      - name: Validate Cosmos export layout
+        run: node tooling/validation/cosmos-export.mjs apps/cosmos/cosmos-export
+
       - name: Mark as non-Jekyll site
         run: touch apps/cosmos/cosmos-export/.nojekyll
 
