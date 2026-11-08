@@ -1,17 +1,25 @@
 import { test, expect } from '@playwright/test';
 
-const FIXTURE = (path: string, name: string) =>
-  `/palm/renderer.html?fixtureId=${encodeURIComponent(JSON.stringify({ path, name }))}&locked=true`;
-
 test.describe('PALM Cosmos smoke', () => {
-  test('Cosmos UI opens', async ({ page }) => {
+  test('Cosmos UI opens and lists fixture categories', async ({ page }) => {
     await page.goto('/palm/');
-    // Wait for the React app to hydrate (check for fixture tree text)
-    await expect(page.locator('text=Fixtures')).toBeVisible({ timeout: 10000 });
+    // The fixture tree must render its category entries (components, patterns, primitives).
+    await expect(page.getByRole('button', { name: 'components' })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole('button', { name: 'patterns' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'primitives' })).toBeVisible();
   });
 
   test('renderer loads a fixture', async ({ page }) => {
-    await page.goto(FIXTURE('fixtures/components/button.fixture.tsx', 'Primary'));
+    await page.goto(
+      '/palm/renderer.html?fixtureId=' +
+        encodeURIComponent(
+          JSON.stringify({
+            path: 'fixtures/components/button.fixture.tsx',
+            name: 'Primary',
+          }),
+        ) +
+        '&locked=true',
+    );
     await expect(page.locator('pm-button')).toBeVisible();
   });
 });

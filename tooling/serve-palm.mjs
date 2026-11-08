@@ -1,56 +1,90 @@
-import http from 'node:http';
-import fs from 'node:fs';
-import path from 'node:path';
-import url from 'node:url';
+import { createServer } from 'node:http';
+import { createReadStream } from 'node:fs';
+import { stat } from 'node:fs/promises';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const ROOT = path.join(__dirname, '..', 'apps', 'cosmos', 'cosmos-export');
-const BASE = '/palm';
+// Serves a directory EXACTLY under a mount prefix:
+//   /palm/index.html      ->  <dir>/index.html
+//   /palm/renderer.html   ->  <dir>/renderer.html
+// No candidate fallbacks, no magic resolution, real 404 for missing files.
+// Portable: works on Windows (fileURLToPath) and any mount prefix (incl. '/' for root).
+export function createStaticServer(dir, prefix = '', port = 8123) {
+  const base = (prefix || '').replace(/\/+$/, '');
+  const root = join(dir);
 
-const mime = {
-  '.html': 'text/html',
-  '.js': 'application/javascript',
-  '.css': 'text/css',
-  '.json': 'application/json',
-  '.svg': 'image/svg+xml',
-  '.woff2': 'font/woff2',
-  '.ico': 'image/x-icon',
-  '.png': 'image/png',
-};
+  const mime = {
+    '.html': 'text/html; charset=utf-8',
+    '.js': 'application/javascript',
+    '.mjs': 'application/javascript',
+    '.css': 'text/css',
+    '.json': 'application/json',
+    '.svg': 'image/svg+xml',
+    '.woff2': 'font/woff2',
+    '.ico': 'image/x-icon',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+  };
 
-function resolveFile(p) {
-  const relativePath = p.slice(BASE.length) || '/';
-  const candidates = [
-    path.join(ROOT, BASE, relativePath === '/' ? 'index.html' : relativePath),
-    path.join(ROOT, relativePath === '/' ? 'index.html' : relativePath),
-  ];
-  for (const fp of candidates) {
+  async function handle(req, res) {
+    const url = new URL(req.url, 'http://localhost');
+    let p = url.pathname;
+    if (p === base || p === base + '/') p = base + '/index.html';
+    if (base && !p.startsWith(base + '/')) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('404: outside mount prefix\n');
+      return;
+    }
+    let relative = p.slice(base.length) || '/';
+    relative = relative.replace(/^\/+/, '') || 'index.html';
+    // block directory traversal
+    if (relative.includes('..') || relative.startsWith('/') || relative.startsWith('\\')) {
+      res.writeHead(403, { 'Content-Type': 'text/plain' });
+      res.end('403: invalid path\n');
+      return;
+    }
+    const fp = join(root, relative);
+    let st;
     try {
-      const st = fs.statSync(fp);
-      if (st.isFile()) return fp;
-    } catch {}
+      st = await stat(fp);
+    } catch {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end(`404: ${req.url}\n`);
+      return;
+    }
+    if (!st.isFile()) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end(`404: ${req.url}\n`);
+      return;
+    }
+    const ext = '.' + relative.split('.').pop().toLowerCase();
+    res.writeHead(200, { 'Content-Type': mime[ext] || 'application/octet-stream' });
+    const stream = createReadStream(fp);
+    stream.pipe(res);
   }
-  return null;
+
+  return new Promise((resolve, reject) => {
+    const srv = createServer(handle);
+    srv.listen(port, () => resolve(srv));
+    srv.on('error', reject);
+  });
 }
 
-const server = http.createServer((req, res) => {
-  const u = new URL(req.url, 'http://localhost');
-  let p = u.pathname;
-  if (p === BASE || p === BASE + '/') p = BASE + '/index.html';
-  if (!p.startsWith(BASE + '/')) {
-    res.writeHead(404);
-    res.end('404');
-    return;
+// CLI usage: node serve-palm.mjs <dir> [prefix] [port]
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const dir = process.argv[2];
+  const prefix = process.argv[3] || '';
+  const port = Number(process.argv[4] || 8123);
+  if (!dir) {
+    console.error('Uso: node serve-palm.mjs <directorio> [prefijo] [puerto]');
+    process.exit(2);
   }
-  const fp = resolveFile(p);
-  if (!fp) {
-    res.writeHead(404);
-    res.end('404 ' + req.url);
-    return;
+  createStaticServer(dir, prefix, port).then((srv) => {
+    const addr = srv.address();
+    const portListening = typeof addr === 'object' && addr !== null ? addr.port : port;
+    console.log(`serving ${dir} at http://localhost:${portListening}${base()}/`);
+  });
+  function base() {
+    return (prefix || '').replace(/\/+$/, '');
   }
-  const ext = path.extname(fp).toLowerCase();
-  res.writeHead(200, { 'Content-Type': mime[ext] || 'application/octet-stream' });
-  fs.createReadStream(fp).pipe(res);
-});
-
-server.listen(8123, () => console.log('serving cosmos-export on http://localhost:8123' + BASE));
+}
