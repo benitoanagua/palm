@@ -9,7 +9,6 @@ const ignoredDirectories = new Set([
   'coverage',
   'dist',
   'node_modules',
-  'storybook-static',
   'cosmos-export',
   'test-results',
 ]);

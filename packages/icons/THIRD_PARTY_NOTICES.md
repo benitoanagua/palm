@@ -33,4 +33,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
-Icon dataset generation is handled by `tooling/generate-tabler-data.mjs` (`pnpm --filter @palm/icons generate`), and legacy icon checks are verified by `tooling/validation/no-legacy-icons.mjs` (`pnpm check:icons`).
+Icon dataset generation is handled by `tooling/generate-tabler-data.mjs` (`pnpm --filter @palm/icons generate`).
