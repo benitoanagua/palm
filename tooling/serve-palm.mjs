@@ -30,6 +30,20 @@ export function createStaticServer(dir, prefix = '', port = 8123) {
     const url = new URL(req.url, 'http://localhost');
     let p = url.pathname;
     if (p === base || p === base + '/') p = base + '/index.html';
+    // El navegador pide /favicon.ico en la raíz del origen, fuera del mount
+    // prefix; servir el icono del export si existe para evitar un 404 inútil.
+    if (p === '/favicon.ico') {
+      const fp = join(root, '_cosmos.ico');
+      try {
+        await stat(fp);
+        res.writeHead(200, { 'Content-Type': 'image/x-icon' });
+        createReadStream(fp).pipe(res);
+      } catch {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('404: favicon not found\n');
+      }
+      return;
+    }
     if (base && !p.startsWith(base + '/')) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('404: outside mount prefix\n');

@@ -3,11 +3,16 @@ import * as React from 'react';
 export const Default = () => (
   <pm-toolbar>
     <span slot="start" style={{ fontWeight: 700 }}>
-      Acciones
+      Elementos recientes
     </span>
-    <pm-button variant="secondary">Cancelar</pm-button>
+    <pm-input placeholder="Filtrar" aria-label="Filtrar elementos" />
     <div slot="end">
-      <pm-button>Guardar cambios</pm-button>
+      <pm-button variant="secondary">
+        <pm-icon slot="start" name="arrow-down" /> Exportar
+      </pm-button>
+      <pm-button>
+        <pm-icon slot="start" name="plus" /> Crear
+      </pm-button>
     </div>
   </pm-toolbar>
 );

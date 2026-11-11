@@ -6,7 +6,7 @@ const FIXTURE = (path: string, name: string) =>
 test.describe('PALM public contracts', () => {
   test('button exposes a native button with its accessible name', async ({ page }) => {
     await page.goto(FIXTURE('fixtures/components/button.fixture.tsx', 'Primary'));
-    await expect(page.getByRole('button', { name: 'Continue' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Continuar' })).toBeVisible();
   });
 
   test('input exposes an accessible name from its label', async ({ page }) => {

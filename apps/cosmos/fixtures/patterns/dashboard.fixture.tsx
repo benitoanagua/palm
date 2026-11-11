@@ -1,71 +1,95 @@
 import * as React from 'react';
 
 export const Default = () => (
-  <div style={{ padding: 24, maxWidth: 1100 }}>
-    <div style={{ display: 'grid', gap: 8, marginBottom: 24 }}>
+  <div
+    style={{
+      padding: 'var(--pm-space-6)',
+      maxWidth: 'var(--pm-container-max-width)',
+      margin: '0 auto',
+    }}
+  >
+    <div style={{ display: 'grid', gap: 'var(--pm-space-2)', marginBottom: 'var(--pm-space-6)' }}>
       <span
         style={{
-          fontSize: '0.75rem',
-          color: 'var(--pm-color-text-muted)',
+          fontSize: 'var(--pm-type-caption-size)',
+          lineHeight: 'var(--pm-type-caption-line-height)',
+          fontWeight: 'var(--pm-type-caption-weight)',
+          letterSpacing: 'var(--pm-type-overline-letter-spacing)',
           textTransform: 'uppercase',
-          letterSpacing: '0.08em',
+          color: 'var(--pm-color-text-muted)',
         }}
       >
         Composable UI
       </span>
-      <h1 style={{ margin: 0, fontSize: 'clamp(2rem,5vw,3.5rem)', letterSpacing: '-0.04em' }}>
-        PALM in action
+      <h1
+        style={{
+          margin: 0,
+          fontSize: 'var(--pm-type-display-size)',
+          lineHeight: 'var(--pm-type-display-line-height)',
+          fontWeight: 'var(--pm-type-display-weight)',
+          letterSpacing: 'var(--pm-type-display-letter-spacing)',
+        }}
+      >
+        PALM en acción
       </h1>
-      <p style={{ margin: 0, maxWidth: '65ch', color: 'var(--pm-color-text-muted)' }}>
-        A small set of higher-level components demonstrates tokens, slots, native semantics,
-        responsive behavior, states and Tabler iconography working together.
+      <p
+        style={{
+          margin: 0,
+          maxWidth: '65ch',
+          color: 'var(--pm-color-text-muted)',
+          fontSize: 'var(--pm-type-body-md-size)',
+          lineHeight: 'var(--pm-type-body-md-line-height)',
+        }}
+      >
+        Un conjunto de componentes de mayor nivel demuestra tokens, ranuras, semántica nativa,
+        comportamiento responsivo, estados e iconografía de Tabler trabajando conjuntamente.
       </p>
     </div>
 
-    <pm-alert tone="success" heading="Everything is composed from PALM primitives.">
-      No framework-specific UI logic is required.
+    <pm-alert tone="success" heading="Todo está compuesto a partir de primitivas PALM.">
+      No se requiere lógica de UI específica de un framework.
     </pm-alert>
 
     <div
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit,minmax(190px,1fr))',
-        gap: 12,
+        gap: 'var(--pm-space-3)',
       }}
     >
-      <pm-metric-card label="Components" value="20+" trend="Growing" tone="positive">
+      <pm-metric-card label="Componentes" value="20+" trend="Creciendo" tone="positive">
         <pm-icon slot="icon" name="settings" />
       </pm-metric-card>
-      <pm-metric-card label="A11y baseline" value="AA" trend="Built in" />
-      <pm-metric-card label="Icon set" value="Tabler" trend="One source" />
+      <pm-metric-card label="Base de accesibilidad" value="AA" trend="Integrada" />
+      <pm-metric-card label="Conjunto de iconos" value="Tabler" trend="Una única fuente" />
     </div>
 
     <pm-toolbar>
       <span slot="start" style={{ fontWeight: 700 }}>
-        Recent items
+        Elementos recientes
       </span>
-      <pm-input placeholder="Filter" aria-label="Filter items" />
+      <pm-input placeholder="Filtrar" aria-label="Filtrar elementos" />
       <div slot="end">
         <pm-button variant="secondary">
-          <pm-icon slot="start" name="arrow-down" /> Export
+          <pm-icon slot="start" name="arrow-down" /> Exportar
         </pm-button>
         <pm-button>
-          <pm-icon slot="start" name="plus" /> Create
+          <pm-icon slot="start" name="plus" /> Crear
         </pm-button>
       </div>
     </pm-toolbar>
 
     <pm-data-table
-      caption="Recent items"
+      caption="Elementos recientes"
       columns={[
-        { key: 'name', label: 'Name' },
-        { key: 'status', label: 'Status' },
-        { key: 'amount', label: 'Amount', numeric: true },
+        { key: 'name', label: 'Nombre' },
+        { key: 'status', label: 'Estado' },
+        { key: 'amount', label: 'Importe', numeric: true },
       ]}
       rows={[
-        { name: 'Alpha', status: 'Ready', amount: '$1,240' },
-        { name: 'Beta', status: 'Review', amount: '$860' },
-        { name: 'Gamma', status: 'Ready', amount: '$2,410' },
+        { name: 'Alpha', status: 'Listo', amount: '$1,240' },
+        { name: 'Beta', status: 'Revisión', amount: '$860' },
+        { name: 'Gamma', status: 'Listo', amount: '$2,410' },
       ]}
     ></pm-data-table>
 
@@ -73,27 +97,27 @@ export const Default = () => (
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))',
-        gap: 16,
+        gap: 'var(--pm-space-4)',
       }}
     >
       <pm-card>
-        <span slot="header">Composition</span>
+        <span slot="header">Composición</span>
         <p style={{ margin: 0, color: 'var(--pm-color-text-muted)' }}>
-          Cards, buttons, icons, fields and status elements compose without leaking implementation
-          details.
+          Tarjetas, botones, iconos, campos y estados se componen sin filtrar detalles de
+          implementación.
         </p>
         <span slot="footer">
-          <pm-status tone="success">Ready</pm-status>
+          <pm-status tone="success">Listo</pm-status>
         </span>
       </pm-card>
       <pm-empty-state
-        heading="No saved views"
-        description="Create a view to keep your favorite filters close at hand."
+        heading="No hay vistas guardadas"
+        description="Crea una vista para mantener tus filtros favoritos a mano."
       >
-        <pm-icon slot="icon" name="settings" aria-label="" />
+        <pm-icon slot="icon" name="settings" aria-hidden="true" />
         <div slot="actions">
-          <pm-button variant="secondary">Learn more</pm-button>
-          <pm-button>Create view</pm-button>
+          <pm-button variant="secondary">Más información</pm-button>
+          <pm-button>Crear vista</pm-button>
         </div>
       </pm-empty-state>
     </div>

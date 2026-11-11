@@ -1,25 +1,34 @@
 import * as React from 'react';
+import { useFixtureInput } from 'react-cosmos/client';
+
+export const Playground = () => {
+  const [interactive, setInteractive] = useFixtureInput('interactive', false);
+  return (
+    <pm-card interactive={interactive}>
+      <span slot="header">Tarjeta</span>
+      <p style={{ margin: 0 }}>Contenido de la tarjeta.</p>
+      <span slot="footer">
+        <pm-status tone="success">Listo</pm-status>
+      </span>
+    </pm-card>
+  );
+};
 
 export const Default = () => (
   <pm-card>
-    <span slot="header">Account</span>
-    <p>Reusable content surface.</p>
+    <span slot="header">Tarjeta</span>
+    <p style={{ margin: 0 }}>Contenido de la tarjeta.</p>
   </pm-card>
 );
 export const WithFooter = () => (
   <pm-card>
-    <span slot="header">Account</span>
-    <p>Reusable content surface.</p>
+    <span slot="header">Tarjeta con pie</span>
+    <p style={{ margin: 0 }}>Contenido.</p>
     <span slot="footer">
-      <pm-badge tone="success">Active</pm-badge>
+      <pm-status tone="success">Listo</pm-status>
     </span>
   </pm-card>
 );
-export const Interactive = () => (
-  <pm-card interactive>
-    <span slot="header">Clickable card</span>
-    <p>This card responds to click and keyboard activation.</p>
-  </pm-card>
-);
+export const Interactive = () => <pm-card interactive>Tarjeta interactiva</pm-card>;
 
-export default { Default, WithFooter, Interactive };
+export default { Playground, Default, WithFooter, Interactive };

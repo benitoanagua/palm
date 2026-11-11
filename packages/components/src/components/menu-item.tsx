@@ -5,7 +5,7 @@ export class PmMenuItem {
   @Prop() value = '';
   @Prop() disabled = false;
   @Prop() tone: 'default' | 'danger' = 'default';
-  @Event() pmSelect!: EventEmitter<string>;
+  @Event({ bubbles: true, composed: true }) pmSelect!: EventEmitter<string>;
 
   private onClick = () => {
     if (this.disabled) return;

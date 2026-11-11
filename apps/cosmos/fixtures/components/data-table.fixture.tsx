@@ -1,33 +1,49 @@
 import * as React from 'react';
+import { useFixtureInput, useFixtureSelect } from 'react-cosmos/client';
+
+const COLUMNS = [
+  { key: 'name', label: 'Nombre' },
+  { key: 'status', label: 'Estado' },
+  { key: 'amount', label: 'Importe', numeric: true },
+];
+const ROWS = [
+  { name: 'Alpha', status: 'Listo', amount: '$1,240' },
+  { name: 'Beta', status: 'Revisión', amount: '$860' },
+  { name: 'Gamma', status: 'Listo', amount: '$2,410' },
+  { name: 'Delta', status: 'Pendiente', amount: '$450' },
+];
+
+export const Playground = () => {
+  const [filterPlaceholder, setFilterPlaceholder] = useFixtureInput(
+    'filterPlaceholder',
+    'Filtrar…',
+  );
+  return (
+    <pm-data-table
+      caption="Elementos recientes"
+      columns={COLUMNS}
+      rows={ROWS}
+      filterable
+      filterPlaceholder={filterPlaceholder}
+    />
+  );
+};
 
 export const Default = () => (
-  <pm-data-table
-    caption="Recent items"
-    columns={[
-      { key: 'name', label: 'Name' },
-      { key: 'status', label: 'Status' },
-    ]}
-    rows={[
-      { name: 'Alpha', status: 'Ready' },
-      { name: 'Beta', status: 'Review' },
-    ]}
-  ></pm-data-table>
+  <pm-data-table caption="Elementos recientes" columns={COLUMNS} rows={ROWS} />
 );
 export const Filterable = () => (
   <pm-data-table
-    caption="Items"
+    caption="Elementos recientes"
+    columns={COLUMNS}
+    rows={ROWS}
     filterable
-    filterPlaceholder="Buscar…"
-    pageSize={5}
-    columns={[{ key: 'name', label: 'Name' }]}
-    rows={[
-      { name: 'Alpha' },
-      { name: 'Beta' },
-      { name: 'Gamma' },
-      { name: 'Delta' },
-      { name: 'Epsilon' },
-    ]}
-  ></pm-data-table>
+    filterPlaceholder="Filtrar elementos…"
+  />
 );
+export const Paginated = () => (
+  <pm-data-table caption="Elementos recientes" columns={COLUMNS} rows={ROWS} pageSize={2} />
+);
+export const Empty = () => <pm-data-table caption="Sin resultados" columns={COLUMNS} rows={[]} />;
 
-export default { Default, Filterable };
+export default { Playground, Default, Filterable, Paginated, Empty };

@@ -15,20 +15,20 @@
 
 .pm-status--success {
   background: var(--pm-color-confirmed);
-  color: var(--pm-color-on-color);
+  color: var(--pm-color-success-contrast);
 }
 
 .pm-status--warning {
   background: var(--pm-color-pending);
-  color: var(--pm-color-on-color);
+  color: var(--pm-color-warning-contrast);
 }
 
 .pm-status--danger {
   background: var(--pm-color-conflict);
-  color: var(--pm-color-on-color);
+  color: var(--pm-color-danger-contrast);
 }
 
 .pm-status--info {
   background: var(--pm-color-action);
-  color: var(--pm-color-on-color);
+  color: var(--pm-color-action-contrast);
 }

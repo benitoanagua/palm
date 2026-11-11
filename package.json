@@ -21,7 +21,10 @@
     "check:api": "node tooling/validation/public-api.mjs",
     "check:docs-links": "node tooling/validation/docs-links.mjs",
     "check:dependencies": "node tooling/validation/dependency-consistency.mjs",
-    "test:e2e": "pnpm --filter @palm/cosmos test:e2e"
+    "test:e2e": "pnpm --filter @palm/cosmos test:e2e",
+    "cosmos:e2e": "pnpm --filter @palm/cosmos exec playwright test --workers=2",
+    "test:e2e:update": "pnpm --filter @palm/cosmos exec playwright test --workers=2 --update-snapshots",
+    "test:e2e:ui": "pnpm --filter @palm/cosmos exec playwright test --ui"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.0",

@@ -1,12 +1,28 @@
 {
   "$schema": "./node_modules/react-cosmos/config.schema.json",
-  "plugins": ["react-cosmos-plugin-vite"],
+  "port": 5000,
+  "host": null,
+  "plugins": ["react-cosmos-plugin-vite", "react-cosmos-plugin-boolean-input"],
   "globalImports": [
     "./cosmos.global.ts",
     "@palm/tokens/tokens.css",
     "@palm/tokens/themes.css",
     "@palm/tokens/type-scale.css"
   ],
+  "fixtureFileSuffix": "fixture",
   "ignore": ["dist", "node_modules", "cosmos-export"],
-  "publicUrl": "./"
+  "watchDirs": ["."],
+  "publicUrl": "./",
+  "ui": {
+    "rendererPreview": {
+      "backgroundColor": "#ffffff"
+    },
+    "responsivePreview": {
+      "devices": [
+        { "label": "Mobile", "width": 360, "height": 740 },
+        { "label": "Tablet", "width": 768, "height": 1024 },
+        { "label": "Desktop", "width": 1280, "height": 800 }
+      ]
+    }
+  }
 }

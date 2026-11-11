@@ -11,7 +11,7 @@ export class PmSegmentedItem {
   @Prop() disabled = false;
   /** Set by the parent <pm-segmented-control>. */
   @Prop({ reflect: true, mutable: true }) selected = false;
-  @Event() pmSelect!: EventEmitter<string>;
+  @Event({ bubbles: true, composed: true }) pmSelect!: EventEmitter<string>;
 
   render() {
     return (

@@ -21,6 +21,19 @@
   --pm-color-text-disabled: #78818a;
   --pm-color-border: #4b555f;
   --pm-color-border-strong: #78818a;
+  /* Los colores de acción/success/danger/warning se aclaran en oscuro para
+     mantener contraste AA (4.5:1) como texto sobre fondos oscuros, y sus
+     colores de contraste se oscurecen para usarse como texto sobre esos
+     fondos ahora claros. Los valores de claro quedan intactos. */
+  --pm-color-action: #4a9ed8;
+  --pm-color-action-contrast: #111827;
+  --pm-color-success: #4ade80;
+  --pm-color-success-contrast: #111827;
+  --pm-color-danger: #f87171;
+  --pm-color-danger-contrast: #111827;
+  --pm-color-warning: #fbbf24;
+  --pm-color-warning-contrast: #111827;
+  --pm-color-neutral-contrast: #1a1a1a;
   --pm-color-pending: var(--pm-color-warning);
   --pm-color-confirmed: var(--pm-color-success);
   --pm-color-conflict: var(--pm-color-danger);

@@ -7,7 +7,7 @@ export class PmPagination {
   @Prop() page = 1;
   @Prop() pageCount = 1;
   @Prop() siblingCount = 1;
-  @Prop() label = 'Pagination';
+  @Prop() label = 'Paginación';
   @Event() pmChange!: EventEmitter<number>;
 
   private goTo(page: number) {
@@ -39,7 +39,7 @@ export class PmPagination {
       <nav class="pm-pagination" aria-label={this.label}>
         <pm-icon-button
           name="chevron-left"
-          label="Previous page"
+          label="Página anterior"
           size="small"
           disabled={this.page <= 1}
           onPmPress={() => this.goTo(this.page - 1)}
@@ -56,7 +56,7 @@ export class PmPagination {
                   type="button"
                   class={{ 'pm-pagination__page': true, 'is-current': token === this.page }}
                   aria-current={token === this.page ? 'page' : undefined}
-                  aria-label={`Page ${token}`}
+                  aria-label={`Página ${token}`}
                   onClick={() => this.goTo(token)}
                 >
                   {token}
@@ -67,7 +67,7 @@ export class PmPagination {
         </ul>
         <pm-icon-button
           name="chevron-right"
-          label="Next page"
+          label="Página siguiente"
           size="small"
           disabled={this.page >= this.pageCount}
           onPmPress={() => this.goTo(this.page + 1)}

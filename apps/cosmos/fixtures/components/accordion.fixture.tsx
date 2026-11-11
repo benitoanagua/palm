@@ -1,27 +1,42 @@
 import * as React from 'react';
+import { useFixtureInput } from 'react-cosmos/client';
+
+export const Playground = () => {
+  const [multiple, setMultiple] = useFixtureInput('multiple', false);
+  return (
+    <pm-accordion multiple={multiple}>
+      <pm-accordion-item value="seccion1" label="Primera sección">
+        Contenido de la primera sección.
+      </pm-accordion-item>
+      <pm-accordion-item value="seccion2" label="Segunda sección">
+        Contenido de la segunda sección.
+      </pm-accordion-item>
+      <pm-accordion-item value="seccion3" label="Tercera sección">
+        Contenido de la tercera sección.
+      </pm-accordion-item>
+    </pm-accordion>
+  );
+};
 
 export const Default = () => (
-  <pm-accordion multiple={false}>
-    <pm-accordion-item label="Primera sección" value="a" open>
-      <p>Contenido de la primera sección.</p>
+  <pm-accordion>
+    <pm-accordion-item value="seccion1" label="Primera sección">
+      Contenido de la primera sección.
     </pm-accordion-item>
-    <pm-accordion-item label="Segunda sección" value="b">
-      <p>Contenido de la segunda sección.</p>
-    </pm-accordion-item>
-    <pm-accordion-item label="Tercera sección" value="c">
-      <p>Contenido de la tercera sección.</p>
+    <pm-accordion-item value="seccion2" label="Segunda sección">
+      Contenido de la segunda sección.
     </pm-accordion-item>
   </pm-accordion>
 );
 export const Multiple = () => (
   <pm-accordion multiple>
-    <pm-accordion-item label="Sección A" value="a" open>
-      <p>Varias secciones pueden estar abiertas a la vez.</p>
+    <pm-accordion-item value="seccion1" label="Primera sección">
+      Contenido de la primera sección.
     </pm-accordion-item>
-    <pm-accordion-item label="Sección B" value="b" open>
-      <p>Este es otro panel abierto simultáneamente.</p>
+    <pm-accordion-item value="seccion2" label="Segunda sección">
+      Contenido de la segunda sección.
     </pm-accordion-item>
   </pm-accordion>
 );
 
-export default { Default, Multiple };
+export default { Playground, Default, Multiple };
